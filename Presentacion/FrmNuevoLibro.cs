@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Modelos;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,15 +13,16 @@ namespace Presentacion
 {
     public partial class FrmNuevoLibro : Form
     {
+        
+        BibliotecaContext bibliotecaContext = new BibliotecaContext();
+
         public FrmNuevoLibro()
         {
             InitializeComponent();
+            
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
 
-        }
 
        
 
@@ -73,6 +75,21 @@ namespace Presentacion
         {
             this.Close();
 
+        }
+
+        private void BtnGuardar_Click(object sender, EventArgs e)
+        {
+            //instancio un objeto basado en la clase Libro y le almaceno
+            //los datos cargados en el formulario
+            Libro libro = new Libro();
+            libro.Nombre = TxtNombre.Text;
+            libro.Autor = TxtAutor.Text;
+            libro.Genero = TxtGenero.Text;
+            libro.Paginas = Convert.ToInt32(TxtPaginas.Text);
+            //agrego ese objeto a la tabla libros administrada automáticamente
+            //por Entity Framework
+            bibliotecaContext.Libros.Add(libro);
+            bibliotecaContext.SaveChanges();
         }
     }
 }

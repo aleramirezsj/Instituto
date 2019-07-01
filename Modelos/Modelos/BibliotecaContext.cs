@@ -15,5 +15,7 @@ namespace Modelos
             Database.SetInitializer<BibliotecaContext>(
               new MigrateDatabaseToLatestVersion<BibliotecaContext, Configuration>());
         }
+
+        public DbSet<Libro> Libros { get; set; }
     }
 }
