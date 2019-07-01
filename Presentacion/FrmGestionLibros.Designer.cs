@@ -80,6 +80,7 @@
             this.BtnEliminar.TabIndex = 26;
             this.BtnEliminar.Text = "&Eliminar";
             this.BtnEliminar.UseVisualStyleBackColor = true;
+            this.BtnEliminar.Click += new System.EventHandler(this.BtnEliminar_Click);
             // 
             // LblBuscar
             // 
