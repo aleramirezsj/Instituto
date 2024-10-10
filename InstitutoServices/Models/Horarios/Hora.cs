@@ -6,9 +6,9 @@ namespace InstitutoServices.Models.Horarios
     public class Hora 
     {
         public int Id { get; set; }
-        [NotMapped]
-      
 
+
+        [NotMapped]
         public string Nombre
         {
             get { var Recreo = EsRecreo ? "Recreo" : "";
