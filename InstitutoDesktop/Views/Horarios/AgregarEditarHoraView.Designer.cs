@@ -33,14 +33,19 @@
             btnCancelar = new FontAwesome.Sharp.IconButton();
             btnGuardar = new FontAwesome.Sharp.IconButton();
             chkRecreo = new CheckBox();
+            dateTimeDesde = new DateTimePicker();
+            label2 = new Label();
+            label3 = new Label();
+            dateTimeHasta = new DateTimePicker();
             SuspendLayout();
             // 
             // txtNombre
             // 
             txtNombre.Font = new Font("Segoe UI", 11F);
-            txtNombre.Location = new Point(321, 101);
+            txtNombre.Location = new Point(218, 296);
             txtNombre.Margin = new Padding(2);
             txtNombre.Name = "txtNombre";
+            txtNombre.ReadOnly = true;
             txtNombre.Size = new Size(257, 32);
             txtNombre.TabIndex = 12;
             // 
@@ -48,7 +53,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 11F);
-            label1.Location = new Point(222, 106);
+            label1.Location = new Point(119, 301);
             label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
             label1.Size = new Size(57, 25);
@@ -58,11 +63,11 @@
             // btnCancelar
             // 
             btnCancelar.IconChar = FontAwesome.Sharp.IconChar.Close;
-            btnCancelar.IconColor = Color.Black;
+            btnCancelar.IconColor = Color.Red;
             btnCancelar.IconFont = FontAwesome.Sharp.IconFont.Solid;
             btnCancelar.IconSize = 30;
             btnCancelar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnCancelar.Location = new Point(426, 309);
+            btnCancelar.Location = new Point(380, 389);
             btnCancelar.Margin = new Padding(3, 4, 3, 4);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(127, 40);
@@ -74,11 +79,11 @@
             // btnGuardar
             // 
             btnGuardar.IconChar = FontAwesome.Sharp.IconChar.Save;
-            btnGuardar.IconColor = Color.Black;
+            btnGuardar.IconColor = Color.Lime;
             btnGuardar.IconFont = FontAwesome.Sharp.IconFont.Solid;
             btnGuardar.IconSize = 30;
             btnGuardar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnGuardar.Location = new Point(264, 309);
+            btnGuardar.Location = new Point(218, 389);
             btnGuardar.Margin = new Padding(3, 4, 3, 4);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new Size(127, 40);
@@ -90,18 +95,57 @@
             // chkRecreo
             // 
             chkRecreo.AutoSize = true;
-            chkRecreo.Location = new Point(321, 168);
+            chkRecreo.ForeColor = Color.Blue;
+            chkRecreo.Location = new Point(320, 345);
             chkRecreo.Name = "chkRecreo";
             chkRecreo.Size = new Size(77, 24);
             chkRecreo.TabIndex = 14;
             chkRecreo.Text = "Recreo";
             chkRecreo.UseVisualStyleBackColor = true;
             // 
+            // dateTimeDesde
+            // 
+            dateTimeDesde.Format = DateTimePickerFormat.Time;
+            dateTimeDesde.Location = new Point(235, 108);
+            dateTimeDesde.Name = "dateTimeDesde";
+            dateTimeDesde.Size = new Size(250, 27);
+            dateTimeDesde.TabIndex = 15;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(118, 114);
+            label2.Name = "label2";
+            label2.Size = new Size(54, 20);
+            label2.TabIndex = 16;
+            label2.Text = "Desde:";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(118, 219);
+            label3.Name = "label3";
+            label3.Size = new Size(47, 20);
+            label3.TabIndex = 18;
+            label3.Text = "Hasta";
+            // 
+            // dateTimeHasta
+            // 
+            dateTimeHasta.Format = DateTimePickerFormat.Time;
+            dateTimeHasta.Location = new Point(235, 213);
+            dateTimeHasta.Name = "dateTimeHasta";
+            dateTimeHasta.Size = new Size(250, 27);
+            dateTimeHasta.TabIndex = 17;
+            // 
             // AgregarEditarHoraView
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(762, 471);
+            Controls.Add(label3);
+            Controls.Add(dateTimeHasta);
+            Controls.Add(label2);
+            Controls.Add(dateTimeDesde);
             Controls.Add(chkRecreo);
             Controls.Add(txtNombre);
             Controls.Add(label1);
@@ -120,5 +164,9 @@
         private FontAwesome.Sharp.IconButton btnCancelar;
         private FontAwesome.Sharp.IconButton btnGuardar;
         private CheckBox chkRecreo;
+        private DateTimePicker dateTimeDesde;
+        private Label label2;
+        private Label label3;
+        private DateTimePicker dateTimeHasta;
     }
 }
