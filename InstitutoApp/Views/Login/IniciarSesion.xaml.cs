@@ -83,7 +83,7 @@ public partial class IniciarSesion : ContentPage
 
     // ...
 
-    private readonly string _firebaseApiKey = "AIzaSyDLPkmzvqIWwmhKQkNapfWd-x-_0WCvudk";
+    private readonly string _firebaseApiKey = "AIzaSyBoesygYuxE55hVGKbPjykPc_0gi40Ug9E";
 
     // Método para registrar al usuario en Firebase usando el access token de Google
     public async Task<string> SignInWithGoogleAccessToken(string googleAccessToken)
@@ -117,11 +117,11 @@ public partial class IniciarSesion : ContentPage
 // Clase para deserializar la respuesta de Firebase
 public class FirebaseSignInResponse
 {
-    public string IdToken { get; set; }
-    public string RefreshToken { get; set; }
-    public string LocalId { get; set; }
-    public string Email { get; set; }
+    public string? IdToken { get; set; }
+    public string? RefreshToken { get; set; }
+    public string? LocalId { get; set; }
+    public string? Email { get; set; }
     public bool EmailVerified { get; set; }
-    public string DisplayName { get; set; }
+    public string? DisplayName { get; set; }
 }
 

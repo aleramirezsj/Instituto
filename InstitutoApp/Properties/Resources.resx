@@ -121,6 +121,12 @@
     <value>https://datainstituto.azurewebsites.net/api/</value>
   </data>
   <data name="client_id" xml:space="preserve">
-    <value>243005933117-9jrpnqa9f296itha7jlaa3nmh23et4vu</value>
+    <value>18582599539-t5iutfuin68p8210m2937cmps9c31e1s</value>
+  </data>
+  <data name="apikeyfirebase" xml:space="preserve">
+    <value>AIzaSyBoesygYuxE55hVGKbPjykPc_0gi40Ug9E</value>
+  </data>
+  <data name="authdomain" xml:space="preserve">
+    <value>instituto20-435114.firebaseapp.com</value>
   </data>
 </root>
