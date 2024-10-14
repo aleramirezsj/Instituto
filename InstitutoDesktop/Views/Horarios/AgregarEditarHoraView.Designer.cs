@@ -110,6 +110,7 @@
             dateTimeDesde.Name = "dateTimeDesde";
             dateTimeDesde.Size = new Size(250, 27);
             dateTimeDesde.TabIndex = 15;
+            dateTimeDesde.Leave += dateTimeDesde_Leave;
             // 
             // label2
             // 
@@ -136,6 +137,7 @@
             dateTimeHasta.Name = "dateTimeHasta";
             dateTimeHasta.Size = new Size(250, 27);
             dateTimeHasta.TabIndex = 17;
+            dateTimeHasta.Leave += dateTimeHasta_Leave;
             // 
             // AgregarEditarHoraView
             // 

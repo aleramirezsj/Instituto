@@ -11,10 +11,10 @@ namespace InstitutoServices.Models.Horarios
         [NotMapped]
         public string Nombre
         {
-            get { var Recreo = EsRecreo ? "Recreo" : "";
-                return $"{Desde.Hour}:"+
-                    $"{Desde.Minute}:- "+
-                    $"{Hasta.Hour}:{Hasta.Minute}"; }
+            get { var recreo = EsRecreo ? "Recreo" : "";
+                return $"{ recreo} {Desde.Hour}:"+
+                    $"{Desde.Minute:D2}:- "+
+                    $"{Hasta.Hour}:{Hasta.Minute:D2}"; }
           
         }
 
