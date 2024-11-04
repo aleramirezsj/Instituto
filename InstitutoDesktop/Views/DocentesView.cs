@@ -1,32 +1,24 @@
 ﻿using InstitutoDesktop.ExtensionMethods;
-using InstitutoDesktop.Interfaces.Inscripciones;
+using InstitutoDesktop.Interfaces.Commons;
 using InstitutoDesktop.Services;
-using InstitutoDesktop.States.Inscripciones.CiclosLectivos;
+using InstitutoDesktop.States.Docentes;
 using InstitutoDesktop.Util;
-using InstitutoServices.Enums;
-using InstitutoServices.Interfaces;
-using InstitutoServices.Interfaces.Commons;
-using InstitutoServices.Interfaces.Horarios;
 using InstitutoServices.Models.Commons;
-using InstitutoServices.Models.Horarios;
-using InstitutoServices.Models.Inscripciones;
-using InstitutoServices.Services.Commons;
-using InstitutoServices.Services.Horarios;
 using System.Data;
 using System.Diagnostics;
 
 namespace InstitutoDesktop.Views
 {
-    public partial class CilosLectivosView : Form
+    public partial class DocentesView : Form
     {
-        private ICiclosLectivosState _currentState;
+        private IDocentesState _currentState;
 
-        public List<CicloLectivo>? listaCicloLectivos = new List<CicloLectivo>();
-        public CicloLectivo cicloLectivoCurrent;
+        public List<Docente>? listaDocente = new List<Docente>();
+        public Docente docenteCurrent;
 
         public readonly MemoryCacheServiceWinForms _memoryCache;
 
-        public CilosLectivosView(MemoryCacheServiceWinForms memoryCacheService, MenuPrincipalView menuPrincipal)
+        public DocentesView(MemoryCacheServiceWinForms memoryCacheService, MenuPrincipalView menuPrincipal)
         {
             InitializeComponent();
             this.MdiParent = menuPrincipal;
@@ -36,7 +28,7 @@ namespace InstitutoDesktop.Views
             _ = _currentState.LoadData();
         }
 
-        public void TransitionTo(ICiclosLectivosState state) 
+        public void TransitionTo(IDocentesState state)
         {
             _currentState = state;
         }
@@ -48,7 +40,7 @@ namespace InstitutoDesktop.Views
 
         private async void btnGuardar_Click(object sender, EventArgs e)
         {
-           _currentState.OnGuardar();
+            await _currentState.OnGuardar();
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
@@ -58,8 +50,7 @@ namespace InstitutoDesktop.Views
 
         private async void btnEliminar_Click(object sender, EventArgs e)
         {
-            _currentState.OnEliminar();
-
+            await _currentState.OnEliminar();
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
