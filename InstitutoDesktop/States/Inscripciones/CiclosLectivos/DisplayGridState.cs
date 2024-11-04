@@ -13,9 +13,11 @@ namespace InstitutoDesktop.States.Inscripciones.CiclosLectivos
 {
     public class DisplayGridState : ICiclosLectivosState
     {
-        private readonly CilosLectivosView _form;
 
-        public DisplayGridState(CilosLectivosView form)
+        private readonly CiclosLectivosView _form;
+
+        public DisplayGridState(CiclosLectivosView form)
+
         {
             _form = form;
             UpdateUI();
@@ -101,4 +103,6 @@ namespace InstitutoDesktop.States.Inscripciones.CiclosLectivos
         public void OnCancelar() { }
         public void OnSalir() => _form.Close();
     }
+
 }
+

@@ -17,7 +17,7 @@ using System.Diagnostics;
 
 namespace InstitutoDesktop.Views
 {
-    public partial class CilosLectivosView : Form
+    public partial class CiclosLectivosView : Form
     {
         private ICiclosLectivosState _currentState;
 
@@ -31,7 +31,6 @@ namespace InstitutoDesktop.Views
             InitializeComponent();
             this.MdiParent = menuPrincipal;
             _memoryCache = memoryCacheService;
-            // Start in the display grid state
             TransitionTo(new DisplayGridState(this));
             _ = _currentState.LoadData();
         }

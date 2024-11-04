@@ -11,9 +11,11 @@ namespace InstitutoDesktop.States.Inscripciones.CiclosLectivos
 {
     public class EditionState : ICiclosLectivosState
     {
-        private readonly CilosLectivosView _form;
 
-        public EditionState(CilosLectivosView form)
+        private readonly CiclosLectivosView _form;
+
+        public EditionState(CiclosLectivosView form)
+
         {
             _form = form;
             UpdateUI();
@@ -68,4 +70,6 @@ namespace InstitutoDesktop.States.Inscripciones.CiclosLectivos
         public Task OnEliminar() => Task.CompletedTask;
         public void OnSalir() => _form.Close();
     }
+
 }
+
