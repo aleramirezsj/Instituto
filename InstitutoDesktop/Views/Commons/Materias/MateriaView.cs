@@ -1,5 +1,6 @@
 ﻿using InstitutoDesktop.ExtensionMethods;
 using InstitutoDesktop.Services;
+using InstitutoDesktop.States.Inscripciones.CiclosLectivos;
 using InstitutoDesktop.Util;
 using InstitutoDesktop.Views.Commons.Aulas;
 using InstitutoServices.Models.Commons;
@@ -10,22 +11,23 @@ namespace InstitutoDesktop.Views.Commons.Materias
 {
     public partial class MateriaView : Form
     {
-        BindingSource BindingAniosCarrera = new BindingSource();
-        BindingSource BindingCarreras = new BindingSource();
-        BindingSource BindingMaterias = new BindingSource();
-        List<AnioCarrera>? ListAniosCarreraFiltrada = new List<AnioCarrera>();
-        List<Materia>? ListMateriasFiltrada = new List<Materia>();
-        private readonly MemoryCacheServiceWinForms _memoryCache;
-        private readonly IServiceProvider _serviceProvider;
+        public BindingSource BindingAniosCarrera = new BindingSource();
+        public BindingSource BindingCarreras = new BindingSource();
+        public BindingSource BindingMaterias = new BindingSource();
+        public List<AnioCarrera>? ListAniosCarreraFiltrada = new List<AnioCarrera>();
+        public List<Materia>? ListMateriasFiltrada = new List<Materia>();
+        public readonly MemoryCacheServiceWinForms _memoryCache;
+        public readonly IServiceProvider _serviceProvider;
 
 
-        public MateriaView(MemoryCacheServiceWinForms memoryCacheService, IServiceProvider serviceProvider)
+        public MateriaView(MemoryCacheServiceWinForms memoryCacheService, IServiceProvider serviceProvider, MenuPrincipalView menuPrincipal)
         {
             InitializeComponent();
+            this.MdiParent = menuPrincipal;
             _memoryCache = memoryCacheService;
-            _serviceProvider = serviceProvider;
-
-            ObtenerListas();
+            // Iniciar en estado de listado
+            TransitionTo(new DisplayGridState(this));
+            _ = _currentState.LoadData();
         }
 
         private async void ObtenerListas()
