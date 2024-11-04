@@ -139,7 +139,7 @@ namespace InstitutoDesktop
 
         private void subMenuCiclosLectivos_Click(object sender, EventArgs e)
         {
-            CiclosLectivosView ciclosLectivosView = ActivatorUtilities.CreateInstance<CiclosLectivosView>(_serviceProvider,this );
+            DocentesView ciclosLectivosView = ActivatorUtilities.CreateInstance<DocentesView>(_serviceProvider,this );
             ciclosLectivosView.Show();
         }
 
@@ -158,7 +158,7 @@ namespace InstitutoDesktop
         private void subMenuDocentes_Click(object sender, EventArgs e)
         {
             DocentesView docentesView = ActivatorUtilities.CreateInstance<DocentesView>(_serviceProvider);
-            docentesView.ShowDialog();
+            docentesView.Show();
         }
 
         private void subMenuCarreras_Click(object sender, EventArgs e)
