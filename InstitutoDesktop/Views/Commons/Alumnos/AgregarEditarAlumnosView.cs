@@ -55,12 +55,12 @@ namespace InstitutoDesktop.Views.Commons.Alumnos
 
             if (alumno.Id == 0)
             {
-                await _memoryCache.AddCacheAsync<Alumno>(alumno, "Alumnos");
+                await _memoryCache.AddCacheAsync<Alumno>(alumno);
                 //await alumnoService.AddAsync(alumno);
             }
             else
             {
-                await _memoryCache.UpdateCacheAsync<Alumno>(alumno, "Alumnos");
+                await _memoryCache.UpdateCacheAsync<Alumno>(alumno);
                 //await alumnoService.UpdateAsync(alumno);
             }
 

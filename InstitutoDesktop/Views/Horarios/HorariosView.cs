@@ -104,21 +104,21 @@ namespace InstitutoDesktop.Views
             //pongo todos los métodos en paralelo para que se ejecuten al mismo tiempo
             var tareas = new List<Task>
             {
-                Task.Run(async () => listaCicloLectivos = await _memoryCache.GetAllCacheAsync<CicloLectivo>("CiclosLectivos")),
+                Task.Run(async () => listaCicloLectivos = await _memoryCache.GetAllCacheAsync<CicloLectivo>()),
                 //Task.Run(async () => listaCicloLectivos = await cicloLectivoService.GetAllAsync()),
-                Task.Run(async () => listaCarreras = await _memoryCache.GetAllCacheAsync<Carrera>("Carreras")),
+                Task.Run(async () => listaCarreras = await _memoryCache.GetAllCacheAsync<Carrera>()),
                 //Task.Run(async () => listaCarreras = await carreraService.GetAllAsync()),
-                Task.Run(async () => listaAnioCarreras = await _memoryCache.GetAllCacheAsync<AnioCarrera>("AniosCarreras")),
+                Task.Run(async () => listaAnioCarreras = await _memoryCache.GetAllCacheAsync<AnioCarrera>()),
                 //Task.Run(async () => listaAnioCarreras = await anioCarreraService.GetAllAsync()),
-                Task.Run(async () => listaMaterias = await _memoryCache.GetAllCacheAsync<Materia>("Materias")),
+                Task.Run(async () => listaMaterias = await _memoryCache.GetAllCacheAsync<Materia>()),
                 //Task.Run(async () => listaMaterias = await materiaService.GetAllAsync()),
-                Task.Run(async () => listaDocentes = await _memoryCache.GetAllCacheAsync<Docente>("Docentes")),
+                Task.Run(async () => listaDocentes = await _memoryCache.GetAllCacheAsync<Docente>()),
                 //Task.Run(async () => listaDocentes = await docenteService.GetAllAsync()),
-                Task.Run(async () => listaHoras = await _memoryCache.GetAllCacheAsync<Hora>("Horas")),
+                Task.Run(async () => listaHoras = await _memoryCache.GetAllCacheAsync<Hora>()),
                 //Task.Run(async () => listaHoras = await horaService.GetAllAsync()),
-                Task.Run(async () => listaHorarios = await _memoryCache.GetAllCacheAsync<Horario>("Horarios")),
+                Task.Run(async () => listaHorarios = await _memoryCache.GetAllCacheAsync<Horario>()),
                 //Task.Run(async () => listaHorarios = await horarioService.GetAllAsync()),
-                Task.Run(async () => listaAulas = await _memoryCache.GetAllCacheAsync<Aula>("Aulas"))
+                Task.Run(async () => listaAulas = await _memoryCache.GetAllCacheAsync<Aula>())
                 //Task.Run(async () => listaAulas = await aulaService.GetAllAsync())
             };
             bindingHorarios.DataSource = listaHorarios;
@@ -187,12 +187,12 @@ namespace InstitutoDesktop.Views
 
                 if (horarioCurrent.Id == 0)
                 {
-                    await _memoryCache.AddCacheAsync<Horario>(horarioCurrent, "Horarios");
+                    await _memoryCache.AddCacheAsync<Horario>(horarioCurrent);
                     //await horarioService.AddAsync(horarioCurrent);
                 }
                 else
                 {
-                    await _memoryCache.UpdateCacheAsync<Horario>(horarioCurrent, "Horarios");
+                    await _memoryCache.UpdateCacheAsync<Horario>(horarioCurrent);
                 }
             }
             await actualizarListaHorarios();
@@ -202,7 +202,7 @@ namespace InstitutoDesktop.Views
 
         private async Task actualizarListaHorarios()
         {
-            listaHorarios = await _memoryCache.GetAllCacheAsync<Horario>("Horarios");
+            listaHorarios = await _memoryCache.GetAllCacheAsync<Horario>();
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
@@ -228,7 +228,7 @@ namespace InstitutoDesktop.Views
             var result = MessageBox.Show($"¿Está seguro que desea eliminar el horario de {horarioCurrent.Materia.Nombre}?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-                await _memoryCache.DeleteCacheAsync<Horario>(horarioCurrent.Id, "Horarios");
+                await _memoryCache.DeleteCacheAsync<Horario>(horarioCurrent.Id);
                 await actualizarListaHorarios();
                 await LoadGrid();
             }

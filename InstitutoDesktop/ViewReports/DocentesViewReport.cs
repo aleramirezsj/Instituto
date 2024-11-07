@@ -35,7 +35,7 @@ namespace InstitutoDesktop.ViewReports
         private async void DocentesViewReport_Load(object sender, EventArgs e)
         {
             reporte.LocalReport.ReportEmbeddedResource = "InstitutoDesktop.Reports.DocentesReport.rdlc";
-            var docentes = await _memoryCache.GetAllCacheAsync<Docente>("Docentes");
+            var docentes = await _memoryCache.GetAllCacheAsync<Docente>();
             reporte.LocalReport.DataSources.Add(new ReportDataSource("DSDocentes", docentes));
             reporte.SetDisplayMode(DisplayMode.PrintLayout);
             reporte.RefreshReport();

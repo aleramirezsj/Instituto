@@ -26,7 +26,7 @@ namespace InstitutoDesktop.States.Inscripciones.CiclosLectivos
         public async Task LoadData()
         {
             ShowInActivity.Show("Cargando ciclos lectivos...");
-            _form.listaCicloLectivos = await _form._memoryCache.GetAllCacheAsync<CicloLectivo>("CiclosLectivos");
+            _form.listaCicloLectivos = await _form._memoryCache.GetAllCacheAsync<CicloLectivo>();
             ShowInActivity.Hide();
             await LoadGrid();
         }
@@ -77,7 +77,7 @@ namespace InstitutoDesktop.States.Inscripciones.CiclosLectivos
 
             if (result == DialogResult.Yes)
             {
-                await _form._memoryCache.DeleteCacheAsync<CicloLectivo>(_form.cicloLectivoCurrent.Id, "CiclosLectivos");
+                await _form._memoryCache.DeleteCacheAsync<CicloLectivo>(_form.cicloLectivoCurrent.Id);
                 await LoadGrid();
             }
             _form.cicloLectivoCurrent = null;

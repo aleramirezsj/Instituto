@@ -55,9 +55,9 @@ else
     private async Task Guardar()
     {
         if (isEditing)
-            await _memoryCache.UpdateCacheAsync<Docente>(docenteEdit, "Docentes");
+            await _memoryCache.UpdateCacheAsync<Docente>(docenteEdit);
         else
-            await _memoryCache.AddCacheAsync<Docente>(docenteEdit, "Docentes");
+            await _memoryCache.AddCacheAsync<Docente>(docenteEdit);
         await OnGuardar.InvokeAsync();
     }
 

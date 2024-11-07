@@ -23,7 +23,7 @@ namespace InstitutoDesktop.Views.Horarios
         private async Task CargarGrilla()
         {
             listaPeriodoHorario.DataSource = null;
-            listaPeriodoHorario.DataSource = await _memoryCache.GetAllCacheAsync<PeriodoHorario>("PeriodosHorarios");
+            listaPeriodoHorario.DataSource = await _memoryCache.GetAllCacheAsync<PeriodoHorario>();
             dataGridPeriodoHorario.OcultarColumnas(new string[] { "Id", "Eliminado", "CicloLectivoId" });
         }
 
@@ -39,7 +39,7 @@ namespace InstitutoDesktop.Views.Horarios
             var respuesta = MessageBox.Show($"¿Está seguro que quiere borrar el Ciclo Lectivo {periodoHorario.Nombre}?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (respuesta == DialogResult.Yes)
             {
-                await _memoryCache.DeleteCacheAsync<PeriodoHorario>(periodoHorario.Id, "PeriodosHorarios");
+                await _memoryCache.DeleteCacheAsync<PeriodoHorario>(periodoHorario.Id);
                 await CargarGrilla();
             }
         }

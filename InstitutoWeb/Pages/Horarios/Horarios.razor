@@ -62,8 +62,8 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        ciclosLectivos= await _memoryCache.GetAllCacheAsync<CicloLectivo>("CiclosLectivos");
-        carreras = await _memoryCache.GetAllCacheAsync<Carrera>("Carreras");
+        ciclosLectivos= await _memoryCache.GetAllCacheAsync<CicloLectivo>();
+        carreras = await _memoryCache.GetAllCacheAsync<Carrera>();
         if (ciclosLectivos.Any(c => c.Actual))
         {
             idCicloLectivoSeleccionado = ciclosLectivos.Where(c => c.Actual).FirstOrDefault().Id;
@@ -81,7 +81,7 @@ else
             else if (idCicloLectivoSeleccionado != null) {
                 idCarreraSeleccionada = usuarioStateService.Usuario.Alumno.InscripcionesACarreras.FirstOrDefault().CarreraId;
                 //muestro por consola cuantos detalles horarios hay
-                detallesHorarios =(await _memoryCache.GetAllCacheAsync<DetalleHorario>("DetallesHorarios"))
+                detallesHorarios =(await _memoryCache.GetAllCacheAsync<DetalleHorario>())
                 .Where(d => d.Horario?.Materia.AnioCarrera.CarreraId == idCarreraSeleccionada && d.Horario.CicloLectivoId == idCicloLectivoSeleccionado).ToList();
             }
             //detallesHorarios = await detalleHorarioService.GetByCarreraAsync(idCicloLectivoSeleccionado, idCarreraSeleccionada);
@@ -91,7 +91,7 @@ else
             idCarreraSeleccionada = 0;
 
             //selecciono los horarios del docente logueado comprobando que no contenga nulos
-            detallesHorarios = (await _memoryCache.GetAllCacheAsync<DetalleHorario>("DetallesHorarios"))
+            detallesHorarios = (await _memoryCache.GetAllCacheAsync<DetalleHorario>())
                 .Where(d => d.Horario?.IntegrantesHorario?.Any(i => i.DocenteId == usuarioStateService.Usuario.Docente.Id) == true 
                             && d.Horario?.CicloLectivoId == idCicloLectivoSeleccionado)
                 .ToList();
@@ -104,7 +104,7 @@ else
         if (IdCarrera != 0 && idCicloLectivoSeleccionado!=null)
         {
             idCarreraSeleccionada = IdCarrera;
-            detallesHorarios = (await _memoryCache.GetAllCacheAsync<DetalleHorario>("DetallesHorarios"))
+            detallesHorarios = (await _memoryCache.GetAllCacheAsync<DetalleHorario>())
             .Where(d => d.Horario?.Materia.AnioCarrera.CarreraId == idCarreraSeleccionada && d.Horario.CicloLectivoId == idCicloLectivoSeleccionado).ToList();
         }
 
@@ -120,7 +120,7 @@ else
     {
         idCarreraSeleccionada = idCarrera;
         
-        detallesHorarios = _memoryCache.GetAllCacheAsync<DetalleHorario>("DetallesHorarios").Result
+        detallesHorarios = _memoryCache.GetAllCacheAsync<DetalleHorario>().Result
         .Where(d => d.Horario?.Materia.AnioCarrera.CarreraId == idCarreraSeleccionada && d.Horario.CicloLectivoId == idCicloLectivoSeleccionado).ToList();
         StateHasChanged();
     }

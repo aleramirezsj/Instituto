@@ -34,11 +34,11 @@ namespace InstitutoDesktop.States.Inscripciones.CiclosLectivos
 
             if (_form.cicloLectivoCurrent.Id == 0)
             {
-                await _form._memoryCache.AddCacheAsync<CicloLectivo>(_form.cicloLectivoCurrent, "CiclosLectivos");
+                await _form._memoryCache.AddCacheAsync<CicloLectivo>(_form.cicloLectivoCurrent);
             }
             else
             {
-                await _form._memoryCache.UpdateCacheAsync<CicloLectivo>(_form.cicloLectivoCurrent, "CiclosLectivos");
+                await _form._memoryCache.UpdateCacheAsync<CicloLectivo>(_form.cicloLectivoCurrent);
             }
 
             _form.TransitionTo(new DisplayGridState(_form));

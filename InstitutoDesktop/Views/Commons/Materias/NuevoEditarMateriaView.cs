@@ -67,11 +67,11 @@ namespace InstitutoDesktop.Views.Commons.Materias
 
             if (materia.Id == 0)
             {
-                await _memoryCache.AddCacheAsync<Materia>(materia, "Materias");
+                await _memoryCache.AddCacheAsync<Materia>(materia);
             }
             else
             {
-                await _memoryCache.UpdateCacheAsync<Materia>(materia, "Materias");
+                await _memoryCache.UpdateCacheAsync<Materia>(materia);
             }
 
             this.Close();

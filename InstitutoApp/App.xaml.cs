@@ -13,7 +13,7 @@ namespace InstitutoApp
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new IniciarSesion());
+            MainPage = new InstitutoShell();
         }
         
     }

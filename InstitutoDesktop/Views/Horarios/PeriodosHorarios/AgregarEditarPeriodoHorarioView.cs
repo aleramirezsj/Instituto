@@ -36,7 +36,7 @@ namespace InstitutoDesktop.Views.Horarios
 
         private async void CargarDatosEnPantalla()
         {
-            comboBoxCicloLectivo.DataSource = await _memoryCache.GetAllCacheAsync<CicloLectivo>("CiclosLectivos");
+            comboBoxCicloLectivo.DataSource = await _memoryCache.GetAllCacheAsync<CicloLectivo>();
             comboBoxCicloLectivo.DisplayMember = "Nombre"; // Nombre de la propiedad a mostrar
             comboBoxCicloLectivo.ValueMember = "Id"; // Nombre de la propiedad de valor único
             chMaterias2doCuatrimestre.Checked = periodoHorario.Es2doCuatrimestre;
@@ -68,11 +68,11 @@ namespace InstitutoDesktop.Views.Horarios
             periodoHorario.Actual = chkActual.Checked;
             if (periodoHorario.Id == 0)
             {
-                await _memoryCache.AddCacheAsync<PeriodoHorario>(periodoHorario, "PeriodosHorarios");
+                await _memoryCache.AddCacheAsync<PeriodoHorario>(periodoHorario);
             }
             else
             {
-                await _memoryCache.UpdateCacheAsync<PeriodoHorario>(periodoHorario, "PeriodosHorarios");
+                await _memoryCache.UpdateCacheAsync<PeriodoHorario>(periodoHorario);
             }
 
             this.Close();

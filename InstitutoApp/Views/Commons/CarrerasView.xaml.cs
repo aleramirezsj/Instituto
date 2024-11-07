@@ -1,6 +1,6 @@
 using InstitutoApp.ViewModels.Commons;
 
-namespace InstitutoApp.Views;
+namespace InstitutoApp.Views.Commons;
 
 public partial class CarrerasView : ContentPage
 {

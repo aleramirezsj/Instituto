@@ -35,13 +35,13 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        alumno = (await _memoryCache.GetAllCacheAsync<Alumno>("Alumnos"))
+        alumno = (await _memoryCache.GetAllCacheAsync<Alumno>())
                 .Where(a => a.Id.Equals(idAlumno)).FirstOrDefault();
     }
 
     private async Task GuardarAlumno()
     {
-        await _memoryCache.UpdateCacheAsync<Alumno>(alumno, "Alumnos");
+        await _memoryCache.UpdateCacheAsync<Alumno>(alumno);
         NavigationManager.NavigateTo($"/alumnos");
     }
 }

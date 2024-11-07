@@ -60,9 +60,9 @@ else
     {
         logger.LogInformation($"la variable isEditing={isEditing} y el turno de examen={turnoExamenEdit?.ToString()}");
         if (isEditing)
-            await _memoryCache.UpdateCacheAsync<TurnoExamen>(turnoExamenEdit, "TurnosExamenes");
+            await _memoryCache.UpdateCacheAsync<TurnoExamen>(turnoExamenEdit);
         else
-            await _memoryCache.AddCacheAsync<TurnoExamen>(turnoExamenEdit, "TurnosExamenes");
+            await _memoryCache.AddCacheAsync<TurnoExamen>(turnoExamenEdit);
         await OnGuardar.InvokeAsync();
     }
 

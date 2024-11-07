@@ -8,13 +8,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InstitutoDesktop.States.Docentes
+namespace InstitutoDesktop.States.Commons.AniosCarreras
 {
-    public class EditionState : IDocentesState
+    public class EditionAniosCarrerasViewState : IAniosCarrerasViewState
     {
-        private readonly DocentesView _form;
+        private readonly AniosCarrerasView _form;
 
-        public EditionState(DocentesView form)
+        public EditionAniosCarrerasViewState(AniosCarrerasView form)
         {
             _form = form;
             UpdateUI();
@@ -24,28 +24,29 @@ namespace InstitutoDesktop.States.Docentes
         {
             if (string.IsNullOrEmpty(_form.txtNombre.Text))
             {
-                MessageBox.Show("Debe definirse un nombre para el docente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Debe definirse un nombre para el año de la carrera", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            _form.docenteCurrent.Nombre = _form.txtNombre.Text;
+            _form.anioCarreraCurrent.Nombre = _form.txtNombre.Text;
+            _form.anioCarreraCurrent.CarreraId = (int)_form.comboBoxCarreras.SelectedValue;
 
-            if (_form.docenteCurrent.Id == 0)
+            if (_form.anioCarreraCurrent.Id == 0)
             {
-                await _form._memoryCache.AddCacheAsync<Docente>(_form.docenteCurrent, "Docentes");
+                await _form._memoryCache.AddCacheAsync<AnioCarrera>(_form.anioCarreraCurrent);
             }
             else
             {
-                await _form._memoryCache.UpdateCacheAsync<Docente>(_form.docenteCurrent, "Docentes");
+                await _form._memoryCache.UpdateCacheAsync<AnioCarrera>(_form.anioCarreraCurrent);
             }
 
-            _form.TransitionTo(new DisplayGridState(_form));
+            _form.TransitionTo(new DisplayGridAniosCarrerasViewState(_form));
         }
 
         public void OnCancelar()
         {
-            _form.docenteCurrent = null;
-            _form.TransitionTo(new DisplayGridState(_form));
+            _form.anioCarreraCurrent = null;
+            _form.TransitionTo(new DisplayGridAniosCarrerasViewState(_form));
         }
 
         public void UpdateUI()
@@ -54,7 +55,7 @@ namespace InstitutoDesktop.States.Docentes
             _form.tabPageLista.Enabled = false;
             _form.tabControl.SelectTab(_form.tabPageAgregarEditar);
 
-            _form.txtNombre.Text = _form.docenteCurrent.Nombre;
+            _form.txtNombre.Text = _form.anioCarreraCurrent.Nombre;
         }
 
         // Estos métodos no aplican en este estado
@@ -66,5 +67,7 @@ namespace InstitutoDesktop.States.Docentes
         public void OnBuscar() { }
         public Task OnEliminar() => Task.CompletedTask;
         public void OnSalir() => _form.Close();
+
+        public Task LoadComboboxCarreras() => Task.CompletedTask;
     }
 }

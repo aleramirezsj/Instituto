@@ -83,6 +83,9 @@ namespace InstitutoBack.Controllers.Commons
         [HttpPost]
         public async Task<ActionResult<AnioCarrera>> PostAnioCarrera(AnioCarrera anioCarrera)
         {
+            //attaching the carrera to avoid creating a new one
+            //_context.Attach(anioCarrera?.Carrera);
+
             _context.anioscarreras.Add(anioCarrera);
             await _context.SaveChangesAsync();
 

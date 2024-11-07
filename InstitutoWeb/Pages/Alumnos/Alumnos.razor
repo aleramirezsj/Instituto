@@ -51,7 +51,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        alumnos = await _memoryCache.GetAllCacheAsync<Alumno>("Alumnos");
+        alumnos = await _memoryCache.GetAllCacheAsync<Alumno>();
 
     }
 

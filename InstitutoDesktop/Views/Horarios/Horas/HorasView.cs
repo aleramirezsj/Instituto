@@ -28,7 +28,7 @@ namespace InstitutoDesktop.Views.Horarios
         }
         private async Task CargarGrilla()
         {
-            listaHoras = await _memoryCache.GetAllCacheAsync<Hora>("Horas");
+            listaHoras = await _memoryCache.GetAllCacheAsync<Hora>();
             BindingHoras.DataSource = listaHoras.OrderBy(h=>h.Desde).ToList();
             dataGridHoras.OcultarColumnas(new string[] { "Desde", "Hasta", "Eliminado" });
 
@@ -56,7 +56,7 @@ namespace InstitutoDesktop.Views.Horarios
             if (respuesta == DialogResult.Yes)
             {
                 //await horaService.DeleteAsync(hora.Id);
-                await _memoryCache.DeleteCacheAsync<Hora>(hora.Id, "Horas");
+                await _memoryCache.DeleteCacheAsync<Hora>(hora.Id);
                 await CargarGrilla();
             }
         }

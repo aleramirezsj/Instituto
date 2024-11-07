@@ -50,7 +50,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        carreras = await _memoryCache.GetAllCacheAsync<Carrera>("Carreras");
+        carreras = await _memoryCache.GetAllCacheAsync<Carrera>();
         inscripcionesACarreras = (List<InscriptoCarrera>) alumno.InscripcionesACarreras;
         //inscripcionesACarreras = await inscriptoCarreraService.GetByAlumno(alumno.Id);
         logger.LogInformation("inscripciones "+inscripcionesACarreras.Count().ToString());
@@ -79,7 +79,7 @@ else
                 if (!inscripcionesACarreras.Any(i => i.CarreraId == carreraSelected.Id))
                 {
                     var inscripcionACarrera = new InscriptoCarrera { AlumnoId = alumno.Id, CarreraId = carreraSelected.Id };
-                    await _memoryCache.AddCacheAsync<InscriptoCarrera>(inscripcionACarrera, "InscriptosCarreras");
+                    await _memoryCache.AddCacheAsync<InscriptoCarrera>(inscripcionACarrera);
                     //await inscriptoCarreraService.AddAsync(new InscriptoCarrera { AlumnoId = alumno.Id, CarreraId = carreraSelected.Id });
                 }
             }
@@ -87,12 +87,12 @@ else
             foreach (var inscripcion in inscripcionesACarreras)
             {
                 if (listSelected.All(c => c.Id != inscripcion.CarreraId))
-                    await _memoryCache.DeleteCacheAsync<InscriptoCarrera>(inscripcion.Id, "InscriptosCarreras");
+                    await _memoryCache.DeleteCacheAsync<InscriptoCarrera>(inscripcion.Id);
 
                 //await inscriptoCarreraService.DeleteAsync(inscripcion.Id);
             }
             seleccionarCarreras = false;
-            inscripcionesACarreras = (await _memoryCache.GetAllCacheAsync<InscriptoCarrera>("InscriptosCarreras"))
+            inscripcionesACarreras = (await _memoryCache.GetAllCacheAsync<InscriptoCarrera>())
                                 .Where(inscripcion => inscripcion.AlumnoId.Equals(alumno.Id)).ToList();
             logger.LogInformation("inscripciones " + inscripcionesACarreras.Count().ToString());
         }

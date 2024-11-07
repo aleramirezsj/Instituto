@@ -84,16 +84,16 @@ namespace InstitutoDesktop.Views
             //pongo todos los métodos en paralelo para que se ejecuten al mismo tiempo
             var tareas = new List<Task>
             {
-                Task.Run(async () => listaTurnosExamenes = await _memoryCache.GetAllCacheAsync<TurnoExamen>("TurnosExamenes")),
+                Task.Run(async () => listaTurnosExamenes = await _memoryCache.GetAllCacheAsync<TurnoExamen>()),
                 //Task.Run(async () => listaCicloLectivos = await cicloLectivoService.GetAllAsync()),
-                Task.Run(async () => listaCarreras = await _memoryCache.GetAllCacheAsync<Carrera>("Carreras")),
+                Task.Run(async () => listaCarreras = await _memoryCache.GetAllCacheAsync<Carrera>()),
                 //Task.Run(async () => listaCarreras = await carreraService.GetAllAsync()),
-                Task.Run(async () => listaAnioCarreras = await _memoryCache.GetAllCacheAsync<AnioCarrera>("AniosCarreras")),
+                Task.Run(async () => listaAnioCarreras = await _memoryCache.GetAllCacheAsync<AnioCarrera>()),
                 //Task.Run(async () => listaAnioCarreras = await anioCarreraService.GetAllAsync()),
-                Task.Run(async () => listaMaterias = await _memoryCache.GetAllCacheAsync<Materia>("Materias")),
+                Task.Run(async () => listaMaterias = await _memoryCache.GetAllCacheAsync<Materia>()),
                 //Task.Run(async () => listaMaterias = await materiaService.GetAllAsync()),
-                Task.Run(async () => listaDocentes = await _memoryCache.GetAllCacheAsync<Docente>("Docentes")),
-                Task.Run(async () => listaMesasExamenes = await _memoryCache.GetAllCacheAsync<MesaExamen>("MesasExamenes"))
+                Task.Run(async () => listaDocentes = await _memoryCache.GetAllCacheAsync<Docente>()),
+                Task.Run(async () => listaMesasExamenes = await _memoryCache.GetAllCacheAsync<MesaExamen>())
                 
                 //Task.Run(async () => listaAulas = await aulaService.GetAllAsync())
             };
@@ -158,12 +158,12 @@ namespace InstitutoDesktop.Views
 
                 if (mesaExamenCurrent.Id == 0)
                 {
-                    await _memoryCache.AddCacheAsync<MesaExamen>(mesaExamenCurrent, "MesasExamenes");
+                    await _memoryCache.AddCacheAsync<MesaExamen>(mesaExamenCurrent);
                     //await horarioService.AddAsync(horarioCurrent);
                 }
                 else
                 {
-                    await _memoryCache.UpdateCacheAsync<MesaExamen>(mesaExamenCurrent, "MesasExamenes");
+                    await _memoryCache.UpdateCacheAsync<MesaExamen>(mesaExamenCurrent);
                 }
             }
             await actualizarListaMesasExamenes();
@@ -173,7 +173,7 @@ namespace InstitutoDesktop.Views
 
         private async Task actualizarListaMesasExamenes()
         {
-            listaMesasExamenes = await _memoryCache.GetAllCacheAsync<MesaExamen>("MesasExamenes");
+            listaMesasExamenes = await _memoryCache.GetAllCacheAsync<MesaExamen>();
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
@@ -200,7 +200,7 @@ namespace InstitutoDesktop.Views
             var result = MessageBox.Show($"¿Está seguro que desea eliminar la mesa de {mesaExamenCurrent.Materia.Nombre}?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-                await _memoryCache.DeleteCacheAsync<MesaExamen>(mesaExamenCurrent.Id, "MesasExamenes");
+                await _memoryCache.DeleteCacheAsync<MesaExamen>(mesaExamenCurrent.Id);
                 await actualizarListaMesasExamenes();
                 await CargarGrilla();
             }

@@ -11,7 +11,7 @@ namespace InstitutoDesktop.Views
 {
     public partial class DocentesView : Form
     {
-        private IDocentesState _currentState;
+        private IBaseViewState _currentState;
 
         public List<Docente>? listaDocente = new List<Docente>();
         public Docente docenteCurrent;
@@ -28,7 +28,7 @@ namespace InstitutoDesktop.Views
             _ = _currentState.LoadData();
         }
 
-        public void TransitionTo(IDocentesState state)
+        public void TransitionTo(IBaseViewState state)
         {
             _currentState = state;
         }

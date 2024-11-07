@@ -44,8 +44,8 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        carreras = await _memoryCache.GetAllCacheAsync<Carrera>("Carreras");
-        turnosExamenes = await _memoryCache.GetAllCacheAsync<TurnoExamen>("TurnosExamenes");
+        carreras = await _memoryCache.GetAllCacheAsync<Carrera>();
+        turnosExamenes = await _memoryCache.GetAllCacheAsync<TurnoExamen>();
         if (turnosExamenes.Any(c => c.Actual))
         {
             turnoExamenSeleccionado = turnosExamenes.Where(c => c.Actual).FirstOrDefault();
@@ -63,11 +63,11 @@ else
                 carreraSeleccionada = usuarioStateService.Usuario.Alumno.InscripcionesACarreras.FirstOrDefault().Carrera;
                 logger.LogInformation($"carrera seleccionada {carreraSeleccionada.Nombre}");
 
-                aniosCarrera = (await _memoryCache.GetAllCacheAsync<AnioCarrera>("AniosCarreras"))
+                aniosCarrera = (await _memoryCache.GetAllCacheAsync<AnioCarrera>())
                                 .Where(a => a.CarreraId == carreraSeleccionada.Id).ToList();
                 //muestros cuantos anios carrera tiene la carrera seleccionada con el logger
                 logger.LogInformation($"anios carrera {aniosCarrera.Count}");
-                materias = (await _memoryCache.GetAllCacheAsync<Materia>("Materias"))
+                materias = (await _memoryCache.GetAllCacheAsync<Materia>())
                     .Where(m => m.AnioCarrera.CarreraId == carreraSeleccionada.Id).ToList();
             }
 
@@ -85,7 +85,7 @@ else
         idCarreraSeleccionada = idCarrera;
 
         carreraSeleccionada= carreras.FirstOrDefault(c => c.Id == idCarreraSeleccionada);
-        materias = (await _memoryCache.GetAllCacheAsync<Materia>("Materias"))
+        materias = (await _memoryCache.GetAllCacheAsync<Materia>())
                     .Where(m => m.AnioCarrera.CarreraId == carreraSeleccionada.Id).ToList();
         StateHasChanged();
     }

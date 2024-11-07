@@ -1,7 +1,6 @@
 ﻿using InstitutoDesktop.ExtensionMethods;
 using InstitutoDesktop.Services;
 using InstitutoDesktop.Util;
-using InstitutoDesktop.Views.Commons.Aulas;
 using InstitutoServices.Models.Commons;
 using InstitutoServices.Services.Commons;
 using Microsoft.Extensions.DependencyInjection;
@@ -33,12 +32,12 @@ namespace InstitutoDesktop.Views.Commons.Materias
             ShowInActivity.Show("Descargando carreras, años de la carrera y materias");
             var tareas = new List<Task>()
             {
-                Task.Run(async () => BindingCarreras.DataSource = await _memoryCache.GetAllCacheAsync<Carrera>("Carreras")),
+                Task.Run(async () => BindingCarreras.DataSource = await _memoryCache.GetAllCacheAsync<Carrera>()),
                 //Task.Run(async () => BindingCarreras.DataSource = await carreraService.GetAllAsync()),
                 //Task.Run(async () => ListAniosCarreraFiltrada = await anioCarreraService.GetAllAsync()),
-                Task.Run(async () => ListAniosCarreraFiltrada = await _memoryCache.GetAllCacheAsync<AnioCarrera>("AniosCarreras")),
+                Task.Run(async () => ListAniosCarreraFiltrada = await _memoryCache.GetAllCacheAsync<AnioCarrera>()),
                 //Task.Run(async () => ListMateriasFiltrada = await materiaService.GetAllAsync())
-                Task.Run(async () => ListMateriasFiltrada = await _memoryCache.GetAllCacheAsync<Materia>("Materias"))
+                Task.Run(async () => ListMateriasFiltrada = await _memoryCache.GetAllCacheAsync<Materia>())
             };
             await Task.WhenAll(tareas);
             ShowInActivity.Hide();
@@ -50,7 +49,7 @@ namespace InstitutoDesktop.Views.Commons.Materias
         private async void ActualizarLista()
         {
 
-            ListMateriasFiltrada = await _memoryCache.GetAllCacheAsync<Materia>("Materias");
+            ListMateriasFiltrada = await _memoryCache.GetAllCacheAsync<Materia>();
 
             BindingMaterias.DataSource = ListMateriasFiltrada;
             CargarDatosEnGrilla();
@@ -120,7 +119,7 @@ namespace InstitutoDesktop.Views.Commons.Materias
             if (respuesta == DialogResult.Yes)
             {
                 //await materiaService.DeleteAsync(materia.Id);
-                await _memoryCache.DeleteCacheAsync<Materia>(materia.Id, "Materias");
+                await _memoryCache.DeleteCacheAsync<Materia>(materia.Id);
                 ActualizarLista();
             }
         }

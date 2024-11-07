@@ -53,11 +53,11 @@ namespace InstitutoDesktop.Views.Commons
             
             if (carrera.Id == 0)
             {
-                await _memoryCache.AddCacheAsync<Carrera>(carrera, "Carreras");
+                await _memoryCache.AddCacheAsync<Carrera>(carrera);
             }
             else
             {
-                await _memoryCache.UpdateCacheAsync<Carrera>(carrera, "Carreras");
+                await _memoryCache.UpdateCacheAsync<Carrera>(carrera);
             }
             this.Close();
         }

@@ -39,7 +39,7 @@ namespace InstitutoDesktop.Views.Inscripciones
 
         private async void CargarDatosCiclosLectivos()
         {
-            var ciclosLectivos = await _memoryCache.GetAllCacheAsync<CicloLectivo>("CiclosLectivos");
+            var ciclosLectivos = await _memoryCache.GetAllCacheAsync<CicloLectivo>();
             cboCiclosLectivos.DataSource = ciclosLectivos;
             cboCiclosLectivos.DisplayMember = "Nombre";
             cboCiclosLectivos.ValueMember = "Id";
@@ -80,12 +80,12 @@ namespace InstitutoDesktop.Views.Inscripciones
 
             if (periodoInscripcion.Id == 0)
             {
-                await _memoryCache.AddCacheAsync<PeriodoInscripcion>(periodoInscripcion, "PeriodosInscripciones");
+                await _memoryCache.AddCacheAsync<PeriodoInscripcion>(periodoInscripcion);
                 //await ciclolectivoService.AddAsync(cicloLectivo);
             }
             else
             {
-                await _memoryCache.UpdateCacheAsync<PeriodoInscripcion>(periodoInscripcion, "PeriodosInscripciones");
+                await _memoryCache.UpdateCacheAsync<PeriodoInscripcion>(periodoInscripcion);
                 //await ciclolectivoService.UpdateAsync(cicloLectivo);
             }
 

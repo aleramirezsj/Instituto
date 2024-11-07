@@ -6,9 +6,7 @@ using InstitutoDesktop.Views.MesasExamenes;
 using InstitutoDesktop.Views.Commons.Alumnos;
 
 using InstitutoDesktop.Views.Commons;
-using InstitutoDesktop.Views.Commons.AnioCarreras;
 using InstitutoDesktop.Views.Commons.Materias;
-using InstitutoDesktop.Views.Commons.Aulas;
 using InstitutoDesktop.Services;
 using InstitutoServices.Services.Commons;
 using Microsoft.Extensions.Caching.Memory;
@@ -45,26 +43,26 @@ namespace InstitutoDesktop
         {
             Task.WhenAll(new List<Task>
             {
-                Task.Run(async () => _cacheService.GetAllCacheAsync<Alumno>("Alumnos")),
-                Task.Run(async () => _cacheService.GetAllCacheAsync<AnioCarrera>("AniosCarreras")),
-                Task.Run(async () =>_cacheService.GetAllCacheAsync<Aula>("Aulas")),
-                Task.Run(async () =>_cacheService.GetAllCacheAsync<Carrera>("Carreras")),
-                Task.Run(async () =>_cacheService.GetAllCacheAsync<CicloLectivo>("CiclosLectivos")),
-                Task.Run(async () =>_cacheService.GetAllCacheAsync<Docente>("Docentes")),
-                Task.Run(async () =>_cacheService.GetAllCacheAsync<Hora>("Horas")),
-                Task.Run(async () =>_cacheService.GetAllCacheAsync<Horario>("Horarios")),
-                Task.Run(async () =>_cacheService.GetAllCacheAsync<IntegranteHorario>("IntegrantesHorarios")),
-                Task.Run(async () =>_cacheService.GetAllCacheAsync<JefaturaSeccion>("JefaturasSecciones")),
-                Task.Run(async () =>_cacheService.GetAllCacheAsync<Materia>("Materias")),
-                Task.Run(async () =>_cacheService.GetAllCacheAsync<TurnoExamen>("TurnosExamenes")),
-                Task.Run(async () =>_cacheService.GetAllCacheAsync<Inscripcion>("Inscripciones")),
-                Task.Run(async () =>_cacheService.GetAllCacheAsync<DetalleInscripcion>("DetallesInscripciones")),
-                Task.Run(async () =>_cacheService.GetAllCacheAsync<MesaExamen>("MesasExamenes")),
-                Task.Run(async () =>_cacheService.GetAllCacheAsync<DetalleMesaExamen>("DetallesMesasExamenes")),
-                Task.Run(async () =>_cacheService.GetAllCacheAsync<InscripcionExamen>("InscripcionesExamenes")),
-                Task.Run(async () =>_cacheService.GetAllCacheAsync<DetalleInscripcionExamen>("DetallesInscripcionesExamenes")),
-                Task.Run(async () =>_cacheService.GetAllCacheAsync<PeriodoHorario>("PeriodosHorarios")),
-                Task.Run(async () =>_cacheService.GetAllCacheAsync<PeriodoInscripcion>("PeriodosInscripciones")),
+                Task.Run(async () => _cacheService.GetAllCacheAsync<Alumno>()),
+                Task.Run(async () => _cacheService.GetAllCacheAsync<AnioCarrera>()),
+                Task.Run(async () =>_cacheService.GetAllCacheAsync<Aula>()),
+                Task.Run(async () =>_cacheService.GetAllCacheAsync<Carrera>()),
+                Task.Run(async () =>_cacheService.GetAllCacheAsync<CicloLectivo>()),
+                Task.Run(async () =>_cacheService.GetAllCacheAsync<Docente>()),
+                Task.Run(async () =>_cacheService.GetAllCacheAsync<Hora>()),
+                Task.Run(async () =>_cacheService.GetAllCacheAsync<Horario>()),
+                Task.Run(async () =>_cacheService.GetAllCacheAsync<IntegranteHorario>()),
+                Task.Run(async () =>_cacheService.GetAllCacheAsync<JefaturaSeccion>()),
+                Task.Run(async () =>_cacheService.GetAllCacheAsync<Materia>()),
+                Task.Run(async () =>_cacheService.GetAllCacheAsync<TurnoExamen>()),
+                Task.Run(async () =>_cacheService.GetAllCacheAsync<Inscripcion>()),
+                Task.Run(async () =>_cacheService.GetAllCacheAsync<DetalleInscripcion>()),
+                Task.Run(async () =>_cacheService.GetAllCacheAsync<MesaExamen>()),
+                Task.Run(async () =>_cacheService.GetAllCacheAsync<DetalleMesaExamen>()),
+                Task.Run(async () =>_cacheService.GetAllCacheAsync<InscripcionExamen>()),
+                Task.Run(async () =>_cacheService.GetAllCacheAsync<DetalleInscripcionExamen>()),
+                Task.Run(async () =>_cacheService.GetAllCacheAsync<PeriodoHorario>()),
+                Task.Run(async () =>_cacheService.GetAllCacheAsync<PeriodoInscripcion>()),
 
             });
 
@@ -139,14 +137,14 @@ namespace InstitutoDesktop
 
         private void subMenuCiclosLectivos_Click(object sender, EventArgs e)
         {
-            DocentesView ciclosLectivosView = ActivatorUtilities.CreateInstance<DocentesView>(_serviceProvider,this );
+            CiclosLectivosView ciclosLectivosView = ActivatorUtilities.CreateInstance<CiclosLectivosView>(_serviceProvider,this );
             ciclosLectivosView.Show();
         }
 
         private void subMenuAulas_Click(object sender, EventArgs e)
         {
             AulasView aulasView = ActivatorUtilities.CreateInstance<AulasView>(_serviceProvider);
-            aulasView.ShowDialog();
+            aulasView.Show();
         }
 
         private void subMenuAlumnos_Click(object sender, EventArgs e)
@@ -169,8 +167,8 @@ namespace InstitutoDesktop
 
         private void subMenuAñosCarreras_Click(object sender, EventArgs e)
         {
-            AnioCarrerasView aniosCarreraView = ActivatorUtilities.CreateInstance<AnioCarrerasView>(_serviceProvider);
-            aniosCarreraView.ShowDialog();
+            AniosCarrerasView aniosCarreraView = ActivatorUtilities.CreateInstance<AniosCarrerasView>(_serviceProvider);
+            aniosCarreraView.Show();
         }
 
         private void subMenuMaterias_Click(object sender, EventArgs e)

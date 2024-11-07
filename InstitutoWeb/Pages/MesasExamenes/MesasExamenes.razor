@@ -54,9 +54,9 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        turnosExamenes = await _memoryCache.GetAllCacheAsync<TurnoExamen>("TurnosExamenes");
-        carreras = await _memoryCache.GetAllCacheAsync<Carrera>("Carreras");
-        mesasExamenes = await _memoryCache.GetAllCacheAsync<MesaExamen>("MesasExamenes");
+        turnosExamenes = await _memoryCache.GetAllCacheAsync<TurnoExamen>();
+        carreras = await _memoryCache.GetAllCacheAsync<Carrera>();
+        mesasExamenes = await _memoryCache.GetAllCacheAsync<MesaExamen>();
         if(turnosExamenes.Any(turno=>turno.Actual))
         {
             idTurnoExamenSeleccionado = turnosExamenes.FirstOrDefault(turno=>turno.Actual).Id;
@@ -82,7 +82,7 @@ else
             if(idTurnoExamenSeleccionado!=null)
             {
                 //filtro las mesas de examenes por el turno seleccionado y por el docente logueado
-                mesasExamenes = (await _memoryCache.GetAllCacheAsync<MesaExamen>("MesasExamenes"))
+                mesasExamenes = (await _memoryCache.GetAllCacheAsync<MesaExamen>())
                                 .Where(m => m.TurnoExamenId == idTurnoExamenSeleccionado &&
                                 m.DetallesMesaExamen.Any(detalle => detalle.DocenteId == usuarioStateService.Usuario.DocenteId)).ToList();
             }

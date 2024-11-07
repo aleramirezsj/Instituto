@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InstitutoDesktop.Interfaces.Commons
 {
-    public interface IDocentesState
+    public interface IBaseViewState
     {
         Task LoadData();
         Task LoadGrid();

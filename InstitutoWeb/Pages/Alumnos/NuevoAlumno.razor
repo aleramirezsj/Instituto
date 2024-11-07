@@ -28,7 +28,7 @@ else
     private async Task GuardarAula()
     {
         //await aulaService.AddAsync(aula);
-        _memoryCache.AddCacheAsync<Aula>(aula, "Aulas");
+        _memoryCache.AddCacheAsync<Aula>(aula);
         NavigationManager.NavigateTo("/aulas");
     }
 }

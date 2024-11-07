@@ -50,12 +50,12 @@ namespace InstitutoDesktop.Views.Horarios
             if (hora.Id == 0)
             {
                 //await horarioService.AddAsync(hora);
-                await _memoryCache.AddCacheAsync<Hora>(hora, "Horas");
+                await _memoryCache.AddCacheAsync<Hora>(hora);
             }
             else
             {
                 //await horarioService.UpdateAsync(hora);
-                await _memoryCache.UpdateCacheAsync<Hora>(hora, "Horas");
+                await _memoryCache.UpdateCacheAsync<Hora>(hora);
             }
 
             this.Close();

@@ -1,6 +1,6 @@
 ﻿namespace InstitutoDesktop.Views
 {
-    partial class CilosLectivosView
+    partial class CiclosLectivosView
     {
         /// <summary>
         /// Required designer variable.

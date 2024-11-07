@@ -42,7 +42,7 @@ namespace InstitutoDesktop.Views.MesasExamenes
 
         private async void CargarCombo()
         {
-            cbmBoxCicloLectivo.DataSource = await _memoryCache.GetAllCacheAsync<CicloLectivo>("CiclosLectivos");
+            cbmBoxCicloLectivo.DataSource = await _memoryCache.GetAllCacheAsync<CicloLectivo>();
             cbmBoxCicloLectivo.DisplayMember = "Nombre";
             cbmBoxCicloLectivo.ValueMember = "Id";
         }
@@ -67,11 +67,11 @@ namespace InstitutoDesktop.Views.MesasExamenes
             if (turnoexamen.Id == 0)
             {
                 //await turnoexamenesService.AddAsync(turnoexamen);
-                await _memoryCache.AddCacheAsync<TurnoExamen>(turnoexamen, "TurnosExamenes");
+                await _memoryCache.AddCacheAsync<TurnoExamen>(turnoexamen);
             }
             else
             {
-                await _memoryCache.UpdateCacheAsync<TurnoExamen>(turnoexamen, "TurnosExamenes");
+                await _memoryCache.UpdateCacheAsync<TurnoExamen>(turnoexamen);
                 //await turnoexamenesService.UpdateAsync(turnoexamen);
             }
 

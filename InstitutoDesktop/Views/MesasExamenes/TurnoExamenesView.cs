@@ -32,7 +32,7 @@ namespace InstitutoDesktop.Views.MesasExamenes
         private async Task CargarGrilla()
         {
             listaTurnos.DataSource = null;
-            listaTurnos.DataSource = (await _memoryCache.GetAllCacheAsync<TurnoExamen>("TurnosExamenes")).OrderBy(turno=>turno.Id);
+            listaTurnos.DataSource = (await _memoryCache.GetAllCacheAsync<TurnoExamen>()).OrderBy(turno=>turno.Id);
             dataGridTurnoExamenes.OcultarColumnas(new string[] {"Id", "Eliminado" });
         }
 
@@ -48,7 +48,7 @@ namespace InstitutoDesktop.Views.MesasExamenes
             var respuesta = MessageBox.Show($"¿Está seguro que quiere borrar el Ciclo Lectivo {turnoexamen.Nombre}?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (respuesta == DialogResult.Yes)
             {
-                await _memoryCache.DeleteCacheAsync<TurnoExamen>(turnoexamen.Id, "TurnosExamenes");
+                await _memoryCache.DeleteCacheAsync<TurnoExamen>(turnoexamen.Id);
                 await CargarGrilla();
             }
         }

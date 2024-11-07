@@ -23,7 +23,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        turnosExamenes = await _memoryCache.GetAllCacheAsync<TurnoExamen>("TurnosExamenes");
+        turnosExamenes = await _memoryCache.GetAllCacheAsync<TurnoExamen>();
     }
 
     private async void Eliminar(IEntityIdNombre entity)
@@ -40,14 +40,14 @@ else
             });
         if (respuesta.IsConfirmed)
         {
-            await _memoryCache.DeleteCacheAsync<TurnoExamen>(turnoExamen.Id, "TurnosExamenes");
-            turnosExamenes = await _memoryCache.GetAllCacheAsync<TurnoExamen>("TurnosExamenes");
+            await _memoryCache.DeleteCacheAsync<TurnoExamen>(turnoExamen.Id);
+            turnosExamenes = await _memoryCache.GetAllCacheAsync<TurnoExamen>();
             StateHasChanged();
         }
     }
     private async Task Guardar()
     {
-        turnosExamenes = await _memoryCache.GetAllCacheAsync<TurnoExamen>("TurnosExamenes");
+        turnosExamenes = await _memoryCache.GetAllCacheAsync<TurnoExamen>();
         currentTurnoExamen = null;
         StateHasChanged();
 

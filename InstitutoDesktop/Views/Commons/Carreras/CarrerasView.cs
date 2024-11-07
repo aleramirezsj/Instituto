@@ -28,7 +28,7 @@ namespace InstitutoDesktop.Views
         private async Task CargarGrilla()
         {
             listaCarreras.DataSource = null;
-            listaCarreras.DataSource = await _memoryCache.GetAllCacheAsync<Carrera>("Carreras");
+            listaCarreras.DataSource = await _memoryCache.GetAllCacheAsync<Carrera>();
 
             dataGridCarreras.OcultarColumnas(new string[] { "Eliminado" });
         }
@@ -51,7 +51,7 @@ namespace InstitutoDesktop.Views
             var respuesta = MessageBox.Show($"¿Está seguro que quiere borrar a la carrera {carrera.Nombre}", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (respuesta == DialogResult.Yes)
             {
-                await _memoryCache.DeleteCacheAsync<Carrera>(carrera.Id, "Carreras");
+                await _memoryCache.DeleteCacheAsync<Carrera>(carrera.Id);
                 await CargarGrilla();
             }
         }

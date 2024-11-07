@@ -35,7 +35,7 @@ namespace InstitutoDesktop.Views.Inscripciones.PeriodosInscripciones
         private async Task CargarGrilla()
         {
             listaPeriodosInscripcion.DataSource = null;
-            listaPeriodosInscripcion.DataSource = await _memoryCache.GetAllCacheAsync<PeriodoInscripcion>("PeriodosInscripciones");
+            listaPeriodosInscripcion.DataSource = await _memoryCache.GetAllCacheAsync<PeriodoInscripcion>();
         }
 
         private async void btnAgregar_Click(object sender, EventArgs e)
@@ -64,7 +64,7 @@ namespace InstitutoDesktop.Views.Inscripciones.PeriodosInscripciones
             if (respuesta == DialogResult.Yes)
             {
                 //await ciclolectivoService.DeleteAsync(ciclolectivo.Id);
-                await _memoryCache.DeleteCacheAsync<PeriodoInscripcion>(periodoInscripcion.Id, "PeriodosInscripciones");
+                await _memoryCache.DeleteCacheAsync<PeriodoInscripcion>(periodoInscripcion.Id);
                 await CargarGrilla();
             }
         }
