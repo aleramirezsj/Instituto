@@ -26,7 +26,7 @@ namespace InstitutoDesktop.Views
 
         public readonly MemoryCacheServiceWinForms _memoryCache;
 
-        public CilosLectivosView(MemoryCacheServiceWinForms memoryCacheService, MenuPrincipalView menuPrincipal)
+        public CiclosLectivosView(MemoryCacheServiceWinForms memoryCacheService, MenuPrincipalView menuPrincipal)
         {
             InitializeComponent();
             this.MdiParent = menuPrincipal;
