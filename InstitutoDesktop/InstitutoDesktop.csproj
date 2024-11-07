@@ -45,6 +45,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Update="Views\DocentesView.cs" />
     <Compile Update="Views\Inscripciones\CiclosLectivosView.cs">
       <SubType>Form</SubType>
     </Compile>

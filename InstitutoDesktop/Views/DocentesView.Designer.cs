@@ -1,6 +1,6 @@
 ﻿namespace InstitutoDesktop.Views
 {
-    partial class CilosLectivosView
+    partial class DocentesView
     {
         /// <summary>
         /// Required designer variable.
@@ -41,7 +41,6 @@
             btnAgregar = new FontAwesome.Sharp.IconButton();
             Grilla = new DataGridView();
             tabPageAgregarEditar = new TabPage();
-            chkActual = new CheckBox();
             txtNombre = new TextBox();
             label2 = new Label();
             btnCancelar = new FontAwesome.Sharp.IconButton();
@@ -70,9 +69,9 @@
             label1.Location = new Point(9, 6);
             label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(200, 37);
+            label1.Size = new Size(131, 37);
             label1.TabIndex = 0;
-            label1.Text = "Ciclos Lectivos";
+            label1.Text = "Docentes";
             // 
             // tabControl
             // 
@@ -237,7 +236,6 @@
             // 
             // tabPageAgregarEditar
             // 
-            tabPageAgregarEditar.Controls.Add(chkActual);
             tabPageAgregarEditar.Controls.Add(txtNombre);
             tabPageAgregarEditar.Controls.Add(label2);
             tabPageAgregarEditar.Controls.Add(btnCancelar);
@@ -251,23 +249,11 @@
             tabPageAgregarEditar.Text = "Agregar/Editar";
             tabPageAgregarEditar.UseVisualStyleBackColor = true;
             // 
-            // chkActual
-            // 
-            chkActual.Anchor = AnchorStyles.None;
-            chkActual.AutoSize = true;
-            chkActual.Location = new Point(439, 239);
-            chkActual.Margin = new Padding(2, 2, 2, 2);
-            chkActual.Name = "chkActual";
-            chkActual.Size = new Size(73, 24);
-            chkActual.TabIndex = 6;
-            chkActual.Text = "Actual";
-            chkActual.UseVisualStyleBackColor = true;
-            // 
             // txtNombre
             // 
             txtNombre.Anchor = AnchorStyles.None;
             txtNombre.Location = new Point(439, 172);
-            txtNombre.Margin = new Padding(2, 2, 2, 2);
+            txtNombre.Margin = new Padding(2);
             txtNombre.Name = "txtNombre";
             txtNombre.Size = new Size(284, 27);
             txtNombre.TabIndex = 5;
@@ -319,7 +305,7 @@
             btnGuardar.UseVisualStyleBackColor = false;
             btnGuardar.Click += btnGuardar_Click;
             // 
-            // CiclosLectivosView
+            // DocentesView
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -327,7 +313,7 @@
             Controls.Add(tabControl);
             Controls.Add(panel1);
             Margin = new Padding(2);
-            Name = "CiclosLectivosView";
+            Name = "DocentesView";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Ciclos Lectivos";
             panel1.ResumeLayout(false);
@@ -359,7 +345,6 @@
         private Label label3;
         public TextBox txtFiltro;
         public FontAwesome.Sharp.IconButton iconButton1;
-        public CheckBox chkActual;
         public TextBox txtNombre;
         private Label label2;
     }

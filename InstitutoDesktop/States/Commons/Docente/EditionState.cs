@@ -1,21 +1,20 @@
-﻿using InstitutoDesktop.Interfaces.Inscripciones;
+﻿using InstitutoDesktop.Interfaces.Commons;
 using InstitutoDesktop.Views;
-using InstitutoServices.Models.Inscripciones;
+using InstitutoDesktop.Views.Commons;
+using InstitutoServices.Models.Commons;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InstitutoDesktop.States.Inscripciones.CiclosLectivos
+namespace InstitutoDesktop.States.Docentes
 {
-    public class EditionState : ICiclosLectivosState
+    public class EditionState : IDocentesState
     {
+        private readonly DocentesView _form;
 
-        private readonly CiclosLectivosView _form;
-
-        public EditionState(CiclosLectivosView form)
-
+        public EditionState(DocentesView form)
         {
             _form = form;
             UpdateUI();
@@ -25,20 +24,19 @@ namespace InstitutoDesktop.States.Inscripciones.CiclosLectivos
         {
             if (string.IsNullOrEmpty(_form.txtNombre.Text))
             {
-                MessageBox.Show("Debe definirse un nombre para el ciclo lectivo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Debe definirse un nombre para el docente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            _form.cicloLectivoCurrent.Nombre = _form.txtNombre.Text;
-            _form.cicloLectivoCurrent.Actual = _form.chkActual.Checked;
+            _form.docenteCurrent.Nombre = _form.txtNombre.Text;
 
-            if (_form.cicloLectivoCurrent.Id == 0)
+            if (_form.docenteCurrent.Id == 0)
             {
-                await _form._memoryCache.AddCacheAsync<CicloLectivo>(_form.cicloLectivoCurrent, "CiclosLectivos");
+                await _form._memoryCache.AddCacheAsync<Docente>(_form.docenteCurrent, "Docentes");
             }
             else
             {
-                await _form._memoryCache.UpdateCacheAsync<CicloLectivo>(_form.cicloLectivoCurrent, "CiclosLectivos");
+                await _form._memoryCache.UpdateCacheAsync<Docente>(_form.docenteCurrent, "Docentes");
             }
 
             _form.TransitionTo(new DisplayGridState(_form));
@@ -46,7 +44,7 @@ namespace InstitutoDesktop.States.Inscripciones.CiclosLectivos
 
         public void OnCancelar()
         {
-            _form.cicloLectivoCurrent = null;
+            _form.docenteCurrent = null;
             _form.TransitionTo(new DisplayGridState(_form));
         }
 
@@ -56,8 +54,7 @@ namespace InstitutoDesktop.States.Inscripciones.CiclosLectivos
             _form.tabPageLista.Enabled = false;
             _form.tabControl.SelectTab(_form.tabPageAgregarEditar);
 
-            _form.txtNombre.Text = _form.cicloLectivoCurrent.Nombre;
-            _form.chkActual.Checked = _form.cicloLectivoCurrent.Actual;
+            _form.txtNombre.Text = _form.docenteCurrent.Nombre;
         }
 
         // Estos métodos no aplican en este estado
@@ -70,6 +67,4 @@ namespace InstitutoDesktop.States.Inscripciones.CiclosLectivos
         public Task OnEliminar() => Task.CompletedTask;
         public void OnSalir() => _form.Close();
     }
-
 }
-
