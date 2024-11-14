@@ -71,7 +71,7 @@ namespace InstitutoApp.ViewModels.Commons
         {
 		
 			AgregarCommand = new Command(Agregar);
-			EditarCommand = new Command(Editar,PermitirEditar);
+            EditarCommand = new Command(Editar, PermitirEditar);
 			EliminarCommand = new Command(Eliminar,PermitirEliminar);
 
 			//RefreshCommand.Execute(null);
@@ -119,14 +119,24 @@ namespace InstitutoApp.ViewModels.Commons
             return carreraCurrent != null;
         }
 
-        private void Editar(object obj)
+        private async void Editar(object obj)
         {
-            WeakReferenceMessenger.Default.Send(new MyMessage("AbrirAddEditCarreraView") { Carrera=carreraCurrent});
+            //WeakReferenceMessenger.Default.Send(new MyMessage("AbrirAddEditCarreraView") { Carrera=carreraCurrent});
+            var navigationParameter = new ShellNavigationQueryParameters
+            {
+                { "CarreraAEditar", carreraCurrent }
+            };
+            await Shell.Current.GoToAsync("//AgregarEditarCarrera", navigationParameter);
         }
 
-        private void Agregar(object obj)
+        private async void Agregar(object obj)
         {
-            WeakReferenceMessenger.Default.Send(new MyMessage("AbrirAddEditCarreraView"));
+            //WeakReferenceMessenger.Default.Send(new MyMessage("AbrirAddEditCarreraView"));
+            var navigationParameter = new ShellNavigationQueryParameters
+            {
+                { "CarreraAEditar", null }
+            };
+            await Shell.Current.GoToAsync("//AgregarEditarCarrera", navigationParameter);
         }
 
         public async Task ObtenerCarreras()

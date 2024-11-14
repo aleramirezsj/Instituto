@@ -1,6 +1,5 @@
 ﻿using InstitutoServices.Enums;
 using InstitutoServices.Interfaces;
-using InstitutoServices.Interfaces.MesasExamenes;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 

@@ -11,8 +11,8 @@ namespace InstitutoServices.Models.Horarios
         public int? MateriaId { get; set; }
         public Materia? Materia { get; set; } = null;
         public int CantidadHoras { get; set; } = 0;
-        public int? CicloLectivoId { get; set; }
-        public CicloLectivo? CicloLectivo { get; set; }
+        public int? PeriodoHorarioId { get; set; }
+        public PeriodoHorario? PeriodoHorario { get; set; }
         public bool Eliminado { get; set; } = false;
 
         [NotMapped]

@@ -1,19 +1,7 @@
-﻿using InstitutoDesktop.ExtensionMethods;
-using InstitutoDesktop.Interfaces.Commons;
+﻿using InstitutoDesktop.Interfaces.Commons;
 using InstitutoDesktop.Services;
 using InstitutoDesktop.States.Commons.Aulas;
-using InstitutoDesktop.Util;
-using InstitutoServices.Enums;
-using InstitutoServices.Interfaces;
-using InstitutoServices.Interfaces.Commons;
-using InstitutoServices.Interfaces.Horarios;
 using InstitutoServices.Models.Commons;
-using InstitutoServices.Models.Horarios;
-using InstitutoServices.Models.Inscripciones;
-using InstitutoServices.Services.Commons;
-using InstitutoServices.Services.Horarios;
-using System.Data;
-using System.Diagnostics;
 
 namespace InstitutoDesktop.Views.Commons
 {
@@ -30,6 +18,7 @@ namespace InstitutoDesktop.Views.Commons
         {
             InitializeComponent();
             this.MdiParent = menuPrincipal;
+            this.WindowState = FormWindowState.Maximized;
             _memoryCache = memoryCacheService;
             // Iniciar en estado de listado
             TransitionTo(new DisplayGridState(this));

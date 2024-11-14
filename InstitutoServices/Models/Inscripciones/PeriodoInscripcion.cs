@@ -12,7 +12,7 @@ namespace InstitutoServices.Models.Inscripciones
     {
         public int Id{ get; set; }
         public string Nombre { get; set; } = string.Empty;
-        public int? CicloLectivoId { get; set; }
+        public int? CicloLectivoId { get; set; } = 0;
         public CicloLectivo? CicloLectivo { get; set; }
         public bool InscripcionHabilitada { get; set; }
         public bool Es2doCuatrimestre { get; set; } = false;

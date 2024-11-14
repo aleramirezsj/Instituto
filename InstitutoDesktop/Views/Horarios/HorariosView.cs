@@ -17,8 +17,7 @@ namespace InstitutoDesktop.Views
 {
     public partial class HorariosView : Form
     {
-        BindingSource bindingHorarios = new BindingSource();
-        List<CicloLectivo>? listaCicloLectivos = new List<CicloLectivo>();
+        List<PeriodoHorario>? listaPeriodosHorarios = new List<PeriodoHorario>();
         List<Carrera>? listaCarreras = new List<Carrera>();
         List<AnioCarrera>? listaAnioCarreras = new List<AnioCarrera>();
         List<Materia>? listaMaterias = new List<Materia>();
@@ -35,8 +34,9 @@ namespace InstitutoDesktop.Views
         {
             InitializeComponent();
             this.MdiParent = menuPrincipal;
+            this.WindowState = FormWindowState.Maximized;
             _memoryCache = memoryCacheService;
-            dataGridHorarios.DataSource = bindingHorarios;
+            dataGridHorarios.DataSource = listaHorarios;
             //tabPageAgregarEditar.Enabled= false;
             ObtenerListas();
 
@@ -45,9 +45,9 @@ namespace InstitutoDesktop.Views
 
         private void CargarCombos()
         {
-            cboCiclosLectivos.DataSource = listaCicloLectivos.ToList();
-            cboCiclosLectivos.DisplayMember = "Nombre";
-            cboCiclosLectivos.ValueMember = "Id";
+            cboPeriodosHorarios.DataSource = listaPeriodosHorarios.ToList();
+            cboPeriodosHorarios.DisplayMember = "Nombre";
+            cboPeriodosHorarios.ValueMember = "Id";
 
             cboCarreras.DataSource = listaCarreras.ToList();
             cboCarreras.DisplayMember = "Nombre";
@@ -104,24 +104,16 @@ namespace InstitutoDesktop.Views
             //pongo todos los métodos en paralelo para que se ejecuten al mismo tiempo
             var tareas = new List<Task>
             {
-                Task.Run(async () => listaCicloLectivos = await _memoryCache.GetAllCacheAsync<CicloLectivo>()),
-                //Task.Run(async () => listaCicloLectivos = await cicloLectivoService.GetAllAsync()),
+                Task.Run(async () => listaPeriodosHorarios = await _memoryCache.GetAllCacheAsync<PeriodoHorario>()),
                 Task.Run(async () => listaCarreras = await _memoryCache.GetAllCacheAsync<Carrera>()),
-                //Task.Run(async () => listaCarreras = await carreraService.GetAllAsync()),
                 Task.Run(async () => listaAnioCarreras = await _memoryCache.GetAllCacheAsync<AnioCarrera>()),
-                //Task.Run(async () => listaAnioCarreras = await anioCarreraService.GetAllAsync()),
                 Task.Run(async () => listaMaterias = await _memoryCache.GetAllCacheAsync<Materia>()),
-                //Task.Run(async () => listaMaterias = await materiaService.GetAllAsync()),
                 Task.Run(async () => listaDocentes = await _memoryCache.GetAllCacheAsync<Docente>()),
-                //Task.Run(async () => listaDocentes = await docenteService.GetAllAsync()),
                 Task.Run(async () => listaHoras = await _memoryCache.GetAllCacheAsync<Hora>()),
-                //Task.Run(async () => listaHoras = await horaService.GetAllAsync()),
                 Task.Run(async () => listaHorarios = await _memoryCache.GetAllCacheAsync<Horario>()),
-                //Task.Run(async () => listaHorarios = await horarioService.GetAllAsync()),
                 Task.Run(async () => listaAulas = await _memoryCache.GetAllCacheAsync<Aula>())
-                //Task.Run(async () => listaAulas = await aulaService.GetAllAsync())
             };
-            bindingHorarios.DataSource = listaHorarios;
+            dataGridHorarios.DataSource = listaHorarios;
             //cuando terminan todas las tareas, cierro el showInActivity y cargo los combos
             await Task.WhenAll(tareas);
             ShowInActivity.Hide();
@@ -132,21 +124,21 @@ namespace InstitutoDesktop.Views
         private async Task LoadGrid()
         {
             if (listaHorarios != null && listaHorarios.Count > 0)
-                bindingHorarios.DataSource = listaHorarios.
-                    Where(h => h.CicloLectivoId.Equals((int)cboCiclosLectivos.SelectedValue) &&
+                dataGridHorarios.DataSource = listaHorarios.
+                    Where(h => h.PeriodoHorarioId.Equals((int)cboPeriodosHorarios.SelectedValue) &&
                           h.Materia.AnioCarrera.CarreraId.Equals((int)cboCarreras.SelectedValue) &&
-                          h.Materia.AnioCarreraId.Equals((int)cboAniosCarreras.SelectedValue));
-            dataGridHorarios.OcultarColumnas(new string[] { "Id", "CicloLectivo", "DetallesHorario", "IntegrantesHorario", "CicloLectivoId", "Eliminado" });
+                          h.Materia.AnioCarreraId.Equals((int)cboAniosCarreras.SelectedValue)).ToList();
+            dataGridHorarios.OcultarColumnas(new string[] { "Id","MateriaId", "PeriodoHorario", "DetallesHorario", "IntegrantesHorario", "PeriodoHorarioId", "Eliminado" });
         }
         private async Task LoadGridFilter()
         {
             if (listaHorarios != null && listaHorarios.Count > 0)
-                bindingHorarios.DataSource = listaHorarios.
-                    Where(h => h.CicloLectivoId.Equals((int)cboCiclosLectivos.SelectedValue) &&
+                dataGridHorarios.DataSource = listaHorarios.
+                    Where(h => h.PeriodoHorarioId.Equals((int)cboPeriodosHorarios.SelectedValue) &&
                           h.Materia.AnioCarrera.CarreraId.Equals((int)cboCarreras.SelectedValue) &&
                           h.Materia.AnioCarreraId.Equals((int)cboAniosCarreras.SelectedValue) &&
-                          h.Materia.Nombre.ToUpper().Contains(txtFiltro.Text.ToUpper()));
-            dataGridHorarios.OcultarColumnas(new string[] { "Id", "CicloLectivo", "DetallesHorario", "IntegrantesHorario", "CicloLectivoId", "Eliminado" });
+                          h.Materia.Nombre.ToUpper().Contains(txtFiltro.Text.ToUpper())).ToList();
+            dataGridHorarios.OcultarColumnas(new string[] { "Id", "MateriaId", "PeriodoHorario", "DetallesHorario", "IntegrantesHorario", "PeriodoHorarioId", "Eliminado" });
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
@@ -176,24 +168,19 @@ namespace InstitutoDesktop.Views
             else
             {
                 horarioCurrent.MateriaId = (int)cboMaterias.SelectedValue;
-                horarioCurrent.CicloLectivoId = (int)cboCiclosLectivos.SelectedValue;
+                horarioCurrent.PeriodoHorarioId = (int)cboPeriodosHorarios.SelectedValue;
 
                 horarioCurrent.CantidadHoras = horarioCurrent.DetallesHorario.Count();
                 horarioCurrent.Materia = null;
-                horarioCurrent.CicloLectivo = null;
+                horarioCurrent.PeriodoHorario = null;
                 horarioCurrent.IntegrantesHorario.ToList().ForEach(i => i.Docente = null);
                 horarioCurrent.DetallesHorario.ToList().ForEach(d => d.Hora = null);
                 horarioCurrent.DetallesHorario.ToList().ForEach(d => d.Aula = null);
 
                 if (horarioCurrent.Id == 0)
-                {
                     await _memoryCache.AddCacheAsync<Horario>(horarioCurrent);
-                    //await horarioService.AddAsync(horarioCurrent);
-                }
                 else
-                {
                     await _memoryCache.UpdateCacheAsync<Horario>(horarioCurrent);
-                }
             }
             await actualizarListaHorarios();
             await LoadGrid();
@@ -207,7 +194,7 @@ namespace InstitutoDesktop.Views
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            horarioCurrent = (Horario)bindingHorarios.Current;
+            horarioCurrent = (Horario)dataGridHorarios.CurrentRow.DataBoundItem;
             ActualizarTabAgregarEditar();
             tabControl.SelectTab(tabPageAgregarEditar);
         }
@@ -224,7 +211,7 @@ namespace InstitutoDesktop.Views
 
         private async void btnEliminar_Click(object sender, EventArgs e)
         {
-            horarioCurrent = (Horario)bindingHorarios.Current;
+            horarioCurrent = (Horario)dataGridHorarios.CurrentRow.DataBoundItem;
             var result = MessageBox.Show($"¿Está seguro que desea eliminar el horario de {horarioCurrent.Materia.Nombre}?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {

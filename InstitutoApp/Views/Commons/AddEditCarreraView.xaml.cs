@@ -3,18 +3,23 @@ using InstitutoServices.Models.Commons;
 
 namespace InstitutoApp.Views.Commons;
 
+[QueryProperty(nameof(CarreraToEdit), "CarreraAEditar")]
 public partial class AddEditCarreraView : ContentPage
 {
+    public Carrera CarreraToEdit
+    {
+        set
+        {
+            var carrera = value;
+            var viewmodel = this.BindingContext as AddEditCarreraViewModel;
+            viewmodel.Carrera = carrera;
+        }
+    }
     AddEditCarreraViewModel viewModel;
 
 	public AddEditCarreraView()
 	{
 		InitializeComponent();
 	}
-    public AddEditCarreraView(Carrera carrera)
-    {
-        InitializeComponent();
-        viewModel = this.BindingContext as AddEditCarreraViewModel;
-        viewModel.Carrera = carrera;
-    }
+    
 }

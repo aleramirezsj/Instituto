@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using InstitutoBack.DataContext;
 using InstitutoServices.Models.Horarios;
+using InstitutoServices.Models.Inscripciones;
 
 namespace InstitutoBack.Controllers.Horarios
 {
@@ -53,7 +54,15 @@ namespace InstitutoBack.Controllers.Horarios
             {
                 return BadRequest();
             }
-
+            if (periodoHorario.Actual)
+            {
+                var periodos = _context.periodoshorarios.Where(x => x.Actual && x.Id != periodoHorario.Id).ToList();
+                foreach (var item in periodos)
+                {
+                    item.Actual = false;
+                    _context.periodoshorarios.Update(item);
+                }
+            }
             _context.Entry(periodoHorario).State = EntityState.Modified;
 
             try
@@ -81,7 +90,15 @@ namespace InstitutoBack.Controllers.Horarios
         public async Task<ActionResult<PeriodoHorario>> PostPeriodoHorario(PeriodoHorario periodoHorario)
         {
             _context.Attach(periodoHorario.CicloLectivo);
-
+            if (periodoHorario.Actual)
+            {
+                var periodos = _context.periodoshorarios.Where(x => x.Actual && x.Id != periodoHorario.Id).ToList();
+                foreach (var item in periodos)
+                {
+                    item.Actual = false;
+                    _context.periodoshorarios.Update(item);
+                }
+            }
             _context.periodoshorarios.Add(periodoHorario);
             await _context.SaveChangesAsync();
 

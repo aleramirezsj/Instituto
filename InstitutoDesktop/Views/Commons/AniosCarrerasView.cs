@@ -1,26 +1,13 @@
-﻿using InstitutoDesktop.ExtensionMethods;
-using InstitutoDesktop.Interfaces.Commons;
+﻿using InstitutoDesktop.Interfaces.Commons;
 using InstitutoDesktop.Services;
 using InstitutoDesktop.States.Commons.AniosCarreras;
-using InstitutoDesktop.States.Commons.Aulas;
-using InstitutoDesktop.Util;
-using InstitutoServices.Enums;
-using InstitutoServices.Interfaces;
-using InstitutoServices.Interfaces.Commons;
-using InstitutoServices.Interfaces.Horarios;
 using InstitutoServices.Models.Commons;
-using InstitutoServices.Models.Horarios;
-using InstitutoServices.Models.Inscripciones;
-using InstitutoServices.Services.Commons;
-using InstitutoServices.Services.Horarios;
-using System.Data;
-using System.Diagnostics;
 
 namespace InstitutoDesktop.Views.Commons
 {
     public partial class AniosCarrerasView : Form
     {
-        private IBaseViewState _currentState;
+        private IAniosCarrerasViewState _currentState;
 
         public List<AnioCarrera>? listaAniosCarreras = new List<AnioCarrera>();
         public AnioCarrera anioCarreraCurrent;
@@ -33,17 +20,18 @@ namespace InstitutoDesktop.Views.Commons
             this.MdiParent = menuPrincipal;
             _memoryCache = memoryCacheService;
             // Iniciar en estado de listado
-            TransitionTo(new DisplayGridAniosCarrerasViewState(this));
+            TransitionTo(new InitialDisplayState(this));
             _ = _currentState.LoadData();
         }
 
-        public void TransitionTo(IBaseViewState state)
+        public void TransitionTo(IAniosCarrerasViewState state)
         {
             _currentState = state;
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
+            TransitionTo(new ActionsState(this));
             _currentState.OnAgregar();
         }
 
@@ -54,11 +42,13 @@ namespace InstitutoDesktop.Views.Commons
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
+            TransitionTo(new ActionsState(this));
             _currentState.OnModificar();
         }
 
         private async void btnEliminar_Click(object sender, EventArgs e)
         {
+            TransitionTo(new ActionsState(this));
             _currentState.OnEliminar();
 
         }
@@ -89,12 +79,6 @@ namespace InstitutoDesktop.Views.Commons
             btnEliminar.Enabled = Grilla.Rows.Count > 0;
         }
 
-        private void comboBoxCarreras_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if(comboBoxCarreras.SelectedValue != null && comboBoxCarreras.SelectedValue.GetType()==typeof(int))
-            {
-                _currentState.UpdateUI();
-            }
-        }
+
     }
 }

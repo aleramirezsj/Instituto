@@ -20,11 +20,17 @@ namespace InstitutoApp.ViewModels.Commons
         public Carrera Carrera
         {
             get { return carrera; }
-            set { carrera = value; 
-                if(value != null)
-                { 
-                    Nombre=carrera.Nombre;
-                    Sigla=carrera.Sigla;
+            set { carrera = value;
+                if (value != null)
+                {
+                    Nombre = carrera.Nombre;
+                    Sigla = carrera.Sigla;
+                    OnPropertyChanged();
+                }
+                else
+                {
+                    Nombre = string.Empty;
+                    Sigla = string.Empty;
                     OnPropertyChanged();
                 }
             }
@@ -59,6 +65,12 @@ namespace InstitutoApp.ViewModels.Commons
         public AddEditCarreraViewModel()
         {
             GuardarCommand = new Command(Guardar, PermitirGuardar);
+            CancelarCommand = new Command(Cancelar);
+        }
+
+        private async void Cancelar(object obj)
+        {
+            await Shell.Current.GoToAsync("//ListaCarreras");
         }
 
         private bool PermitirGuardar(object arg)
@@ -79,7 +91,8 @@ namespace InstitutoApp.ViewModels.Commons
                 Carrera.Sigla = this.Sigla;
                 await carreraService.UpdateAsync(Carrera);
             }
-            WeakReferenceMessenger.Default.Send(new MyMessage("VolverACarreras"));
+            //WeakReferenceMessenger.Default.Send(new MyMessage("VolverACarreras"));
+            await Shell.Current.GoToAsync("//ListaCarreras");
         }
     }
 }

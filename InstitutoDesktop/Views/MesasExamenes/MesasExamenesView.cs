@@ -30,10 +30,12 @@ namespace InstitutoDesktop.Views
 
         private readonly MemoryCacheServiceWinForms _memoryCache;
 
-        public MesasExamenesView(MemoryCacheServiceWinForms memoryCacheService)
+        public MesasExamenesView(MemoryCacheServiceWinForms memoryCacheService, MenuPrincipalView menuPrincipal)
         {
             InitializeComponent();
             _memoryCache = memoryCacheService;
+            this.MdiParent = menuPrincipal;
+            this.WindowState = FormWindowState.Maximized;
             dataGridMesasExamenes.DataSource = bindingMesasExamenes;
             //tabPageAgregarEditar.Enabled= false;
             ObtenerListas();
@@ -148,13 +150,14 @@ namespace InstitutoDesktop.Views
             }
             else
             {
+                var turnoExamen = (TurnoExamen)cboTurnosExamenes.SelectedItem;
                 mesaExamenCurrent.MateriaId = (int)cboMaterias.SelectedValue;
                 mesaExamenCurrent.Materia = (Materia)cboMaterias.SelectedItem;
                 mesaExamenCurrent.Llamado1 = dateTime1erLlamado.Value;
-                mesaExamenCurrent.Llamado2 = dateTime2doLlamado.Value;
+                mesaExamenCurrent.Llamado2 = turnoExamen.TieneLLamado2?dateTime2doLlamado.Value:DateTime.MinValue;
                 mesaExamenCurrent.Horario = txtHorario.Text;
                 mesaExamenCurrent.TurnoExamenId = (int)cboTurnosExamenes.SelectedValue;
-                mesaExamenCurrent.TurnoExamen = (TurnoExamen)cboTurnosExamenes.SelectedItem;
+                mesaExamenCurrent.TurnoExamen = turnoExamen;
 
                 if (mesaExamenCurrent.Id == 0)
                 {
@@ -185,13 +188,15 @@ namespace InstitutoDesktop.Views
 
         private void ActualizarTabAgregarEditar()
         {
+            var turnoExamen= (TurnoExamen)cboTurnosExamenes.SelectedItem;
+            dateTime2doLlamado.Visible = turnoExamen.TieneLLamado2;
+            lbl2doLlamado.Visible = turnoExamen.TieneLLamado2;
             cboMaterias.SelectedValue = mesaExamenCurrent?.MateriaId ?? 0;
             dateTime1erLlamado.Value = mesaExamenCurrent?.Llamado1 ?? DateTime.Now;
             dateTime2doLlamado.Value = mesaExamenCurrent?.Llamado2 ?? DateTime.Now;
             txtHorario.Text = mesaExamenCurrent?.Horario ?? string.Empty;
             dataGridDetallesMesa.DataSource = mesaExamenCurrent?.DetallesMesaExamen?.OrderBy(d => d.TipoIntegrante).ToList() ?? null;
-            dataGridDetallesMesa.OcultarColumnas(new string[] { "MesaExamen", "MesaExamenId", "Id", "Eliminado" });
-
+            dataGridDetallesMesa.OcultarColumnas(new string[] { "DocenteId", "MesaExamen", "MesaExamenId", "Id", "Eliminado" });
         }
 
         private async void btnEliminar_Click(object sender, EventArgs e)
@@ -271,7 +276,7 @@ namespace InstitutoDesktop.Views
 
             dataGridDetallesMesa.DataSource = null;
             dataGridDetallesMesa.DataSource = mesaExamenCurrent.DetallesMesaExamen.OrderBy(d => d.TipoIntegrante).ToList();
-            dataGridDetallesMesa.OcultarColumnas(new string[] { "MesaExamen", "MesaExamenId", "Id", "Eliminado" });
+            dataGridDetallesMesa.OcultarColumnas(new string[] { "DocenteId","MesaExamen", "MesaExamenId", "Id", "Eliminado" });
             btnAgregarDetalleMesa.Text = "Agregar";
 
 
@@ -290,8 +295,7 @@ namespace InstitutoDesktop.Views
             mesaExamenCurrent.DetallesMesaExamen.Remove(mesaExamenCurrent.DetallesMesaExamen.First(d => d.Id.Equals(detalleMesaExamen.Id)));
             dataGridDetallesMesa.DataSource = null;
             dataGridDetallesMesa.DataSource = mesaExamenCurrent.DetallesMesaExamen;
-            dataGridDetallesMesa.OcultarColumnas(new string[] { "MesaExamen", "MesaExamenId", "Id", "Eliminado" });
-
+            dataGridDetallesMesa.OcultarColumnas(new string[] { "DocenteId", "MesaExamen", "MesaExamenId", "Id", "Eliminado" });
 
         }
 

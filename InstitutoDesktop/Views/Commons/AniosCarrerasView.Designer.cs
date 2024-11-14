@@ -66,13 +66,14 @@
             // 
             // comboBoxCarreras
             // 
+            comboBoxCarreras.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            comboBoxCarreras.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxCarreras.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             comboBoxCarreras.FormattingEnabled = true;
             comboBoxCarreras.Location = new Point(261, 6);
             comboBoxCarreras.Name = "comboBoxCarreras";
             comboBoxCarreras.Size = new Size(690, 45);
             comboBoxCarreras.TabIndex = 1;
-            comboBoxCarreras.SelectedIndexChanged += comboBoxCarreras_SelectedIndexChanged;
             // 
             // label1
             // 
@@ -328,6 +329,7 @@
             Name = "AniosCarrerasView";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Años de las carreras";
+            WindowState = FormWindowState.Maximized;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             tabControl.ResumeLayout(false);

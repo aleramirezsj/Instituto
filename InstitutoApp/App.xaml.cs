@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
+using Firebase.Auth;
 using InstitutoApp.Class;
 using InstitutoApp.ViewModels.Commons;
 using InstitutoApp.Views;

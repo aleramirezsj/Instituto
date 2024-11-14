@@ -1,4 +1,6 @@
-﻿using InstitutoApp.ViewModels;
+﻿using Firebase.Auth;
+using InstitutoApp.ViewModels;
+using InstitutoApp.Views;
 
 namespace InstitutoApp
 {
@@ -8,6 +10,12 @@ namespace InstitutoApp
         {
             InitializeComponent();
             FlyoutItemsPrincipal.IsVisible = false; // Oculta el menú lateral
+            RegisterRoutes();
+        }
+
+        private void RegisterRoutes()
+        {
+            Routing.RegisterRoute("Registrarse", typeof(RegistrarseView));
         }
 
         public void EnableAppAfterLogin()

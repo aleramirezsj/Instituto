@@ -6,7 +6,6 @@ using InstitutoDesktop.Views.MesasExamenes;
 using InstitutoDesktop.Views.Commons.Alumnos;
 
 using InstitutoDesktop.Views.Commons;
-using InstitutoDesktop.Views.Commons.Materias;
 using InstitutoDesktop.Services;
 using InstitutoServices.Services.Commons;
 using Microsoft.Extensions.Caching.Memory;
@@ -16,7 +15,6 @@ using InstitutoServices.Models.Horarios;
 using InstitutoServices.Models.MesasExamenes;
 using Microsoft.Extensions.DependencyInjection;
 using InstitutoDesktop.ViewReports;
-using InstitutoDesktop.Views.Inscripciones.PeriodosInscripciones;
 
 
 
@@ -84,11 +82,7 @@ namespace InstitutoDesktop
 
 
 
-        private void turnoExamenesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            TurnoExamenesView turnoexamenesview = ActivatorUtilities.CreateInstance<TurnoExamenesView>(_serviceProvider);
-            turnoexamenesview.ShowDialog();
-        }
+
 
 
 
@@ -162,7 +156,7 @@ namespace InstitutoDesktop
         private void subMenuCarreras_Click(object sender, EventArgs e)
         {
             CarrerasView carrerasView = ActivatorUtilities.CreateInstance<CarrerasView>(_serviceProvider);
-            carrerasView.ShowDialog();
+            carrerasView.Show();
         }
 
         private void subMenuAñosCarreras_Click(object sender, EventArgs e)
@@ -173,20 +167,22 @@ namespace InstitutoDesktop
 
         private void subMenuMaterias_Click(object sender, EventArgs e)
         {
-            MateriaView materiaView = ActivatorUtilities.CreateInstance<MateriaView>(_serviceProvider);
-            materiaView.ShowDialog();
+            //var memoryCacheService = new MemoryCacheServiceWinForms(new MemoryCache(new MemoryCacheOptions()));
+            //MateriasView materiasView= new MateriasView(memoryCacheService,this);
+            MateriasView materiasView = ActivatorUtilities.CreateInstance<MateriasView>(_serviceProvider);
+            materiasView.Show();
         }
 
         private void subMenuHoras_Click(object sender, EventArgs e)
         {
             HorasView horasView = ActivatorUtilities.CreateInstance<HorasView>(_serviceProvider);
-            horasView.ShowDialog();
+            horasView.Show();
         }
 
         private void subMenuPeriodosHorarios_Click(object sender, EventArgs e)
         {
-            PeriodoHorarioView periodoHorarioView = ActivatorUtilities.CreateInstance<PeriodoHorarioView>(_serviceProvider);
-            periodoHorarioView.ShowDialog();
+            PeriodosHorariosView periodoHorarioView = ActivatorUtilities.CreateInstance<PeriodosHorariosView>(_serviceProvider);
+            periodoHorarioView.Show();
         }
 
         private void subMenuHorarios_Click(object sender, EventArgs e)
@@ -197,20 +193,20 @@ namespace InstitutoDesktop
 
         private void subMenuTurnosExámenes_Click(object sender, EventArgs e)
         {
-            TurnoExamenesView turnoExamenesView = ActivatorUtilities.CreateInstance<TurnoExamenesView>(_serviceProvider);
-            turnoExamenesView.ShowDialog();
+            TurnosExamenesView turnoExamenesView = ActivatorUtilities.CreateInstance<TurnosExamenesView>(_serviceProvider);
+            turnoExamenesView.Show();
         }
 
         private void subMenuPeriodosInscripciones_Click(object sender, EventArgs e)
         {
-            PeriodoInscripcionView periodoInscripcionView = ActivatorUtilities.CreateInstance<PeriodoInscripcionView>(_serviceProvider);
-            periodoInscripcionView.ShowDialog();
+            PeriodosInscripcionesView periodoInscripcionView = ActivatorUtilities.CreateInstance<PeriodosInscripcionesView>(_serviceProvider);
+            periodoInscripcionView.Show();
         }
 
         private void subMenuConformacionMesasExamenes_Click(object sender, EventArgs e)
         {
             MesasExamenesView mesasExamenesView = ActivatorUtilities.CreateInstance<MesasExamenesView>(_serviceProvider);
-            mesasExamenesView.ShowDialog();
+            mesasExamenesView.Show();
         }
     }
 }

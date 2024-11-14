@@ -4,7 +4,6 @@ using InstitutoServices.Services.Commons;
 using InstitutoDesktop.Views;
 using InstitutoDesktop.Views.Commons.Alumnos;
 using InstitutoDesktop.Views.Inscripciones;
-using InstitutoDesktop.Views.Commons.Materias;
 using InstitutoDesktop.Views.Horarios;
 using InstitutoDesktop.Views.MesasExamenes;
 using InstitutoDesktop.Services;
@@ -67,22 +66,21 @@ namespace InstitutoDesktop
             services.AddScoped<MemoryCacheServiceWinForms>();
             services.AddScoped<MenuPrincipalView>(); // Registrar formularios
             services.AddScoped<CarrerasView>();
-            services.AddScoped<AgregarEditarCarreraView>();
             services.AddScoped<AlumnosView>();
             services.AddScoped<AgregarEditarAlumnosView>();
             services.AddScoped<AniosCarrerasView>();
-            services.AddScoped<MateriaView>();
-            services.AddScoped<NuevoEditarMateriaView>();
+            services.AddScoped<MateriasView>();
             services.AddScoped<AulasView>();
             services.AddScoped<DocentesView>();
             services.AddScoped<HorariosView>();
             services.AddScoped<DocentesView>();
             //horas
             services.AddScoped<HorasView>();
-            services.AddScoped<AgregarEditarHoraView>();
+            services.AddScoped<PeriodosHorariosView>();
+            //inscripciones
+            services.AddScoped<PeriodosInscripcionesView>();
             //turnos examenes
-            services.AddScoped<TurnoExamenesView>();
-            services.AddScoped<AgregarEditarTurnoExamenesView>();
+            services.AddScoped<TurnosExamenesView>();
 
 
 

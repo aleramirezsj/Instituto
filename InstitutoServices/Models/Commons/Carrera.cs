@@ -1,5 +1,4 @@
 ﻿using InstitutoServices.Interfaces;
-using InstitutoServices.Interfaces.MesasExamenes;
 
 namespace InstitutoServices.Models.Commons
 {

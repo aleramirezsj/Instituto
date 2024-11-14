@@ -1,16 +1,25 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
+using Firebase.Auth.Repository;
+using Firebase.Auth;
 using InstitutoApp.Class;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Firebase.Auth.Providers;
 
 namespace InstitutoApp.ViewModels.Login
 {
     public class IniciarSesionViewModel : NotificationObject
     {
-		private string email;
+        public readonly FirebaseAuthClient _clientAuth;
+        private FileUserRepository _userRepository;
+        private UserInfo _userInfo;
+        private FirebaseCredential _firebaseCredential;
+
+
+        private string email;
 		public string Email
 		{
 			get { return email; }
@@ -44,7 +53,36 @@ namespace InstitutoApp.ViewModels.Login
 
         public IniciarSesionViewModel()
         {
-			IniciarSesionCommand= new Command(IniciarSesion,PermitirIniciarSesion);
+            
+            _clientAuth = new FirebaseAuthClient(new FirebaseAuthConfig()
+            {
+                ApiKey = "AIzaSyBmHgrN0BoHgd0ZlDqY9f_BygkzOfhuP_E",
+                AuthDomain = "instituto20-435114.firebaseapp.com",
+                Providers = new Firebase.Auth.Providers.FirebaseAuthProvider[]
+                {
+                    new EmailProvider()
+                }
+            });
+            _userRepository = new FileUserRepository("InstitutoApp");
+            ChequearSiHayUsuarioAlmacenado();
+            IniciarSesionCommand = new Command(IniciarSesion,PermitirIniciarSesion);
+            RegistrarseCommand = new Command(Registrarse);
+        }
+
+        private async void Registrarse(object obj)
+        {
+            await Shell.Current.GoToAsync("Registrarse");
+        }
+
+        private async void ChequearSiHayUsuarioAlmacenado()
+        {
+            if (_userRepository.UserExists())
+            {
+                (_userInfo, _firebaseCredential) = _userRepository.ReadUser();
+
+                var institutoShell = (InstitutoShell)App.Current.MainPage;
+                institutoShell.EnableAppAfterLogin();
+            }
         }
 
         private bool PermitirIniciarSesion(object arg)
@@ -52,11 +90,37 @@ namespace InstitutoApp.ViewModels.Login
             return !string.IsNullOrEmpty(Email) && !string.IsNullOrEmpty(Password);
         }
 
-        private void IniciarSesion(object obj)
+        private async void IniciarSesion(object obj)
         {
-            //WeakReferenceMessenger.Default.Send(new Message("AbrirAppShell"));
-			var institutoShell =(InstitutoShell) App.Current.MainPage;
-            institutoShell.EnableAppAfterLogin();
+            try
+            {
+
+                var userCredential = await _clientAuth.SignInWithEmailAndPasswordAsync(email, password);
+                if(userCredential.User.Info.IsEmailVerified == false)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Inicio de sesión", "Debe verificar su correo electrónico", "Ok");
+                    return;
+                }
+
+                if (recordarContraseña)
+                {
+                    _userRepository.SaveUser(userCredential.User);
+                }
+                else
+                {
+                    _userRepository.DeleteUser();
+                }
+
+                var institutoShell = (InstitutoShell)App.Current.MainPage;
+                institutoShell.EnableAppAfterLogin();
+
+            }
+            catch (Exception error)
+            {
+                await Application.Current.MainPage.DisplayAlert("Inicio de sesión", "Ocurrió un problema:" + error.Message, "Ok");
+
+            }
+
         }
     }
 }

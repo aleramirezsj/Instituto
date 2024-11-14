@@ -10,4 +10,12 @@ public partial class CarrerasView : ContentPage
 		BindingContext = new CarrerasViewModel();
 	}
 
+	protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        var viewModel = BindingContext as CarrerasViewModel;
+		viewModel.ObtenerCarreras();
+		viewModel.CarreraCurrent = null;
+    }
+
 }

@@ -3806,20 +3806,20 @@ namespace InstitutoBack.Migrations
                     b.Property<int>("CantidadHoras")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CicloLectivoId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("Eliminado")
                         .HasColumnType("tinyint(1)");
 
                     b.Property<int?>("MateriaId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("PeriodoHorarioId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("CicloLectivoId");
-
                     b.HasIndex("MateriaId");
+
+                    b.HasIndex("PeriodoHorarioId");
 
                     b.ToTable("horarios");
                 });
@@ -4003,7 +4003,7 @@ namespace InstitutoBack.Migrations
                             AlumnoId = 1,
                             CarreraId = 1,
                             Eliminado = false,
-                            Fecha = new DateTime(2024, 10, 30, 21, 13, 44, 833, DateTimeKind.Local).AddTicks(3817),
+                            Fecha = new DateTime(2024, 11, 14, 8, 30, 19, 964, DateTimeKind.Local).AddTicks(8723),
                             PeriodoInscripcionId = 1
                         });
                 });
@@ -10022,6 +10022,7 @@ namespace InstitutoBack.Migrations
                         {
                             Id = 1,
                             Actual = false,
+                            CicloLectivoId = 0,
                             Eliminado = false,
                             InscripcionHabilitada = false,
                             Nombre = "Julio/Agosto 2024",
@@ -10119,17 +10120,17 @@ namespace InstitutoBack.Migrations
 
             modelBuilder.Entity("InstitutoServices.Models.Horarios.Horario", b =>
                 {
-                    b.HasOne("InstitutoServices.Models.Inscripciones.CicloLectivo", "CicloLectivo")
-                        .WithMany()
-                        .HasForeignKey("CicloLectivoId");
-
                     b.HasOne("InstitutoServices.Models.Commons.Materia", "Materia")
                         .WithMany()
                         .HasForeignKey("MateriaId");
 
-                    b.Navigation("CicloLectivo");
+                    b.HasOne("InstitutoServices.Models.Horarios.PeriodoHorario", "PeriodoHorario")
+                        .WithMany()
+                        .HasForeignKey("PeriodoHorarioId");
 
                     b.Navigation("Materia");
+
+                    b.Navigation("PeriodoHorario");
                 });
 
             modelBuilder.Entity("InstitutoServices.Models.Horarios.IntegranteHorario", b =>

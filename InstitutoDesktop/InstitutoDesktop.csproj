@@ -45,10 +45,22 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Update="Views\Commons\CarrerasView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\Commons\MateriasView.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Views\Commons\AniosCarrerasView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Views\DocentesView.cs" />
+    <Compile Update="Views\Commons\DocentesView.cs" />
+    <Compile Update="Views\Horarios\PeriodosHorariosView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\Horarios\HorasView.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Views\Inscripciones\CiclosLectivosView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -79,6 +91,10 @@
     <Reference Include="Microsoft.ReportViewer.WinForms">
       <HintPath>Paquetes\Microsoft.ReportViewer.WinForms.dll</HintPath>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Interfaces\MesasExamenes\" />
   </ItemGroup>
 
 </Project>

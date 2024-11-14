@@ -256,7 +256,7 @@
             chkActual.Anchor = AnchorStyles.None;
             chkActual.AutoSize = true;
             chkActual.Location = new Point(439, 239);
-            chkActual.Margin = new Padding(2, 2, 2, 2);
+            chkActual.Margin = new Padding(2);
             chkActual.Name = "chkActual";
             chkActual.Size = new Size(73, 24);
             chkActual.TabIndex = 6;
@@ -267,7 +267,7 @@
             // 
             txtNombre.Anchor = AnchorStyles.None;
             txtNombre.Location = new Point(439, 172);
-            txtNombre.Margin = new Padding(2, 2, 2, 2);
+            txtNombre.Margin = new Padding(2);
             txtNombre.Name = "txtNombre";
             txtNombre.Size = new Size(284, 27);
             txtNombre.TabIndex = 5;
@@ -330,6 +330,7 @@
             Name = "CiclosLectivosView";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Ciclos Lectivos";
+            WindowState = FormWindowState.Maximized;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             tabControl.ResumeLayout(false);

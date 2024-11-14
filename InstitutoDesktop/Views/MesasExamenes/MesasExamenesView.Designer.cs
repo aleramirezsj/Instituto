@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             panel1 = new Panel();
             label6 = new Label();
             cboAniosCarreras = new ComboBox();
@@ -87,13 +87,14 @@
             panel1.Location = new Point(1, 1);
             panel1.Margin = new Padding(2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1033, 60);
+            panel1.Size = new Size(1250, 60);
             panel1.TabIndex = 0;
             // 
             // label6
             // 
+            label6.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label6.AutoSize = true;
-            label6.Location = new Point(866, 6);
+            label6.Location = new Point(1087, 6);
             label6.Name = "label6";
             label6.Size = new Size(89, 20);
             label6.TabIndex = 7;
@@ -101,8 +102,9 @@
             // 
             // cboAniosCarreras
             // 
+            cboAniosCarreras.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             cboAniosCarreras.FormattingEnabled = true;
-            cboAniosCarreras.Location = new Point(825, 30);
+            cboAniosCarreras.Location = new Point(1046, 30);
             cboAniosCarreras.Name = "cboAniosCarreras";
             cboAniosCarreras.Size = new Size(195, 28);
             cboAniosCarreras.TabIndex = 6;
@@ -110,8 +112,9 @@
             // 
             // label5
             // 
+            label5.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             label5.AutoSize = true;
-            label5.Location = new Point(536, 6);
+            label5.Location = new Point(591, 6);
             label5.Name = "label5";
             label5.Size = new Size(60, 20);
             label5.TabIndex = 5;
@@ -119,17 +122,18 @@
             // 
             // cboCarreras
             // 
+            cboCarreras.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             cboCarreras.FormattingEnabled = true;
-            cboCarreras.Location = new Point(521, 30);
+            cboCarreras.Location = new Point(591, 30);
             cboCarreras.Name = "cboCarreras";
-            cboCarreras.Size = new Size(298, 28);
+            cboCarreras.Size = new Size(449, 28);
             cboCarreras.TabIndex = 4;
             cboCarreras.SelectedIndexChanged += cboCarreras_SelectedIndexChanged;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(308, 6);
+            label4.Location = new Point(278, 7);
             label4.Name = "label4";
             label4.Size = new Size(124, 20);
             label4.TabIndex = 3;
@@ -138,9 +142,9 @@
             // cboTurnosExamenes
             // 
             cboTurnosExamenes.FormattingEnabled = true;
-            cboTurnosExamenes.Location = new Point(266, 30);
+            cboTurnosExamenes.Location = new Point(278, 30);
             cboTurnosExamenes.Name = "cboTurnosExamenes";
-            cboTurnosExamenes.Size = new Size(237, 28);
+            cboTurnosExamenes.Size = new Size(307, 28);
             cboTurnosExamenes.TabIndex = 2;
             cboTurnosExamenes.SelectedIndexChanged += cboTurnosExamenes_SelectedIndexChanged;
             // 
@@ -164,7 +168,7 @@
             tabControl.Margin = new Padding(2);
             tabControl.Name = "tabControl";
             tabControl.SelectedIndex = 0;
-            tabControl.Size = new Size(1033, 546);
+            tabControl.Size = new Size(1250, 546);
             tabControl.TabIndex = 1;
             // 
             // tabPageLista
@@ -181,7 +185,7 @@
             tabPageLista.Margin = new Padding(2);
             tabPageLista.Name = "tabPageLista";
             tabPageLista.Padding = new Padding(2);
-            tabPageLista.Size = new Size(1025, 513);
+            tabPageLista.Size = new Size(1242, 513);
             tabPageLista.TabIndex = 0;
             tabPageLista.Text = "Lista";
             tabPageLista.UseVisualStyleBackColor = true;
@@ -196,7 +200,7 @@
             iconButtonSalir.IconFont = FontAwesome.Sharp.IconFont.Auto;
             iconButtonSalir.IconSize = 44;
             iconButtonSalir.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButtonSalir.Location = new Point(897, 228);
+            iconButtonSalir.Location = new Point(1114, 228);
             iconButtonSalir.Margin = new Padding(3, 4, 3, 4);
             iconButtonSalir.Name = "iconButtonSalir";
             iconButtonSalir.Size = new Size(123, 54);
@@ -215,7 +219,7 @@
             BtnBuscar.IconColor = Color.White;
             BtnBuscar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             BtnBuscar.ImageAlign = ContentAlignment.MiddleLeft;
-            BtnBuscar.Location = new Point(900, 18);
+            BtnBuscar.Location = new Point(1117, 18);
             BtnBuscar.Margin = new Padding(3, 4, 3, 4);
             BtnBuscar.Name = "BtnBuscar";
             BtnBuscar.Size = new Size(123, 51);
@@ -249,7 +253,7 @@
             btnEliminar.IconColor = Color.Black;
             btnEliminar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnEliminar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnEliminar.Location = new Point(900, 176);
+            btnEliminar.Location = new Point(1117, 176);
             btnEliminar.Margin = new Padding(2);
             btnEliminar.Name = "btnEliminar";
             btnEliminar.Size = new Size(120, 46);
@@ -266,7 +270,7 @@
             btnModificar.IconColor = Color.Black;
             btnModificar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnModificar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnModificar.Location = new Point(900, 126);
+            btnModificar.Location = new Point(1117, 126);
             btnModificar.Margin = new Padding(2);
             btnModificar.Name = "btnModificar";
             btnModificar.Size = new Size(120, 46);
@@ -283,7 +287,7 @@
             btnAgregar.IconColor = Color.Black;
             btnAgregar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnAgregar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnAgregar.Location = new Point(900, 75);
+            btnAgregar.Location = new Point(1117, 75);
             btnAgregar.Margin = new Padding(2);
             btnAgregar.Name = "btnAgregar";
             btnAgregar.Size = new Size(120, 46);
@@ -300,23 +304,23 @@
             dataGridMesasExamenes.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dataGridMesasExamenes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridMesasExamenes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = SystemColors.Window;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle1.Format = "d";
-            dataGridViewCellStyle1.NullValue = null;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
-            dataGridMesasExamenes.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.Format = "d";
+            dataGridViewCellStyle2.NullValue = null;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            dataGridMesasExamenes.DefaultCellStyle = dataGridViewCellStyle2;
             dataGridMesasExamenes.Location = new Point(6, 63);
             dataGridMesasExamenes.Margin = new Padding(2);
             dataGridMesasExamenes.Name = "dataGridMesasExamenes";
             dataGridMesasExamenes.ReadOnly = true;
             dataGridMesasExamenes.RowHeadersWidth = 62;
             dataGridMesasExamenes.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridMesasExamenes.Size = new Size(885, 442);
+            dataGridMesasExamenes.Size = new Size(1102, 442);
             dataGridMesasExamenes.TabIndex = 0;
             // 
             // tabPageAgregarEditar
@@ -343,7 +347,7 @@
             tabPageAgregarEditar.Margin = new Padding(2);
             tabPageAgregarEditar.Name = "tabPageAgregarEditar";
             tabPageAgregarEditar.Padding = new Padding(2);
-            tabPageAgregarEditar.Size = new Size(1025, 513);
+            tabPageAgregarEditar.Size = new Size(1242, 513);
             tabPageAgregarEditar.TabIndex = 1;
             tabPageAgregarEditar.Text = "Agregar/Editar";
             tabPageAgregarEditar.UseVisualStyleBackColor = true;
@@ -409,7 +413,7 @@
             BtnEditar.IconColor = Color.Black;
             BtnEditar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             BtnEditar.ImageAlign = ContentAlignment.MiddleLeft;
-            BtnEditar.Location = new Point(838, 290);
+            BtnEditar.Location = new Point(1055, 290);
             BtnEditar.Margin = new Padding(2);
             BtnEditar.Name = "BtnEditar";
             BtnEditar.Size = new Size(113, 46);
@@ -426,7 +430,7 @@
             btnQuitarDocente.IconColor = Color.Black;
             btnQuitarDocente.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnQuitarDocente.ImageAlign = ContentAlignment.MiddleLeft;
-            btnQuitarDocente.Location = new Point(838, 353);
+            btnQuitarDocente.Location = new Point(1055, 353);
             btnQuitarDocente.Margin = new Padding(2);
             btnQuitarDocente.Name = "btnQuitarDocente";
             btnQuitarDocente.Size = new Size(114, 46);
@@ -467,7 +471,7 @@
             dataGridDetallesMesa.ReadOnly = true;
             dataGridDetallesMesa.RowHeadersWidth = 62;
             dataGridDetallesMesa.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridDetallesMesa.Size = new Size(778, 241);
+            dataGridDetallesMesa.Size = new Size(995, 241);
             dataGridDetallesMesa.TabIndex = 8;
             // 
             // btnAgregarDetalleMesa
@@ -477,7 +481,7 @@
             btnAgregarDetalleMesa.IconColor = Color.Black;
             btnAgregarDetalleMesa.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnAgregarDetalleMesa.ImageAlign = ContentAlignment.MiddleLeft;
-            btnAgregarDetalleMesa.Location = new Point(702, 173);
+            btnAgregarDetalleMesa.Location = new Point(919, 173);
             btnAgregarDetalleMesa.Margin = new Padding(2);
             btnAgregarDetalleMesa.Name = "btnAgregarDetalleMesa";
             btnAgregarDetalleMesa.Size = new Size(120, 46);
@@ -559,7 +563,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1036, 607);
+            ClientSize = new Size(1253, 607);
             Controls.Add(tabControl);
             Controls.Add(panel1);
             Margin = new Padding(2);

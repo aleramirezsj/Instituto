@@ -1,5 +1,4 @@
 ﻿using InstitutoServices.Interfaces;
-using InstitutoServices.Interfaces.MesasExamenes;
 using System;
 using System.Collections.Generic;
 using System.Linq;

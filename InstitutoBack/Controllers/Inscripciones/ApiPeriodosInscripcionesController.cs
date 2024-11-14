@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using InstitutoBack.DataContext;
 using InstitutoServices.Models.Inscripciones;
 using InstitutoServices.Models.Horarios;
+using InstitutoServices.Models.MesasExamenes;
 
 namespace InstitutoBack.Controllers.Inscripciones
 {
@@ -54,6 +55,16 @@ namespace InstitutoBack.Controllers.Inscripciones
                 return BadRequest();
             }
 
+            if (periodoInscripcion.InscripcionHabilitada)
+            {
+                var periodos = _context.periodosinscripciones.Where(x => x.InscripcionHabilitada && x.Id != periodoInscripcion.Id).ToList();
+                foreach (var item in periodos)
+                {
+                    item.InscripcionHabilitada = false;
+                    _context.periodosinscripciones.Update(item);
+                }
+            }
+
             _context.Entry(periodoInscripcion).State = EntityState.Modified;
 
             try
@@ -81,6 +92,15 @@ namespace InstitutoBack.Controllers.Inscripciones
         public async Task<ActionResult<PeriodoInscripcion>> PostPeriodoInscripcion(PeriodoInscripcion periodoInscripcion)
         {
             _context.Attach(periodoInscripcion.CicloLectivo);
+            if (periodoInscripcion.InscripcionHabilitada)
+            {
+                var periodos = _context.periodosinscripciones.Where(x => x.InscripcionHabilitada && x.Id != periodoInscripcion.Id).ToList();
+                foreach (var item in periodos)
+                {
+                    item.InscripcionHabilitada = false;
+                    _context.periodosinscripciones.Update(item);
+                }
+            }
             _context.periodosinscripciones.Add(periodoInscripcion);
             await _context.SaveChangesAsync();
 

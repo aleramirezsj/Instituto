@@ -19,13 +19,12 @@ namespace InstitutoApp
 
             builder.Services.AddSingleton(new FirebaseAuthClient(new FirebaseAuthConfig()
             {
-                ApiKey = "AIzaSyDLPkmzvqIWwmhKQkNapfWd-x-_0WCvudk",
+                ApiKey = "AIzaSyBmHgrN0BoHgd0ZlDqY9f_BygkzOfhuP_E",
                 AuthDomain = "instituto20-435114.firebaseapp.com",
                 Providers = new Firebase.Auth.Providers.FirebaseAuthProvider[]
-    {
-                new EmailProvider(),
-                new GoogleProvider()
-    }
+                {
+                    new EmailProvider()
+                }
             }));
 #if DEBUG
             builder.Logging.AddDebug();
