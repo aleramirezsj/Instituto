@@ -16,9 +16,10 @@ namespace InstitutoApp.ViewModels.Commons
     public class CarrerasViewModel : NotificationObject
     {
 
-		GenericService<Carrera> carreraService=new GenericService<Carrera>();
+        
+        //GenericService<Carrera> carreraService=new GenericService<Carrera>();
 
-		private bool activityStart;
+        private bool activityStart;
 		public bool ActivityStart
 		{
 			get { return activityStart; }
@@ -66,11 +67,12 @@ namespace InstitutoApp.ViewModels.Commons
         public Command EditarCommand { get; }
         public Command EliminarCommand { get; }
         //public ICommand RefreshCommand => new Command(async () => await RefreshCarreras(this));
+        
+        public IMemoryCacheService? _memoryCacheService;
 
         public CarrerasViewModel()
         {
-		
-			AgregarCommand = new Command(Agregar);
+            AgregarCommand = new Command(Agregar);
             EditarCommand = new Command(Editar, PermitirEditar);
 			EliminarCommand = new Command(Eliminar,PermitirEliminar);
 
@@ -109,7 +111,7 @@ namespace InstitutoApp.ViewModels.Commons
             if (respuesta)
             {
                 ActivityStart = true;
-				await carreraService.DeleteAsync(carreraCurrent.Id);
+				await _memoryCacheService.DeleteCacheAsync<Carrera>(carreraCurrent.Id);
 				ObtenerCarreras();
             }
         }
@@ -142,7 +144,7 @@ namespace InstitutoApp.ViewModels.Commons
         public async Task ObtenerCarreras()
         {
 			ActivityStart = true;
-            var carreras=await carreraService.GetAllAsync();
+            var carreras=await _memoryCacheService.GetAllCacheAsync<Carrera>();
             Carreras = new ObservableCollection<Carrera>(carreras); ;
             ActivityStart = false;
 			

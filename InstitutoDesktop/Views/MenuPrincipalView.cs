@@ -3,7 +3,6 @@ using InstitutoDesktop.Views.Inscripciones;
 using InstitutoDesktop.Views.Horarios;
 using InstitutoDesktop.Views.MesasExamenes;
 
-using InstitutoDesktop.Views.Commons.Alumnos;
 
 using InstitutoDesktop.Views.Commons;
 using InstitutoDesktop.Services;
@@ -33,58 +32,17 @@ namespace InstitutoDesktop
         {
             InitializeComponent();
             _cacheService = memoryCacheService;
-            GetCacheData();
+            
             _serviceProvider = serviceProvider;
+            ToolButtonHorarios.Click += subMenuHorarios_Click;
+            ToolButtonMesasExamenes.Click += subMenuConformacionMesasExamenes_Click;
         }
-
-        private void GetCacheData()
-        {
-            Task.WhenAll(new List<Task>
-            {
-                Task.Run(async () => _cacheService.GetAllCacheAsync<Alumno>()),
-                Task.Run(async () => _cacheService.GetAllCacheAsync<AnioCarrera>()),
-                Task.Run(async () =>_cacheService.GetAllCacheAsync<Aula>()),
-                Task.Run(async () =>_cacheService.GetAllCacheAsync<Carrera>()),
-                Task.Run(async () =>_cacheService.GetAllCacheAsync<CicloLectivo>()),
-                Task.Run(async () =>_cacheService.GetAllCacheAsync<Docente>()),
-                Task.Run(async () =>_cacheService.GetAllCacheAsync<Hora>()),
-                Task.Run(async () =>_cacheService.GetAllCacheAsync<Horario>()),
-                Task.Run(async () =>_cacheService.GetAllCacheAsync<IntegranteHorario>()),
-                Task.Run(async () =>_cacheService.GetAllCacheAsync<JefaturaSeccion>()),
-                Task.Run(async () =>_cacheService.GetAllCacheAsync<Materia>()),
-                Task.Run(async () =>_cacheService.GetAllCacheAsync<TurnoExamen>()),
-                Task.Run(async () =>_cacheService.GetAllCacheAsync<Inscripcion>()),
-                Task.Run(async () =>_cacheService.GetAllCacheAsync<DetalleInscripcion>()),
-                Task.Run(async () =>_cacheService.GetAllCacheAsync<MesaExamen>()),
-                Task.Run(async () =>_cacheService.GetAllCacheAsync<DetalleMesaExamen>()),
-                Task.Run(async () =>_cacheService.GetAllCacheAsync<InscripcionExamen>()),
-                Task.Run(async () =>_cacheService.GetAllCacheAsync<DetalleInscripcionExamen>()),
-                Task.Run(async () =>_cacheService.GetAllCacheAsync<PeriodoHorario>()),
-                Task.Run(async () =>_cacheService.GetAllCacheAsync<PeriodoInscripcion>()),
-
-            });
-
-
-        }
-
 
 
         private void iconMenuItem4_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            this.Close();
         }
-
-
-
-
-
-
-
-
-
-
-
-
 
         private void iconMenuItem9_Click(object sender, EventArgs e)
         {
@@ -120,14 +78,12 @@ namespace InstitutoDesktop
 
         private void mnuDocentes_Click(object sender, EventArgs e)
         {
-            DocentesViewReport docentesViewReport = ActivatorUtilities.CreateInstance<DocentesViewReport>(_serviceProvider);
-            docentesViewReport.ShowDialog();
+            DocentesViewReport docentesViewReport = ActivatorUtilities.CreateInstance<DocentesViewReport>(_serviceProvider,this);
+            docentesViewReport.Show();
         }
-        private void iconMenuItem11_Click(object sender, EventArgs e)
-        {
-            MesasExamenesView mesasExamenesView = ActivatorUtilities.CreateInstance<MesasExamenesView>(_serviceProvider);
-            mesasExamenesView.ShowDialog();
-        }
+
+
+
 
         private void subMenuCiclosLectivos_Click(object sender, EventArgs e)
         {
@@ -137,31 +93,31 @@ namespace InstitutoDesktop
 
         private void subMenuAulas_Click(object sender, EventArgs e)
         {
-            AulasView aulasView = ActivatorUtilities.CreateInstance<AulasView>(_serviceProvider);
+            AulasView aulasView = ActivatorUtilities.CreateInstance<AulasView>(_serviceProvider, this);
             aulasView.Show();
         }
 
         private void subMenuAlumnos_Click(object sender, EventArgs e)
         {
-            AlumnosView alumnosView = ActivatorUtilities.CreateInstance<AlumnosView>(_serviceProvider);
-            alumnosView.ShowDialog();
+            AlumnosView alumnosView = ActivatorUtilities.CreateInstance<AlumnosView>(_serviceProvider,this);
+            alumnosView.Show();
         }
 
         private void subMenuDocentes_Click(object sender, EventArgs e)
         {
-            DocentesView docentesView = ActivatorUtilities.CreateInstance<DocentesView>(_serviceProvider);
+            DocentesView docentesView = ActivatorUtilities.CreateInstance<DocentesView>(_serviceProvider, this);
             docentesView.Show();
         }
 
         private void subMenuCarreras_Click(object sender, EventArgs e)
         {
-            CarrerasView carrerasView = ActivatorUtilities.CreateInstance<CarrerasView>(_serviceProvider);
+            CarrerasView carrerasView = ActivatorUtilities.CreateInstance<CarrerasView>(_serviceProvider, this);
             carrerasView.Show();
         }
 
         private void subMenuAñosCarreras_Click(object sender, EventArgs e)
         {
-            AniosCarrerasView aniosCarreraView = ActivatorUtilities.CreateInstance<AniosCarrerasView>(_serviceProvider);
+            AniosCarrerasView aniosCarreraView = ActivatorUtilities.CreateInstance<AniosCarrerasView>(_serviceProvider,this);
             aniosCarreraView.Show();
         }
 
@@ -169,19 +125,19 @@ namespace InstitutoDesktop
         {
             //var memoryCacheService = new MemoryCacheServiceWinForms(new MemoryCache(new MemoryCacheOptions()));
             //MateriasView materiasView= new MateriasView(memoryCacheService,this);
-            MateriasView materiasView = ActivatorUtilities.CreateInstance<MateriasView>(_serviceProvider);
+            MateriasView materiasView = ActivatorUtilities.CreateInstance<MateriasView>(_serviceProvider, this);
             materiasView.Show();
         }
 
         private void subMenuHoras_Click(object sender, EventArgs e)
         {
-            HorasView horasView = ActivatorUtilities.CreateInstance<HorasView>(_serviceProvider);
+            HorasView horasView = ActivatorUtilities.CreateInstance<HorasView>(_serviceProvider, this);
             horasView.Show();
         }
 
         private void subMenuPeriodosHorarios_Click(object sender, EventArgs e)
         {
-            PeriodosHorariosView periodoHorarioView = ActivatorUtilities.CreateInstance<PeriodosHorariosView>(_serviceProvider);
+            PeriodosHorariosView periodoHorarioView = ActivatorUtilities.CreateInstance<PeriodosHorariosView>(_serviceProvider, this);
             periodoHorarioView.Show();
         }
 
@@ -193,19 +149,19 @@ namespace InstitutoDesktop
 
         private void subMenuTurnosExámenes_Click(object sender, EventArgs e)
         {
-            TurnosExamenesView turnoExamenesView = ActivatorUtilities.CreateInstance<TurnosExamenesView>(_serviceProvider);
+            TurnosExamenesView turnoExamenesView = ActivatorUtilities.CreateInstance<TurnosExamenesView>(_serviceProvider, this);
             turnoExamenesView.Show();
         }
 
         private void subMenuPeriodosInscripciones_Click(object sender, EventArgs e)
         {
-            PeriodosInscripcionesView periodoInscripcionView = ActivatorUtilities.CreateInstance<PeriodosInscripcionesView>(_serviceProvider);
+            PeriodosInscripcionesView periodoInscripcionView = ActivatorUtilities.CreateInstance<PeriodosInscripcionesView>(_serviceProvider, this);
             periodoInscripcionView.Show();
         }
 
         private void subMenuConformacionMesasExamenes_Click(object sender, EventArgs e)
         {
-            MesasExamenesView mesasExamenesView = ActivatorUtilities.CreateInstance<MesasExamenesView>(_serviceProvider);
+            MesasExamenesView mesasExamenesView = ActivatorUtilities.CreateInstance<MesasExamenesView>(_serviceProvider, this);
             mesasExamenesView.Show();
         }
     }

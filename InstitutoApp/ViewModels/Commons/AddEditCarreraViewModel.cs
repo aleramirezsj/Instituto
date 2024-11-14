@@ -13,7 +13,6 @@ namespace InstitutoApp.ViewModels.Commons
 {
     public class AddEditCarreraViewModel: NotificationObject
     {
-		GenericService<Carrera> carreraService=new GenericService<Carrera>();
 
         private Carrera carrera;
 
@@ -62,6 +61,8 @@ namespace InstitutoApp.ViewModels.Commons
         public Command GuardarCommand { get; }
         public Command CancelarCommand { get; }
 
+        public IMemoryCacheService? _memoryCacheService;
+
         public AddEditCarreraViewModel()
         {
             GuardarCommand = new Command(Guardar, PermitirGuardar);
@@ -83,13 +84,13 @@ namespace InstitutoApp.ViewModels.Commons
             if (Carrera == null)
             {
                 var carrera = new Carrera() { Nombre = this.Nombre, Sigla = this.Sigla };
-                await carreraService.AddAsync(carrera);
+                await _memoryCacheService.AddCacheAsync<Carrera>(carrera);
             }
             else
             {
                 Carrera.Nombre = this.Nombre;
                 Carrera.Sigla = this.Sigla;
-                await carreraService.UpdateAsync(Carrera);
+                await _memoryCacheService.UpdateCacheAsync<Carrera>(Carrera);
             }
             //WeakReferenceMessenger.Default.Send(new MyMessage("VolverACarreras"));
             await Shell.Current.GoToAsync("//ListaCarreras");

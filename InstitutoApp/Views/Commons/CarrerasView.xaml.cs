@@ -1,14 +1,16 @@
 using InstitutoApp.ViewModels.Commons;
+using InstitutoServices.Services.Commons;
 
 namespace InstitutoApp.Views.Commons;
 
 public partial class CarrerasView : ContentPage
 {
-	public CarrerasView()
+	public CarrerasView(IMemoryCacheService _memoryCacheService)
 	{
 		InitializeComponent();
-		BindingContext = new CarrerasViewModel();
-	}
+		(BindingContext as CarrerasViewModel)._memoryCacheService = _memoryCacheService;
+
+    }
 
 	protected override void OnAppearing()
     {

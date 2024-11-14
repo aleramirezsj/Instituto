@@ -61,6 +61,15 @@ namespace InstitutoDesktop.Views
             cboMaterias.DisplayMember = "Nombre";
             cboMaterias.ValueMember = "Id";
 
+            AutoCompleteStringCollection autoCompletadoMaterias = new AutoCompleteStringCollection();
+            foreach (Materia materia in listaMaterias.Where(m => m.AnioCarreraId.Equals((int)cboAniosCarreras.SelectedValue)).ToList())
+            {
+                autoCompletadoMaterias.Add(materia.Nombre.ToString());
+            }
+            cboMaterias.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cboMaterias.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            cboMaterias.AutoCompleteCustomSource = autoCompletadoMaterias;
+
             cboDocentes.DataSource = listaDocentes.ToList();
             cboDocentes.DisplayMember = "Nombre";
             cboDocentes.ValueMember = "Id";
@@ -87,17 +96,11 @@ namespace InstitutoDesktop.Views
             var tareas = new List<Task>
             {
                 Task.Run(async () => listaTurnosExamenes = await _memoryCache.GetAllCacheAsync<TurnoExamen>()),
-                //Task.Run(async () => listaCicloLectivos = await cicloLectivoService.GetAllAsync()),
                 Task.Run(async () => listaCarreras = await _memoryCache.GetAllCacheAsync<Carrera>()),
-                //Task.Run(async () => listaCarreras = await carreraService.GetAllAsync()),
                 Task.Run(async () => listaAnioCarreras = await _memoryCache.GetAllCacheAsync<AnioCarrera>()),
-                //Task.Run(async () => listaAnioCarreras = await anioCarreraService.GetAllAsync()),
                 Task.Run(async () => listaMaterias = await _memoryCache.GetAllCacheAsync<Materia>()),
-                //Task.Run(async () => listaMaterias = await materiaService.GetAllAsync()),
                 Task.Run(async () => listaDocentes = await _memoryCache.GetAllCacheAsync<Docente>()),
                 Task.Run(async () => listaMesasExamenes = await _memoryCache.GetAllCacheAsync<MesaExamen>())
-                
-                //Task.Run(async () => listaAulas = await aulaService.GetAllAsync())
             };
             bindingMesasExamenes.DataSource = listaMesasExamenes;
             //cuando terminan todas las tareas, cierro el showInActivity y cargo los combos
@@ -278,6 +281,11 @@ namespace InstitutoDesktop.Views
             dataGridDetallesMesa.DataSource = mesaExamenCurrent.DetallesMesaExamen.OrderBy(d => d.TipoIntegrante).ToList();
             dataGridDetallesMesa.OcultarColumnas(new string[] { "DocenteId","MesaExamen", "MesaExamenId", "Id", "Eliminado" });
             btnAgregarDetalleMesa.Text = "Agregar";
+            var nroIndice = cboTipoIntegrante.SelectedIndex;
+            nroIndice++;
+            if (nroIndice == 4) { nroIndice = 0; }
+            cboTipoIntegrante.SelectedIndex = nroIndice;
+            
 
 
         }
@@ -342,7 +350,7 @@ namespace InstitutoDesktop.Views
 
         private void dateTime1erLlamado_ValueChanged(object sender, EventArgs e)
         {
-            dateTime2doLlamado.Value = dateTime1erLlamado.Value.AddDays(15);
+            dateTime2doLlamado.Value = dateTime1erLlamado.Value.AddDays(14);
         }
     }
 }

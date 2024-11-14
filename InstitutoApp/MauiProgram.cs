@@ -1,6 +1,9 @@
 ﻿using Firebase.Auth.Providers;
 using Firebase.Auth;
 using Microsoft.Extensions.Logging;
+using InstitutoServices.Services.Commons;
+using InstitutoApp.ViewModels.Commons;
+using InstitutoApp.Views.Commons;
 
 namespace InstitutoApp
 {
@@ -26,7 +29,14 @@ namespace InstitutoApp
                     new EmailProvider()
                 }
             }));
+            builder.Services.AddMemoryCache();
+            builder.Services.AddSingleton<IMemoryCacheService, MemoryCacheService>();
+            builder.Services.AddTransient<CarrerasView>();
+            builder.Services.AddTransient<AddEditCarreraView>();
 #if DEBUG
+
+
+
             builder.Logging.AddDebug();
 #endif
 

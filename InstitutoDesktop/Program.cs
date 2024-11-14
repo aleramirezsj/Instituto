@@ -2,7 +2,6 @@ using InstitutoDesktop.Views.Commons;
 using Microsoft.Extensions.DependencyInjection;
 using InstitutoServices.Services.Commons;
 using InstitutoDesktop.Views;
-using InstitutoDesktop.Views.Commons.Alumnos;
 using InstitutoDesktop.Views.Inscripciones;
 using InstitutoDesktop.Views.Horarios;
 using InstitutoDesktop.Views.MesasExamenes;
@@ -40,7 +39,7 @@ namespace InstitutoDesktop
             // Iniciar la aplicación con la inyección de dependencias
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(ServiceProvider.GetRequiredService<MenuPrincipalView>());
+            Application.Run(ServiceProvider.GetRequiredService<SplashView>());
         }
 
         private static void DespliegueControladoDeErroresOtroshilos(object sender, UnhandledExceptionEventArgs args)
@@ -67,7 +66,6 @@ namespace InstitutoDesktop
             services.AddScoped<MenuPrincipalView>(); // Registrar formularios
             services.AddScoped<CarrerasView>();
             services.AddScoped<AlumnosView>();
-            services.AddScoped<AgregarEditarAlumnosView>();
             services.AddScoped<AniosCarrerasView>();
             services.AddScoped<MateriasView>();
             services.AddScoped<AulasView>();
@@ -81,6 +79,7 @@ namespace InstitutoDesktop
             services.AddScoped<PeriodosInscripcionesView>();
             //turnos examenes
             services.AddScoped<TurnosExamenesView>();
+            services.AddScoped<SplashView>();
 
 
 

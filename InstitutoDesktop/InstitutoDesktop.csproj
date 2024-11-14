@@ -16,11 +16,13 @@
 
   <ItemGroup>
     <None Remove="Reports\DocentesReport.rdlc" />
+    <None Remove="Resources\fondosplash.jpg" />
     <None Remove="Resources\loading.gif" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Reports\DocentesReport.rdlc" />
+    <EmbeddedResource Include="Resources\fondosplash.jpg" />
     <EmbeddedResource Include="Resources\loading.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>

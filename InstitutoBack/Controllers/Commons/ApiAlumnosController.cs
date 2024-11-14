@@ -26,14 +26,14 @@ namespace InstitutoBack.Controllers.Commons
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Alumno>>> Getalumnos()
         {
-            return await _context.alumnos.ToListAsync();
+            return await _context.alumnos.Include(alumno=>alumno.InscripcionesACarreras).ToListAsync();
         }
 
         // GET: api/ApiAlumnos/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Alumno>> GetAlumno(int id)
         {
-            var alumno = await _context.alumnos.FindAsync(id);
+            var alumno = await _context.alumnos.Include(alumno => alumno.InscripcionesACarreras).FirstOrDefaultAsync(alumno=>alumno.Id==id);
 
             if (alumno == null)
             {

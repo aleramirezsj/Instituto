@@ -1,5 +1,6 @@
 using InstitutoApp.ViewModels.Commons;
 using InstitutoServices.Models.Commons;
+using InstitutoServices.Services.Commons;
 
 namespace InstitutoApp.Views.Commons;
 
@@ -17,9 +18,10 @@ public partial class AddEditCarreraView : ContentPage
     }
     AddEditCarreraViewModel viewModel;
 
-	public AddEditCarreraView()
+	public AddEditCarreraView(IMemoryCacheService _memoryCacheService)
 	{
 		InitializeComponent();
-	}
+        (BindingContext as AddEditCarreraViewModel)._memoryCacheService = _memoryCacheService;
+    }
     
 }

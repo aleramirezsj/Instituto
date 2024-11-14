@@ -26,6 +26,8 @@ namespace InstitutoServices.Class
         public static string Aula { get; set; } = "apiaulas";
         public static string PeriodoInscripcion { get; set; } = "apiperiodosinscripciones";
         public static string PeriodoHorario { get; set; } = "apiperiodoshorarios";
+        public static string InscripcionExamen { get; set; } = "apiinscripcionesexamenes";
+        public static string DetalleInscripcionExamen { get; set; } = "apidetallesinscripcionesexamenes";
 
 
 
@@ -56,6 +58,8 @@ namespace InstitutoServices.Class
                 nameof(Aula) => Aula,
                 nameof(PeriodoHorario) => PeriodoHorario,
                 nameof(PeriodoInscripcion) => PeriodoInscripcion,
+                nameof(InscripcionExamen) => InscripcionExamen,
+                nameof(DetalleInscripcionExamen) => DetalleInscripcionExamen,
                 _ => throw new ArgumentException($"Endpoint '{name}' no está definido.")
             };
         }

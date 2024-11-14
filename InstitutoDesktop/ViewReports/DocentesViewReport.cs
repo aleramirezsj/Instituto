@@ -20,11 +20,12 @@ namespace InstitutoDesktop.ViewReports
         List<Docente> listDoce = new List<Docente>();
         private readonly MemoryCacheServiceWinForms _memoryCache;
         private readonly IServiceProvider _serviceProvider;
-        public DocentesViewReport(MemoryCacheServiceWinForms cacheServiceWinForms)
+        public DocentesViewReport(MemoryCacheServiceWinForms cacheServiceWinForms, MenuPrincipalView menuPrincipalView)
         {
             InitializeComponent();
             _memoryCache = cacheServiceWinForms;
-
+            this.MdiParent= menuPrincipalView;
+            this.WindowState = FormWindowState.Maximized;
             reporte = new ReportViewer();
 
             reporte.Dock = DockStyle.Fill;

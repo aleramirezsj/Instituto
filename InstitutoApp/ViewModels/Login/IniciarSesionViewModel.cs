@@ -1,13 +1,7 @@
-﻿using CommunityToolkit.Mvvm.Messaging;
-using Firebase.Auth.Repository;
-using Firebase.Auth;
-using InstitutoApp.Class;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Firebase.Auth;
 using Firebase.Auth.Providers;
+using Firebase.Auth.Repository;
+using InstitutoApp.Class;
 
 namespace InstitutoApp.ViewModels.Login
 {
@@ -115,9 +109,9 @@ namespace InstitutoApp.ViewModels.Login
                 institutoShell.EnableAppAfterLogin();
 
             }
-            catch (Exception error)
+            catch (FirebaseAuthException error)
             {
-                await Application.Current.MainPage.DisplayAlert("Inicio de sesión", "Ocurrió un problema:" + error.Message, "Ok");
+                await Application.Current.MainPage.DisplayAlert("Inicio de sesión", "Ocurrió un problema:" + error.Reason, "Ok");
 
             }
 
