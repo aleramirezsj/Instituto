@@ -18,7 +18,7 @@
     </div>
     <div class="form-group">
         <label for="nombre">Nombre completo</label>
-        <InputText class="form-control mb-2" type="text" @bind-Value="usuario.User" />
+        <InputText class="form-control mb-2" type="text" @bind-Value="usuario.Nombre" />
     </div>
     <ValidationSummary />
     <button type="submit" class="btn btn-primary">Registrarse</button>
@@ -31,7 +31,7 @@
 
     private async Task Registro()
     {
-        var userId=await AuthService.createUserWithEmailAndPassword(usuario.Email, usuario.Password, usuario.User);
+        var userId=await AuthService.createUserWithEmailAndPassword(usuario.Email, usuario.Password, usuario.Nombre);
         if (userId != null)
             await SweetAlert.FireAsync("Usuario Creado", $"Se envio un correo electrónico a {usuario.Email} debe confirmar su cuenta para poder continuar");
 

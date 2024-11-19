@@ -32,7 +32,7 @@ namespace InstitutoDesktop
         {
             InitializeComponent();
             _cacheService = memoryCacheService;
-            
+
             _serviceProvider = serviceProvider;
             ToolButtonHorarios.Click += subMenuHorarios_Click;
             ToolButtonMesasExamenes.Click += subMenuConformacionMesasExamenes_Click;
@@ -53,32 +53,29 @@ namespace InstitutoDesktop
 
         private void MenuPrincipalView_Activated(object sender, EventArgs e)
         {
-            //if (!logueado)
-            //{
-            //    IniciarSesionView iniciarSesionView = new IniciarSesionView();
-            //    iniciarSesionView.ShowDialog();
-            //    if (!iniciarSesionView.loginSuccessfull)
-            //    {
-            //        Application.Exit();
-            //    }
-            //    else
-            //    {
-            //        logueado = true;
-            //    }
-            //}
+            if (!logueado)
+            {
+                IniciarSesionView iniciarSesionView = ActivatorUtilities.CreateInstance<IniciarSesionView>(_serviceProvider);
+                iniciarSesionView.OnLoginSuccess += (s, e) =>LoginFinalizado(e);
+                
+                iniciarSesionView.Show();
+                
+            }
 
         }
 
-
-
-
-
-
-
+        private void LoginFinalizado(bool isLogin)
+        {
+            menuStrip1.Visible= isLogin;
+            toolStrip1.Visible = isLogin;
+            logueado = isLogin;
+            if(!isLogin)
+                this.Close();
+        }
 
         private void mnuDocentes_Click(object sender, EventArgs e)
         {
-            DocentesViewReport docentesViewReport = ActivatorUtilities.CreateInstance<DocentesViewReport>(_serviceProvider,this);
+            DocentesViewReport docentesViewReport = ActivatorUtilities.CreateInstance<DocentesViewReport>(_serviceProvider, this);
             docentesViewReport.Show();
         }
 
@@ -87,7 +84,7 @@ namespace InstitutoDesktop
 
         private void subMenuCiclosLectivos_Click(object sender, EventArgs e)
         {
-            CiclosLectivosView ciclosLectivosView = ActivatorUtilities.CreateInstance<CiclosLectivosView>(_serviceProvider,this );
+            CiclosLectivosView ciclosLectivosView = ActivatorUtilities.CreateInstance<CiclosLectivosView>(_serviceProvider, this);
             ciclosLectivosView.Show();
         }
 
@@ -99,7 +96,7 @@ namespace InstitutoDesktop
 
         private void subMenuAlumnos_Click(object sender, EventArgs e)
         {
-            AlumnosView alumnosView = ActivatorUtilities.CreateInstance<AlumnosView>(_serviceProvider,this);
+            AlumnosView alumnosView = ActivatorUtilities.CreateInstance<AlumnosView>(_serviceProvider, this);
             alumnosView.Show();
         }
 
@@ -117,7 +114,7 @@ namespace InstitutoDesktop
 
         private void subMenuAñosCarreras_Click(object sender, EventArgs e)
         {
-            AniosCarrerasView aniosCarreraView = ActivatorUtilities.CreateInstance<AniosCarrerasView>(_serviceProvider,this);
+            AniosCarrerasView aniosCarreraView = ActivatorUtilities.CreateInstance<AniosCarrerasView>(_serviceProvider, this);
             aniosCarreraView.Show();
         }
 
@@ -143,7 +140,7 @@ namespace InstitutoDesktop
 
         private void subMenuHorarios_Click(object sender, EventArgs e)
         {
-            HorariosView horariosView = ActivatorUtilities.CreateInstance<HorariosView>(_serviceProvider,this);
+            HorariosView horariosView = ActivatorUtilities.CreateInstance<HorariosView>(_serviceProvider, this);
             horariosView.Show();
         }
 
@@ -163,6 +160,12 @@ namespace InstitutoDesktop
         {
             MesasExamenesView mesasExamenesView = ActivatorUtilities.CreateInstance<MesasExamenesView>(_serviceProvider, this);
             mesasExamenesView.Show();
+        }
+
+        private void subMenuUsuarios_Click(object sender, EventArgs e)
+        {
+            UsuariosView usuariosView = ActivatorUtilities.CreateInstance<UsuariosView>(_serviceProvider, this);
+            usuariosView.Show();
         }
     }
 }

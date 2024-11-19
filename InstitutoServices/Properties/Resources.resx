@@ -126,4 +126,16 @@
   <data name="UrlApiRemoto" xml:space="preserve">
     <value>https://datainstituto.azurewebsites.net/api/</value>
   </data>
+  <data name="ApiKeyFirebase" xml:space="preserve">
+    <value>AIzaSyBmHgrN0BoHgd0ZlDqY9f_BygkzOfhuP_E</value>
+  </data>
+  <data name="AuthDomainFirebase" xml:space="preserve">
+    <value>instituto20-435114.firebaseapp.com</value>
+  </data>
+  <data name="ApiKeyGoogleCloud" xml:space="preserve">
+    <value>AIzaSyDLPkmzvqIWwmhKQkNapfWd-x-_0WCvudk</value>
+  </data>
+  <data name="client_id" xml:space="preserve">
+    <value>243005933117-9jrpnqa9f296itha7jlaa3nmh23et4vu</value>
+  </data>
 </root>

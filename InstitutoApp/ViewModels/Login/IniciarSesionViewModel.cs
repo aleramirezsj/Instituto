@@ -1,57 +1,42 @@
-﻿using Firebase.Auth;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Firebase.Auth;
 using Firebase.Auth.Providers;
 using Firebase.Auth.Repository;
 using InstitutoApp.Class;
+using Microsoft.Extensions.Configuration;
 
 namespace InstitutoApp.ViewModels.Login
 {
-    public class IniciarSesionViewModel : NotificationObject
+    public partial class IniciarSesionViewModel : ObservableObject
     {
         public readonly FirebaseAuthClient _clientAuth;
         private FileUserRepository _userRepository;
         private UserInfo _userInfo;
         private FirebaseCredential _firebaseCredential;
 
-
+        [ObservableProperty]
+        [NotifyCanExecuteChangedFor(nameof(IniciarSesionCommand))]
         private string email;
-		public string Email
-		{
-			get { return email; }
-			set { email = value;
-				OnPropertyChanged();
-				IniciarSesionCommand.ChangeCanExecute();
-            }
-		}
 
-		private string password;
-		public string Password
-		{
-			get { return password; }
-			set { password = value;
-				OnPropertyChanged();
-                IniciarSesionCommand.ChangeCanExecute();
-            }
-		}
+        [ObservableProperty]
+        [NotifyCanExecuteChangedFor(nameof(IniciarSesionCommand))]
+        private string password;
 
-		private bool recordarContraseña;
-		public bool RecordarContraseña
-		{
-			get { return recordarContraseña; }
-			set { recordarContraseña = value;
-				OnPropertyChanged();
-			}
-		}
+        [ObservableProperty]
+        private bool recordarContraseña;
 
-        public Command IniciarSesionCommand { get; }
-        public Command RegistrarseCommand { get; }
+
+        public IRelayCommand IniciarSesionCommand { get; }
+        public IRelayCommand RegistrarseCommand { get; }
 
         public IniciarSesionViewModel()
         {
             
             _clientAuth = new FirebaseAuthClient(new FirebaseAuthConfig()
             {
-                ApiKey = "AIzaSyBmHgrN0BoHgd0ZlDqY9f_BygkzOfhuP_E",
-                AuthDomain = "instituto20-435114.firebaseapp.com",
+                ApiKey = InstitutoServices.Properties.Resources.ApiKeyFirebase,
+                AuthDomain = InstitutoServices.Properties.Resources.AuthDomainFirebase,
                 Providers = new Firebase.Auth.Providers.FirebaseAuthProvider[]
                 {
                     new EmailProvider()
@@ -59,11 +44,11 @@ namespace InstitutoApp.ViewModels.Login
             });
             _userRepository = new FileUserRepository("InstitutoApp");
             ChequearSiHayUsuarioAlmacenado();
-            IniciarSesionCommand = new Command(IniciarSesion,PermitirIniciarSesion);
-            RegistrarseCommand = new Command(Registrarse);
+            IniciarSesionCommand = new RelayCommand(IniciarSesion,PermitirIniciarSesion);
+            RegistrarseCommand = new RelayCommand(Registrarse);
         }
 
-        private async void Registrarse(object obj)
+        private async void Registrarse()
         {
             await Shell.Current.GoToAsync("Registrarse");
         }
@@ -79,12 +64,12 @@ namespace InstitutoApp.ViewModels.Login
             }
         }
 
-        private bool PermitirIniciarSesion(object arg)
+        private bool PermitirIniciarSesion()
         {
             return !string.IsNullOrEmpty(Email) && !string.IsNullOrEmpty(Password);
         }
 
-        private async void IniciarSesion(object obj)
+        private async void IniciarSesion()
         {
             try
             {

@@ -6,7 +6,7 @@
 else
 {
     var primerMesa= MesasExamenes.OrderBy(m=>m.Llamado1).FirstOrDefault();
-    <h3> Docente: @usuarioStateService.Usuario.User</h3>
+    <h3> Docente: @usuarioStateService.Usuario.Nombre</h3>
     <h3> Turno de examen: @primerMesa.TurnoExamen.Nombre</h3>
     @if (primerMesa.TurnoExamen.TieneLLamado2)
     {

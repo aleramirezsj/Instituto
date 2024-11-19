@@ -1,14 +1,15 @@
 
 using Firebase.Auth;
 using Firebase.Auth.Providers;
+using InstitutoServices.Models.Firebase;
 using System.Net.Http.Json;
 
 namespace InstitutoApp.Views.Login;
 
 public partial class IniciarSesion : ContentPage
 {
-    private readonly string _clientId = Properties.Resources.client_id+ ".apps.googleusercontent.com";
-    private readonly string _redirectUri = $"com.googleusercontent.apps.{Properties.Resources.client_id}:/oauth2redirect";
+    private readonly string _clientId = InstitutoServices.Properties.Resources.client_id+ ".apps.googleusercontent.com";
+    private readonly string _redirectUri = $"com.googleusercontent.apps.{InstitutoServices.Properties.Resources.client_id}:/oauth2redirect";
     private readonly string _authUri = "https://accounts.google.com/o/oauth2/v2/auth";
     private readonly string _tokenUri = "https://oauth2.googleapis.com/token";
 
@@ -83,7 +84,7 @@ public partial class IniciarSesion : ContentPage
 
     // ...
 
-    private readonly string _firebaseApiKey = "AIzaSyDLPkmzvqIWwmhKQkNapfWd-x-_0WCvudk";
+    private readonly string _firebaseApiKey = InstitutoServices.Properties.Resources.ApiKeyGoogleCloud;
 
     // Método para registrar al usuario en Firebase usando el access token de Google
     public async Task<string> SignInWithGoogleAccessToken(string googleAccessToken)
@@ -115,13 +116,5 @@ public partial class IniciarSesion : ContentPage
     }
 }
 // Clase para deserializar la respuesta de Firebase
-public class FirebaseSignInResponse
-{
-    public string IdToken { get; set; }
-    public string RefreshToken { get; set; }
-    public string LocalId { get; set; }
-    public string Email { get; set; }
-    public bool EmailVerified { get; set; }
-    public string DisplayName { get; set; }
-}
+
 

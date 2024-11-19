@@ -35,6 +35,7 @@
             label2 = new Label();
             txtPassword = new TextBox();
             chkVerContraseña = new CheckBox();
+            btnIngresarConGoogle = new FontAwesome.Sharp.IconButton();
             SuspendLayout();
             // 
             // btnCancelar
@@ -44,10 +45,10 @@
             btnCancelar.IconFont = FontAwesome.Sharp.IconFont.Regular;
             btnCancelar.IconSize = 24;
             btnCancelar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnCancelar.Location = new Point(416, 261);
-            btnCancelar.Margin = new Padding(4, 5, 4, 5);
+            btnCancelar.Location = new Point(333, 209);
+            btnCancelar.Margin = new Padding(3, 4, 3, 4);
             btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(159, 50);
+            btnCancelar.Size = new Size(127, 40);
             btnCancelar.TabIndex = 9;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = true;
@@ -60,10 +61,10 @@
             btnIngresar.IconFont = FontAwesome.Sharp.IconFont.Regular;
             btnIngresar.IconSize = 24;
             btnIngresar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnIngresar.Location = new Point(213, 261);
-            btnIngresar.Margin = new Padding(4, 5, 4, 5);
+            btnIngresar.Location = new Point(170, 209);
+            btnIngresar.Margin = new Padding(3, 4, 3, 4);
             btnIngresar.Name = "btnIngresar";
-            btnIngresar.Size = new Size(159, 50);
+            btnIngresar.Size = new Size(127, 40);
             btnIngresar.TabIndex = 8;
             btnIngresar.Text = "Ingresar";
             btnIngresar.UseVisualStyleBackColor = true;
@@ -72,52 +73,74 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(205, 72);
+            label1.Location = new Point(164, 58);
+            label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(58, 25);
+            label1.Size = new Size(49, 20);
             label1.TabIndex = 10;
             label1.Text = "Email:";
             // 
             // txtEmail
             // 
-            txtEmail.Location = new Point(292, 72);
+            txtEmail.Location = new Point(234, 58);
+            txtEmail.Margin = new Padding(2);
             txtEmail.Name = "txtEmail";
-            txtEmail.Size = new Size(299, 31);
+            txtEmail.Size = new Size(240, 27);
             txtEmail.TabIndex = 11;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(172, 140);
+            label2.Location = new Point(138, 112);
+            label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
-            label2.Size = new Size(91, 25);
+            label2.Size = new Size(73, 20);
             label2.TabIndex = 12;
             label2.Text = "Password:";
             // 
             // txtPassword
             // 
-            txtPassword.Location = new Point(292, 140);
+            txtPassword.Location = new Point(234, 112);
+            txtPassword.Margin = new Padding(2);
             txtPassword.Name = "txtPassword";
             txtPassword.PasswordChar = '*';
-            txtPassword.Size = new Size(299, 31);
+            txtPassword.Size = new Size(240, 27);
             txtPassword.TabIndex = 13;
             // 
             // chkVerContraseña
             // 
             chkVerContraseña.AutoSize = true;
-            chkVerContraseña.Location = new Point(292, 198);
+            chkVerContraseña.Location = new Point(234, 158);
+            chkVerContraseña.Margin = new Padding(2);
             chkVerContraseña.Name = "chkVerContraseña";
-            chkVerContraseña.Size = new Size(154, 29);
+            chkVerContraseña.Size = new Size(128, 24);
             chkVerContraseña.TabIndex = 14;
             chkVerContraseña.Text = "Ver contraseña";
             chkVerContraseña.UseVisualStyleBackColor = true;
             chkVerContraseña.CheckedChanged += chkVerContraseña_CheckedChanged;
             // 
+            // btnIngresarConGoogle
+            // 
+            btnIngresarConGoogle.IconChar = FontAwesome.Sharp.IconChar.File;
+            btnIngresarConGoogle.IconColor = Color.Black;
+            btnIngresarConGoogle.IconFont = FontAwesome.Sharp.IconFont.Regular;
+            btnIngresarConGoogle.IconSize = 24;
+            btnIngresarConGoogle.ImageAlign = ContentAlignment.MiddleLeft;
+            btnIngresarConGoogle.Location = new Point(222, 268);
+            btnIngresarConGoogle.Margin = new Padding(3, 4, 3, 4);
+            btnIngresarConGoogle.Name = "btnIngresarConGoogle";
+            btnIngresarConGoogle.Size = new Size(192, 40);
+            btnIngresarConGoogle.TabIndex = 15;
+            btnIngresarConGoogle.Text = "Ingresar con google";
+            btnIngresarConGoogle.UseVisualStyleBackColor = true;
+            btnIngresarConGoogle.Click += btnIngresarConGoogle_Click;
+            // 
             // IniciarSesionView
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 346);
+            ClientSize = new Size(640, 337);
+            Controls.Add(btnIngresarConGoogle);
             Controls.Add(chkVerContraseña);
             Controls.Add(txtPassword);
             Controls.Add(label2);
@@ -125,8 +148,9 @@
             Controls.Add(label1);
             Controls.Add(btnCancelar);
             Controls.Add(btnIngresar);
+            Margin = new Padding(2);
             Name = "IniciarSesionView";
-            StartPosition = FormStartPosition.CenterParent;
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "IniciarSesion";
             ResumeLayout(false);
             PerformLayout();
@@ -141,5 +165,6 @@
         private Label label2;
         private TextBox txtPassword;
         private CheckBox chkVerContraseña;
+        private FontAwesome.Sharp.IconButton btnIngresarConGoogle;
     }
 }

@@ -8,7 +8,7 @@
 @if (usuario != null)
 {
     <div>
-        <p>Nombre: @usuario.User</p>
+        <p>Nombre: @usuario.Nombre</p>
         <p>Email: @usuario.Email</p>
         <p>Tipo de usuario: @usuario.TipoUsuario</p>
     </div>
@@ -92,7 +92,7 @@
         usuario = new Usuario()
             {
                 Email = usuarioFirebase?.Email,
-                User = alumno.ApellidoNombre,
+                Nombre = alumno.ApellidoNombre,
                 TipoUsuario = tipoUsuario,
                 AlumnoId = alumno.Id
             };
@@ -101,7 +101,7 @@
         await SweetAlert.FireAsync(new SweetAlertOptions
             {
                 Title = $"{tipoUsuario} creado con éxito",
-                Text = $"El {tipoUsuario} {usuario.User} fue creado correctamente",
+                Text = $"El {tipoUsuario} {usuario.Nombre} fue creado correctamente",
                 Icon = SweetAlertIcon.Info,
                 ShowCancelButton = false,
                 ConfirmButtonText = "Ok",
@@ -115,7 +115,7 @@
         usuario = new Usuario()
             {
                 Email = usuarioFirebase?.Email,
-                User = usuarioFirebase?.DisplayName,
+                Nombre = usuarioFirebase?.DisplayName,
                 TipoUsuario = tipoUsuario,
                 DocenteId = docente.Id
             };
@@ -124,7 +124,7 @@
         await SweetAlert.FireAsync(new SweetAlertOptions
             {
                 Title = $"{tipoUsuario} creado con éxito",
-                Text = $"El {tipoUsuario} {usuario.User} fue creado correctamente",
+                Text = $"El {tipoUsuario} {usuario.Nombre} fue creado correctamente",
                 Icon = SweetAlertIcon.Info,
                 ShowCancelButton = false,
                 ConfirmButtonText = "Ok",

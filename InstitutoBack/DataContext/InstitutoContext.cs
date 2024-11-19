@@ -1031,7 +1031,7 @@ namespace InstitutoBack.DataContext
             modelBuilder.Entity<InscriptoCarrera>().HasData(inscriptoCarrera);
             #endregion
             #region datos semillas Usuarios
-            var usuario = new Usuario { Id = 1, User = "admin", Email = "admin@gmail.com", TipoUsuario = TipoUsuarioEnum.Directivo, DocenteId = 1 };
+            var usuario = new Usuario { Id = 1, Nombre = "admin", Email = "admin@gmail.com", TipoUsuario = TipoUsuarioEnum.Directivo, DocenteId = 1 };
 
             modelBuilder.Entity<Usuario>().HasData(usuario);
             #endregion

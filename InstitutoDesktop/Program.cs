@@ -80,6 +80,8 @@ namespace InstitutoDesktop
             //turnos examenes
             services.AddScoped<TurnosExamenesView>();
             services.AddScoped<SplashView>();
+            services.AddScoped<IniciarSesionView>();
+            services.AddScoped<UsuariosView>();
 
 
 

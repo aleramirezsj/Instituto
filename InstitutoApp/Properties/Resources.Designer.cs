@@ -59,23 +59,5 @@ namespace InstitutoApp.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a 243005933117-9jrpnqa9f296itha7jlaa3nmh23et4vu.
-        /// </summary>
-        internal static string client_id {
-            get {
-                return ResourceManager.GetString("client_id", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a https://datainstituto.azurewebsites.net/api/.
-        /// </summary>
-        internal static string UrlApi {
-            get {
-                return ResourceManager.GetString("UrlApi", resourceCulture);
-            }
-        }
     }
 }

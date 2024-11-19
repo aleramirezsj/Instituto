@@ -2,20 +2,15 @@
 using CommunityToolkit.Mvvm.Input;
 using Firebase.Auth;
 using Firebase.Auth.Providers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InstitutoApp.ViewModels.Login
 {
     public partial class RegistrarseViewModel : ObservableObject
     {
         private readonly FirebaseAuthClient _clientAuth;
-        private const string FirebaseApiKey = "AIzaSyBmHgrN0BoHgd0ZlDqY9f_BygkzOfhuP_E";
-        private const string RequestUri = "https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=" + FirebaseApiKey;
+        private readonly string FirebaseApiKey ;
+        private readonly string RequestUri;
 
         public IRelayCommand RegistrarseCommand { get; }
 
@@ -33,11 +28,13 @@ namespace InstitutoApp.ViewModels.Login
 
         public RegistrarseViewModel()
         {
+            FirebaseApiKey = InstitutoServices.Properties.Resources.ApiKeyFirebase;
+            RequestUri = "https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=" + FirebaseApiKey;
             RegistrarseCommand = new RelayCommand(Registrarse);
             _clientAuth = new FirebaseAuthClient(new FirebaseAuthConfig()
             {
-                ApiKey = "AIzaSyBmHgrN0BoHgd0ZlDqY9f_BygkzOfhuP_E",
-                AuthDomain = "instituto20-435114.firebaseapp.com",
+                ApiKey = FirebaseApiKey,
+                AuthDomain = InstitutoServices.Properties.Resources.AuthDomainFirebase,
                 Providers = new Firebase.Auth.Providers.FirebaseAuthProvider[]
                 {
                         new EmailProvider()
@@ -55,9 +52,9 @@ namespace InstitutoApp.ViewModels.Login
                     await SendVerificationEmailAsync(user.User.GetIdTokenAsync().Result);
                     await Application.Current.MainPage.DisplayAlert("Registrarse", "Cuenta creada!", "Ok");
                 }
-                catch (Exception error) // Use alias here 
+                catch (FirebaseAuthException error) // Use alias here 
                 {
-                    await Application.Current.MainPage.DisplayAlert("Registrarse", "Ocurrió un problema:" + error.Message, "Ok");
+                    await Application.Current.MainPage.DisplayAlert("Registrarse", "Ocurrió un problema:" + error.Reason, "Ok");
 
                 }
             }
@@ -67,7 +64,7 @@ namespace InstitutoApp.ViewModels.Login
             }
         }
 
-        public static async Task SendVerificationEmailAsync(string idToken)
+        public async Task SendVerificationEmailAsync(string idToken)
         {
             using (var client = new HttpClient())
             {

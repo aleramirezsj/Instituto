@@ -4,6 +4,7 @@ using InstitutoBack.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InstitutoBack.Migrations
 {
     [DbContext(typeof(InstitutoContext))]
-    partial class InstitutoContextModelSnapshot : ModelSnapshot
+    [Migration("20241117190846_PermitirAccionesAdministrativas")]
+    partial class PermitirAccionesAdministrativas
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -3707,10 +3710,6 @@ namespace InstitutoBack.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -3720,6 +3719,10 @@ namespace InstitutoBack.Migrations
 
                     b.Property<int>("TipoUsuario")
                         .HasColumnType("int");
+
+                    b.Property<string>("User")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
@@ -3736,10 +3739,10 @@ namespace InstitutoBack.Migrations
                             DocenteId = 1,
                             Eliminado = false,
                             Email = "admin@gmail.com",
-                            Nombre = "admin",
                             Password = "",
                             PermitirAccionesAdministrativas = false,
-                            TipoUsuario = 4
+                            TipoUsuario = 4,
+                            User = "admin"
                         });
                 });
 
@@ -4007,7 +4010,7 @@ namespace InstitutoBack.Migrations
                             AlumnoId = 1,
                             CarreraId = 1,
                             Eliminado = false,
-                            Fecha = new DateTime(2024, 11, 17, 17, 55, 19, 987, DateTimeKind.Local).AddTicks(3275),
+                            Fecha = new DateTime(2024, 11, 17, 16, 8, 44, 951, DateTimeKind.Local).AddTicks(2429),
                             PeriodoInscripcionId = 1
                         });
                 });
