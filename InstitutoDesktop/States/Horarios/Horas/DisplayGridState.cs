@@ -30,17 +30,17 @@ namespace InstitutoDesktop.States.Horarios.Horas
             ShowInActivity.Show("Cargando Horas...");
             _form.listaHoras = await _form._memoryCache.GetAllCacheAsync<Hora>();
             ShowInActivity.Hide();
-            await LoadGrid();
+            LoadGrid();
         }
 
-        public async Task LoadGrid()
+        public void LoadGrid()
         {
             if (_form.listaHoras != null && _form.listaHoras.Count > 0)
                 _form.Grilla.DataSource = _form.listaHoras.OrderBy(ciclo => ciclo.Nombre).ToList();
             _form.Grilla.OcultarColumnas(new string[] { "Id", "Desde", "Hasta", "Eliminado" });
         }
 
-        public async Task LoadGridFilter(string filterText)
+        public void LoadGridFilter(string filterText)
         {
             if (_form.listaHoras != null && _form.listaHoras.Count > 0)
                 _form.Grilla.DataSource = _form.listaHoras
@@ -80,7 +80,7 @@ namespace InstitutoDesktop.States.Horarios.Horas
             if (result == DialogResult.Yes)
             {
                 await _form._memoryCache.DeleteCacheAsync<Hora>(_form.horaCurrent.Id);
-                await LoadGrid();
+                LoadGrid();
             }
             _form.horaCurrent = null;
         }

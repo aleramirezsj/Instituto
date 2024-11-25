@@ -28,17 +28,17 @@ namespace InstitutoDesktop.States.Commons.Aulas
             ShowInActivity.Show("Cargando Aulas...");
             _form.listaAulas = await _form._memoryCache.GetAllCacheAsync<Aula>();
             ShowInActivity.Hide();
-            await LoadGrid();
+            LoadGrid();
         }
 
-        public async Task LoadGrid()
+        public void LoadGrid()
         {
             if (_form.listaAulas != null && _form.listaAulas.Count > 0)
                 _form.Grilla.DataSource = _form.listaAulas.OrderBy(ciclo => ciclo.Nombre).ToList();
             _form.Grilla.OcultarColumnas(new string[] { "Id", "Eliminado" });
         }
 
-        public async Task LoadGridFilter(string filterText)
+        public void LoadGridFilter(string filterText)
         {
             if (_form.listaAulas != null && _form.listaAulas.Count > 0)
                 _form.Grilla.DataSource = _form.listaAulas
@@ -78,7 +78,7 @@ namespace InstitutoDesktop.States.Commons.Aulas
             if (result == DialogResult.Yes)
             {
                 await _form._memoryCache.DeleteCacheAsync<Aula>(_form.aulaCurrent.Id);
-                await LoadGrid();
+                LoadGrid();
             }
             _form.aulaCurrent = null;
         }

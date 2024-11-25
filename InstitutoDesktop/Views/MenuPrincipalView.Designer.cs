@@ -317,7 +317,6 @@
             // 
             // toolStrip1
             // 
-            toolStrip1.Enabled = false;
             toolStrip1.ImageScalingSize = new Size(20, 20);
             toolStrip1.Items.AddRange(new ToolStripItem[] { ToolButtonHorarios, ToolButtonMesasExamenes });
             toolStrip1.Location = new Point(0, 0);

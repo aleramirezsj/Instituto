@@ -340,7 +340,7 @@
             // 
             checkPermitirAccionesAdministrativas.Anchor = AnchorStyles.None;
             checkPermitirAccionesAdministrativas.AutoSize = true;
-            checkPermitirAccionesAdministrativas.Location = new Point(306, 261);
+            checkPermitirAccionesAdministrativas.Location = new Point(306, 197);
             checkPermitirAccionesAdministrativas.Name = "checkPermitirAccionesAdministrativas";
             checkPermitirAccionesAdministrativas.Size = new Size(342, 24);
             checkPermitirAccionesAdministrativas.TabIndex = 27;
@@ -373,7 +373,7 @@
             // 
             txtPassword.Anchor = AnchorStyles.None;
             txtPassword.Font = new Font("Segoe UI", 11F);
-            txtPassword.Location = new Point(306, 186);
+            txtPassword.Location = new Point(306, 250);
             txtPassword.Margin = new Padding(2);
             txtPassword.Name = "txtPassword";
             txtPassword.PasswordChar = '*';
@@ -385,7 +385,7 @@
             label4.Anchor = AnchorStyles.None;
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 11F);
-            label4.Location = new Point(183, 186);
+            label4.Location = new Point(183, 250);
             label4.Margin = new Padding(2, 0, 2, 0);
             label4.Name = "label4";
             label4.Size = new Size(95, 25);

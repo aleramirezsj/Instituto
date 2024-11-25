@@ -27,17 +27,17 @@ namespace InstitutoDesktop.States.Docentes
             ShowInActivity.Show("Cargando docentes...");
             _form.listaDocente = await _form._memoryCache.GetAllCacheAsync<Docente>();
             ShowInActivity.Hide();
-            await LoadGrid();
+            LoadGrid();
         }
 
-        public async Task LoadGrid()
+        public void LoadGrid()
         {
             if (_form.listaDocente != null && _form.listaDocente.Count > 0)
                 _form.Grilla.DataSource = _form.listaDocente.OrderBy(docente => docente.Nombre).ToList();
             _form.Grilla.OcultarColumnas(new string[] { "Id", "Eliminado" });
         }
 
-        public async Task LoadGridFilter(string filterText)
+        public void LoadGridFilter(string filterText)
         {
             if (_form.listaDocente != null && _form.listaDocente.Count > 0)
                 _form.Grilla.DataSource = _form.listaDocente
@@ -77,7 +77,7 @@ namespace InstitutoDesktop.States.Docentes
             if (result == DialogResult.Yes)
             {
                 await _form._memoryCache.DeleteCacheAsync<Docente>(_form.docenteCurrent.Id);
-                await LoadGrid();
+                LoadGrid();
             }
             _form.docenteCurrent = null;
         }

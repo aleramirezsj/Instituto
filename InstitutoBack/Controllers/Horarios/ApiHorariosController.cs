@@ -93,6 +93,21 @@ namespace InstitutoBack.Controllers.Horarios
             {
                 return BadRequest();
             }
+            //attach de la materia
+            _context.Attach(horario.Materia);
+            //attach del periodo
+            _context.Attach(horario.PeriodoHorario);
+            //attach de los detalles
+            foreach (var detalle in horario.DetallesHorario)
+            {
+                _context.Attach(detalle.Hora);
+                _context.Attach(detalle.Aula);
+            }
+            //attach de los integrantes
+            foreach (var detalle in horario.IntegrantesHorario)
+            {
+                _context.Attach(detalle.Docente);
+            }
             // Marcar el horario como modificado
             _context.Entry(horario).State = EntityState.Modified;
 
@@ -164,6 +179,21 @@ namespace InstitutoBack.Controllers.Horarios
         [HttpPost]
         public async Task<ActionResult<Horario>> PostHorario(Horario horario)
         {
+            //attach de la materia
+            _context.Attach(horario.Materia);
+            //attach del periodo
+            _context.Attach(horario.PeriodoHorario);
+            //attach de los detalles
+            foreach (var detalle in horario.DetallesHorario)
+            {
+                _context.Attach(detalle.Hora);
+                _context.Attach(detalle.Aula);
+            }
+            //attach de los integrantes
+            foreach (var detalle in horario.IntegrantesHorario)
+            {
+                _context.Attach(detalle.Docente);
+            }
             _context.horarios.Add(horario);
 
             await _context.SaveChangesAsync();

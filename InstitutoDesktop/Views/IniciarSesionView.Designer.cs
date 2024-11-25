@@ -28,52 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            btnCancelar = new FontAwesome.Sharp.IconButton();
-            btnIngresar = new FontAwesome.Sharp.IconButton();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IniciarSesionView));
             label1 = new Label();
             txtEmail = new TextBox();
             label2 = new Label();
             txtPassword = new TextBox();
             chkVerContraseña = new CheckBox();
-            btnIngresarConGoogle = new FontAwesome.Sharp.IconButton();
+            pictureBox1 = new PictureBox();
+            btnIniciarSesion = new FontAwesome.Sharp.IconButton();
+            btnCancelar = new FontAwesome.Sharp.IconButton();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
-            // 
-            // btnCancelar
-            // 
-            btnCancelar.IconChar = FontAwesome.Sharp.IconChar.File;
-            btnCancelar.IconColor = Color.Black;
-            btnCancelar.IconFont = FontAwesome.Sharp.IconFont.Regular;
-            btnCancelar.IconSize = 24;
-            btnCancelar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnCancelar.Location = new Point(333, 209);
-            btnCancelar.Margin = new Padding(3, 4, 3, 4);
-            btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(127, 40);
-            btnCancelar.TabIndex = 9;
-            btnCancelar.Text = "Cancelar";
-            btnCancelar.UseVisualStyleBackColor = true;
-            btnCancelar.Click += btnCancelar_Click;
-            // 
-            // btnIngresar
-            // 
-            btnIngresar.IconChar = FontAwesome.Sharp.IconChar.File;
-            btnIngresar.IconColor = Color.Black;
-            btnIngresar.IconFont = FontAwesome.Sharp.IconFont.Regular;
-            btnIngresar.IconSize = 24;
-            btnIngresar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnIngresar.Location = new Point(170, 209);
-            btnIngresar.Margin = new Padding(3, 4, 3, 4);
-            btnIngresar.Name = "btnIngresar";
-            btnIngresar.Size = new Size(127, 40);
-            btnIngresar.TabIndex = 8;
-            btnIngresar.Text = "Ingresar";
-            btnIngresar.UseVisualStyleBackColor = true;
-            btnIngresar.Click += btnIngresar_Click;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(164, 58);
+            label1.Location = new Point(346, 55);
             label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
             label1.Size = new Size(49, 20);
@@ -82,7 +52,7 @@
             // 
             // txtEmail
             // 
-            txtEmail.Location = new Point(234, 58);
+            txtEmail.Location = new Point(416, 55);
             txtEmail.Margin = new Padding(2);
             txtEmail.Name = "txtEmail";
             txtEmail.Size = new Size(240, 27);
@@ -91,7 +61,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(138, 112);
+            label2.Location = new Point(320, 109);
             label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
             label2.Size = new Size(73, 20);
@@ -100,7 +70,7 @@
             // 
             // txtPassword
             // 
-            txtPassword.Location = new Point(234, 112);
+            txtPassword.Location = new Point(416, 109);
             txtPassword.Margin = new Padding(2);
             txtPassword.Name = "txtPassword";
             txtPassword.PasswordChar = '*';
@@ -110,7 +80,7 @@
             // chkVerContraseña
             // 
             chkVerContraseña.AutoSize = true;
-            chkVerContraseña.Location = new Point(234, 158);
+            chkVerContraseña.Location = new Point(416, 155);
             chkVerContraseña.Margin = new Padding(2);
             chkVerContraseña.Name = "chkVerContraseña";
             chkVerContraseña.Size = new Size(128, 24);
@@ -119,52 +89,86 @@
             chkVerContraseña.UseVisualStyleBackColor = true;
             chkVerContraseña.CheckedChanged += chkVerContraseña_CheckedChanged;
             // 
-            // btnIngresarConGoogle
+            // pictureBox1
             // 
-            btnIngresarConGoogle.IconChar = FontAwesome.Sharp.IconChar.File;
-            btnIngresarConGoogle.IconColor = Color.Black;
-            btnIngresarConGoogle.IconFont = FontAwesome.Sharp.IconFont.Regular;
-            btnIngresarConGoogle.IconSize = 24;
-            btnIngresarConGoogle.ImageAlign = ContentAlignment.MiddleLeft;
-            btnIngresarConGoogle.Location = new Point(222, 268);
-            btnIngresarConGoogle.Margin = new Padding(3, 4, 3, 4);
-            btnIngresarConGoogle.Name = "btnIngresarConGoogle";
-            btnIngresarConGoogle.Size = new Size(192, 40);
-            btnIngresarConGoogle.TabIndex = 15;
-            btnIngresarConGoogle.Text = "Ingresar con google";
-            btnIngresarConGoogle.UseVisualStyleBackColor = true;
-            btnIngresarConGoogle.Click += btnIngresarConGoogle_Click;
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(12, 55);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(278, 242);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 16;
+            pictureBox1.TabStop = false;
+            // 
+            // btnIniciarSesion
+            // 
+            btnIniciarSesion.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnIniciarSesion.BackColor = Color.DarkGray;
+            btnIniciarSesion.IconChar = FontAwesome.Sharp.IconChar.CircleArrowRight;
+            btnIniciarSesion.IconColor = Color.Black;
+            btnIniciarSesion.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnIniciarSesion.ImageAlign = ContentAlignment.MiddleLeft;
+            btnIniciarSesion.Location = new Point(320, 244);
+            btnIniciarSesion.Margin = new Padding(2);
+            btnIniciarSesion.Name = "btnIniciarSesion";
+            btnIniciarSesion.Size = new Size(147, 53);
+            btnIniciarSesion.TabIndex = 17;
+            btnIniciarSesion.Text = "Iniciar sesión";
+            btnIniciarSesion.TextAlign = ContentAlignment.MiddleRight;
+            btnIniciarSesion.UseVisualStyleBackColor = false;
+            btnIniciarSesion.Click += btnIniciarSesion_Click;
+            // 
+            // btnCancelar
+            // 
+            btnCancelar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnCancelar.BackColor = Color.LightGray;
+            btnCancelar.IconChar = FontAwesome.Sharp.IconChar.Close;
+            btnCancelar.IconColor = Color.Black;
+            btnCancelar.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnCancelar.ImageAlign = ContentAlignment.MiddleLeft;
+            btnCancelar.Location = new Point(510, 244);
+            btnCancelar.Margin = new Padding(2);
+            btnCancelar.Name = "btnCancelar";
+            btnCancelar.Size = new Size(146, 53);
+            btnCancelar.TabIndex = 18;
+            btnCancelar.Text = "Cancelar";
+            btnCancelar.TextAlign = ContentAlignment.MiddleRight;
+            btnCancelar.UseVisualStyleBackColor = false;
+            btnCancelar.Click += btnCancelar_Click_1;
             // 
             // IniciarSesionView
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(640, 337);
-            Controls.Add(btnIngresarConGoogle);
+            CancelButton = btnCancelar;
+            ClientSize = new Size(732, 337);
+            ControlBox = false;
+            Controls.Add(btnCancelar);
+            Controls.Add(btnIniciarSesion);
+            Controls.Add(pictureBox1);
             Controls.Add(chkVerContraseña);
             Controls.Add(txtPassword);
             Controls.Add(label2);
             Controls.Add(txtEmail);
             Controls.Add(label1);
-            Controls.Add(btnCancelar);
-            Controls.Add(btnIngresar);
             Margin = new Padding(2);
             Name = "IniciarSesionView";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "IniciarSesion";
+            Text = "Iniciar sesión";
+            TopMost = true;
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private FontAwesome.Sharp.IconButton btnCancelar;
-        private FontAwesome.Sharp.IconButton btnIngresar;
         private Label label1;
         private TextBox txtEmail;
         private Label label2;
         private TextBox txtPassword;
         private CheckBox chkVerContraseña;
-        private FontAwesome.Sharp.IconButton btnIngresarConGoogle;
+        private PictureBox pictureBox1;
+        public FontAwesome.Sharp.IconButton btnIngresar;
+        public FontAwesome.Sharp.IconButton btnIniciarSesion;
+        public FontAwesome.Sharp.IconButton btnCancelar;
     }
 }

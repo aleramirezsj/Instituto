@@ -37,17 +37,17 @@ namespace InstitutoDesktop.States.Commons.AniosCarreras
             _form.listaAniosCarreras = await _form._memoryCache.GetAllCacheAsync<AnioCarrera>();
             ShowInActivity.Hide();
             await LoadComboboxCarreras();
-            await LoadGrid();
+            LoadGrid();
         }
 
-        public async Task LoadGrid()
+        public void LoadGrid()
         {
             if (_form.listaAniosCarreras != null && _form.listaAniosCarreras.Count > 0)
                 _form.Grilla.DataSource = _form.listaAniosCarreras.Where(anio=>anio.CarreraId.Equals((int)_form.comboBoxCarreras.SelectedValue)).OrderBy(anio => anio.Nombre).ToList();
             _form.Grilla.OcultarColumnas(new string[] { "Id", "Carrera", "CarreraId", "AñoYCarrera", "Eliminado" });
         }
 
-        public async Task LoadGridFilter(string filterText)
+        public void LoadGridFilter(string filterText)
         {
             if (_form.listaAniosCarreras != null && _form.listaAniosCarreras.Count > 0)
                 _form.Grilla.DataSource = _form.listaAniosCarreras
@@ -70,7 +70,7 @@ namespace InstitutoDesktop.States.Commons.AniosCarreras
         public async void UpdateUI()
         {
             
-            await LoadGrid();
+            LoadGrid();
             _form.tabPageAgregarEditar.Enabled = false;
             _form.tabPageLista.Enabled = true;
             _form.tabControl.SelectTab(_form.tabPageLista);

@@ -70,8 +70,8 @@ namespace InstitutoDesktop.States.Inscripciones.PeriodosInscripciones
 
         // Estos métodos no aplican en este estado
         public Task LoadData() => Task.CompletedTask;
-        public Task LoadGrid() => Task.CompletedTask;
-        public Task LoadGridFilter(string filterText) => Task.CompletedTask;
+        public void LoadGrid() {}
+        public void LoadGridFilter(string filterText) {}
         public void OnAgregar() { }
         public void OnModificar() { }
         public void OnBuscar() { }

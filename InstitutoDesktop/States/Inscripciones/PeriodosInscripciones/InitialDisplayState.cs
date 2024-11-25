@@ -31,17 +31,17 @@ namespace InstitutoDesktop.States.Inscripciones.PeriodosInscripciones
             _form.listaPeriodosInscripciones = await _form._memoryCache.GetAllCacheAsync<PeriodoInscripcion>();
             ShowInActivity.Hide();
             await LoadComboboxCiclosLectivos();
-            await LoadGrid();
+            LoadGrid();
         }
 
-        public async Task LoadGrid()
+        public void LoadGrid()
         {
             if (_form.listaPeriodosInscripciones != null && _form.listaPeriodosInscripciones.Count > 0)
                 _form.Grilla.DataSource = _form.listaPeriodosInscripciones.OrderBy(periodo => periodo.CicloLectivoId).ToList();
             _form.Grilla.OcultarColumnas(new string[] { "Id","CicloLectivoId","Es2doCuatrimestre",  "Eliminado" });
         }
 
-        public async Task LoadGridFilter(string filterText)
+        public void LoadGridFilter(string filterText)
         {
             if (_form.listaPeriodosInscripciones != null && _form.listaPeriodosInscripciones.Count > 0)
                 _form.Grilla.DataSource = _form.listaPeriodosInscripciones
@@ -63,7 +63,7 @@ namespace InstitutoDesktop.States.Inscripciones.PeriodosInscripciones
         public async void UpdateUI()
         {
             
-            await LoadGrid();
+            LoadGrid();
             _form.tabPageAgregarEditar.Enabled = false;
             _form.tabPageLista.Enabled = true;
             _form.tabControl.SelectTab(_form.tabPageLista);

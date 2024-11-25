@@ -1,13 +1,9 @@
 ﻿using InstitutoDesktop.ExtensionMethods;
 using InstitutoDesktop.Interfaces.Commons;
-using InstitutoDesktop.Interfaces.MesasExamenes;
 using InstitutoDesktop.Util;
 using InstitutoDesktop.Views.Commons;
-using InstitutoDesktop.Views.Inscripciones;
-using InstitutoDesktop.Views.MesasExamenes;
+using InstitutoServices.Enums;
 using InstitutoServices.Models.Commons;
-using InstitutoServices.Models.Inscripciones;
-using InstitutoServices.Models.MesasExamenes;
 
 namespace InstitutoDesktop.States.Commons.Usuarios
 {
@@ -33,17 +29,20 @@ namespace InstitutoDesktop.States.Commons.Usuarios
             ShowInActivity.Show("Cargando alumnos...");
             _form.listaUsuarios = await _form._memoryCache.GetAllCacheAsync<Usuario>();
             ShowInActivity.Hide();
-            await LoadGrid();
+            await LoadComboboxDocentes();
+            await LoadComboboxAlumnos();
+            LoadComboboxTipoUsuario();
+            LoadGrid();
         }
 
-        public async Task LoadGrid()
+        public void LoadGrid()
         {
             if (_form.listaUsuarios != null && _form.listaUsuarios.Count > 0)
                 _form.Grilla.DataSource = _form.listaUsuarios.OrderBy(usuario => usuario.Nombre).ToList();
             _form.Grilla.OcultarColumnas(new string[] { "Id", "Eliminado" });
         }
 
-        public async Task LoadGridFilter(string filterText)
+        public void LoadGridFilter(string filterText)
         {
             if (_form.listaUsuarios != null && _form.listaUsuarios.Count > 0)
                 _form.Grilla.DataSource = _form.listaUsuarios
@@ -65,7 +64,7 @@ namespace InstitutoDesktop.States.Commons.Usuarios
         public async void UpdateUI()
         {
             
-            await LoadGrid();
+            LoadGrid();
             _form.tabPageAgregarEditar.Enabled = false;
             _form.tabPageLista.Enabled = true;
             _form.tabControl.SelectTab(_form.tabPageLista);
@@ -88,8 +87,28 @@ namespace InstitutoDesktop.States.Commons.Usuarios
         public void OnCancelar() { }
         public void OnSalir() => _form.Close();
 
+        public async Task LoadComboboxDocentes()
+        {
+            ShowInActivity.Show("Cargando docentes...");
+            _form.comboBoxDocentes.DataSource = await _form._memoryCache.GetAllCacheAsync<Docente>();
+            ShowInActivity.Hide();
+            _form.comboBoxDocentes.DisplayMember = "Nombre";
+            _form.comboBoxDocentes.ValueMember = "Id";
+        }
 
+        public async Task LoadComboboxAlumnos()
+        {
+            ShowInActivity.Show("Cargando alumnos...");
+            _form.comboBoxAlumnos.DataSource = await _form._memoryCache.GetAllCacheAsync<Alumno>();
+            ShowInActivity.Hide();
+            _form.comboBoxAlumnos.DisplayMember = "ApellidoNombre";
+            _form.comboBoxAlumnos.ValueMember = "Id";
+        }
 
+        public void LoadComboboxTipoUsuario()
+        {
+            _form.comboBoxTipoUsuario.DataSource = Enum.GetValues(typeof(TipoUsuarioEnum));
+        }
 
     }
 }

@@ -8,5 +8,8 @@ namespace InstitutoDesktop.Interfaces.Commons
 {
     public interface IUsuariosViewState : IBaseViewState
     {
+        Task LoadComboboxDocentes();
+        Task LoadComboboxAlumnos();
+        void LoadComboboxTipoUsuario();
     }
 }

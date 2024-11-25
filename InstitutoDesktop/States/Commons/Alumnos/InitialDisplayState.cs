@@ -33,17 +33,17 @@ namespace InstitutoDesktop.States.Commons.Alumnos
             ShowInActivity.Show("Cargando alumnos...");
             _form.listaAlumnos = await _form._memoryCache.GetAllCacheAsync<Alumno>();
             ShowInActivity.Hide();
-            await LoadGrid();
+            LoadGrid();
         }
 
-        public async Task LoadGrid()
+        public void LoadGrid()
         {
             if (_form.listaAlumnos != null && _form.listaAlumnos.Count > 0)
                 _form.Grilla.DataSource = _form.listaAlumnos.OrderBy(alumno => alumno.ApellidoNombre).ToList();
             _form.Grilla.OcultarColumnas(new string[] { "Id", "Eliminado" });
         }
 
-        public async Task LoadGridFilter(string filterText)
+        public void LoadGridFilter(string filterText)
         {
             if (_form.listaAlumnos != null && _form.listaAlumnos.Count > 0)
                 _form.Grilla.DataSource = _form.listaAlumnos
@@ -65,7 +65,7 @@ namespace InstitutoDesktop.States.Commons.Alumnos
         public async void UpdateUI()
         {
             
-            await LoadGrid();
+            LoadGrid();
             _form.tabPageAgregarEditar.Enabled = false;
             _form.tabPageLista.Enabled = true;
             _form.tabControl.SelectTab(_form.tabPageLista);

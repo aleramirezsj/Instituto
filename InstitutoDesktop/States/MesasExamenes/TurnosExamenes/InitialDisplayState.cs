@@ -32,17 +32,17 @@ namespace InstitutoDesktop.States.MesasExamenes.TurnosExamenes
             _form.listaTurnosExamenes = await _form._memoryCache.GetAllCacheAsync<TurnoExamen>();
             ShowInActivity.Hide();
             await LoadComboboxCiclosLectivos();
-            await LoadGrid();
+            LoadGrid();
         }
 
-        public async Task LoadGrid()
+        public void LoadGrid()
         {
             if (_form.listaTurnosExamenes != null && _form.listaTurnosExamenes.Count > 0)
                 _form.Grilla.DataSource = _form.listaTurnosExamenes.OrderBy(periodo => periodo.CicloLectivoId).ToList();
             _form.Grilla.OcultarColumnas(new string[] { "Id","CicloLectivoId",  "Eliminado" });
         }
 
-        public async Task LoadGridFilter(string filterText)
+        public void LoadGridFilter(string filterText)
         {
             if (_form.listaTurnosExamenes != null && _form.listaTurnosExamenes.Count > 0)
                 _form.Grilla.DataSource = _form.listaTurnosExamenes
@@ -64,7 +64,7 @@ namespace InstitutoDesktop.States.MesasExamenes.TurnosExamenes
         public async void UpdateUI()
         {
             
-            await LoadGrid();
+            LoadGrid();
             _form.tabPageAgregarEditar.Enabled = false;
             _form.tabPageLista.Enabled = true;
             _form.tabControl.SelectTab(_form.tabPageLista);

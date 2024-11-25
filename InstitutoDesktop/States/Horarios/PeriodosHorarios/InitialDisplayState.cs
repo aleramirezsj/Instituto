@@ -32,17 +32,17 @@ namespace InstitutoDesktop.States.Horarios.PeriodosHorarios
             _form.listaPeriodosHorarios = await _form._memoryCache.GetAllCacheAsync<PeriodoHorario>();
             ShowInActivity.Hide();
             await LoadComboboxCiclosLectivos();
-            await LoadGrid();
+            LoadGrid();
         }
 
-        public async Task LoadGrid()
+        public void LoadGrid()
         {
             if (_form.listaPeriodosHorarios != null && _form.listaPeriodosHorarios.Count > 0)
                 _form.Grilla.DataSource = _form.listaPeriodosHorarios.OrderBy(periodo => periodo.CicloLectivoId).ToList();
             _form.Grilla.OcultarColumnas(new string[] { "Id","CicloLectivoId","Es2doCuatrimestre",  "Eliminado" });
         }
 
-        public async Task LoadGridFilter(string filterText)
+        public void LoadGridFilter(string filterText)
         {
             if (_form.listaPeriodosHorarios != null && _form.listaPeriodosHorarios.Count > 0)
                 _form.Grilla.DataSource = _form.listaPeriodosHorarios
@@ -64,7 +64,7 @@ namespace InstitutoDesktop.States.Horarios.PeriodosHorarios
         public async void UpdateUI()
         {
             
-            await LoadGrid();
+            LoadGrid();
             _form.tabPageAgregarEditar.Enabled = false;
             _form.tabPageLista.Enabled = true;
             _form.tabControl.SelectTab(_form.tabPageLista);

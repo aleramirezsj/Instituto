@@ -36,10 +36,10 @@ namespace InstitutoDesktop.States.Commons.Materias
             await LoadComboboxCarreras();
             await LoadComboboxAniosCarreras();
             LoadComboTipoMaterias();
-            await LoadGrid();
+            LoadGrid();
         }
 
-        public async Task LoadGrid()
+        public void LoadGrid()
         {
             var anioCarrera=_form.comboBoxAñosCarreras.SelectedItem as AnioCarrera;
 
@@ -48,7 +48,7 @@ namespace InstitutoDesktop.States.Commons.Materias
             _form.Grilla.OcultarColumnas(new string[] { "Id", "AnioCarrera", "AnioCarreraId", "Eliminado" });
         }
 
-        public async Task LoadGridFilter(string filterText)
+        public void LoadGridFilter(string filterText)
         {
             var anioCarrera = _form.comboBoxAñosCarreras.SelectedItem as AnioCarrera;
 
@@ -91,7 +91,7 @@ namespace InstitutoDesktop.States.Commons.Materias
             if (result == DialogResult.Yes)
             {
                 await _form._memoryCache.DeleteCacheAsync<Materia>(_form.materiaCurrent.Id);
-                await LoadGrid();
+                LoadGrid();
             }
             _form.materiaCurrent = null;
         }
@@ -107,7 +107,7 @@ namespace InstitutoDesktop.States.Commons.Materias
         public async void UpdateUI()
         {
             
-            await LoadGrid();
+            LoadGrid();
             _form.tabPageAgregarEditar.Enabled = false;
             _form.tabPageLista.Enabled = true;
             _form.tabControl.SelectTab(_form.tabPageLista);

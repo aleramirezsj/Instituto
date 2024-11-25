@@ -54,13 +54,16 @@ namespace InstitutoDesktop.States.Commons.Usuarios
 
         // Estos métodos no aplican en este estado
         public Task LoadData() => Task.CompletedTask;
-        public Task LoadGrid() => Task.CompletedTask;
-        public Task LoadGridFilter(string filterText) => Task.CompletedTask;
+        public void LoadGrid() {}
+        public void LoadGridFilter(string filterText) {}
         public void OnBuscar() { }
         public void UpdateUI() { }
         public Task OnGuardar() => Task.CompletedTask;
         public void OnCancelar() { }
         public void OnSalir() => _form.Close();
+        public Task LoadComboboxDocentes() => Task.CompletedTask;
+        public Task LoadComboboxAlumnos() => Task.CompletedTask;
+        public void LoadComboboxTipoUsuario() { }
 
 
 

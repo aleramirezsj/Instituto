@@ -9,8 +9,8 @@ namespace InstitutoDesktop.Interfaces.Inscripciones
     public interface ICiclosLectivosState
     {
         Task LoadData();
-        Task LoadGrid();
-        Task LoadGridFilter(string filterText);
+        void LoadGrid();
+        void LoadGridFilter(string filterText);
         void OnAgregar();
         Task OnGuardar();
         void OnModificar();

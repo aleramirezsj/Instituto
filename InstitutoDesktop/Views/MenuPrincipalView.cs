@@ -26,6 +26,7 @@ namespace InstitutoDesktop
         bool logueado = false;
         private readonly MemoryCacheServiceWinForms _cacheService;
         private readonly IServiceProvider _serviceProvider;
+        IniciarSesionView iniciarSesionView;
 
 
         public MenuPrincipalView(MemoryCacheServiceWinForms memoryCacheService, IServiceProvider serviceProvider)
@@ -55,7 +56,10 @@ namespace InstitutoDesktop
         {
             if (!logueado)
             {
-                IniciarSesionView iniciarSesionView = ActivatorUtilities.CreateInstance<IniciarSesionView>(_serviceProvider);
+                if(iniciarSesionView== null)
+                {
+                    iniciarSesionView = ActivatorUtilities.CreateInstance<IniciarSesionView>(_serviceProvider);
+                }
                 iniciarSesionView.OnLoginSuccess += (s, e) =>LoginFinalizado(e);
                 
                 iniciarSesionView.Show();
@@ -66,8 +70,8 @@ namespace InstitutoDesktop
 
         private void LoginFinalizado(bool isLogin)
         {
-            menuStrip1.Visible= isLogin;
             toolStrip1.Visible = isLogin;
+            menuStrip1.Visible= isLogin;
             logueado = isLogin;
             if(!isLogin)
                 this.Close();

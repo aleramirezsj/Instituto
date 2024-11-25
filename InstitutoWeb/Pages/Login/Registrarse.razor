@@ -2,6 +2,7 @@
 @inject AuthenticationService AuthService
 @inject NavigationManager NavigationManager
 @inject SweetAlertService SweetAlert
+@inject IMemoryCacheService _memoryCache
 @inject ILogger<Registrarse> logger
 
 <!--creamos un formulario que pide email, password, nombre completo-->
@@ -33,8 +34,10 @@
     {
         var userId=await AuthService.createUserWithEmailAndPassword(usuario.Email, usuario.Password, usuario.Nombre);
         if (userId != null)
+        {
             await SweetAlert.FireAsync("Usuario Creado", $"Se envio un correo electrónico a {usuario.Email} debe confirmar su cuenta para poder continuar");
-
+            _memoryCache.SetCache<Usuario>(usuario.Email, usuario);
+        }
         NavigationManager.NavigateTo("/login");
     }
         

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace InstitutoServices.Models.Commons
 {
-    public class AnioCarrera : IEntityWithId
+    public class AnioCarrera : IEntityIdNombre
     {
         public int Id { get; set; }
         public string Nombre { get; set; } = string.Empty;

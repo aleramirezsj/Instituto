@@ -13,6 +13,8 @@ using System.Text;
 using System.Windows.Forms;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
+using InstitutoServices.Interfaces;
+using InstitutoServices.Models.Commons;
 
 namespace InstitutoDesktop.ExtensionMethods
 {
@@ -131,7 +133,21 @@ namespace InstitutoDesktop.ExtensionMethods
             return Application.OpenForms.OfType<Form>().Where(f => f.Name == form.Name).SingleOrDefault<Form>() != null;
         }
 
-        
+        public static void SetDataAndAutoComplete<T>(this ComboBox combo, List<T> dataSource) where T : class,IEntityIdNombre
+        {
+            combo.DataSource = dataSource.ToList();
+            combo.DisplayMember = "Nombre";
+            combo.ValueMember = "Id";
+
+            AutoCompleteStringCollection autoCompleteEntitys = new AutoCompleteStringCollection();
+            foreach (T entity in dataSource.ToList())
+            {
+                autoCompleteEntitys.Add(entity.Nombre.ToString());
+            }
+            combo.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            combo.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            combo.AutoCompleteCustomSource = autoCompleteEntitys;
+        }
 
     }
 

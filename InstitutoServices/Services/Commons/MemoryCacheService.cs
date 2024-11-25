@@ -90,5 +90,25 @@ namespace InstitutoServices.Services.Commons
             var key = typeof(T).Name;
             _memoryCache.Remove(key);
         }
+        //método para vaciar toda la caché
+        public void ClearAllCache()
+        {
+            _memoryCache.Dispose();
+        }
+        //método para obtener un dato de la caché a partir de su clave
+        public T GetCache<T>(string key) where T : class, IEntityWithId
+        {
+            if (_memoryCache.TryGetValue(key, out T cachedObject))
+            {
+                return cachedObject;
+            }
+            return null;
+        }
+        //método para agregar un dato a la caché a partir de su clave
+        public void SetCache<T>(string key, T entity) where T : class, IEntityWithId
+        {
+            _memoryCache.Set(key, entity);
+        }
+
     }
 }

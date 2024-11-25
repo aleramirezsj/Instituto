@@ -28,17 +28,17 @@ namespace InstitutoDesktop.States.Inscripciones.CiclosLectivos
             ShowInActivity.Show("Cargando ciclos lectivos...");
             _form.listaCicloLectivos = await _form._memoryCache.GetAllCacheAsync<CicloLectivo>();
             ShowInActivity.Hide();
-            await LoadGrid();
+            LoadGrid();
         }
 
-        public async Task LoadGrid()
+        public void LoadGrid()
         {
             if (_form.listaCicloLectivos != null && _form.listaCicloLectivos.Count > 0)
                 _form.Grilla.DataSource = _form.listaCicloLectivos.OrderBy(ciclo => ciclo.Nombre).ToList();
             _form.Grilla.OcultarColumnas(new string[] { "Id", "Eliminado" });
         }
 
-        public async Task LoadGridFilter(string filterText)
+        public void LoadGridFilter(string filterText)
         {
             if (_form.listaCicloLectivos != null && _form.listaCicloLectivos.Count > 0)
                 _form.Grilla.DataSource = _form.listaCicloLectivos
@@ -78,7 +78,7 @@ namespace InstitutoDesktop.States.Inscripciones.CiclosLectivos
             if (result == DialogResult.Yes)
             {
                 await _form._memoryCache.DeleteCacheAsync<CicloLectivo>(_form.cicloLectivoCurrent.Id);
-                await LoadGrid();
+                LoadGrid();
             }
             _form.cicloLectivoCurrent = null;
         }

@@ -2,7 +2,7 @@
 @inject IUsuarioService usuarioService
 @inject IUsuarioStateService usuarioStateService
 @inject SweetAlertService SweetAlert
-@inject IMemoryCacheService MemoryCacheService
+@inject IMemoryCacheService _memoryCacheService
 
 
 @if (usuario != null)
@@ -89,9 +89,11 @@
     private async Task GuardarAlumno(Alumno alumno)
     {
         this.alumno = alumno;
+        var nuevoUsuarioCacheado = _memoryCacheService.GetCache<Usuario>(usuarioFirebase?.Email);
         usuario = new Usuario()
             {
                 Email = usuarioFirebase?.Email,
+                Password = nuevoUsuarioCacheado.Password,
                 Nombre = alumno.ApellidoNombre,
                 TipoUsuario = tipoUsuario,
                 AlumnoId = alumno.Id
@@ -112,9 +114,11 @@
     private async Task SeleccionarDocente(Docente docente)
     {
         this.docente = docente;
+        var nuevoUsuarioCacheado = _memoryCacheService.GetCache<Usuario>(usuarioFirebase?.Email);
         usuario = new Usuario()
             {
                 Email = usuarioFirebase?.Email,
+                Password = nuevoUsuarioCacheado.Password,
                 Nombre = usuarioFirebase?.DisplayName,
                 TipoUsuario = tipoUsuario,
                 DocenteId = docente.Id

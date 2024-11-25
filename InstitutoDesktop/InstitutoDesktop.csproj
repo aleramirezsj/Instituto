@@ -95,8 +95,4 @@
     </Reference>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Interfaces\MesasExamenes\" />
-  </ItemGroup>
-
 </Project>
