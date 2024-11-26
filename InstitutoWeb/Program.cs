@@ -22,7 +22,7 @@ builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 builder.Logging.SetMinimumLevel(LogLevel.Debug);
 string urlApi = builder.Configuration.GetValue<string>("UrlApiLocal");
-if (builder.Configuration.GetValue<bool>("Remoto")==true)
+if (builder.Configuration.GetValue<bool>("Remote")==true)
      urlApi = builder.Configuration.GetValue<string>("UrlApiRemoto");
 
 builder.Services.AddMemoryCache();
