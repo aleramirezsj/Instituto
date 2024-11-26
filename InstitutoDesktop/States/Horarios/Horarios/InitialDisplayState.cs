@@ -166,7 +166,7 @@ namespace InstitutoDesktop.States.Horarios.Horarios
         
         public void LoadComboboxAulas()=>_form.cboAulas.SetDataAndAutoComplete<Aula>(_form.listaAulas.ToList());
 
-        public void LoadComboboxHoras()=> _form.cboHoras.SetDataAndAutoComplete<Hora>(_form.listaHoras.ToList());
+        public void LoadComboboxHoras()=> _form.cboHoras.SetDataAndAutoCompleteWithToString<Hora>(_form.listaHoras.ToList());
 
         public void OnAgregarDocenteAIntegrantes() {
             _form.TransitionTo(new EditionState(_form));

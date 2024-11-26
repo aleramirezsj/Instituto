@@ -1,15 +1,9 @@
 ﻿using InstitutoDesktop.ExtensionMethods;
-using InstitutoDesktop.Interfaces.Commons;
 using InstitutoDesktop.Interfaces.Horarios;
-using InstitutoDesktop.Interfaces.MesasExamenes;
 using InstitutoDesktop.Views;
-using InstitutoDesktop.Views.Inscripciones;
-using InstitutoDesktop.Views.MesasExamenes;
 using InstitutoServices.Enums;
 using InstitutoServices.Models.Commons;
 using InstitutoServices.Models.Horarios;
-using InstitutoServices.Models.Inscripciones;
-using InstitutoServices.Models.MesasExamenes;
 
 namespace InstitutoDesktop.States.Horarios.Horarios
 {
@@ -55,7 +49,9 @@ namespace InstitutoDesktop.States.Horarios.Horarios
             if(!ControlDataInsert()) return;
 
             _form.horarioCurrent.MateriaId = (int)_form.cboMaterias.SelectedValue;
+            _form.horarioCurrent.Materia = (Materia)_form.cboMaterias.SelectedItem;
             _form.horarioCurrent.PeriodoHorarioId = (int)_form.cboPeriodosHorarios.SelectedValue;
+            _form.horarioCurrent.PeriodoHorario = (PeriodoHorario)_form.cboPeriodosHorarios.SelectedItem;
 
             _form.horarioCurrent.CantidadHoras = _form.horarioCurrent.DetallesHorario.Count();
 

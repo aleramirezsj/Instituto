@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace InstitutoServices.Models.Horarios
 {
-    public class Hora : IEntityIdNombre
+    public class Hora : IEntityWithId
     {
         public int Id { get; set; }
 
@@ -16,10 +16,7 @@ namespace InstitutoServices.Models.Horarios
                 // formateo la hora y minutos para que se muestren con 2 digitos si son cero
                 return $"{Desde.Hour:D2}:{Desde.Minute:D2} - {Hasta.Hour:D2}:{Hasta.Minute:D2}";
             }
-            set
-            {
-                // no hago nada
-            }
+           
         }
 
         public DateTime Desde { get; set; } = DateTime.MinValue;

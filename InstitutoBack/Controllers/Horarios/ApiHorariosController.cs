@@ -8,6 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using InstitutoServices.Models;
 using InstitutoBack.DataContext;
 using InstitutoServices.Models.Horarios;
+using System.Diagnostics;
+using InstitutoBack.ExtensionMethods;
+using InstitutoServices.Models.Commons;
 
 namespace InstitutoBack.Controllers.Horarios
 {
@@ -94,19 +97,42 @@ namespace InstitutoBack.Controllers.Horarios
                 return BadRequest();
             }
             //attach de la materia
-            _context.Attach(horario.Materia);
+            if (horario.Materia != null)
+            {
+                _context.Attach(horario.Materia);
+                _context.Attach(horario.Materia.AnioCarrera);
+            }
             //attach del periodo
-            _context.Attach(horario.PeriodoHorario);
+            if (horario.PeriodoHorario != null)
+            {
+                _context.Attach(horario.PeriodoHorario);
+                _context.Attach(horario.PeriodoHorario.CicloLectivo);
+            }
             //attach de los detalles
             foreach (var detalle in horario.DetallesHorario)
             {
-                _context.Attach(detalle.Hora);
-                _context.Attach(detalle.Aula);
+                if (detalle.Hora != null)
+                {
+                    var horaYaAttachada = _context.Set<Hora>().Local.FirstOrDefault(entry => entry.Id.Equals(detalle.Hora.Id));
+                    if (horaYaAttachada == null)
+                        _context.Attach(detalle.Hora);
+                    else
+                        detalle.Hora = horaYaAttachada;
+                }
+
+                if (detalle.Aula != null)
+                {
+                    var aulaYaAttachada = _context.Set<Aula>().Local.FirstOrDefault(entry => entry.Id.Equals(detalle.Aula.Id));
+                    if (aulaYaAttachada == null)
+                        _context.Attach(detalle.Aula);
+                    else
+                        detalle.Aula = aulaYaAttachada;
+                }
             }
             //attach de los integrantes
             foreach (var detalle in horario.IntegrantesHorario)
             {
-                _context.Attach(detalle.Docente);
+                if (detalle.Docente != null) _context.Attach(detalle.Docente);
             }
             // Marcar el horario como modificado
             _context.Entry(horario).State = EntityState.Modified;
@@ -179,20 +205,44 @@ namespace InstitutoBack.Controllers.Horarios
         [HttpPost]
         public async Task<ActionResult<Horario>> PostHorario(Horario horario)
         {
+            Debug.Print(horario.PropertiesToString());
             //attach de la materia
-            _context.Attach(horario.Materia);
+            if (horario.Materia != null)
+            {
+                _context.Attach(horario.Materia);
+                _context.Attach(horario.Materia.AnioCarrera);
+            }
             //attach del periodo
-            _context.Attach(horario.PeriodoHorario);
+            if (horario.PeriodoHorario != null)
+            {
+                _context.Attach(horario.PeriodoHorario);
+                _context.Attach(horario.PeriodoHorario.CicloLectivo);
+            }
             //attach de los detalles
             foreach (var detalle in horario.DetallesHorario)
             {
-                _context.Attach(detalle.Hora);
-                _context.Attach(detalle.Aula);
+                if (detalle.Hora != null)
+                {
+                    var horaYaAttachada = _context.Set<Hora>().Local.FirstOrDefault(entry => entry.Id.Equals(detalle.Hora.Id));
+                    if (horaYaAttachada == null)
+                        _context.Attach(detalle.Hora);
+                    else
+                        detalle.Hora = horaYaAttachada;
+                }
+
+                if (detalle.Aula != null)
+                {
+                    var aulaYaAttachada = _context.Set<Aula>().Local.FirstOrDefault(entry => entry.Id.Equals(detalle.Aula.Id));
+                    if (aulaYaAttachada == null)
+                        _context.Attach(detalle.Aula);
+                    else
+                        detalle.Aula = aulaYaAttachada;
+                }
             }
             //attach de los integrantes
             foreach (var detalle in horario.IntegrantesHorario)
             {
-                _context.Attach(detalle.Docente);
+                if (detalle.Docente != null) _context.Attach(detalle.Docente);
             }
             _context.horarios.Add(horario);
 

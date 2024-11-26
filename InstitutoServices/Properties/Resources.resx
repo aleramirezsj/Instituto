@@ -121,7 +121,7 @@
     <value>https://localhost:7202/api/</value>
   </data>
   <data name="Remoto" xml:space="preserve">
-    <value>true</value>
+    <value>false</value>
   </data>
   <data name="UrlApiRemoto" xml:space="preserve">
     <value>https://datainstituto.azurewebsites.net/api/</value>

@@ -20,6 +20,44 @@ namespace InstitutoDesktop.ExtensionMethods
 {
     public static class MyExtensions
     {
+        public static void CopyPropertiesTo<T>(this T source, T destination)
+        {
+            if (source == null || destination == null)
+            {
+                throw new ArgumentNullException("Objeto de origen o destino son nulos");
+            }
+
+            Type type = typeof(T);
+
+            foreach (PropertyInfo property in type.GetProperties(BindingFlags.Public | BindingFlags.Instance))
+            {
+                if (property.CanRead && property.CanWrite)
+                {
+                    object value = property.GetValue(source, null);
+                    property.SetValue(destination, value, null);
+                }
+            }
+        }
+        public static string PropertiesToString<T>(this T source)
+        {
+            if (source == null)
+            {
+                throw new ArgumentNullException("source");
+            }
+            Type type = typeof(T);
+
+            string stringReturn = string.Empty;
+
+            foreach (PropertyInfo property in type.GetProperties(BindingFlags.Public | BindingFlags.Instance))
+            {
+                if (property.CanRead && property.CanWrite)
+                {
+                    object? value = property.GetValue(source, null);
+                    stringReturn += $"{property.Name}={value?.ToString() ?? "null"}{Environment.NewLine}";
+                }
+            }
+            return stringReturn;
+        }
         public static string GetHashSha256(this string textoAEncriptar)
         {
             // Create a SHA256   
@@ -143,6 +181,22 @@ namespace InstitutoDesktop.ExtensionMethods
             foreach (T entity in dataSource.ToList())
             {
                 autoCompleteEntitys.Add(entity.Nombre.ToString());
+            }
+            combo.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            combo.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            combo.AutoCompleteCustomSource = autoCompleteEntitys;
+        }
+
+        public static void SetDataAndAutoCompleteWithToString<T>(this ComboBox combo, List<T> dataSource) where T : class, IEntityWithId
+        {
+            combo.DataSource = dataSource.ToList();
+            combo.DisplayMember = "Nombre";
+            combo.ValueMember = "Id";
+
+            AutoCompleteStringCollection autoCompleteEntitys = new AutoCompleteStringCollection();
+            foreach (T entity in dataSource.ToList())
+            {
+                autoCompleteEntitys.Add(entity.ToString());
             }
             combo.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             combo.AutoCompleteSource = AutoCompleteSource.CustomSource;
