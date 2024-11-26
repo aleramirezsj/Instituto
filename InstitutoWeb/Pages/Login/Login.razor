@@ -12,7 +12,46 @@
 
 @if (userFirebaseAuthenticate == null)
 {
-    <h3>Iniciar sesión</h3>
+    <div class="card text-center">
+        <div class="card-header">
+            Iniciar sesión
+        </div>
+        <div class="card-body">
+            <h3 class="card-title">Bienvenido a InstitutoWeb</h3>
+            <div class="container">
+                <div class="row mb-3">
+                    <div class="col-md-12 d-flex justify-content-center align-items-center">
+                        <label class="form-label me-2">Email</label>
+                        <InputText class="form-control w-50" @bind-Value="usuario.Email" placeholder="Email" />
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-12 d-flex justify-content-center align-items-center">
+                        <label class="form-label me-2">Password</label>
+                        <InputText class="form-control w-50" @bind-Value="usuario.Password" placeholder="Password" type="password" />
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-12 d-flex justify-content-center align-items-center">
+                        <button class="btn btn-primary me-2" @onclick="IniciarSesion">Acceder</button>
+                        <button class="btn btn-secondary" @onclick="Registrarse">Registrarme</button>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-12 d-flex justify-content-center align-items-center">
+                        @* <button class="btn btn-dark me-2" @onclick="LoginGoogle">Google</button> *@
+                        <button @onclick="LoginGoogle" class="btn btn-dark me-2"><svg width="1em" height="1em" fill="none" viewBox="0 0 18 19" xmlns="http://www.w3.org/2000/svg"><path fill="#FFC107" d="M15.204 8.206h-.537v-.028h-6v2.667h3.767A3.998 3.998 0 0 1 4.667 9.51a4 4 0 0 1 4-4c1.02 0 1.947.385 2.653 1.013l1.886-1.885a6.64 6.64 0 0 0-4.54-1.794 6.667 6.667 0 1 0 6.538 5.36"></path><path fill="#FB5B5B" d="m2.769 6.408 2.19 1.607A4 4 0 0 1 8.667 5.51c1.02 0 1.947.385 2.653 1.013l1.886-1.885a6.64 6.64 0 0 0-4.54-1.794A6.66 6.66 0 0 0 2.77 6.408"></path><path fill="#4CAF50" d="M8.667 16.178a6.64 6.64 0 0 0 4.47-1.73l-2.064-1.746a3.97 3.97 0 0 1-2.406.81 4 4 0 0 1-3.761-2.65l-2.174 1.676a6.66 6.66 0 0 0 5.935 3.64"></path><path fill="#1976D2" d="M15.204 8.206h-.537v-.028h-6v2.667h3.767a4 4 0 0 1-1.362 1.857h.001l2.063 1.745c-.146.133 2.197-1.602 2.197-4.936a6.7 6.7 0 0 0-.13-1.305"></path></svg> <span>Acceder con Google</span></button><div><iframe aria-hidden="true" data-hcaptcha-widget-id="2b7fn9gxdhd6" data-hcaptcha-response="" src="https://newassets.hcaptcha.com/captcha/v1/05c78a4/static/hcaptcha.html#frame=checkbox-invisible" style="display: none;"></iframe><textarea id="g-recaptcha-response-2b7fn9gxdhd6" name="g-recaptcha-response" style="display: none;"></textarea><textarea id="h-captcha-response-2b7fn9gxdhd6" name="h-captcha-response" style="display: none;"></textarea></div>
+                        @* <button class="btn btn-info" @onclick="LoginFacebook">Facebook</button> *@
+                        <button class="btn btn-dark" @onclick="ResetearPassword">Olvidé mi contraseña</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer text-body-secondary">
+            Desarrollo 3er año - TSDS - 2024
+        </div>
+    </div>
+@*     <h3>Iniciar sesión</h3>
 
     <EditForm Model="usuario" OnValidSubmit="IniciarSesion">
         <DataAnnotationsValidator />
@@ -40,7 +79,7 @@
 
 
 
-    <button class="btn btn-dark" @onclick="ResetearPassword">Olvidé mi contraseña</button>
+    <button class="btn btn-dark" @onclick="ResetearPassword">Olvidé mi contraseña</button> *@
 
 }
 else
