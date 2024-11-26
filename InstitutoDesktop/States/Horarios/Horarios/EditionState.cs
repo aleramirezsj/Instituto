@@ -143,7 +143,7 @@ namespace InstitutoDesktop.States.Horarios.Horarios
             }
             else
             {
-                _form.horarioCurrent.DetallesHorario.Add(new DetalleHorario { HoraId = hora.Id, Hora = hora, Dia = (DiaEnum)_form.cboDias.SelectedValue, HorarioId = _form.horarioCurrent.Id, AulaId = aula.Id, Aula = aula });
+                _form.horarioCurrent.DetallesHorario.Add(new DetalleHorario { HoraId = hora.Id, Hora = hora, Dia = (DiaEnum)_form.cboDias.SelectedValue, HorarioId = _form.horarioCurrent.Id, AulaId = aula?.Id, Aula = aula });
             }
             _form.dataGridHoras.DataSource = null;
             _form.dataGridHoras.DataSource = _form.horarioCurrent.DetallesHorario.OrderBy(d => d.Dia).ThenBy(d => d.Hora.Desde).ToList();

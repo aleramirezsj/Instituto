@@ -357,7 +357,7 @@
             btnEditarHora.Margin = new Padding(2);
             btnEditarHora.Name = "btnEditarHora";
             btnEditarHora.Size = new Size(113, 37);
-            btnEditarHora.TabIndex = 19;
+            btnEditarHora.TabIndex = 8;
             btnEditarHora.Text = "Editar";
             btnEditarHora.TextAlign = ContentAlignment.MiddleRight;
             btnEditarHora.UseVisualStyleBackColor = false;
@@ -369,7 +369,7 @@
             cboAulas.Location = new Point(90, 305);
             cboAulas.Name = "cboAulas";
             cboAulas.Size = new Size(204, 28);
-            cboAulas.TabIndex = 18;
+            cboAulas.TabIndex = 4;
             // 
             // label10
             // 
@@ -394,7 +394,7 @@
             btnQuitarHora.Margin = new Padding(2);
             btnQuitarHora.Name = "btnQuitarHora";
             btnQuitarHora.Size = new Size(113, 46);
-            btnQuitarHora.TabIndex = 16;
+            btnQuitarHora.TabIndex = 9;
             btnQuitarHora.Text = "Quitar";
             btnQuitarHora.TextAlign = ContentAlignment.MiddleRight;
             btnQuitarHora.UseVisualStyleBackColor = false;
@@ -413,7 +413,7 @@
             btnQuitarDocente.Margin = new Padding(2);
             btnQuitarDocente.Name = "btnQuitarDocente";
             btnQuitarDocente.Size = new Size(114, 46);
-            btnQuitarDocente.TabIndex = 15;
+            btnQuitarDocente.TabIndex = 3;
             btnQuitarDocente.Text = "Quitar";
             btnQuitarDocente.TextAlign = ContentAlignment.MiddleRight;
             btnQuitarDocente.UseVisualStyleBackColor = false;
@@ -446,7 +446,7 @@
             btnAgregarHora.Margin = new Padding(2);
             btnAgregarHora.Name = "btnAgregarHora";
             btnAgregarHora.Size = new Size(120, 46);
-            btnAgregarHora.TabIndex = 13;
+            btnAgregarHora.TabIndex = 7;
             btnAgregarHora.Text = "Agregar";
             btnAgregarHora.TextAlign = ContentAlignment.MiddleRight;
             btnAgregarHora.UseVisualStyleBackColor = false;
@@ -458,7 +458,7 @@
             cboDias.Location = new Point(339, 305);
             cboDias.Name = "cboDias";
             cboDias.Size = new Size(144, 28);
-            cboDias.TabIndex = 12;
+            cboDias.TabIndex = 5;
             // 
             // label9
             // 
@@ -476,7 +476,7 @@
             cboHoras.Location = new Point(547, 302);
             cboHoras.Name = "cboHoras";
             cboHoras.Size = new Size(140, 28);
-            cboHoras.TabIndex = 10;
+            cboHoras.TabIndex = 6;
             // 
             // label8
             // 
@@ -515,7 +515,7 @@
             btnAgregarDocente.Margin = new Padding(2);
             btnAgregarDocente.Name = "btnAgregarDocente";
             btnAgregarDocente.Size = new Size(120, 46);
-            btnAgregarDocente.TabIndex = 7;
+            btnAgregarDocente.TabIndex = 2;
             btnAgregarDocente.Text = "Agregar";
             btnAgregarDocente.TextAlign = ContentAlignment.MiddleRight;
             btnAgregarDocente.UseVisualStyleBackColor = false;
@@ -527,7 +527,7 @@
             cboDocentes.Location = new Point(122, 77);
             cboDocentes.Name = "cboDocentes";
             cboDocentes.Size = new Size(376, 28);
-            cboDocentes.TabIndex = 6;
+            cboDocentes.TabIndex = 1;
             // 
             // label7
             // 
@@ -545,7 +545,7 @@
             cboMaterias.Location = new Point(122, 18);
             cboMaterias.Name = "cboMaterias";
             cboMaterias.Size = new Size(376, 28);
-            cboMaterias.TabIndex = 4;
+            cboMaterias.TabIndex = 0;
             // 
             // btnCancelar
             // 
@@ -559,7 +559,7 @@
             btnCancelar.Margin = new Padding(2);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(122, 57);
-            btnCancelar.TabIndex = 3;
+            btnCancelar.TabIndex = 11;
             btnCancelar.Text = "Cancelar";
             btnCancelar.TextAlign = ContentAlignment.MiddleRight;
             btnCancelar.UseVisualStyleBackColor = false;
@@ -577,7 +577,7 @@
             btnGuardar.Margin = new Padding(2);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new Size(122, 57);
-            btnGuardar.TabIndex = 2;
+            btnGuardar.TabIndex = 10;
             btnGuardar.Text = "Guardar";
             btnGuardar.TextAlign = ContentAlignment.MiddleRight;
             btnGuardar.UseVisualStyleBackColor = false;

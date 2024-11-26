@@ -94,7 +94,8 @@ namespace InstitutoDesktop.States.Horarios.Horarios
                 _form.dataGridHorarios.DataSource = _form.listaHorarios.
                     Where(h => h.PeriodoHorarioId.Equals((int)_form.cboPeriodosHorarios.SelectedValue) &&
                           h.Materia.AnioCarrera.CarreraId.Equals((int)_form.cboCarreras.SelectedValue) &&
-                          h.Materia.AnioCarreraId.Equals((int)_form.cboAniosCarreras.SelectedValue)).ToList();
+                          h.Materia.AnioCarreraId.Equals((int)_form.cboAniosCarreras.SelectedValue)).
+                          OrderBy(h=>h.Materia.Nombre).ToList();
             _form.dataGridHorarios.OcultarColumnas(new string[] { "Id", "MateriaId", "PeriodoHorario", "DetallesHorario", "IntegrantesHorario", "PeriodoHorarioId", "Eliminado" });
         }
 
@@ -105,7 +106,8 @@ namespace InstitutoDesktop.States.Horarios.Horarios
                     Where(h => h.PeriodoHorarioId.Equals((int)_form.cboPeriodosHorarios.SelectedValue) &&
                           h.Materia.AnioCarrera.CarreraId.Equals((int)_form.cboCarreras.SelectedValue) &&
                           h.Materia.AnioCarreraId.Equals((int)_form.cboAniosCarreras.SelectedValue) &&
-                          h.Materia.Nombre.ToUpper().Contains(_form.txtFiltro.Text.ToUpper())).ToList();
+                          h.Materia.Nombre.ToUpper().Contains(_form.txtFiltro.Text.ToUpper()))
+                          .OrderBy(h => h.Materia.Nombre).ToList();
             _form.dataGridHorarios.OcultarColumnas(new string[] { "Id", "MateriaId", "PeriodoHorario", "DetallesHorario", "IntegrantesHorario", "PeriodoHorarioId", "Eliminado" });
         }
 
