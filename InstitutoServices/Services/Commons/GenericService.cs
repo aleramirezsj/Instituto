@@ -1,9 +1,7 @@
 ﻿using InstitutoServices.Class;
 using InstitutoServices.Interfaces;
 using InstitutoServices.Models;
-using InstitutoServices.Properties;
 using System.Net.Http.Json;
-using System.Resources;
 using System.Text.Json;
 using static System.Net.WebRequestMethods;
 
@@ -26,15 +24,13 @@ namespace InstitutoServices.Services.Commons
         {
             this.client = new HttpClient();
             this.options = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
-            ResourceManager rm = new ResourceManager(typeof(Resources));
-            string urlApi;
-            urlApi = rm.GetString("UrlApiRemoto");
+            string urlApi= "https://datainstituto.azurewebsites.net/api/";
             //if (Properties.Resources.Remoto == "false")
             //{
             //    urlApi = Properties.Resources.UrlApiLocal;
             //}else
             //{
-            //urlApi = Properties.Resources.UrlApiRemoto;
+            //    urlApi = Properties.Resources.UrlApiRemoto;
             //}
 
             this._endpoint = urlApi+ApiEndpoints.GetEndpoint(typeof(T).Name);
