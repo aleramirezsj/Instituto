@@ -93,7 +93,7 @@
         usuario = new Usuario()
             {
                 Email = usuarioFirebase?.Email,
-                Password = nuevoUsuarioCacheado.Password,
+                Password = nuevoUsuarioCacheado?.Password ?? string.Empty,
                 Nombre = alumno.ApellidoNombre,
                 TipoUsuario = tipoUsuario,
                 AlumnoId = alumno.Id
@@ -118,7 +118,7 @@
         usuario = new Usuario()
             {
                 Email = usuarioFirebase?.Email,
-                Password = nuevoUsuarioCacheado.Password,
+                Password = nuevoUsuarioCacheado?.Password??string.Empty,
                 Nombre = usuarioFirebase?.DisplayName,
                 TipoUsuario = tipoUsuario,
                 DocenteId = docente.Id

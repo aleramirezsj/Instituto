@@ -64,31 +64,19 @@
                 },
                 createUserWithEmailAndPassword: async function (email, password, displayName) {
                     try {
-                        const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, password)
-                            .then((userCredential) => {
-                                // El usuario se ha creado correctamente
-                                const user = userCredential.user;
+                        const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, password);
+                        // El usuario se ha creado correctamente
+                        const user = userCredential.user;
 
-                                // Actualizar el perfil del usuario
-                                user.updateProfile({
-                                    displayName: displayName
-                                });
-                                // Enviar correo de verificación
-                                user.sendEmailVerification()
-                                    .then(() => {
-                                        console.log('Correo de verificación enviado.');
-                                    })
-                                    .catch((error) => {
-                                        console.error('Error al enviar el correo de verificación:', error);
-                                    });
-                            })
-                            .catch((error) => {
-                                console.error('Error al crear el usuario:', error);
-                            });
-                        return userCredential.user.uid;
+                        // Actualizar el perfil del usuario
+                        user.updateProfile({
+                            displayName: displayName
+                        });
+                        // Enviar correo de verificación
+                        user.sendEmailVerification();
+                        return { Error: "", User: userCredential.user };
                     } catch (error) {
-                        console.error("Error en autenticación:", error.message);
-                        return null;
+                        return { Error: error.message, User: null };
                     }
                 },
                 signOut: async function () {

@@ -132,6 +132,8 @@ else
                 });
             return;
         }
+        var usuarioCreado = await usuarioService.GetUserByEmail(response.User.Email);
+        usuarioStateService.SetUsuario(usuarioCreado, response.User);
 
     }
 

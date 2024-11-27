@@ -50,20 +50,15 @@ namespace InstitutoWeb.Services.Login
         {
 
                 LoginResponse response = await _jsRuntime.InvokeAsync<LoginResponse>("firebaseAuth.signInWithEmailPassword", email, password, rememberPassword);
-            if(response.User!=null)
-            {
-                var usuario = await _usuarioService.GetUserByEmail(response.User.Email);
-                _usuarioStateService.SetUsuario(usuario, response.User);
-            }
 
             return response;
 
         }
 
-        public async Task<string> createUserWithEmailAndPassword(string email, string password, string displayName)
+        public async Task<LoginResponse> createUserWithEmailAndPassword(string email, string password, string displayName)
         {
-            var userId = await _jsRuntime.InvokeAsync<string>("firebaseAuth.createUserWithEmailAndPassword", email, password, displayName);
-            return userId;
+            LoginResponse response = await _jsRuntime.InvokeAsync<LoginResponse>("firebaseAuth.createUserWithEmailAndPassword", email, password, displayName);
+            return response;
         }
 
         public async Task SignOut()
