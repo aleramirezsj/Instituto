@@ -23,9 +23,18 @@ else
                 @foreach (var mesaExamen in grupo)
                 {
                     <tr>
-                        <td>@mesaExamen.Llamado1.Date.ToString("dd/MM/yyyy")</td>
+                        <td>
+                            <span style="font-size: 75%;">
+                                @mesaExamen.Llamado1.Date.ToString("dd/MM/yyyy")
+                            </span>
+                        </td>
+                                
                         <td><strong>@mesaExamen.Materia.Nombre</strong></td>
-                        <td>@mesaExamen.Horario</td>
+                        <td>
+                            <span style="font-size: 75%;">
+                                @mesaExamen.Horario
+                            </span>
+                        </td>
                         <td>
                             @{
                                 var nombresDocentes = string.Join(" | ", mesaExamen.DetallesMesaExamen

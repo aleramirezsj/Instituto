@@ -6,11 +6,12 @@
 else
 {
     var primerMesa= MesasExamenes.OrderBy(m=>m.Llamado1).FirstOrDefault();
-    <h3> Docente: @usuarioStateService.Usuario.Nombre</h3>
-    <h3> Turno de examen: @primerMesa.TurnoExamen.Nombre</h3>
+    <br />
+    <p> Docente:<strong> @usuarioStateService.Usuario.Nombre </strong></p>
+    <p> Turno de examen: <strong>@primerMesa.TurnoExamen.Nombre</strong></p>
     @if (primerMesa.TurnoExamen.TieneLLamado2)
     {
-        <h1>Primer llamado</h1>
+        <h3>Primer llamado</h3>
     }
     <table class="table table-striped table-hover">
             <thead class="table-dark">
@@ -26,9 +27,17 @@ else
                 @foreach (var mesaExamen in MesasExamenes)
                 {
                     <tr>
-                    <td>@mesaExamen.Llamado1.Date.ToString("dd/MM/yyyy")</td>
+                    <td>
+                        <span style="font-size: 75%;">
+                            @mesaExamen.Llamado1.Date.ToString("dd/MM/yyyy")
+                        </span>
+                    </td>
                     <td><strong>@mesaExamen.Materia.Nombre</strong></td>
-                        <td>@mesaExamen.Horario</td>
+                        <td>
+                            <span style="font-size: 75%;">
+                                @mesaExamen.Horario
+                            </span>
+                        </td>
                         <td>
                             @{
                                 var nombresDocentes = string.Join(" | ", mesaExamen.DetallesMesaExamen
@@ -56,7 +65,7 @@ else
         </table>
     @if(primerMesa.TurnoExamen.TieneLLamado2)
     {
-    <h1>Segundo llamado</h1>
+    <h3>Segundo llamado</h3>
     <table class="table table-striped table-hover">
         <thead class="table-dark">
             <tr>
@@ -71,17 +80,26 @@ else
             @foreach (var mesaExamen in MesasExamenes)
             {
                 <tr>
-                    <td>@mesaExamen.Llamado2.Date.ToShortDateString()</td>
-                    <td>@mesaExamen.Materia.Nombre</td>
-                    <td>@mesaExamen.Horario</td>
+                    <td>
+                        <span style="font-size: 75%;">
+                            @mesaExamen.Llamado2.Date.ToString("dd/MM/yyyy")
+                        </span>
+                    </td>
+                        <td><strong>@mesaExamen.Materia.Nombre</strong></td>
+                    <td>
+                        <span style="font-size: 75%;">
+                            @mesaExamen.Horario
+                        </span>
+                    </td>
                     <td>
                         @{
                             var nombresDocentes = string.Join(" | ", mesaExamen.DetallesMesaExamen
                             .Where(d => d.TipoIntegrante != TipoIntegranteEnum.Suplente)
                             .Select(d => d.Docente.Nombre));
                         }
-
-                        @nombresDocentes
+                        <span style="font-size: 75%;">
+                            @nombresDocentes
+                        </span>
                     </td>
                     <td>
                         @{
@@ -89,7 +107,9 @@ else
                             .Where(d => d.TipoIntegrante == TipoIntegranteEnum.Suplente)
                             .Select(d => d.Docente.Nombre));
                         }
-                        @suplentes
+                        <span style="font-size: 75%;">
+                            @suplentes
+                        </span>
                     </td>
 
                 </tr>

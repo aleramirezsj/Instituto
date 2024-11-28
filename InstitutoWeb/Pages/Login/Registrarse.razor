@@ -65,6 +65,7 @@
         else
         {
             await SweetAlert.FireAsync("Usuario Creado", $"Se envio un correo electrónico a {response.User.Email} debe confirmar su cuenta para poder continuar");
+            usuario.Password=usuario.Password.GetHashSha256();
             _memoryCache.SetCache<Usuario>(usuario.Email, usuario);
         }
         NavigationManager.NavigateTo("/login");
