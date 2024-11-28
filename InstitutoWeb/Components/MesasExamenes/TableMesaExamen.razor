@@ -16,6 +16,7 @@ else
                     <th>Espacio Curricular</th>
                     <th>Hora</th>
                     <th>Docentes</th>
+                    <th>Suplente/s</th>
                 </tr>
             </thead>
             <tbody>
@@ -33,6 +34,15 @@ else
                             }
 
                             @nombresDocentes
+                        </td>
+                        <td>
+                            @{
+                                var nombresSuplentes = string.Join(" | ", mesaExamen.DetallesMesaExamen
+                                .Where(d => d.TipoIntegrante == TipoIntegranteEnum.Suplente)
+                                .Select(d => d.Docente.Nombre));
+                            }
+
+                            @nombresSuplentes
                         </td>
                     </tr>
                 }

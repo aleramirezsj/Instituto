@@ -48,23 +48,23 @@ else
                         var primerElemento = grupoHora.First();
                         hora = primerElemento.Hora?.Nombre ?? string.Empty;
                         if (detalleHorario.Dia == DiaEnum.Lunes)
-                            lunes = detalleHorario.Horario.Materia.Nombre + Environment.NewLine + nombresDocentes;
+                            lunes = "<b>" + detalleHorario.Horario.Materia.Nombre + "</b><br /><span style='font-size: 75%;'>" + nombresDocentes + "</span>";
                         if (detalleHorario.Dia == DiaEnum.Martes)
-                            martes = detalleHorario.Horario.Materia.Nombre + Environment.NewLine + nombresDocentes;
+                            martes = "<b>" + detalleHorario.Horario.Materia.Nombre + "</b><br /><span style='font-size: 75%;'>" + nombresDocentes + "</span>";
                         if (detalleHorario.Dia == DiaEnum.Miércoles)
-                            miercoles = detalleHorario.Horario.Materia.Nombre + Environment.NewLine + nombresDocentes;
+                            miercoles = "<b>" + detalleHorario.Horario.Materia.Nombre + "</b><br /><span style='font-size: 75%;'>" + nombresDocentes + "</span>";
                         if (detalleHorario.Dia == DiaEnum.Jueves)
-                            jueves = detalleHorario.Horario.Materia.Nombre + Environment.NewLine + nombresDocentes;
+                            jueves = "<b>" + detalleHorario.Horario.Materia.Nombre + "</b><br /><span style='font-size: 75%;'>" + nombresDocentes + "</span>";
                         if (detalleHorario.Dia == DiaEnum.Viernes)
-                            viernes = detalleHorario.Horario.Materia.Nombre + Environment.NewLine + nombresDocentes;
+                            viernes = "<b>" + detalleHorario.Horario.Materia.Nombre + "</b><br /><span style='font-size: 75%;'>" + nombresDocentes + "</span>";
                     }
                     <tr>
                         <td>@hora</td>
-                        <td>@lunes</td>
-                        <td>@martes</td>
-                        <td>@miercoles</td>
-                        <td>@jueves</td>
-                        <td>@viernes</td>
+                        <td>@(new MarkupString(lunes))</td>
+                        <td>@(new MarkupString(martes))</td>
+                        <td>@(new MarkupString(miercoles))</td>
+                        <td>@(new MarkupString(jueves))</td>
+                        <td>@(new MarkupString(viernes))</td>
                     </tr>
                 }
             </tbody>

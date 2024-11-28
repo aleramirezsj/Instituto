@@ -27,10 +27,18 @@ else
             <ListCard ListEntity="@(carreras.Cast<IEntityIdNombre>().ToList())" OnSeleccionar="SeleccionarCarrera" TituloCard="Carrera" />
         }else
         {
-            <div class="text-end">
-                <button class="btn btn-info" @onclick="VolverAListaCarreras">Volver a lista de carreras</button>
-            </div>
-            if(usuarioStateService.Usuario.TipoUsuario==TipoUsuarioEnum.Alumno)
+            
+                <div class="row">
+                    <div class="text-end">
+                    @if(usuarioStateService.Usuario!=null)
+                    {
+                        <button class="btn btn-info me-2" @onclick="VerSoloMisHorarios">Ver solo mis horarios </button>
+                    }
+                        <button class="btn btn-info" @onclick="VerHorariosTodasLasCarreras">Ver horarios de todas las carreras</button>
+                    </div>
+                </div>
+            
+            if(usuarioStateService.Usuario==null||usuarioStateService?.Usuario?.TipoUsuario==TipoUsuarioEnum.Alumno||verTodosLosHorarios)
             {
                 <TableDetallesHorarios DetallesHorarios="@detallesHorarios" />
             }else
@@ -50,6 +58,7 @@ else
 
     private int? idPeriodoHorarioSeleccionado;
     private int? idCarreraSeleccionada;
+    private bool verTodosLosHorarios = false;
 
     //from query
     [SupplyParameterFromQuery]
@@ -65,42 +74,11 @@ else
         periodosHorarios= await _memoryCache.GetAllCacheAsync<PeriodoHorario>();
         carreras = await _memoryCache.GetAllCacheAsync<Carrera>();
         if (periodosHorarios.Any(c => c.Actual))
-        {
             idPeriodoHorarioSeleccionado = periodosHorarios.Where(c => c.Actual).FirstOrDefault().Id;
-        }
-        else
-        {
-            logger.LogError("No hay período de horarios seleccionado como actual");
-        }
-        if(usuarioStateService.Usuario!=null&&usuarioStateService.Usuario.TipoUsuario==TipoUsuarioEnum.Alumno)
-        {
-            if(usuarioStateService.Usuario.Alumno.InscripcionesACarreras.Count>1)
-            {
-                carreras = carreras.Where(c=>usuarioStateService.Usuario.Alumno.InscripcionesACarreras.Select(i=>i.CarreraId).Contains(c.Id)).ToList();
-            }
-            else if (idPeriodoHorarioSeleccionado != null) {
-                idCarreraSeleccionada = usuarioStateService.Usuario.Alumno.InscripcionesACarreras.FirstOrDefault().CarreraId;
-                //muestro por consola cuantos detalles horarios hay
-                detallesHorarios =(await _memoryCache.GetAllCacheAsync<DetalleHorario>())
-                .Where(d => d.Horario?.Materia.AnioCarrera.CarreraId == idCarreraSeleccionada && d.Horario.PeriodoHorarioId == idPeriodoHorarioSeleccionado).ToList();
-            }
-            //detallesHorarios = await detalleHorarioService.GetByCarreraAsync(idCicloLectivoSeleccionado, idCarreraSeleccionada);
-        }
-        if(usuarioStateService.Usuario!=null&&usuarioStateService.Usuario.TipoUsuario==TipoUsuarioEnum.Docente)
-        {
-            idCarreraSeleccionada = 0;
 
-            //selecciono los horarios del docente logueado comprobando que no contenga nulos
-            detallesHorarios = (await _memoryCache.GetAllCacheAsync<DetalleHorario>())
-                .Where(d => d.Horario?.IntegrantesHorario?.Any(i => i.DocenteId == usuarioStateService.Usuario.Docente.Id) == true 
-                            && d.Horario?.PeriodoHorarioId == idPeriodoHorarioSeleccionado)
-                .ToList();
+        if (usuarioStateService.Usuario != null)
+            ObtenerHorariosDelUsuarioLogueado();
 
-            
-                
-            
-            //detallesHorarios = await detalleHorarioService.GetByCarreraAsync(idCicloLectivoSeleccionado, idCarreraSeleccionada);
-        }
         if (IdCarrera != 0 && idPeriodoHorarioSeleccionado != null)
         {
             idCarreraSeleccionada = IdCarrera;
@@ -119,18 +97,59 @@ else
     private async Task SeleccionarCarrera(int idCarrera)
     {
         idCarreraSeleccionada = idCarrera;
-        
-        detallesHorarios = _memoryCache.GetAllCacheAsync<DetalleHorario>().Result
+
+        detallesHorarios = (await _memoryCache.GetAllCacheAsync<DetalleHorario>())
         .Where(d => d.Horario?.Materia.AnioCarrera.CarreraId == idCarreraSeleccionada && d.Horario.PeriodoHorarioId == idPeriodoHorarioSeleccionado).ToList();
+        logger.LogInformation("el tipo de usuario actual es " + usuarioStateService.Usuario.TipoUsuario);
         StateHasChanged();
     }
 
-    private async Task VolverAListaCarreras()
+    private void VerHorariosTodasLasCarreras()
     {
+        verTodosLosHorarios = true;
         idCarreraSeleccionada = null;
-        detallesHorarios = null;
+        //detallesHorarios = null;
         StateHasChanged();
     }
 
-    
+    private async Task ObtenerHorariosDelUsuarioLogueado()
+    {
+        if (usuarioStateService.Usuario.TipoUsuario == TipoUsuarioEnum.Alumno)
+        {
+            if (usuarioStateService.Usuario.Alumno.InscripcionesACarreras.Count > 1)
+            {
+                carreras = (await _memoryCache.GetAllCacheAsync<Carrera>())
+                        .Where(c => usuarioStateService.Usuario.Alumno.InscripcionesACarreras.Select(i => i.CarreraId).Contains(c.Id)).ToList();
+            }
+            else if (idPeriodoHorarioSeleccionado != null)
+            {
+                idCarreraSeleccionada = usuarioStateService.Usuario.Alumno.InscripcionesACarreras.FirstOrDefault().CarreraId;
+                //muestro por consola cuantos detalles horarios hay
+                detallesHorarios = (await _memoryCache.GetAllCacheAsync<DetalleHorario>())
+                .Where(d => d.Horario?.Materia.AnioCarrera.CarreraId == idCarreraSeleccionada && d.Horario.PeriodoHorarioId == idPeriodoHorarioSeleccionado).ToList();
+            }
+            //detallesHorarios = await detalleHorarioService.GetByCarreraAsync(idCicloLectivoSeleccionado, idCarreraSeleccionada);
+        }
+        if (usuarioStateService.Usuario.TipoUsuario == TipoUsuarioEnum.Docente)
+        {
+            idCarreraSeleccionada = 0;
+
+            //selecciono los horarios del docente logueado comprobando que no contenga nulos
+            detallesHorarios = (await _memoryCache.GetAllCacheAsync<DetalleHorario>())
+                .Where(d => d.Horario?.IntegrantesHorario?.Any(i => i.DocenteId == usuarioStateService.Usuario.Docente.Id) == true
+                            && d.Horario?.PeriodoHorarioId == idPeriodoHorarioSeleccionado)
+                .ToList();
+
+
+
+
+            //detallesHorarios = await detalleHorarioService.GetByCarreraAsync(idCicloLectivoSeleccionado, idCarreraSeleccionada);
+        }
+    }
+    private void VerSoloMisHorarios()
+    {
+        verTodosLosHorarios = false;
+        ObtenerHorariosDelUsuarioLogueado();
+        StateHasChanged();
+    }
 }

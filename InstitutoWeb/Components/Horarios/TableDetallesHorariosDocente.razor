@@ -43,15 +43,15 @@ else
                     var primerElemento = grupoHora.First();
                     hora = primerElemento.Hora?.Nombre ?? string.Empty;
                     if (detalleHorario.Dia == DiaEnum.Lunes)
-                        lunes = detalleHorario.Horario.Materia.Nombre + "<br />" + $"{detalleHorario.Horario.Materia.AnioCarrera.Nombre} {detalleHorario.Horario.Materia.AnioCarrera.Carrera.Sigla}";
+                        lunes = "<b>" + detalleHorario.Horario.Materia.Nombre + "</b><br />" + $"{detalleHorario.Horario.Materia.AnioCarrera.Nombre} {detalleHorario.Horario.Materia.AnioCarrera.Carrera.Sigla}";
                     if (detalleHorario.Dia == DiaEnum.Martes)
-                        martes = detalleHorario.Horario.Materia.Nombre + "<br />" + $"{detalleHorario.Horario.Materia.AnioCarrera.Nombre} {detalleHorario.Horario.Materia.AnioCarrera.Carrera.Sigla}";
+                        martes = "<b>" + detalleHorario.Horario.Materia.Nombre + "</b><br />" + $"{detalleHorario.Horario.Materia.AnioCarrera.Nombre} {detalleHorario.Horario.Materia.AnioCarrera.Carrera.Sigla}";
                     if (detalleHorario.Dia == DiaEnum.Miércoles)
-                        miercoles = detalleHorario.Horario.Materia.Nombre + "<br />" + $"{detalleHorario.Horario.Materia.AnioCarrera.Nombre} {detalleHorario.Horario.Materia.AnioCarrera.Carrera.Sigla}";
+                        miercoles = "<b>" + detalleHorario.Horario.Materia.Nombre + "</b><br />" + $"{detalleHorario.Horario.Materia.AnioCarrera.Nombre} {detalleHorario.Horario.Materia.AnioCarrera.Carrera.Sigla}";
                     if (detalleHorario.Dia == DiaEnum.Jueves)
-                        jueves = detalleHorario.Horario.Materia.Nombre + "<br />" + $"{detalleHorario.Horario.Materia.AnioCarrera.Nombre} {detalleHorario.Horario.Materia.AnioCarrera.Carrera.Sigla}";
+                        jueves = "<b>" + detalleHorario.Horario.Materia.Nombre + "</b><br />" + $"{detalleHorario.Horario.Materia.AnioCarrera.Nombre} {detalleHorario.Horario.Materia.AnioCarrera.Carrera.Sigla}";
                     if (detalleHorario.Dia == DiaEnum.Viernes)
-                        viernes = detalleHorario.Horario.Materia.Nombre + "<br />" + $"{detalleHorario.Horario.Materia.AnioCarrera.Nombre} {detalleHorario.Horario.Materia.AnioCarrera.Carrera.Sigla}";
+                        viernes = "<b>" + detalleHorario.Horario.Materia.Nombre + "</b><br />" + $"{detalleHorario.Horario.Materia.AnioCarrera.Nombre} {detalleHorario.Horario.Materia.AnioCarrera.Carrera.Sigla}";
                 }
                 <tr>
                     <td>@hora</td>
