@@ -23,7 +23,7 @@ else
                 @foreach (var mesaExamen in grupo)
                 {
                     <tr>
-                        <td>@mesaExamen.Llamado1.Date.ToShortDateString()</td>
+                        <td>@mesaExamen.Llamado1.Date.ToString("dd/MM/yyyy")</td>
                         <td><strong>@mesaExamen.Materia.Nombre</strong></td>
                         <td>@mesaExamen.Horario</td>
                         <td>
