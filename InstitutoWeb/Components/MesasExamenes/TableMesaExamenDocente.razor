@@ -27,7 +27,7 @@ else
                 {
                     <tr>
                         <td>@mesaExamen.Llamado1.Date.ToShortDateString()</td>
-                        <td>@mesaExamen.Materia.Nombre</td>
+                    <td><strong>@mesaExamen.Materia.Nombre</strong></td>
                         <td>@mesaExamen.Horario</td>
                         <td>
                             @{
@@ -35,8 +35,9 @@ else
                                 .Where(d => d.TipoIntegrante != TipoIntegranteEnum.Suplente)
                                 .Select(d => d.Docente.Nombre));
                             }
-
-                            @nombresDocentes
+                            <span style="font-size: 75%;">
+                                @nombresDocentes
+                            </span>
                         </td>
                         <td>
                             @{
@@ -44,7 +45,9 @@ else
                                 .Where(d => d.TipoIntegrante == TipoIntegranteEnum.Suplente)
                                 .Select(d => d.Docente.Nombre));
                             }
-                            @suplentes
+                            <span style="font-size: 75%;">
+                                @suplentes
+                            </span>
                         </td>
                         
                     </tr>
