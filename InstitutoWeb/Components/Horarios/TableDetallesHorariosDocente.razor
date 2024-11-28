@@ -10,8 +10,8 @@ else
         .OrderBy(h => h.Hora?.Desde)
         .ThenBy(h => h.Dia)
         .ToList();
-
-    <h3>Horario del docente @usuarioStateService.Usuario.Nombre</h3>
+<br />
+    <p>Horario del docente <strong>@usuarioStateService.Usuario.Nombre</strong></p>
     <table class="table table-striped table-hover">
         <thead class="table-dark">
             <tr>
