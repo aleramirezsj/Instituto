@@ -31,10 +31,10 @@ else
                 <div class="text-end">
                 @if (usuarioStateService.Usuario != null)
                 {
-                    <button class="btn btn-info me-2" @onclick="VerSoloMisMesas">Ver solo mis mesas </button>
+                    <button class="btn btn-info me-2" @onclick="VerSoloMisMesas">Ver mis mesas </button>
                 }
                 
-                    <button class="btn btn-info" @onclick="VerMesasDeTodasLasCarreras">Ver mesas de todas las carreras</button>
+                    <button class="btn btn-info" @onclick="VerMesasDeTodasLasCarreras">Ver todas las todas</button>
                 </div>
             </div>
             if (usuarioStateService.Usuario==null||usuarioStateService.Usuario.TipoUsuario == TipoUsuarioEnum.Alumno||verTodasLasMesas)
