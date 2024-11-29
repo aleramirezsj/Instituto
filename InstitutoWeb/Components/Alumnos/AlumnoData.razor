@@ -96,6 +96,12 @@ else
             inscripcionesACarreras = (await _memoryCache.GetAllCacheAsync<InscriptoCarrera>())
                                 .Where(inscripcion => inscripcion.AlumnoId.Equals(alumno.Id)).ToList();
             logger.LogInformation("inscripciones " + inscripcionesACarreras.Count().ToString());
+            //muestro por consola la lista de inscripciones
+            foreach (var inscripcion in inscripcionesACarreras)
+            {
+                logger.LogInformation("inscripcion " + inscripcion?.Carrera?.Nombre);
+                
+            }
         }
         catch (Exception ex)
         {
