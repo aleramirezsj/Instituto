@@ -87,6 +87,7 @@ namespace InstitutoBack.Controllers.Commons
         [HttpPost]
         public async Task<ActionResult<InscriptoCarrera>> PostInscriptoCarrera(InscriptoCarrera inscriptoCarrera)
         {
+            _context.Attach(inscriptoCarrera.Carrera);
             _context.inscriptoscarreras.Add(inscriptoCarrera);
             await _context.SaveChangesAsync();
 

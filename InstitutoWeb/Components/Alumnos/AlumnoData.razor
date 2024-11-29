@@ -78,7 +78,8 @@ else
             {
                 if (!inscripcionesACarreras.Any(i => i.CarreraId == carreraSelected.Id))
                 {
-                    var inscripcionACarrera = new InscriptoCarrera { AlumnoId = alumno.Id, CarreraId = carreraSelected.Id };
+                    var carrera= carreras.FirstOrDefault(c => c.Id == carreraSelected.Id);
+                    var inscripcionACarrera = new InscriptoCarrera { AlumnoId = alumno.Id ,CarreraId = carreraSelected.Id, Carrera=carrera };
                     await _memoryCache.AddCacheAsync<InscriptoCarrera>(inscripcionACarrera);
                     //await inscriptoCarreraService.AddAsync(new InscriptoCarrera { AlumnoId = alumno.Id, CarreraId = carreraSelected.Id });
                 }

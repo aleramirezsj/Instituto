@@ -1,4 +1,6 @@
 @inject IGenericService<Alumno> alumnoService
+@inject IMemoryCacheService _memoryCacheService
+
 
 <EditForm Model="alumno" OnValidSubmit="HandleGuardarAlumno" class="edit-form-horizontal">
     <DataAnnotationsValidator />
@@ -33,7 +35,7 @@
     }
     private async Task HandleGuardarAlumno()
     {
-        var nuevoAlumno=await alumnoService.AddAsync(alumno);
+        var nuevoAlumno = await _memoryCacheService.AddCacheAsync<Alumno>(alumno);
         await OnGuardarAlumno.InvokeAsync(nuevoAlumno);
     }
 }

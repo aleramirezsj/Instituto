@@ -5,10 +5,7 @@ html, body {
 h1:focus {
     outline: none;
 }
-h1:hover {
-    background-color: aquamarine !important;
-    border: solid 1px #000000 !important
-}
+
 
 a, .btn-link {
     color: #0071c1;

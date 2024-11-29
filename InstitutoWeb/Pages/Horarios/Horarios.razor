@@ -130,7 +130,9 @@ else
             }
             //detallesHorarios = await detalleHorarioService.GetByCarreraAsync(idCicloLectivoSeleccionado, idCarreraSeleccionada);
         }
-        if (usuarioStateService.Usuario.TipoUsuario == TipoUsuarioEnum.Docente)
+        else
+        //deshabilito para que tome los docentes, jefes de seccion y directivos
+        //if (usuarioStateService.Usuario.TipoUsuario == TipoUsuarioEnum.Docente)
         {
             idCarreraSeleccionada = 0;
 
