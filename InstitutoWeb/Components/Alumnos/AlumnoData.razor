@@ -118,7 +118,7 @@ else
     {
         if(inscripcionesACarreras.Count==0)
         {
-            SweetAlert.FireAsync("Error perfil incompleto", "Debes definir la o las carreras en las que estás inscripto.", SweetAlertIcon.Warning);
+            SweetAlert.FireAsync("Alumno creado con exito", "Para completar tu perfil debes indicar las carreras en las que estás inscripto.", SweetAlertIcon.Info);
             context.PreventNavigation();
         }  
         return Task.CompletedTask;

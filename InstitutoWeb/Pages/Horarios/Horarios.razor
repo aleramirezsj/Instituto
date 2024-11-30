@@ -104,11 +104,11 @@ else
         StateHasChanged();
     }
 
-    private void VerHorariosTodasLasCarreras()
+    private async Task VerHorariosTodasLasCarreras()
     {
         verTodosLosHorarios = true;
         idCarreraSeleccionada = null;
-        //detallesHorarios = null;
+        carreras = await _memoryCache.GetAllCacheAsync<Carrera>();
         StateHasChanged();
     }
 
@@ -118,6 +118,7 @@ else
         {
             if (usuarioStateService.Usuario.Alumno.InscripcionesACarreras.Count > 1)
             {
+                idCarreraSeleccionada = null;
                 carreras = (await _memoryCache.GetAllCacheAsync<Carrera>())
                         .Where(c => usuarioStateService.Usuario.Alumno.InscripcionesACarreras.Select(i => i.CarreraId).Contains(c.Id)).ToList();
             }
