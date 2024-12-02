@@ -33,12 +33,12 @@ else
                 {
                     if(usuarioStateService.Usuario.TipoUsuario!=TipoUsuarioEnum.Alumno)
                     {
-                        <button class="btn btn-outline-dark me-2" @onclick="VerMesasDeHoy">Ver hoy </button>
+                        <button class="btn btn-outline-dark me-2" @onclick="VerMesasDeHoy">Hoy </button>
                     }
-                    <button class="btn btn-outline-dark me-2" @onclick="VerSoloMisMesas">Ver mis mesas </button>
+                    <button class="btn btn-outline-dark me-2" @onclick="VerSoloMisMesas">Mis mesas </button>
                 }
 
-                    <button class="btn btn-outline-dark" @onclick="VerMesasDeTodasLasCarreras">Ver todas las mesas</button>
+                    <button class="btn btn-outline-dark" @onclick="VerMesasDeTodasLasCarreras">Todas las mesas</button>
                 </div>
             </div>
             if (usuarioStateService.Usuario==null||usuarioStateService.Usuario.TipoUsuario == TipoUsuarioEnum.Alumno||verTodasLasMesas)

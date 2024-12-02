@@ -1,4 +1,18 @@
-﻿<div class="container my-4">
+﻿@inject IMemoryCacheService _memoryCache
+@inject IUsuarioStateService usuarioStateService
+
+<div class="container my-4">
+    <div class="row mb-4">
+        <div class="col-12 d-flex justify-content-center align-items-center">
+            <button class="btn btn-primary me-2" @onclick="RetrocederFecha">
+                <span class="icon-retroceder"></span>
+            </button>
+            <InputDate @bind-Value="fechaSeleccionada" class="form-control" />
+            <button class="btn btn-primary ms-2" @onclick="AvanzarFecha">
+                <span class="icon-avanzar"></span>
+            </button>
+        </div>
+    </div>
     <div class="row">
         @foreach (var mesa in ListMesasExamenes)
         {
@@ -16,14 +30,15 @@
                         <p class="card-text">Docentes:<strong> @nombresDocentes</strong></p>
                         @if (mesa.TurnoExamen.TieneLLamado2)
                         {
-                            if(mesa.Llamado1.Date==DateTime.Today)
+                            if (mesa.Llamado1.Date == fechaSeleccionada.Date)
                             {
                                 <p class="card-text"><strong>1º Llamado: @mesa.Llamado1.Date.ToString("dd/MM/yyyy")</strong></p>
-                            }else
+                            }
+                            else
                             {
                                 <p class="card-text">1º Llamado: @mesa.Llamado1.Date.ToString("dd/MM/yyyy")</p>
                             }
-                            if(mesa.Llamado2.Date==DateTime.Today)
+                            if (mesa.Llamado2.Date == fechaSeleccionada.Date)
                             {
                                 <p class="card-text"><strong>2º Llamado: @mesa.Llamado2.Date.ToString("dd/MM/yyyy")</strong></p>
                             }
@@ -55,4 +70,28 @@
 @code {
     [Parameter]
     public List<MesaExamen> ListMesasExamenes { get; set; }
+
+    private DateTime fechaSeleccionada = DateTime.Today;
+
+    private void AvanzarFecha()
+    {
+        fechaSeleccionada = fechaSeleccionada.AddDays(1);
+        ObtenerMesasFechaDefinida();
+        StateHasChanged();
+
+    }
+
+    private void RetrocederFecha()
+    {
+        fechaSeleccionada = fechaSeleccionada.AddDays(-1);
+        ObtenerMesasFechaDefinida();
+        StateHasChanged();
+    }
+
+    private async Task ObtenerMesasFechaDefinida()
+    {
+        ListMesasExamenes = (await _memoryCache.GetAllCacheAsync<MesaExamen>())
+                            .Where(m => m.DetallesMesaExamen.Any(detalle => detalle.DocenteId == usuarioStateService.Usuario.DocenteId) &&
+                            (m.Llamado1.Date == fechaSeleccionada.Date || m.Llamado2.Date == fechaSeleccionada.Date)).ToList();
+    }
 }
