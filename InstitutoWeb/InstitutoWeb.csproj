@@ -49,7 +49,7 @@
     <Content Update="Components\Horarios\TableHoras.razor">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>
-    <Content Update="Components\MesasExamenes\ListCardMesasHoy.razor">
+    <Content Update="Components\MesasExamenes\ListCardMesasHoyDocentes.razor">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>
     <Content Update="Components\NuevoDetalleInscripcion\NuevoDetalleInscripcion.razor">

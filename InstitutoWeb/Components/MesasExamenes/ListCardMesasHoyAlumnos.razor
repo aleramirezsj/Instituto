@@ -7,7 +7,7 @@
             <button class="btn btn-primary me-2" @onclick="RetrocederFecha">
                 <span class="icon-retroceder"></span>
             </button>
-            <InputDate @bind-Value="fechaSeleccionada" class="form-control" />
+            <InputDate @bind-Value="FechaSeleccionada" class="form-control"  />
             <button class="btn btn-primary ms-2" @onclick="AvanzarFecha">
                 <span class="icon-avanzar"></span>
             </button>
@@ -73,17 +73,31 @@
 
     private DateTime fechaSeleccionada = DateTime.Today;
 
-    private void AvanzarFecha()
+    public DateTime FechaSeleccionada
     {
-        fechaSeleccionada = fechaSeleccionada.AddDays(1);
-        ObtenerMesasFechaDefinida();
+        get { return fechaSeleccionada; }
+        set { fechaSeleccionada = value;
+            CambioDeFechaDefinido();
+        }
+    }
+
+
+    private async Task AvanzarFecha()
+    {
+        FechaSeleccionada = FechaSeleccionada.AddDays(1);
+        await ObtenerMesasFechaDefinida();
         StateHasChanged();
 
+    }
+    private async Task CambioDeFechaDefinido()
+    {
+        await ObtenerMesasFechaDefinida();
+        StateHasChanged();
     }
 
     private void RetrocederFecha()
     {
-        fechaSeleccionada = fechaSeleccionada.AddDays(-1);
+        FechaSeleccionada = FechaSeleccionada.AddDays(-1);
         ObtenerMesasFechaDefinida();
         StateHasChanged();
     }
@@ -92,6 +106,6 @@
     {
         ListMesasExamenes = (await _memoryCache.GetAllCacheAsync<MesaExamen>())
                             .Where(m => m.DetallesMesaExamen.Any(detalle => detalle.DocenteId == usuarioStateService.Usuario.DocenteId) &&
-                            (m.Llamado1.Date == fechaSeleccionada.Date || m.Llamado2.Date == fechaSeleccionada.Date)).ToList();
+                            (m.Llamado1.Date == FechaSeleccionada.Date || m.Llamado2.Date == FechaSeleccionada.Date)).ToList();
     }
 }
