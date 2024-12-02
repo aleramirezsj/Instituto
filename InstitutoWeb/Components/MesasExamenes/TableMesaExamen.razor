@@ -4,7 +4,12 @@
 }
 else
 {
-    var mesasAgrupadasPorAnio = MesasExamenes.OrderBy(m=>m.Materia.AnioCarreraId).GroupBy(m => m.Materia.AnioCarreraId);
+    var mesasAgrupadasPorAnio = MesasExamenes.OrderBy(m=>m.Materia.AnioCarreraId).ThenBy(m=>m.Llamado1).ThenBy(m=>m.Horario).GroupBy(m => m.Materia.AnioCarreraId);
+    //tomo la primer mesa para obtener el turno de examen
+    var mesaTurno = MesasExamenes.OrderBy(m => m.Materia.AnioCarreraId).FirstOrDefault();
+
+    <br />
+    <p> Turno de examen: <strong>@mesaTurno.TurnoExamen.Nombre</strong></p>
     foreach (var grupo in mesasAgrupadasPorAnio)
     {
         var primeraMesa = grupo.First();
@@ -12,7 +17,15 @@ else
         <table class="table table-striped table-hover">
             <thead class="table-dark">
                 <tr>
-                    <th>Fecha</th>
+                    @if (primeraMesa.TurnoExamen.TieneLLamado2)
+                    {
+                        <th>1º llamado</th>
+                        <th>2º llamado</th>
+                    }
+                    else
+                    {
+                        <th>Fecha</th>
+                    }
                     <th>Espacio Curricular</th>
                     <th>Hora</th>
                     <th>Docentes</th>
@@ -23,11 +36,27 @@ else
                 @foreach (var mesaExamen in grupo)
                 {
                     <tr>
-                        <td>
-                            <span style="font-size: 75%;">
-                                @mesaExamen.Llamado1.Date.ToString("dd/MM/yyyy")
-                            </span>
-                        </td>
+                        @if (primeraMesa.TurnoExamen.TieneLLamado2)
+                        {
+                            <td>
+                                <span style="font-size: 75%;">
+                                    @mesaExamen.Llamado1.Date.ToString("dd/MM/yyyy")
+                                </span>
+                            </td>
+                            <td>
+                                <span style="font-size: 75%;">
+                                    @mesaExamen.Llamado2.Date.ToString("dd/MM/yyyy")
+                                </span>
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                <span style="font-size: 75%;">
+                                    @mesaExamen.Llamado1.Date.ToString("dd/MM/yyyy")
+                                </span>
+                            </td>
+                        }
                                 
                         <td><strong>@mesaExamen.Materia.Nombre</strong></td>
                         <td>
@@ -59,6 +88,7 @@ else
                 }
             </tbody>
         </table>
+
     }
 }
 @code {

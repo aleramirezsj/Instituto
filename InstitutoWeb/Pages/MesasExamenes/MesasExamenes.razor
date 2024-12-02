@@ -31,6 +31,10 @@ else
                 <div class="text-end">
                 @if (usuarioStateService.Usuario != null)
                 {
+                    if(usuarioStateService.Usuario.TipoUsuario!=TipoUsuarioEnum.Alumno)
+                    {
+                        <button class="btn btn-outline-dark me-2" @onclick="VerMesasDeHoy">Ver hoy </button>
+                    }
                     <button class="btn btn-outline-dark me-2" @onclick="VerSoloMisMesas">Ver mis mesas </button>
                 }
 
@@ -42,7 +46,14 @@ else
                 <TableMesaExamen MesasExamenes="mesasExamenes"/>
             } else
             {
-                <TableMesaExamenDocente MesasExamenes="mesasExamenes"/>
+                if(verMesasDeHoy)
+                {
+                    <ListCardMesasHoy ListMesasExamenes="mesasExamenes" />
+                }
+                else
+                {
+                    <TableMesaExamenDocente MesasExamenes="mesasExamenes"/>
+                }
             }
 
         }
@@ -58,6 +69,7 @@ else
     private int? idTurnoExamenSeleccionado;
     private int? idCarreraSeleccionada;
     private bool verTodasLasMesas = false;
+    private bool verMesasDeHoy = false;
 
     //private Carrera carreraSeleccionada;
 
@@ -94,6 +106,7 @@ else
     {
         idCarreraSeleccionada = null;
         verTodasLasMesas = true;
+        verMesasDeHoy = false;
         carreras = await _memoryCache.GetAllCacheAsync<Carrera>();
         StateHasChanged();
     }
@@ -101,7 +114,15 @@ else
     private async Task VerSoloMisMesas()
     {
         verTodasLasMesas=false;
-        ObtenerMesasDelUsuarioLogueado();
+        verMesasDeHoy = false;
+        await ObtenerMesasDelUsuarioLogueado();
+        StateHasChanged();
+    }
+    private async Task VerMesasDeHoy()
+    {
+        verMesasDeHoy = true;
+        verTodasLasMesas = false;
+        await ObtenerMesasDelUsuarioLogueado();
         StateHasChanged();
     }
     private async Task ObtenerMesasDelUsuarioLogueado()
@@ -129,9 +150,19 @@ else
                 if(idTurnoExamenSeleccionado!=null)
                 {
                     //filtro las mesas de examenes por el turno seleccionado y por el docente logueado
-                    mesasExamenes = (await _memoryCache.GetAllCacheAsync<MesaExamen>())
+                    if(verMesasDeHoy)
+                    {
+                        mesasExamenes = (await _memoryCache.GetAllCacheAsync<MesaExamen>())
                                     .Where(m => m.TurnoExamenId == idTurnoExamenSeleccionado &&
-                                    m.DetallesMesaExamen.Any(detalle => detalle.DocenteId == usuarioStateService.Usuario.DocenteId)).ToList();
+                                    m.DetallesMesaExamen.Any(detalle => detalle.DocenteId == usuarioStateService.Usuario.DocenteId) &&
+                                    (m.Llamado1.Date==DateTime.Today||m.Llamado2.Date==DateTime.Today)).ToList();
+                    }
+                    else
+                    {
+                        mesasExamenes = (await _memoryCache.GetAllCacheAsync<MesaExamen>())
+                                    .Where(m => m.TurnoExamenId == idTurnoExamenSeleccionado &&
+                                m.DetallesMesaExamen.Any(detalle => detalle.DocenteId == usuarioStateService.Usuario.DocenteId)).OrderBy(m => m.Llamado1.Date).ThenBy(m => m.Horario).ToList();
+                    }
                 }
             }
     }
