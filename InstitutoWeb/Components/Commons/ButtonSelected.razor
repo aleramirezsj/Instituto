@@ -1,0 +1,26 @@
+﻿@if(condition)
+{
+    <button class="btn btn-dark me-2" @onclick="HandleOnClick">@text </button>
+}
+else
+{
+    <button class="btn btn-outline-dark me-2" @onclick="HandleOnClick">@text </button>
+}
+
+
+@code {
+    [Parameter]
+    public string text { get; set; }
+
+    [Parameter]
+    public bool condition { get; set; }
+
+    [Parameter]
+    public EventCallback OnClick { get; set; }
+
+    private async Task HandleOnClick()
+    {
+        await OnClick.InvokeAsync();
+    }
+
+}
