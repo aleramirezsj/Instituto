@@ -33,7 +33,8 @@ else
                         </span>
                     </td>
                     <td>
-                        <strong>@mesaExamen?.Materia?.Nombre - 
+                        <strong>
+                            @mesaExamen?.Materia?.Nombre - @mesaExamen?.Materia?.AnioCarrera?.Nombre 
                             @mesaExamen?.Materia?.AnioCarrera?.Carrera?.Sigla
                         </strong>
                     </td>
@@ -89,7 +90,12 @@ else
                             @mesaExamen.Llamado2.Date.ToString("dd/MM/yyyy")
                         </span>
                     </td>
-                        <td><strong>@mesaExamen.Materia.Nombre</strong></td>
+                        <td>
+                            <strong>
+                                @mesaExamen?.Materia?.Nombre - @mesaExamen?.Materia?.AnioCarrera?.Nombre
+                                @mesaExamen?.Materia?.AnioCarrera?.Carrera?.Sigla
+                            </strong>
+                        </td>
                     <td>
                         <span style="font-size: 75%;">
                             @mesaExamen.Horario

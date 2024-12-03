@@ -19,7 +19,7 @@
             <div class="col-12 mb-4">
                 <div class="card text-center">
                     <div class="card-header">
-                        <strong>@mesa.Materia.Nombre - @mesa.Materia.AnioCarrera.Carrera.Sigla</strong>
+                        <strong>@mesa.Materia.Nombre - @mesa.Materia.AnioCarrera.Nombre  @mesa.Materia.AnioCarrera.Carrera.Sigla</strong>
                     </div>
                     <div class="card-body text-start">
                         @{
@@ -71,6 +71,12 @@
     [Parameter]
     public List<MesaExamen> ListMesasExamenes { get; set; }
 
+    [Parameter]
+    public int? IdCarreraSeleccionada { get; set; }
+
+    [Parameter]
+    public int? IdTurnoExamenSeleccionado { get; set; }
+
     private DateTime fechaSeleccionada = DateTime.Today;
 
     public DateTime FechaSeleccionada
@@ -105,7 +111,6 @@
     private async Task ObtenerMesasFechaDefinida()
     {
         ListMesasExamenes = (await _memoryCache.GetAllCacheAsync<MesaExamen>())
-                            .Where(m => m.DetallesMesaExamen.Any(detalle => detalle.DocenteId == usuarioStateService.Usuario.DocenteId) &&
-                            (m.Llamado1.Date == FechaSeleccionada.Date || m.Llamado2.Date == FechaSeleccionada.Date)).ToList();
+                                .Where(m => m.TurnoExamenId == IdTurnoExamenSeleccionado && m.Materia.AnioCarrera.CarreraId == IdCarreraSeleccionada && (m.Llamado1.Date == FechaSeleccionada.Date || m.Llamado2.Date == FechaSeleccionada.Date)).ToList();
     }
 }

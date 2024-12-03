@@ -43,7 +43,7 @@ else
             {
                 if(verMesasDeHoy)
                 {
-                    <ListCardMesasHoyAlumnos ListMesasExamenes="mesasExamenes"/>
+                    <ListCardMesasHoyAlumnos ListMesasExamenes="mesasExamenes" IdCarreraSeleccionada="@idCarreraSeleccionada" IdTurnoExamenSeleccionado="@idTurnoExamenSeleccionado"/>
                 }
                 else
                 {
@@ -95,10 +95,11 @@ else
 
         if(usuarioStateService.Usuario!=null)
         {
-            if (usuarioStateService.Usuario.TipoUsuario == TipoUsuarioEnum.Docente)
-                idCarreraSeleccionada = 0;
+                
             if(usuarioStateService.Usuario.TipoUsuario==TipoUsuarioEnum.Alumno)
                 DefinirCarreraSeleccionada();
+            else
+                idCarreraSeleccionada = 0;
             await ObtenerMesasDelUsuarioLogueado();   
         }
 
@@ -127,8 +128,6 @@ else
     {
         idCarreraSeleccionada = idCarrera;
         await ObtenerMesasDelUsuarioLogueado();
-        //mesasExamenes = await mesaExamenService.GetByTurnoAndCarreraAsync(idTurnoExamenSeleccionado, idCarreraSeleccionada);
-        logger.LogInformation(mesasExamenes.Count.ToString());
         StateHasChanged();
     }
 
