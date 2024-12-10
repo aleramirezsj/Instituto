@@ -20,6 +20,8 @@ namespace InstitutoServices.Models.MesasExamenes
         public TurnoExamen? TurnoExamen { get; set; }
         public bool Eliminado { get; set; }
 
+        public List<DetalleInscripcionExamen> detallesInscripcionesExamenes { get; set; } = new List<DetalleInscripcionExamen>();
+
         public override string ToString()
         {
             return $"{Alumno?.ApellidoNombre} {Carrera?.Nombre}" ?? $"Inscripcion {Id}";

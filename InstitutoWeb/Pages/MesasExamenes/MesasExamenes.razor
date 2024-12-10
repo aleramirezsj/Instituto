@@ -29,8 +29,9 @@ else
 
                         <ButtonSelected text="Hoy" condition="@verMesasDeHoy" OnClick="VerMesasDeHoy" />
                     <ButtonSelected text="Mis mesas" condition="!verTodasLasMesas && !verMesasDeHoy" OnClick="VerSoloMisMesas" />
-                    <ButtonSelected text="Todas las mesas" condition="verTodasLasMesas&&!verMesasDeHoy" OnClick="VerMesasDeTodasLasCarreras" />
                 }
+                    <ButtonSelected text="Todas las mesas" condition="verTodasLasMesas&&!verMesasDeHoy" OnClick="VerMesasDeTodasLasCarreras" />
+                
             </div>
         </div>
         if(idCarreraSeleccionada==null)
@@ -166,7 +167,7 @@ else
     {
         if (idTurnoExamenSeleccionado != null)
         {
-            if(usuarioStateService.Usuario.TipoUsuario==TipoUsuarioEnum.Alumno)
+            if (usuarioStateService.Usuario == null||usuarioStateService.Usuario.TipoUsuario == TipoUsuarioEnum.Alumno )
             {
                 if (verMesasDeHoy)
                 {

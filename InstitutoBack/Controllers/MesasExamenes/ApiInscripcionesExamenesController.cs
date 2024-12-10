@@ -35,7 +35,9 @@ namespace InstitutoBack.Controllers.MesasExamenes
         [HttpGet("{id}")]
         public async Task<ActionResult<InscripcionExamen>> GetInscripcionExamen(int id)
         {
-            var inscripcionExamen = await _context.inscripcionesExamenes.FindAsync(id);
+            var inscripcionExamen = await _context.inscripcionesExamenes.Include(i => i.Alumno)
+                .Include(i => i.Carrera)
+                .Include(i => i.TurnoExamen).FirstOrDefaultAsync(i=>i.Id.Equals(id));
 
             if (inscripcionExamen == null)
             {
@@ -50,6 +52,14 @@ namespace InstitutoBack.Controllers.MesasExamenes
         [HttpPut("{id}")]
         public async Task<IActionResult> PutInscripcionExamen(int id, InscripcionExamen inscripcionExamen)
         {
+            //attach the related entities
+            _context.Attach(inscripcionExamen.Alumno);
+            _context.Attach(inscripcionExamen.Carrera);
+            _context.Attach(inscripcionExamen.TurnoExamen);
+            foreach (var detalle in inscripcionExamen.detallesInscripcionesExamenes)
+            {
+                _context.Attach(detalle.Materia);
+            }
             if (id != inscripcionExamen.Id)
             {
                 return BadRequest();
@@ -81,6 +91,14 @@ namespace InstitutoBack.Controllers.MesasExamenes
         [HttpPost]
         public async Task<ActionResult<InscripcionExamen>> PostInscripcionExamen(InscripcionExamen inscripcionExamen)
         {
+            //attach the related entities
+            _context.Attach(inscripcionExamen.Alumno);
+            _context.Attach(inscripcionExamen.Carrera);
+            _context.Attach(inscripcionExamen.TurnoExamen);
+            foreach (var detalle in inscripcionExamen.detallesInscripcionesExamenes)
+            {
+                _context.Attach(detalle.Materia);
+            }
             _context.inscripcionesExamenes.Add(inscripcionExamen);
             await _context.SaveChangesAsync();
 
@@ -96,8 +114,8 @@ namespace InstitutoBack.Controllers.MesasExamenes
             {
                 return NotFound();
             }
-
-            _context.inscripcionesExamenes.Remove(inscripcionExamen);
+            inscripcionExamen.Eliminado = true;
+            _context.inscripcionesExamenes.Update(inscripcionExamen);
             await _context.SaveChangesAsync();
 
             return NoContent();
