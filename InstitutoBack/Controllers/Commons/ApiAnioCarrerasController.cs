@@ -28,9 +28,9 @@ namespace InstitutoBack.Controllers.Commons
         {
             if (idCarrera != null)
             {
-                return await _context.anioscarreras.Include(a => a.Carrera).Where(a => a.CarreraId.Equals(idCarrera)).ToListAsync();
+                return await _context.anioscarreras.Include(a => a.Carrera).Where(a => a.CarreraId.Equals(idCarrera)).AsNoTracking().ToListAsync();
             }
-            return await _context.anioscarreras.Include(a => a.Carrera).ToListAsync();
+            return await _context.anioscarreras.Include(a => a.Carrera).AsNoTracking().ToListAsync();
         }
 
         // GET: api/ApiAnioCarreras/5

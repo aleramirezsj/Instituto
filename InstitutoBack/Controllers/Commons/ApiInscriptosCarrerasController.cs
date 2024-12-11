@@ -26,14 +26,14 @@ namespace InstitutoBack.Controllers.Commons
         [HttpGet]
         public async Task<ActionResult<IEnumerable<InscriptoCarrera>>> Getinscriptoscarreras()
         {
-            return await _context.inscriptoscarreras.Include(i=>i.Carrera).Include(i=>i.Alumno).ToListAsync();
+            return await _context.inscriptoscarreras.Include(i=>i.Carrera).Include(i=>i.Alumno).AsNoTracking().ToListAsync();
         }
 
         //agrego un metodo que obtenga las inscripciones a carreras que tiene un determinado alumno
         [HttpGet("getByAlumno")]
         public async Task<ActionResult<IEnumerable<InscriptoCarrera>>> GetInscripcionesByAlumno([FromQuery] int alumnoId)
         {
-            return await _context.inscriptoscarreras.Include(i=>i.Carrera).Where(i => i.AlumnoId == alumnoId).ToListAsync();
+            return await _context.inscriptoscarreras.Include(i=>i.Carrera).Where(i => i.AlumnoId == alumnoId).AsNoTracking().ToListAsync();
         }
 
 

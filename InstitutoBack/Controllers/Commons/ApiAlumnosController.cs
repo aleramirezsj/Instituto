@@ -26,7 +26,7 @@ namespace InstitutoBack.Controllers.Commons
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Alumno>>> Getalumnos()
         {
-            return await _context.alumnos.Include(alumno=>alumno.InscripcionesACarreras).ToListAsync();
+            return await _context.alumnos.Include(alumno=>alumno.InscripcionesACarreras).AsNoTracking().ToListAsync();
         }
 
         // GET: api/ApiAlumnos/5

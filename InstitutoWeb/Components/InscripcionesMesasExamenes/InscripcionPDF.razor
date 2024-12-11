@@ -1,0 +1,36 @@
+﻿@if(inscripcion!=null)
+{
+    var materiasAgrupadasPorAnio = inscripcion.detallesInscripcionesExamenes.OrderBy(m => m?.Materia?.AnioCarreraId).ThenBy(m => m?.Materia?.Nombre).GroupBy(m => m?.Materia?.AnioCarreraId);
+
+    <h3>Inscripción de @inscripcion?.Alumno?.ApellidoNombre</h3>
+    <h2>Carrera: @inscripcion?.Carrera?.Nombre</h2>
+    <p>Fecha de inscripción: @inscripcion?.Fecha.ToShortDateString()</p>
+    <p>Turno de examen: @inscripcion?.TurnoExamen?.Nombre</p>
+    <hr />
+    <h3>Materias inscriptas</h3>
+    foreach (var grupo in materiasAgrupadasPorAnio)
+    {
+        var primeraMateria = grupo.First();
+
+        <table class="table table-striped table-hover" style="width:100%">
+            <thead class="table-dark">
+            <tr>
+                    <th style="background-color:lightgray">@primeraMateria.Materia.AnioCarrera.Nombre</th>
+            </tr>
+            </thead>
+            <tbody style="border:solid 1px #000">
+            @foreach (var inscripcion in grupo)
+            {
+                <tr>
+                        <td >@inscripcion.Materia.Nombre</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    }
+}
+
+@code {
+    [Parameter]
+    public InscripcionExamen inscripcion { get; set; }
+}

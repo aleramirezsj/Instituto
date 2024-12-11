@@ -56,8 +56,8 @@ namespace InstitutoBack.Controllers.Commons
 
             var user = await _context.usuarios.
                 Include(u=>u.Alumno).ThenInclude(u => u.InscripcionesACarreras).
-                                    ThenInclude(u => u.Carrera).
-                Include(u=>u.Docente).Where(u=>u.Email.Equals(email)).FirstOrDefaultAsync();
+                                    ThenInclude(u => u.Carrera).AsNoTracking().
+                Include(u=>u.Docente).Where(u=>u.Email.Equals(email)).AsNoTracking().FirstOrDefaultAsync();
 
             if (user == null)
             {

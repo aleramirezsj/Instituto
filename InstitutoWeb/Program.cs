@@ -15,6 +15,7 @@ using InstitutoServices.Services.MesasExamenes;
 using InstitutoServices.Services.Inscripciones;
 using InstitutoWeb.Interfaces;
 using Microsoft.Extensions.Logging;
+using InstitutoWeb.HtmlToPdf;
 
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
@@ -45,7 +46,9 @@ builder.Services.AddScoped<AuthenticationService>();
 
 
 builder.Services.AddSweetAlert2();
-
+//HtmlToPdf
+builder.Services.AddScoped<RazorRenderer>();
+builder.Services.AddScoped<PdfGenerator>();
 
 AppDomain.CurrentDomain.UnhandledException += (sender, eventArgs) =>
 {

@@ -45,7 +45,15 @@
 
     private async Task HandleFinalizarInscripcion(List<Materia> listSelected)
     {
-        var respuesta= await SweetAlert.FireAsync("Finalizar inscripción","¿Está seguro que desea finalizar la inscripción?", SweetAlertIcon.Warning);
+        SweetAlertResult respuesta = await SweetAlert.FireAsync(new SweetAlertOptions
+            {
+                Title = "Finalizar inscripción",
+                Text = $"¿Está seguro que desea finalizar la inscripción",
+                Icon = SweetAlertIcon.Warning,
+                ShowCancelButton = true,
+                ConfirmButtonText = "Si, quiero finalizarla",
+                CancelButtonText = "No, espera"
+            });
         if (respuesta.IsConfirmed)
             await OnFinalizarInscripcion.InvokeAsync(listSelected.Where(e => e.Eliminado == true).ToList()??null);
     }

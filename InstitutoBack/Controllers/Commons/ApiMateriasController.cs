@@ -28,9 +28,9 @@ namespace InstitutoBack.Controllers.Commons
         {
             if (idAnioCarrera != null)
             {
-                return await _context.materias.Include(m => m.AnioCarrera).ThenInclude(anio=>anio.Carrera).Where(m => m.AnioCarreraId.Equals(idAnioCarrera)).ToListAsync();
+                return await _context.materias.Include(m => m.AnioCarrera).ThenInclude(anio=>anio.Carrera).Where(m => m.AnioCarreraId.Equals(idAnioCarrera)).AsNoTracking().ToListAsync();
             }
-            return await _context.materias.Include(m=>m.AnioCarrera).ToListAsync();
+            return await _context.materias.Include(m=>m.AnioCarrera).AsNoTracking().ToListAsync();
         }
 
         // GET: api/ApiMaterias/5

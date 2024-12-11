@@ -26,7 +26,7 @@ namespace InstitutoBack.Controllers.Commons
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Carrera>>> Getcarreras()
         {
-            return await _context.carreras.ToListAsync();
+            return await _context.carreras.AsNoTracking().ToListAsync();
         }
 
         // GET: api/ApiCarreras/5

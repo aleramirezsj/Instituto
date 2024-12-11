@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using InstitutoBack.DataContext;
 using InstitutoServices.Models.MesasExamenes;
+using InstitutoServices.Models.Commons;
 
 namespace InstitutoBack.Controllers.MesasExamenes
 {
@@ -91,19 +92,54 @@ namespace InstitutoBack.Controllers.MesasExamenes
         [HttpPost]
         public async Task<ActionResult<InscripcionExamen>> PostInscripcionExamen(InscripcionExamen inscripcionExamen)
         {
-            //attach the related entities
-            _context.Attach(inscripcionExamen.Alumno);
-            _context.Attach(inscripcionExamen.Carrera);
-            _context.Attach(inscripcionExamen.TurnoExamen);
-            foreach (var detalle in inscripcionExamen.detallesInscripcionesExamenes)
+            try
             {
-                _context.Attach(detalle.Materia);
+                _context.Attach(inscripcionExamen.Carrera);
+                foreach (var insc_carrera in inscripcionExamen.Alumno.InscripcionesACarreras)
+                {
+                    var AttachCarreraExist = _context.Set<Carrera>().Local.FirstOrDefault(entry => entry.Id.Equals(insc_carrera.Carrera.Id));
+                    if (AttachCarreraExist == null)
+                        _context.Attach(insc_carrera.Carrera);
+                    else
+                        insc_carrera.Carrera = AttachCarreraExist;
+                }
+                //if (!_context.Entry(inscripcionExamen.Carrera).IsKeySet) 
+                 
+                //inscripcionExamen.Carrera = null;
+                _context.Attach(inscripcionExamen.Alumno);
+
+                //if (!_context.Entry(inscripcionExamen.TurnoExamen.CicloLectivo).IsKeySet)
+                _context.Attach(inscripcionExamen.TurnoExamen.CicloLectivo);
+
+                //if (!_context.Entry(inscripcionExamen.TurnoExamen).IsKeySet) 
+                _context.Attach(inscripcionExamen.TurnoExamen);
+                
+                
+                
+
+                foreach (var detalle in inscripcionExamen.detallesInscripcionesExamenes)
+                {
+                    //detalle.Materia.AnioCarrera = null;
+                    var AttachAnioExist = _context.Set<AnioCarrera>().Local.FirstOrDefault(entry => entry.Id.Equals(detalle.Materia.AnioCarrera.Id));
+                    if (AttachAnioExist == null)
+                        _context.Attach(detalle.Materia.AnioCarrera);
+                    else
+                        detalle.Materia.AnioCarrera = AttachAnioExist;
+
+                    _context.Attach(detalle.Materia);
+                    
+                }
+                _context.inscripcionesExamenes.Add(inscripcionExamen);
+                await _context.SaveChangesAsync();
             }
-            _context.inscripcionesExamenes.Add(inscripcionExamen);
-            await _context.SaveChangesAsync();
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException("Error al adjuntar entidades relacionadas o guardar la inscripción de examen.", ex);
+            }
 
             return CreatedAtAction("GetInscripcionExamen", new { id = inscripcionExamen.Id }, inscripcionExamen);
         }
+
 
         // DELETE: api/ApiInscripcionesExamenes/5
         [HttpDelete("{id}")]
