@@ -1,8 +1,5 @@
 ﻿@page "/inscripcionmesasexamenes"
 
-@inject IGenericService<CicloLectivo> cicloLectivoService
-@inject IGenericService<Carrera> carreraService
-@inject IDetalleHorarioService detalleHorarioService
 @inject SweetAlertService SweetAlert
 @inject ILogger<InscripcionMesasExamenes> logger
 @inject IMemoryCacheService _memoryCache
@@ -24,25 +21,45 @@ else
     {
         <ListCard ListEntity="@(carreras.Cast<IEntityIdNombre>().ToList())" OnSeleccionar="SeleccionarCarrera" TituloCard="Carrera" />
     }
-    if (carreraSeleccionada != null && materias != null)
-    {
-        if (usuarioStateService.Usuario.Alumno.InscripcionesACarreras.Count > 1)
+    
+    <div class="text-end">
+        @if (usuarioStateService.Usuario.Alumno.InscripcionesACarreras.Count > 1 && carreraSeleccionada != null && !visualizarPDF)
         {
-            <div class="text-end">
-                <button class="btn btn-dark me-2" @onclick="()=>{carreraSeleccionada=null; materias=null;StateHasChanged();}">Cambiar de carrera</button>
-            </div>
-
+            <button class="btn btn-dark me-2" @onclick="()=>{carreraSeleccionada=null; materias=null;StateHasChanged();}">Cambiar de carrera</button>
         }
-
-        <h3>Carrera: @carreraSeleccionada.Nombre </h3>
-        <ListCardInscripcionMesasExamenes Materias="@materias" OnFinalizarInscripcion="FinalizarInscripcion" />
+        @if (inscripcionCurrent!=null&&carreraSeleccionada!=null)
+        {
+                <button class="btn btn-dark me-2" @onclick="TooglePdf">@textoBotonPDF</button>
+        }
+        @if (inscripcionCurrent != null && !modificarInscripcion && !visualizarPDF && carreraSeleccionada != null)
+        {
+            <button class="btn btn-dark me-2" @onclick="ModificarInscripcion">Modificar inscripción</button> 
+        }
+    </div>
+    @if (!string.IsNullOrEmpty(pdfBase64)&&visualizarPDF)
+    {
+        <iframe src="data:application/pdf;base64,@pdfBase64" width="100%" height="600px"></iframe>
     }
+    else
+    {
+        if (carreraSeleccionada != null && materias != null)
+        {
+            if (inscripcionCurrent == null||modificarInscripcion)
+            {
+                <h3>Carrera: @carreraSeleccionada.Nombre </h3>
+                <ListCardInscripcionMesasExamenes Materias="@materias" OnFinalizarInscripcion="FinalizarInscripcion" />
+            }
+            else
+            {
+                <InscripcionPDF inscripcion="@inscripcionCurrent" />
+                
+            }
+        }
+    }
+    
 }
 
-@if (!string.IsNullOrEmpty(pdfBase64))
-{
-    <iframe src="data:application/pdf;base64,@pdfBase64" width="100%" height="600px"></iframe>
-}
+
 
 
 @code {
@@ -55,57 +72,56 @@ else
 
     private int? idCarreraSeleccionada;
     private string? pdfBase64;
+    private InscripcionExamen? inscripcionCurrent;
+    private bool visualizarPDF = false;
+    private bool modificarInscripcion = false;
+    private string textoBotonPDF=>visualizarPDF?"Ocultar PDF":"Ver PDF";
 
     protected override async Task OnInitializedAsync()
     {
         carreras = await _memoryCache.GetAllCacheAsync<Carrera>();
         turnosExamenes = await _memoryCache.GetAllCacheAsync<TurnoExamen>();
         if (turnosExamenes.Any(c => c.Actual))
-        {
             turnoExamenSeleccionado = turnosExamenes.Where(c => c.Actual).FirstOrDefault();
-        }
         if (usuarioStateService.Usuario != null && usuarioStateService.Usuario.TipoUsuario == TipoUsuarioEnum.Alumno)
         {
             if (usuarioStateService.Usuario.Alumno.InscripcionesACarreras.Count > 1)
-            {
                 carreras = carreras
                             .Where(c => usuarioStateService.Usuario.Alumno.InscripcionesACarreras.Select(i => i.CarreraId).Contains(c.Id)).ToList();
-            }
             else
             {
                 carreraSeleccionada = usuarioStateService.Usuario.Alumno.InscripcionesACarreras.FirstOrDefault().Carrera;
-
                 aniosCarrera = (await _memoryCache.GetAllCacheAsync<AnioCarrera>())
                                 .Where(a => a.CarreraId == carreraSeleccionada.Id).ToList();
-                //muestros cuantos anios carrera tiene la carrera seleccionada con el logger
-                materias = (await _memoryCache.GetAllCacheAsync<Materia>())
-                    .Where(m => m.AnioCarrera.CarreraId == carreraSeleccionada.Id && m.EsRecreo.Equals(false)).ToList();
+                await ObtenerMateriasEInscripcion();
             }
-
         }
-
     }
-
-    private async Task FinalizarInscripcion(List<Materia> materiasInscripcion)
+    private async Task ModificarInscripcion()
     {
-        var nuevaInscripcion = new InscripcionExamen
-            {
-                AlumnoId = usuarioStateService.Usuario.Alumno.Id,
-                Alumno = usuarioStateService.Usuario.Alumno,
-                CarreraId = carreraSeleccionada.Id,
-                Carrera = carreraSeleccionada,
-                TurnoExamenId = turnoExamenSeleccionado.Id,
-                TurnoExamen = turnoExamenSeleccionado,
-                Fecha = DateTime.Now
-            };
-        foreach (var materia in materiasInscripcion)
+        modificarInscripcion = true;
+        //obtengo las materias de la carrega
+        materias = (await _memoryCache.GetAllCacheAsync<Materia>())
+                    .Where(m => m.AnioCarrera.CarreraId == inscripcionCurrent.CarreraId &&
+                           m.EsRecreo.Equals(false)).OrderBy(m => m.AnioCarreraId).ThenBy(m => m.Nombre).ToList();
+        //marco las materias que ya estan inscriptas
+        foreach (var materia in materias)
         {
-            nuevaInscripcion.detallesInscripcionesExamenes.Add(new DetalleInscripcionExamen
-                {
-                    MateriaId = materia.Id,
-                    Materia = materia
-                });
+            materia.Eliminado = inscripcionCurrent.detallesInscripcionesExamenes.Any(d => d.MateriaId == materia.Id);
         }
+        StateHasChanged();
+    }
+    private async Task TooglePdf()
+    {
+        visualizarPDF = !visualizarPDF;
+        if(string.IsNullOrEmpty(pdfBase64)&&visualizarPDF)
+        {
+            await GenerarPDF();
+        }
+        StateHasChanged();
+    }
+    private async Task GenerarPDF()
+    {
         SweetAlertOptions options = new SweetAlertOptions
             {
                 Title = "Generando PDF",
@@ -113,19 +129,15 @@ else
                 Icon = SweetAlertIcon.Info,
                 ShowCancelButton = false,
                 ShowConfirmButton = false,
-                ConfirmButtonText = "Descargar PDF",
-                ConfirmButtonColor = "#3085d6",
                 ShowCloseButton = false,
                 AllowOutsideClick = false,
                 AllowEscapeKey = false,
                 AllowEnterKey = false
             };
-         SweetAlert.FireAsync(options);
-
-        await _memoryCache.AddCacheAsync<InscripcionExamen>(nuevaInscripcion);
+        SweetAlert.FireAsync(options);
         var html = await renderer.RenderComponentAsync<InscripcionPDF>(new Dictionary<string, object?>
         {
-            { "inscripcion", nuevaInscripcion }
+            { "inscripcion", inscripcionCurrent }
         });
         var pdfBytes = await pdfGenerator.GeneratePdfAsync(html);
 
@@ -134,8 +146,6 @@ else
 
         if (!string.IsNullOrEmpty(pdfBase64))
         {
-            //await SweetAlert.Close();
-            // El archivo se almacenó correctamente
             await SweetAlert.FireAsync("Éxito", "El archivo PDF se ha generado correctamente.", SweetAlertIcon.Success);
         }
         else
@@ -143,17 +153,70 @@ else
             // Hubo un problema al almacenar el archivo
             await SweetAlert.FireAsync("Error", "Hubo un problema al generar el archivo PDF.", SweetAlertIcon.Error);
         }
+    }
+    private async Task  ObtenerMateriasEInscripcion()
+    {
+        //muestro cuantos anios carrera tiene la carrera seleccionada con el logger
+        materias = (await _memoryCache.GetAllCacheAsync<Materia>())
+            .Where(m => m.AnioCarrera.CarreraId == carreraSeleccionada.Id &&
+                m.EsRecreo.Equals(false)).OrderBy(m=>m.AnioCarreraId).ThenBy(m=>m.Nombre).ToList();
+        inscripcionCurrent = (await _memoryCache.GetAllCacheAsync<InscripcionExamen>())
+        .Where(i => i.AlumnoId == usuarioStateService.Usuario.Alumno.Id &&
+               i.TurnoExamenId == turnoExamenSeleccionado.Id &&
+                i.CarreraId == carreraSeleccionada.Id).FirstOrDefault();
+    }
 
+    private async Task FinalizarInscripcion(List<Materia> materiasInscripcion)
+    {
+        if (inscripcionCurrent == null)
+        {
+            var nuevaInscripcion = new InscripcionExamen
+                {
+                    AlumnoId = usuarioStateService.Usuario.Alumno.Id,
+                    Alumno = usuarioStateService.Usuario.Alumno,
+                    CarreraId = carreraSeleccionada.Id,
+                    Carrera = carreraSeleccionada,
+                    TurnoExamenId = turnoExamenSeleccionado.Id,
+                    TurnoExamen = turnoExamenSeleccionado,
+                    Fecha = DateTime.Now
+                };
+            foreach (var materia in materiasInscripcion)
+            {
+                nuevaInscripcion.detallesInscripcionesExamenes.Add(new DetalleInscripcionExamen
+                    {
+                        MateriaId = materia.Id,
+                        Materia = materia
+                    });
+            }
+
+
+            await _memoryCache.AddCacheAsync<InscripcionExamen>(nuevaInscripcion);
+            inscripcionCurrent = nuevaInscripcion;
+        }
+        else
+        {
+            inscripcionCurrent.detallesInscripcionesExamenes.Clear();
+            foreach (var materia in materiasInscripcion)
+            {
+                inscripcionCurrent.detallesInscripcionesExamenes.Add(new DetalleInscripcionExamen
+                {
+                    MateriaId = materia.Id,
+                    Materia = materia
+                });
+            }
+            await _memoryCache.UpdateCacheAsync<InscripcionExamen>(inscripcionCurrent);
+            modificarInscripcion = false;
+        }
         StateHasChanged();
     }
 
     private async Task SeleccionarCarrera(int idCarrera)
     {
         idCarreraSeleccionada = idCarrera;
-
+        modificarInscripcion = false;
+        visualizarPDF = false;
         carreraSeleccionada = carreras.FirstOrDefault(c => c.Id == idCarreraSeleccionada);
-        materias = (await _memoryCache.GetAllCacheAsync<Materia>())
-                    .Where(m => m.AnioCarrera.CarreraId == carreraSeleccionada.Id && m.EsRecreo.Equals(false)).ToList();
+        await ObtenerMateriasEInscripcion();
         StateHasChanged();
     }
 }

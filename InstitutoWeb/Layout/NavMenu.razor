@@ -146,6 +146,9 @@
                 Task.Run(async () => await _memoryCache.GetAllCacheAsync<InscripcionExamen>()),
                 Task.Run(async () => await _memoryCache.GetAllCacheAsync<DetalleInscripcionExamen>()),
                 Task.Run(async () => await _memoryCache.GetAllCacheAsync<InscriptoCarrera>()),
+                Task.Run(async () => await _memoryCache.GetAllCacheAsync<PeriodoHorario>()),
+                Task.Run(async () => await _memoryCache.GetAllCacheAsync<PeriodoInscripcion>()),
+
 
             });
 
