@@ -37,7 +37,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigins",
         builder => builder
-            .WithOrigins("https://institutoweb.azurewebsites.net", "https://localhost:7202")
+            .WithOrigins("https://institutoweb.azurewebsites.net", "https://localhost:7189")
             .AllowAnyHeader()
             .AllowAnyMethod());
 });

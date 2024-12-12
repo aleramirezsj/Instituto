@@ -172,12 +172,12 @@ else
                 if (verMesasDeHoy)
                 {
                     mesasExamenes = (await _memoryCache.GetAllCacheAsync<MesaExamen>())
-                                .Where(m => m.TurnoExamenId == idTurnoExamenSeleccionado && m.Materia.AnioCarrera.CarreraId == idCarreraSeleccionada && (m.Llamado1.Date==DateTime.Today||m.Llamado2.Date==DateTime.Today)).ToList();
+                                .Where(m => m.TurnoExamenId == idTurnoExamenSeleccionado && m.Materia.AnioCarrera.CarreraId == idCarreraSeleccionada && (m.Llamado1.Date == DateTime.Today || m.Llamado2.Date == DateTime.Today)).OrderBy(m => m.Llamado1.Date).ThenBy(m => m.Horario).ToList();
                 }
                 else
                 {
                     mesasExamenes = (await _memoryCache.GetAllCacheAsync<MesaExamen>())
-                                .Where(m => m.TurnoExamenId == idTurnoExamenSeleccionado && m.Materia.AnioCarrera.CarreraId == idCarreraSeleccionada).ToList();
+                                .Where(m => m.TurnoExamenId == idTurnoExamenSeleccionado && m.Materia.AnioCarrera.CarreraId == idCarreraSeleccionada).OrderBy(m => m.Llamado1.Date).ThenBy(m => m.Horario).ToList();
                 }
             }
             else
@@ -185,7 +185,7 @@ else
                 if (verTodasLasMesas && idCarreraSeleccionada != null)
                 {
                     mesasExamenes = (await _memoryCache.GetAllCacheAsync<MesaExamen>())
-                        .Where(m => m.TurnoExamenId == idTurnoExamenSeleccionado && m.Materia.AnioCarrera.CarreraId == idCarreraSeleccionada).ToList();
+                        .Where(m => m.TurnoExamenId == idTurnoExamenSeleccionado && m.Materia.AnioCarrera.CarreraId == idCarreraSeleccionada).OrderBy(m => m.Llamado1.Date).ThenBy(m => m.Horario).ToList();
                 }
                 else
                 {
@@ -194,7 +194,7 @@ else
                         mesasExamenes = (await _memoryCache.GetAllCacheAsync<MesaExamen>())
                                     .Where(m => m.TurnoExamenId == idTurnoExamenSeleccionado &&
                                     m.DetallesMesaExamen.Any(detalle => detalle.DocenteId == usuarioStateService.Usuario.DocenteId) &&
-                                    (m.Llamado1.Date == DateTime.Today || m.Llamado2.Date == DateTime.Today)).ToList();
+                                    (m.Llamado1.Date == DateTime.Today || m.Llamado2.Date == DateTime.Today)).OrderBy(m => m.Llamado1.Date).ThenBy(m => m.Horario).ToList();
                     }
                     else
                     {
