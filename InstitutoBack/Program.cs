@@ -35,9 +35,9 @@ builder.Services.AddSwaggerGen();
 // Configurar una política de CORS
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAll",
+    options.AddPolicy("AllowSpecificOrigins",
         builder => builder
-            .AllowAnyOrigin()
+            .WithOrigins("https://institutoweb.azurewebsites.net", "https://localhost:7202")
             .AllowAnyHeader()
             .AllowAnyMethod());
 });
@@ -51,7 +51,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors("AllowAll");
+app.UseCors("AllowSpecificOrigins");
 
 app.UseHttpsRedirection();
 
