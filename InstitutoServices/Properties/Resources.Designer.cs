@@ -107,7 +107,7 @@ namespace InstitutoServices.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a false.
+        ///   Busca una cadena traducida similar a true.
         /// </summary>
         public static string Remoto {
             get {

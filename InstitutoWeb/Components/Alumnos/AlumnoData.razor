@@ -3,7 +3,9 @@
 @inject ILogger<AlumnoData> logger
 @inject NavigationManager NavigationManager
 @inject SweetAlertService SweetAlert
-@inject IMemoryCacheService _memoryCache
+@inject IMemoryCacheBlazorService _memoryCache
+@inject AuthenticationService AuthService
+
 
 
 <div>
@@ -109,7 +111,7 @@ else
         }
  
         
-        
+        await AuthService.GetUserAuthenticated();
         
         StateHasChanged();
     }

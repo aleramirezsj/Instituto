@@ -9,14 +9,6 @@
 	<BlazorWebAssemblyEnableSWC>true</BlazorWebAssemblyEnableSWC>
   </PropertyGroup>
 
-
-  <ItemGroup>
-    <Compile Remove="Services\Commons\**" />
-    <Content Remove="Services\Commons\**" />
-    <EmbeddedResource Remove="Services\Commons\**" />
-    <None Remove="Services\Commons\**" />
-  </ItemGroup>
-
   <ItemGroup>
     <Content Remove="wwwroot\SweetAlert2.min.css" />
   </ItemGroup>
@@ -64,10 +56,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\InstitutoServices\InstitutoServices.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\js\" />
   </ItemGroup>
 
   <ItemGroup>

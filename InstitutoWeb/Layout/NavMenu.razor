@@ -5,7 +5,7 @@
 @inject IInscriptoCarreraService inscriptoCarreraService
 @inject ILogger<NavMenu> logger
 @inject IUsuarioStateService usuarioStateService
-@inject IMemoryCacheService _memoryCache
+@inject IMemoryCacheBlazorService _memoryCache
 
 
 
@@ -115,39 +115,39 @@
 
     protected async override Task OnInitializedAsync()
     {
+        usuarioStateService.OnChange += ChequeoEstadoLogin;
         if (usuarioStateService?.FirebaseUser==null)
         {
             await AuthService.GetUserAuthenticated();
         }
-        usuarioStateService.OnChange += ChequeoEstadoLogin;
         GetCacheData();
     }
     private async void GetCacheData()
     {
         await Task.WhenAll(new List<Task>
             {
-                Task.Run(async () => await _memoryCache.GetAllCacheAsync<Alumno>()),
-                Task.Run(async () => await _memoryCache.GetAllCacheAsync<AnioCarrera>()),
-                Task.Run(async () => await _memoryCache.GetAllCacheAsync<Aula>()),
-                Task.Run(async () => await _memoryCache.GetAllCacheAsync<Carrera>()),
-                Task.Run(async () => await _memoryCache.GetAllCacheAsync<CicloLectivo>()),
-                Task.Run(async () => await _memoryCache.GetAllCacheAsync<Docente>()),
-                Task.Run(async () => await _memoryCache.GetAllCacheAsync<Hora>()),
-                Task.Run(async () => await _memoryCache.GetAllCacheAsync<Horario>()),
-                Task.Run(async () => await _memoryCache.GetAllCacheAsync<DetalleHorario>()),
-                Task.Run(async () => await _memoryCache.GetAllCacheAsync<IntegranteHorario>()),
-                Task.Run(async () => await _memoryCache.GetAllCacheAsync<JefaturaSeccion>()),
-                Task.Run(async () => await _memoryCache.GetAllCacheAsync<Materia>()),
-                Task.Run(async () => await _memoryCache.GetAllCacheAsync<TurnoExamen>()),
-                Task.Run(async () => await _memoryCache.GetAllCacheAsync<Inscripcion>()),
-                Task.Run(async () => await _memoryCache.GetAllCacheAsync<DetalleInscripcion>()),
-                Task.Run(async () => await _memoryCache.GetAllCacheAsync<MesaExamen>()),
-                Task.Run(async () => await _memoryCache.GetAllCacheAsync<DetalleMesaExamen>()),
-                Task.Run(async () => await _memoryCache.GetAllCacheAsync<InscripcionExamen>()),
-                Task.Run(async () => await _memoryCache.GetAllCacheAsync<DetalleInscripcionExamen>()),
-                Task.Run(async () => await _memoryCache.GetAllCacheAsync<InscriptoCarrera>()),
-                Task.Run(async () => await _memoryCache.GetAllCacheAsync<PeriodoHorario>()),
-                Task.Run(async () => await _memoryCache.GetAllCacheAsync<PeriodoInscripcion>()),
+                // Task.Run(async () => await _memoryCache.GetAllCacheAsync<Alumno>()),
+                // Task.Run(async () => await _memoryCache.GetAllCacheAsync<AnioCarrera>()),
+                // Task.Run(async () => await _memoryCache.GetAllCacheAsync<Aula>()),
+                // Task.Run(async () => await _memoryCache.GetAllCacheAsync<Carrera>()),
+                // Task.Run(async () => await _memoryCache.GetAllCacheAsync<CicloLectivo>()),
+                // Task.Run(async () => await _memoryCache.GetAllCacheAsync<Docente>()),
+                // Task.Run(async () => await _memoryCache.GetAllCacheAsync<Hora>()),
+                // Task.Run(async () => await _memoryCache.GetAllCacheAsync<Horario>()),
+                // Task.Run(async () => await _memoryCache.GetAllCacheAsync<DetalleHorario>()),
+                // Task.Run(async () => await _memoryCache.GetAllCacheAsync<IntegranteHorario>()),
+                // Task.Run(async () => await _memoryCache.GetAllCacheAsync<JefaturaSeccion>()),
+                // Task.Run(async () => await _memoryCache.GetAllCacheAsync<Materia>()),
+                // Task.Run(async () => await _memoryCache.GetAllCacheAsync<TurnoExamen>()),
+                // Task.Run(async () => await _memoryCache.GetAllCacheAsync<Inscripcion>()),
+                // Task.Run(async () => await _memoryCache.GetAllCacheAsync<DetalleInscripcion>()),
+                // Task.Run(async () => await _memoryCache.GetAllCacheAsync<MesaExamen>()),
+                // Task.Run(async () => await _memoryCache.GetAllCacheAsync<DetalleMesaExamen>()),
+                // Task.Run(async () => await _memoryCache.GetAllCacheAsync<InscripcionExamen>()),
+                // Task.Run(async () => await _memoryCache.GetAllCacheAsync<DetalleInscripcionExamen>()),
+                // Task.Run(async () => await _memoryCache.GetAllCacheAsync<InscriptoCarrera>()),
+                // Task.Run(async () => await _memoryCache.GetAllCacheAsync<PeriodoHorario>()),
+                // Task.Run(async () => await _memoryCache.GetAllCacheAsync<PeriodoInscripcion>()),
 
 
             });

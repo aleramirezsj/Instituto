@@ -13,13 +13,13 @@
 <PageTitle>Perfil de Usuario</PageTitle>
 
 
-@if (userFirebaseAuthenticate == null)
+@if (usuarioStateService.FirebaseUser == null)
 {
     <p><em>Cargando información del usuario...</em></p>
 }
 else
 {
-    <h3>Hola @userFirebaseAuthenticate.DisplayName</h3>
+    <h3>Hola @usuarioStateService.FirebaseUser.DisplayName</h3>
     @if(usuarioStateService.Usuario==null&&tipoUsuario==0)
     {
         <p><em>Eres un nuevo usuario, necesitamos completar tu perfil selecciona el tipo de usuario que eres</em></p>
@@ -27,21 +27,19 @@ else
     }
     else
     {
-        <UsuarioData usuario="@usuarioStateService.Usuario" usuarioFirebase="@userFirebaseAuthenticate" tipoUsuario="@tipoUsuario" />
+        <UsuarioData usuario="@usuarioStateService.Usuario" usuarioFirebase="@usuarioStateService.FirebaseUser" tipoUsuario="@tipoUsuario" />
     }
            
 
 }
 
 @code {
-    FirebaseUser? userFirebaseAuthenticate { get; set; } = null;
 
     TipoUsuarioEnum tipoUsuario { get; set; } 
 
 
     protected override void OnInitialized()
     {
-        userFirebaseAuthenticate = usuarioStateService.FirebaseUser;
         //usuario = await usuarioService.GetUserByEmail(userFirebaseAuthenticate?.Email);
         if (usuarioStateService.Usuario != null)
         {

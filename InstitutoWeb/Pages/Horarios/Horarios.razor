@@ -2,7 +2,7 @@
 
 @inject SweetAlertService SweetAlert
 @inject ILogger<Horarios> logger
-@inject IMemoryCacheService _memoryCache
+@inject IMemoryCacheBlazorService _memoryCache
 @inject IUsuarioStateService usuarioStateService
 
 
@@ -97,12 +97,34 @@ else
     private async Task SeleccionarCarrera(int idCarrera)
     {
         idCarreraSeleccionada = idCarrera;
+        logger.LogInformation("SeleccionarCarrera iniciado con idCarrera: " + idCarrera);
 
-        detallesHorarios = (await _memoryCache.GetAllCacheAsync<DetalleHorario>())
-        .Where(d => d.Horario?.Materia.AnioCarrera.CarreraId == idCarreraSeleccionada && d.Horario.PeriodoHorarioId == idPeriodoHorarioSeleccionado).ToList();
-        logger.LogInformation("el tipo de usuario actual es " + usuarioStateService.Usuario.TipoUsuario);
+        try
+        {
+ 
+
+            detallesHorarios = (await _memoryCache.GetAllCacheAsync<DetalleHorario>())
+                .Where(d => d.Horario?.Materia.AnioCarrera.CarreraId == idCarreraSeleccionada && d.Horario.PeriodoHorarioId == idPeriodoHorarioSeleccionado).ToList();
+
+            logger.LogInformation("Detalles horarios count: " + detallesHorarios.Count);
+        }
+        catch (Exception ex)
+        {
+            logger.LogError("Error al obtener detalles horarios: " + ex.Message);
+        }
+
+        if (usuarioStateService.Usuario != null)
+        {
+            logger.LogInformation("el tipo de usuario actual es " + usuarioStateService.Usuario.TipoUsuario);
+        }
+        else
+        {
+            logger.LogWarning("usuarioStateService.Usuario es nulo");
+        }
+
         StateHasChanged();
     }
+
 
     private async Task VerHorariosTodasLasCarreras()
     {

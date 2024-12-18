@@ -24,7 +24,7 @@ namespace InstitutoWeb.Services.Login
 
         public async Task<FirebaseUser?> LoginWithGoogle()
         {
-            var userFirebase = await _jsRuntime.InvokeAsync<FirebaseUser>("firebaseAuth.loginWithGoogle");
+            var userFirebase = await _jsRuntime.InvokeAsync<FirebaseUser>("appHelpers.firebaseAuth.loginWithGoogle");
 
             if (userFirebase != null)
             {
@@ -37,7 +37,7 @@ namespace InstitutoWeb.Services.Login
 
         public async Task<FirebaseUser?> LoginWithFacebook()
         {
-            var userFirebase = await _jsRuntime.InvokeAsync<FirebaseUser>("firebaseAuth.loginWithFacebook");
+            var userFirebase = await _jsRuntime.InvokeAsync<FirebaseUser>("appHelpers.firebaseAuth.loginWithFacebook");
             if (userFirebase != null)
             {
                 var usuario = await _usuarioService.GetUserByEmail(userFirebase.Email);
@@ -49,7 +49,7 @@ namespace InstitutoWeb.Services.Login
         public async Task<LoginResponse> SignInWithEmailPassword(string email, string password, bool rememberPassword)
         {
 
-                LoginResponse response = await _jsRuntime.InvokeAsync<LoginResponse>("firebaseAuth.signInWithEmailPassword", email, password, rememberPassword);
+                LoginResponse response = await _jsRuntime.InvokeAsync<LoginResponse>("appHelpers.firebaseAuth.signInWithEmailPassword", email, password, rememberPassword);
 
             return response;
 
@@ -57,20 +57,20 @@ namespace InstitutoWeb.Services.Login
 
         public async Task<LoginResponse> createUserWithEmailAndPassword(string email, string password, string displayName)
         {
-            LoginResponse response = await _jsRuntime.InvokeAsync<LoginResponse>("firebaseAuth.createUserWithEmailAndPassword", email, password, displayName);
+            LoginResponse response = await _jsRuntime.InvokeAsync<LoginResponse>("appHelpers.firebaseAuth.createUserWithEmailAndPassword", email, password, displayName);
             return response;
         }
 
         public async Task SignOut()
         {
-            await _jsRuntime.InvokeVoidAsync("firebaseAuth.signOut");
+            await _jsRuntime.InvokeVoidAsync("appHelpers.firebaseAuth.signOut");
             _usuarioStateService.SetUsuario(null, null);
         }
 
 
         public async Task<FirebaseUser?> GetUserAuthenticated()
         {
-            var userFirebase= await _jsRuntime.InvokeAsync<FirebaseUser>("firebaseAuth.getUserFirebase");
+            var userFirebase= await _jsRuntime.InvokeAsync<FirebaseUser>("appHelpers.firebaseAuth.getUserFirebase");
             //chequeo que el usuario haya verificado su correo
             if (userFirebase != null && userFirebase.EmailVerified)
             {
@@ -85,7 +85,7 @@ namespace InstitutoWeb.Services.Login
         }
         public async Task<bool> SendPasswordResetEmail(string email)
         {
-            return await _jsRuntime.InvokeAsync<bool> ("firebaseAuth.sendPasswordResetEmail", email);
+            return await _jsRuntime.InvokeAsync<bool>("appHelpers.firebaseAuth.sendPasswordResetEmail", email);
         }
 
     }

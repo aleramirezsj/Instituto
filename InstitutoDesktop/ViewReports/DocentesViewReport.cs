@@ -15,7 +15,7 @@ namespace InstitutoDesktop.ViewReports
 {
     public partial class DocentesViewReport : Form
     {
-        ReportViewer reporte;
+        ReportViewer reporte = new();
         BindingSource BindingDocente = new BindingSource();
         List<Docente> listDoce = new List<Docente>();
         private readonly MemoryCacheServiceWinForms _memoryCache;
@@ -26,7 +26,7 @@ namespace InstitutoDesktop.ViewReports
             _memoryCache = cacheServiceWinForms;
             this.MdiParent= menuPrincipalView;
             this.WindowState = FormWindowState.Maximized;
-            reporte = new ReportViewer();
+            //reporte = new ReportViewer();
 
             reporte.Dock = DockStyle.Fill;
 
