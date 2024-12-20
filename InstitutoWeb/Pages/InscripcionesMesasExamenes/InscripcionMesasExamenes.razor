@@ -81,8 +81,8 @@ else
     {
         carreras = await _memoryCache.GetAllCacheAsync<Carrera>();
         turnosExamenes = await _memoryCache.GetAllCacheAsync<TurnoExamen>();
-        if (turnosExamenes.Any(c => c.Actual))
-            turnoExamenSeleccionado = turnosExamenes.Where(c => c.Actual).FirstOrDefault();
+        if (turnosExamenes.Any(c => c.InscripcionHabilitada))
+            turnoExamenSeleccionado = turnosExamenes.Where(c => c.InscripcionHabilitada).FirstOrDefault();
         if (usuarioStateService.Usuario != null && usuarioStateService.Usuario.TipoUsuario == TipoUsuarioEnum.Alumno)
         {
             if (usuarioStateService.Usuario.Alumno.InscripcionesACarreras.Count > 1)
