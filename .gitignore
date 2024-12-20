@@ -361,3 +361,9 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/Certs/instituto.key
+/Certs/instituto.crt
+/Dockerfile
+/DockerfileBack
+/.dockerignore
+/nginx.conf
