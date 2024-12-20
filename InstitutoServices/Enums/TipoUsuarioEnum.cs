@@ -4,7 +4,7 @@
     {
         Alumno=1,
         Docente,
-        Jefe_sección,
+        Jefe_seccion,
         Directivo,
 
     }
