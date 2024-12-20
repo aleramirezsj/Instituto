@@ -4,6 +4,10 @@
 @inject NavigationManager NavigationManager
 @inject SweetAlertService SweetAlert
 @inject IMemoryCacheService _memoryCache
+@inject IUsuarioStateService usuarioStateService
+@inject IUsuarioService _usuarioService;
+
+
 
 
 <div>
@@ -100,17 +104,17 @@ else
             foreach (var inscripcion in inscripcionesACarreras)
             {
                 logger.LogInformation("inscripcion " + inscripcion?.Carrera?.Nombre);
-                
+
             }
         }
         catch (Exception ex)
         {
             logger.LogError(ex, "Error al inscribirse a una carrera");
         }
- 
-        
-        
-        
+
+        var usuario = await _usuarioService.GetUserByEmail(usuarioStateService?.FirebaseUser?.Email);
+        usuarioStateService.SetUsuario(usuario, usuarioStateService.FirebaseUser);
+
         StateHasChanged();
     }
 
