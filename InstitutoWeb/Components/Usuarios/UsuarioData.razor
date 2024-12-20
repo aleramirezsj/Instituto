@@ -3,6 +3,8 @@
 @inject IUsuarioStateService usuarioStateService
 @inject SweetAlertService SweetAlert
 @inject IMemoryCacheService _memoryCacheService
+@inject IUsuarioService _usuarioService;
+
 
 
 @if (usuario != null)
@@ -37,7 +39,7 @@
         <DocenteData docente="@docente" />
     }
 }
-@if (tipoUsuario == TipoUsuarioEnum.Jefe_sección)
+@if (tipoUsuario == TipoUsuarioEnum.Jefe_seccion)
 {
     @if (docente == null)
     {
@@ -133,7 +135,8 @@
                 ShowCancelButton = false,
                 ConfirmButtonText = "Ok",
             });
-        usuarioStateService.SetUsuario(usuario, usuarioFirebase);
+        var nuevousuario = await _usuarioService.GetUserByEmail(usuarioStateService?.FirebaseUser?.Email);
+        usuarioStateService.SetUsuario(nuevousuario, usuarioFirebase);
         StateHasChanged();
     }
 
