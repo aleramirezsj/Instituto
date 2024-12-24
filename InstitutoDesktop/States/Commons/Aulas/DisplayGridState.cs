@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace InstitutoDesktop.States.Commons.Aulas
 {
-    public class DisplayGridState : IBaseViewState
+    public class DisplayGridState : ICrudViewState
     {
         private readonly AulasView _form;
 

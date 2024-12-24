@@ -5,7 +5,7 @@ using InstitutoServices.Models.Commons;
 
 namespace InstitutoDesktop.States.Commons.Carreras
 {
-    public class EditionState : IBaseViewState
+    public class EditionState : ICrudViewState
     {
         private readonly CarrerasView _form;
 

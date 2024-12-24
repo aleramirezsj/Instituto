@@ -568,7 +568,7 @@
             Margin = new Padding(2);
             Name = "MesasExamenesView";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Horarios";
+            Text = "Mesas de exámenes";
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             tabControl.ResumeLayout(false);

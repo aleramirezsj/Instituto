@@ -7,7 +7,7 @@ namespace InstitutoDesktop.Views.Commons
 {
     public partial class AulasView : Form
     {
-        private IBaseViewState _currentState;
+        private ICrudViewState _currentState;
 
         public List<Aula>? listaAulas = new List<Aula>();
         public Aula aulaCurrent;
@@ -23,9 +23,11 @@ namespace InstitutoDesktop.Views.Commons
             // Iniciar en estado de listado
             TransitionTo(new DisplayGridState(this));
             _ = _currentState.LoadData();
+            this.WindowState = FormWindowState.Maximized;
+
         }
 
-        public void TransitionTo(IBaseViewState state) 
+        public void TransitionTo(ICrudViewState state) 
         {
             _currentState = state;
         }

@@ -2,16 +2,11 @@
 
 namespace InstitutoDesktop.Interfaces.MesasExamenes
 {
-    public interface IMesasExamenesViewState : ICrudViewState
+    public interface IInscripcionesMesasExamenesViewState : ICrudViewState
     {
         void LoadComboboxTurnosExamenes();
         void LoadComboboxCarreras();
         void LoadComboboxAniosCarreras();
         void LoadComboboxMaterias();
-        void LoadComboboxDocentes();
-        void LoadComboboxTipoIntegrante();
-        void OnAgregarDocenteADetalle();
-        void OnQuitarDocenteDeDetalle();
-        void OnEditarDocenteDeDetalle();
     }
 }

@@ -7,7 +7,7 @@ using InstitutoServices.Models.Horarios;
 
 namespace InstitutoDesktop.States.Horarios.Horas
 {
-    public class EditionState : IBaseViewState
+    public class EditionState : ICrudViewState
     {
         private readonly HorasView _form;
 

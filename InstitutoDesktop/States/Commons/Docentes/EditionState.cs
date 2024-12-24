@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace InstitutoDesktop.States.Docentes
 {
-    public class EditionState : IBaseViewState
+    public class EditionState : ICrudViewState
     {
         private readonly DocentesView _form;
 

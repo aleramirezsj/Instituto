@@ -11,7 +11,7 @@ namespace InstitutoDesktop.Views.Commons
 {
     public partial class DocentesView : Form
     {
-        private IBaseViewState _currentState;
+        private ICrudViewState _currentState;
 
         public List<Docente>? listaDocente = new List<Docente>();
         public Docente docenteCurrent;
@@ -26,9 +26,10 @@ namespace InstitutoDesktop.Views.Commons
             // Start in the display grid state
             TransitionTo(new DisplayGridState(this));
             _ = _currentState.LoadData();
+            this.WindowState = FormWindowState.Maximized;
         }
 
-        public void TransitionTo(IBaseViewState state)
+        public void TransitionTo(ICrudViewState state)
         {
             _currentState = state;
         }

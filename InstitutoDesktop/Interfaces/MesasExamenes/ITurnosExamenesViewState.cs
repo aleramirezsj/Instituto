@@ -2,7 +2,7 @@
 
 namespace InstitutoDesktop.Interfaces.MesasExamenes
 {
-    public interface ITurnosExamenesViewState : IBaseViewState
+    public interface ITurnosExamenesViewState : ICrudViewState
     {
         Task LoadComboboxCiclosLectivos();
     }

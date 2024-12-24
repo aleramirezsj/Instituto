@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InstitutoDesktop.Interfaces.Commons
 {
-    public interface IPeriodosHorariosViewState : IBaseViewState
+    public interface IPeriodosHorariosViewState : ICrudViewState
     {
         Task LoadComboboxCiclosLectivos();
     }

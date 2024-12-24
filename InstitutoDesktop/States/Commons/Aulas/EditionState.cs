@@ -5,7 +5,7 @@ using InstitutoServices.Models.Commons;
 
 namespace InstitutoDesktop.States.Commons.Aulas
 {
-    public class EditionState : IBaseViewState
+    public class EditionState : ICrudViewState
     {
         private readonly AulasView _form;
 

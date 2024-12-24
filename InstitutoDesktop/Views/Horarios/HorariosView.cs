@@ -43,6 +43,7 @@ namespace InstitutoDesktop.Views
             _memoryCache = memoryCacheService;
             TransitionTo(new InitialDisplayState(this));
             _ = _currentState.LoadData();
+            this.WindowState = FormWindowState.Maximized;
         }
         public void TransitionTo(IHorariosViewState state) => _currentState = state;
 

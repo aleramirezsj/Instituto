@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace InstitutoDesktop.States.Commons.Carreras
 {
-    public class DisplayGridState : IBaseViewState
+    public class DisplayGridState : ICrudViewState
     {
         private readonly CarrerasView _form;
 

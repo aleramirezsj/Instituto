@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace InstitutoDesktop.States.Horarios.Horas
 {
-    public class DisplayGridState : IBaseViewState
+    public class DisplayGridState : ICrudViewState
     {
         private readonly HorasView _form;
 

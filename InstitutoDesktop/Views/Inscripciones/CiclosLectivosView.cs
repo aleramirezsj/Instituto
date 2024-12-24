@@ -33,6 +33,7 @@ namespace InstitutoDesktop.Views
             _memoryCache = memoryCacheService;
             TransitionTo(new DisplayGridState(this));
             _ = _currentState.LoadData();
+            this.WindowState = FormWindowState.Maximized;
         }
 
         public void TransitionTo(ICiclosLectivosState state) 

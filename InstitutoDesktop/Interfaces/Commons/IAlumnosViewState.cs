@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InstitutoDesktop.Interfaces.Commons
 {
-    public interface IAlumnosViewState: IBaseViewState
+    public interface IAlumnosViewState: ICrudViewState
     {
     }
 }

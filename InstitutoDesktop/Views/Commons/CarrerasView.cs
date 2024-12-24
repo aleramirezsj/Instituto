@@ -8,7 +8,7 @@ namespace InstitutoDesktop.Views.Commons
 {
     public partial class CarrerasView : Form
     {
-        public IBaseViewState _currentState { get; set; }
+        public ICrudViewState _currentState { get; set; }
 
         public List<Carrera>? listaCarreras { get; set; } = new List<Carrera>();
         public Carrera carreraCurrent { get; set; }
@@ -26,11 +26,12 @@ namespace InstitutoDesktop.Views.Commons
             // Iniciar en estado de listado
             TransitionTo(new DisplayGridState(this));
             _ = _currentState.LoadData();
+            this.WindowState = FormWindowState.Maximized;
         }
 
-        
 
-        public void TransitionTo(IBaseViewState state) 
+
+        public void TransitionTo(ICrudViewState state) 
         {
             _currentState = state;
         }

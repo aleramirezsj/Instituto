@@ -6,22 +6,19 @@ using InstitutoServices.Models.MesasExamenes;
 
 namespace InstitutoDesktop.Views
 {
-    public partial class MesasExamenesView : Form
+    public partial class InscripcionesMesasExamenesView : Form
     {
         public List<TurnoExamen>? listaTurnosExamenes = new List<TurnoExamen>();
         public List<Carrera>? listaCarreras = new List<Carrera>();
         public List<AnioCarrera>? listaAnioCarreras = new List<AnioCarrera>();
         public List<Materia>? listaMaterias = new List<Materia>();
-        public List<Docente>? listaDocentes = new List<Docente>();
-        public List<MesaExamen>? listaMesasExamenes = new List<MesaExamen>();
-        public MesaExamen mesaExamenCurrent;
-        public DetalleMesaExamen detalleMesaExamenEdit;
+        public List<InscripcionExamen>? listaInscripcionExamen = new List<InscripcionExamen>();
 
         public readonly MemoryCacheServiceWinForms _memoryCache;
 
         public IMesasExamenesViewState _currentState;
 
-        public MesasExamenesView(MemoryCacheServiceWinForms memoryCacheService, MenuPrincipalView menuPrincipal)
+        public InscripcionesMesasExamenesView(MemoryCacheServiceWinForms memoryCacheService, MenuPrincipalView menuPrincipal)
         {
             InitializeComponent();
             _memoryCache = memoryCacheService;

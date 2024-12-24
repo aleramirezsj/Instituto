@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace InstitutoDesktop.States.Docentes
 {
-    public class DisplayGridState : IBaseViewState
+    public class DisplayGridState : ICrudViewState
     {
         private readonly DocentesView _form;
 

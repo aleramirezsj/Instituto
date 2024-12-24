@@ -37,6 +37,7 @@ namespace InstitutoDesktop
             _serviceProvider = serviceProvider;
             ToolButtonHorarios.Click += subMenuHorarios_Click;
             ToolButtonMesasExamenes.Click += subMenuConformacionMesasExamenes_Click;
+            this.WindowState = FormWindowState.Maximized;
         }
 
 

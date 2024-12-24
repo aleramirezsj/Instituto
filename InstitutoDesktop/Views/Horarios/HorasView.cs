@@ -9,7 +9,7 @@ namespace InstitutoDesktop.Views.Horarios
 {
     public partial class HorasView : Form
     {
-        public IBaseViewState _currentState { get; set; }
+        public ICrudViewState _currentState { get; set; }
 
         public List<Hora>? listaHoras { get; set; } = new List<Hora>();
         public Hora horaCurrent { get; set; }
@@ -27,11 +27,12 @@ namespace InstitutoDesktop.Views.Horarios
             // Iniciar en estado de listado
             TransitionTo(new DisplayGridState(this));
             _ = _currentState.LoadData();
+            this.WindowState = FormWindowState.Maximized;
         }
 
         
 
-        public void TransitionTo(IBaseViewState state) 
+        public void TransitionTo(ICrudViewState state) 
         {
             _currentState = state;
         }

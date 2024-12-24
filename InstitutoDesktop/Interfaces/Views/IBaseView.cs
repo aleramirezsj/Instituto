@@ -15,7 +15,7 @@ namespace InstitutoDesktop.Interfaces.Views
     {
         List<T>? lista { get; set; }
         T current { get; set; }
-        IBaseViewState _currentState { get; set; }
+        ICrudViewState _currentState { get; set; }
         MemoryCacheServiceWinForms _memoryCache { get; set; }
         TabControl TabControl { get; set; }
         TabPage TabPageLista { get; set; }
@@ -30,7 +30,7 @@ namespace InstitutoDesktop.Interfaces.Views
         FontAwesome.Sharp.IconButton BtnBuscar { get; set; }
         TextBox TxtFiltro { get; set; }
         TextBox TxtNombre { get; set; }
-        void TransitionTo(IBaseViewState state);
+        void TransitionTo(ICrudViewState state);
         void Close();
     }
 }

@@ -24,6 +24,7 @@ namespace InstitutoDesktop.Views.Inscripciones
             // Iniciar en estado de listado
             TransitionTo(new InitialDisplayState(this));
             _ = _currentState.LoadData();
+            this.WindowState = FormWindowState.Maximized;
         }
 
         public void TransitionTo(IPeriodosInscripcionesViewState state)

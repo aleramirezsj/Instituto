@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InstitutoDesktop.Interfaces.Commons
 {
-    public interface IUsuariosViewState : IBaseViewState
+    public interface IUsuariosViewState : ICrudViewState
     {
         Task LoadComboboxDocentes();
         Task LoadComboboxAlumnos();

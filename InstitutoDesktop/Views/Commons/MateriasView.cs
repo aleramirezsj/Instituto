@@ -24,6 +24,7 @@ namespace InstitutoDesktop.Views.Commons
             // Iniciar en estado de listado
             TransitionTo(new DisplayGridState(this));
             _ = _currentState.LoadData();
+            this.WindowState = FormWindowState.Maximized;
         }
 
         public void TransitionTo(IMateriasViewState state)

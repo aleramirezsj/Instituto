@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InstitutoDesktop.Interfaces.Commons
 {
-    public interface IMateriasViewState : IBaseViewState
+    public interface IMateriasViewState : ICrudViewState
     {
         Task LoadComboboxCarreras();
         Task LoadComboboxAniosCarreras();

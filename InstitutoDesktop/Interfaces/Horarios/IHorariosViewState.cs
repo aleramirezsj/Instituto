@@ -2,7 +2,7 @@
 
 namespace InstitutoDesktop.Interfaces.Horarios
 {
-    public interface IHorariosViewState : IBaseViewState
+    public interface IHorariosViewState : ICrudViewState
     {
         void LoadComboboxPeriodosHorarios();
         void LoadComboboxCarreras();
