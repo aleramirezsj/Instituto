@@ -1,7 +1,7 @@
 ﻿using InstitutoServices.Class;
 using System.Linq.Expressions;
 
-namespace InstitutoBack.Util
+namespace InstitutoServices.Util
 {
     public static class BuilderPredicate
     {
@@ -12,13 +12,9 @@ namespace InstitutoBack.Util
 
             foreach (var filter in filters)
             {
-                // Obtener la propiedad de la ruta completa
                 var property = GetPropertyExpression(parameter, filter.PropertyName);
-
-                // Convertir el valor al tipo de la propiedad
                 var constant = Expression.Constant(Convert.ChangeType(filter.Value, property.Type));
 
-                // Crear la expresión de comparación o método
                 Expression comparison = filter.Operation switch
                 {
                     "Equals" => Expression.Equal(property, constant),
@@ -30,6 +26,8 @@ namespace InstitutoBack.Util
                     "Contains" => Expression.Call(property, typeof(string).GetMethod("Contains", new[] { typeof(string) })!, constant),
                     "StartsWith" => Expression.Call(property, typeof(string).GetMethod("StartsWith", new[] { typeof(string) })!, constant),
                     "EndsWith" => Expression.Call(property, typeof(string).GetMethod("EndsWith", new[] { typeof(string) })!, constant),
+                    "AndAlso" => body == null ? constant : Expression.AndAlso(body, constant),
+                    "OrElse" => body == null ? constant : Expression.OrElse(body, constant),
                     _ => throw new NotSupportedException($"Operation {filter.Operation} is not supported")
                 };
 
@@ -51,6 +49,7 @@ namespace InstitutoBack.Util
 
             return propertyExpression;
         }
+
 
     }
 }
