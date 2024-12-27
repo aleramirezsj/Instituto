@@ -45,6 +45,16 @@ namespace InstitutoServices.Util
                         "EndsWith" => Expression.Call(property, typeof(string).GetMethod("EndsWith", new[] { typeof(string) })!, constant),
                         _ => throw new NotSupportedException($"Operation {filter.Operation} is not supported")
                     };
+
+                    // Si body ya tiene una expresión, combinarla con la actual usando AND
+                    if (body != null)
+                    {
+                        body = Expression.AndAlso(body, currentExpression);
+                    }
+                    else
+                    {
+                        body = currentExpression;
+                    }
                 }
             }
 
