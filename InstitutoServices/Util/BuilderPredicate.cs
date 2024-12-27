@@ -26,31 +26,41 @@ public static class BuilderPredicate
 
     private static Expression BuildExpression(ParameterExpression parameter, FilterDTO filter)
     {
-        if (filter.SubFilters != null && filter.SubFilters.Any())
+        if (string.IsNullOrWhiteSpace(filter.PropertyName))
         {
-            Expression? subExpression = null;
+            if (filter.SubFilters == null || filter.SubFilters.Count == 0)
+            {
+                throw new ArgumentException("El FilterDTO con PropertyName vacío debe tener SubFilters.", nameof(filter.SubFilters));
+            }
+
+            Expression? combinedExpression = null;
             foreach (var subFilter in filter.SubFilters)
             {
-                var subFilterExpression = BuildExpression(parameter, subFilter);
-                if (subExpression == null)
+                var subExpression = BuildExpression(parameter, subFilter);
+                if (combinedExpression == null)
                 {
-                    subExpression = subFilterExpression;
+                    combinedExpression = subExpression;
                 }
                 else
                 {
-                    subExpression = filter.Operation switch
+                    combinedExpression = filter.Operation switch
                     {
-                        "AndAlso" => Expression.AndAlso(subExpression, subFilterExpression),
-                        "OrElse" => Expression.OrElse(subExpression, subFilterExpression),
+                        "AndAlso" => Expression.AndAlso(combinedExpression, subExpression),
+                        "OrElse" => Expression.OrElse(combinedExpression, subExpression),
                         _ => throw new NotSupportedException($"La operación lógica {filter.Operation} no es compatible.")
                     };
                 }
             }
-            return subExpression!;
+            return combinedExpression!;
         }
         else
         {
-            var member = Expression.Property(parameter, filter.PropertyName);
+            Expression member = parameter;
+            foreach (var property in filter.PropertyName.Split('.'))
+            {
+                member = Expression.Property(member, property);
+            }
+
             var constant = Expression.Constant(Convert.ChangeType(filter.Value, member.Type));
 
             return filter.Operation switch
