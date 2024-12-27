@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using InstitutoServices.Models;
 using InstitutoBack.DataContext;
 using InstitutoServices.Models.Commons;
+using InstitutoBack.Util;
+using InstitutoServices.Class;
 
 namespace InstitutoBack.Controllers.Commons
 {
@@ -33,6 +35,17 @@ namespace InstitutoBack.Controllers.Commons
             return await _context.anioscarreras.Include(a => a.Carrera).AsNoTracking().ToListAsync();
         }
 
+        [HttpPost("filter")]
+        public async Task<ActionResult<IEnumerable<AnioCarrera>>> Getanioscarreras([FromBody] List<FilterDTO> filters)
+        {
+            var filterExpression = BuilderPredicate.GetExpression<AnioCarrera>(filters);
+
+            if (filterExpression == null)
+            {
+                return BadRequest("Invalid filter expression.");
+            }
+            return await _context.anioscarreras.Include(a => a.Carrera).Where(filterExpression).AsNoTracking().ToListAsync();
+        }
         // GET: api/ApiAnioCarreras/5
         [HttpGet("{id}")]
         public async Task<ActionResult<AnioCarrera>> GetAnioCarrera(int id)
