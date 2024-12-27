@@ -12,8 +12,8 @@ namespace InstitutoBack.Util
 
             foreach (var filter in filters)
             {
-                // Obtener la propiedad del modelo
-                var property = Expression.Property(parameter, filter.PropertyName);
+                // Obtener la propiedad de la ruta completa
+                var property = GetPropertyExpression(parameter, filter.PropertyName);
 
                 // Convertir el valor al tipo de la propiedad
                 var constant = Expression.Constant(Convert.ChangeType(filter.Value, property.Type));
@@ -21,37 +21,35 @@ namespace InstitutoBack.Util
                 // Crear la expresión de comparación o método
                 Expression comparison = filter.Operation switch
                 {
-                    // Operaciones de comparación
                     "Equals" => Expression.Equal(property, constant),
                     "NotEquals" => Expression.NotEqual(property, constant),
                     "GreaterThan" => Expression.GreaterThan(property, constant),
                     "GreaterThanOrEquals" => Expression.GreaterThanOrEqual(property, constant),
                     "LessThan" => Expression.LessThan(property, constant),
                     "LessThanOrEquals" => Expression.LessThanOrEqual(property, constant),
-
-                    // Métodos de cadenas
                     "Contains" => Expression.Call(property, typeof(string).GetMethod("Contains", new[] { typeof(string) })!, constant),
                     "StartsWith" => Expression.Call(property, typeof(string).GetMethod("StartsWith", new[] { typeof(string) })!, constant),
                     "EndsWith" => Expression.Call(property, typeof(string).GetMethod("EndsWith", new[] { typeof(string) })!, constant),
-
-                    // Operadores lógicos (se pueden expandir según necesidad)
-                    "AndAlso" => body == null ? constant : Expression.AndAlso(body, constant),
-                    "OrElse" => body == null ? constant : Expression.OrElse(body, constant),
-
-                    // Otros operadores no soportados
                     _ => throw new NotSupportedException($"Operation {filter.Operation} is not supported")
                 };
 
-                // Combinar la nueva comparación con el cuerpo existente
                 body = body == null ? comparison : Expression.AndAlso(body, comparison);
             }
 
-            if (body == null)
+            return Expression.Lambda<Func<T, bool>>(body!, parameter);
+        }
+
+        private static Expression GetPropertyExpression(Expression parameter, string propertyName)
+        {
+            var propertyNames = propertyName.Split('.'); // Separar por puntos para manejar propiedades anidadas
+            Expression propertyExpression = parameter;
+
+            foreach (var property in propertyNames)
             {
-                throw new InvalidOperationException("No filters provided to build the predicate.");
+                propertyExpression = Expression.Property(propertyExpression, property); // Navegar por la propiedad
             }
 
-            return Expression.Lambda<Func<T, bool>>(body, parameter);
+            return propertyExpression;
         }
 
     }
