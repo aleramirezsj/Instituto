@@ -1,9 +1,9 @@
 ﻿using InstitutoServices.Class;
 using System.Linq.Expressions;
 
-public static class PredicateBuilder
+public static class BuilderPredicate
 {
-    public static Expression<Func<T, bool>> BuildPredicate<T>(List<FilterDTO> filters)
+    public static Expression<Func<T, bool>> GetExpression<T>(List<FilterDTO> filters)
     {
         var parameter = Expression.Parameter(typeof(T), "x");
         Expression? expression = null;
