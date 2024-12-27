@@ -19,14 +19,43 @@ namespace InstitutoServices.Util
 
         private static void ProcessExpression(Expression expression, List<FilterDTO> filters)
         {
-            if (expression is BinaryExpression binaryExpression)
+            // Si la expresión es lógica (AND/OR)
+            if (expression is BinaryExpression logicalExpression &&
+                (logicalExpression.NodeType == ExpressionType.AndAlso || logicalExpression.NodeType == ExpressionType.OrElse))
+            {
+                // Procesar las expresiones lógicas
+                var leftFilters = new List<FilterDTO>();
+                var rightFilters = new List<FilterDTO>();
+
+                ProcessExpression(logicalExpression.Left, leftFilters);
+                ProcessExpression(logicalExpression.Right, rightFilters);
+
+                // Agregar las expresiones lógicas con su tipo
+                filters.AddRange(leftFilters);
+                filters.AddRange(rightFilters);
+                filters.Add(new FilterDTO
+                {
+                    PropertyName = string.Empty,  // El campo vacío para representar la expresión lógica
+                    Operation = GetOperationFromExpressionType(logicalExpression.NodeType),
+                    Value = string.Empty  // No es necesario un valor en expresiones lógicas
+                });
+            }
+            // Si la expresión es binaria (como Equals, NotEquals, etc.)
+            else if (expression is BinaryExpression binaryExpression)
             {
                 var filter = CreateFilterFromBinaryExpression(binaryExpression);
                 if (filter != null)
                 {
                     filters.Add(filter);
                 }
+                else
+                {
+                    // Si la expresión es lógica, procesamos ambos lados (AND/OR)
+                    ProcessExpression(binaryExpression.Left, filters);
+                    ProcessExpression(binaryExpression.Right, filters);
+                }
             }
+            // Si la expresión es una llamada de método (por ejemplo, Equals, Contains, StartsWith, etc.)
             else if (expression is MethodCallExpression methodCallExpression)
             {
                 var filter = CreateFilterFromMethodCallExpression(methodCallExpression);
@@ -35,18 +64,13 @@ namespace InstitutoServices.Util
                     filters.Add(filter);
                 }
             }
-            else if (expression is BinaryExpression logicalExpression &&
-                     (logicalExpression.NodeType == ExpressionType.AndAlso || logicalExpression.NodeType == ExpressionType.OrElse))
-            {
-                ProcessExpression(logicalExpression.Left, filters);
-                ProcessExpression(logicalExpression.Right, filters);
-            }
             else
             {
                 throw new NotSupportedException($"La expresión no es compatible: {expression}");
             }
         }
 
+        // Manejo de expresiones binarias simples (por ejemplo, a.Equals(1))
         private static FilterDTO? CreateFilterFromBinaryExpression(BinaryExpression binaryExpression)
         {
             if (binaryExpression.Left is MemberExpression memberExpression &&
@@ -62,23 +86,24 @@ namespace InstitutoServices.Util
             return null;
         }
 
+        // Manejo de llamadas a métodos (como Equals, Contains, StartsWith)
         private static FilterDTO? CreateFilterFromMethodCallExpression(MethodCallExpression methodCallExpression)
         {
+            // Manejo de métodos Equals
             if (methodCallExpression.Method.Name == "Equals" &&
-        methodCallExpression.Object is MemberExpression memberExpression &&
-        methodCallExpression.Arguments[0] is ConstantExpression constantExpression)
+                methodCallExpression.Object is MemberExpression memberExpression &&
+                methodCallExpression.Arguments[0] is ConstantExpression constantExpression)
             {
-                // Manejar el caso de a.CarreraId.Equals(1)
                 return new FilterDTO
                 {
-                    PropertyName = memberExpression.Member.Name,
+                    PropertyName = GetFullPropertyPath(memberExpression), // Ruta completa de la propiedad
                     Operation = "Equals", // Siempre es Equals en este caso
                     Value = constantExpression.Value?.ToString()
                 };
             }
+            // Manejo de métodos de cadenas como Contains, StartsWith, EndsWith
             if (methodCallExpression.Method.DeclaringType == typeof(string))
             {
-                // Manejar métodos de cadenas como Contains, StartsWith, EndsWith
                 if (methodCallExpression.Object is MemberExpression memberExpression2 &&
                     methodCallExpression.Arguments[0] is ConstantExpression constantExpression2)
                 {
@@ -93,6 +118,8 @@ namespace InstitutoServices.Util
 
             return null;
         }
+
+        // Obtiene la ruta completa de la propiedad para propiedades anidadas (e.g., "Direccion.Ciudad")
         private static string GetFullPropertyPath(MemberExpression memberExpression)
         {
             var propertyPath = new List<string>();
@@ -107,6 +134,7 @@ namespace InstitutoServices.Util
             return string.Join(".", propertyPath); // Combinar las propiedades con "."
         }
 
+        // Mapea los operadores de la expresión a operaciones de filtro (Equals, GreaterThan, AndAlso, etc.)
         private static string GetOperationFromExpressionType(ExpressionType expressionType)
         {
             return expressionType switch
@@ -144,5 +172,4 @@ namespace InstitutoServices.Util
             };
         }
     }
-
 }
