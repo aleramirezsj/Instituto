@@ -1,8 +1,10 @@
 using InstitutoBack.DataContext;
+using Microsoft.AspNetCore.Hosting.StaticWebAssets;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
+
 
 // Detectar si estamos en un contenedor
 string password = Environment.GetEnvironmentVariable("PASSWORD")??InstitutoBack.Properties.Resources.pass;
@@ -32,6 +34,7 @@ builder.WebHost.ConfigureKestrel(options =>
         }
         listenOptions.UseHttps(certPath, password);
     });
+    
 });
 
 var configuration = new ConfigurationBuilder()
@@ -80,6 +83,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 
 app.UseCors("AllowSpecificOrigins");
 

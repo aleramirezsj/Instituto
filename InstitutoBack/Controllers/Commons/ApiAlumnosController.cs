@@ -8,6 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using InstitutoServices.Models;
 using InstitutoBack.DataContext;
 using InstitutoServices.Models.Commons;
+using System.Linq.Expressions;
+using System.Text.Json;
+using Newtonsoft.Json;
+using InstitutoServices.Class;
+using InstitutoBack.Util;
 
 namespace InstitutoBack.Controllers.Commons
 {
@@ -27,6 +32,17 @@ namespace InstitutoBack.Controllers.Commons
         public async Task<ActionResult<IEnumerable<Alumno>>> Getalumnos()
         {
             return await _context.alumnos.Include(alumno=>alumno.InscripcionesACarreras).AsNoTracking().ToListAsync();
+        }
+        [HttpPost("filter")]
+        public async Task<ActionResult<IEnumerable<Alumno>>> Getalumnos([FromBody] List<FilterDTO> filters)
+        {
+            var filterExpression = BuilderPredicate.GetExpression<Alumno>(filters);
+
+            if (filterExpression == null)
+            {
+                return BadRequest("Invalid filter expression.");
+            }
+            return await _context.alumnos.Include(alumno => alumno.InscripcionesACarreras).Where(filterExpression).AsNoTracking().ToListAsync();
         }
 
         // GET: api/ApiAlumnos/5
