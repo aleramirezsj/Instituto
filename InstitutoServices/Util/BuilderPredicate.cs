@@ -61,7 +61,7 @@ public static class BuilderPredicate
                 member = Expression.Property(member, property);
             }
 
-            var constant = Expression.Constant(Convert.ChangeType(filter.Value, member.Type));
+            var constant = GetConstantExpression(filter.Value, member.Type);
 
             return filter.Operation switch
             {
@@ -76,6 +76,50 @@ public static class BuilderPredicate
                 "EndsWith" => Expression.Call(member, typeof(string).GetMethod("EndsWith", new[] { typeof(string) })!, constant),
                 _ => throw new NotSupportedException($"La operación {filter.Operation} no es compatible.")
             };
+        }
+    }
+
+    private static Expression GetConstantExpression(string? value, Type targetType)
+    {
+        if (string.IsNullOrEmpty(value))
+        {
+            return Expression.Constant(null, targetType);
+        }
+
+        // Manejar el caso especial de Convert(value, type)
+        if (value.StartsWith("Convert(") && value.EndsWith(")"))
+        {
+            var content = value.Substring(8, value.Length - 9); // Remover "Convert(" y ")"
+            var parts = content.Split(new[] { ',' }, 2);
+            if (parts.Length == 2)
+            {
+                var valueStr = parts[0].Trim();
+
+                if (targetType.IsGenericType && targetType.GetGenericTypeDefinition() == typeof(Nullable<>))
+                {
+                    var underlyingType = Nullable.GetUnderlyingType(targetType);
+                    var convertedValue = Convert.ChangeType(valueStr, underlyingType);
+                    return Expression.Constant(convertedValue, targetType);
+                }
+                else
+                {
+                    var convertedValue = Convert.ChangeType(valueStr, targetType);
+                    return Expression.Constant(convertedValue, targetType);
+                }
+            }
+        }
+
+        // Manejar tipos nullables
+        if (targetType.IsGenericType && targetType.GetGenericTypeDefinition() == typeof(Nullable<>))
+        {
+            var underlyingType = Nullable.GetUnderlyingType(targetType);
+            var convertedValue = Convert.ChangeType(value, underlyingType);
+            return Expression.Constant(convertedValue, targetType);
+        }
+        else
+        {
+            var convertedValue = Convert.ChangeType(value, targetType);
+            return Expression.Constant(convertedValue, targetType);
         }
     }
 }

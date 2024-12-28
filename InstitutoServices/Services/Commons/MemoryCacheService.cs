@@ -1,4 +1,5 @@
-﻿using InstitutoServices.Interfaces;
+﻿using InstitutoServices.Class;
+using InstitutoServices.Interfaces;
 using InstitutoServices.Models.Commons;
 using InstitutoServices.Models.Horarios;
 using InstitutoServices.Models.Inscripciones;
@@ -7,6 +8,7 @@ using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -33,6 +35,19 @@ namespace InstitutoServices.Services.Commons
             }
             IGenericService<T> genericService = new GenericService<T>();
             var list= await genericService.GetAllAsync();
+            _memoryCache.Set(key, list);
+            return list;
+        }
+        public virtual async Task<List<T>> GetWithFilterCacheAsync<T>(Expression<Func<T, bool>> filter) where T : class, IEntityWithId
+        {
+            var key = $"{typeof(T).Name}-{filter.ToString()}";
+
+            if (_memoryCache.TryGetValue(key, out List<T> cachedList))
+            {
+                return cachedList;
+            }
+            IGenericService<T> genericService = new GenericService<T>();
+            var list = await genericService.GetWithFilterAsync(filter);
             _memoryCache.Set(key, list);
             return list;
         }

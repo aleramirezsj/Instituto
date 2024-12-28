@@ -1,9 +1,14 @@
 ﻿using InstitutoServices.Class;
 using InstitutoServices.Interfaces;
 using InstitutoServices.Models;
+using InstitutoServices.Util;
+using System.Linq.Expressions;
 using System.Net.Http.Json;
+using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using static System.Net.WebRequestMethods;
+
 
 namespace InstitutoServices.Services.Commons
 {
@@ -49,6 +54,21 @@ namespace InstitutoServices.Services.Commons
             return JsonSerializer.Deserialize<List<T>>(content, options); 
         }
 
+        public async Task<List<T>?> GetWithFilterAsync(Expression<Func<T, bool>> filter)
+        {
+            var listFilter = ExpressionToFilterDTOConverter.Convert(filter);
+            var json = JsonSerializer.Serialize(listFilter);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await client.PostAsync($"{_endpoint}/filter", content);
+            var responseContent = await response.Content.ReadAsStringAsync();
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new ApplicationException(responseContent?.ToString());
+            }
+            return JsonSerializer.Deserialize<List<T>>(responseContent, options);
+        }
+
         public async Task<T?> GetByIdAsync(int id)
         {
             var response = await client.GetAsync($"{_endpoint}/{id}");
@@ -57,7 +77,7 @@ namespace InstitutoServices.Services.Commons
             {
                 throw new ApplicationException(content?.ToString());
             }
-            return  JsonSerializer.Deserialize<T>(content,options);
+            return  System.Text.Json.JsonSerializer.Deserialize<T>(content,options);
         }
 
         public async Task<T?> AddAsync(T? entity)
@@ -68,7 +88,7 @@ namespace InstitutoServices.Services.Commons
             {
                 throw new ApplicationException(content?.ToString()); 
             }
-            return JsonSerializer.Deserialize<T>(content, options);
+            return System.Text.Json.JsonSerializer.Deserialize<T>(content, options);
         }  
         
         public async Task<bool> UpdateAsync(T? entity)
