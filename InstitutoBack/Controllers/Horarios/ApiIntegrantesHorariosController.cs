@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using InstitutoServices.Models;
 using InstitutoBack.DataContext;
 using InstitutoServices.Models.Horarios;
+using InstitutoServices.Class;
 
 namespace InstitutoBack.Controllers.Horarios
 {
@@ -28,6 +29,19 @@ namespace InstitutoBack.Controllers.Horarios
         {
             return await _context.integranteshorarios.ToListAsync();
         }
+
+        [HttpPost("filter")]
+        public async Task<ActionResult<IEnumerable<IntegranteHorario>>> Getintegranteshorarios([FromBody] List<FilterDTO> filters)
+        {
+            var filterExpression = BuilderPredicate.GetExpression<IntegranteHorario>(filters);
+
+            if (filterExpression == null)
+            {
+                return BadRequest("Invalid filter expression.");
+            }
+            return await _context.integranteshorarios.Where(filterExpression).AsNoTracking().ToListAsync();
+        }
+
 
         // GET: api/ApiIntegrantesHorarios/5
         [HttpGet("{id}")]

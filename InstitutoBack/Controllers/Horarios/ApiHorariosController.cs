@@ -11,6 +11,7 @@ using InstitutoServices.Models.Horarios;
 using System.Diagnostics;
 using InstitutoBack.ExtensionMethods;
 using InstitutoServices.Models.Commons;
+using InstitutoServices.Class;
 
 namespace InstitutoBack.Controllers.Horarios
 {
@@ -68,6 +69,23 @@ namespace InstitutoBack.Controllers.Horarios
                             .Include(h => h.IntegrantesHorario).ThenInclude(i => i.Docente)
                             .ToListAsync();
         }
+
+        [HttpPost("filter")]
+        public async Task<ActionResult<IEnumerable<Horario>>> Gethorarios([FromBody] List<FilterDTO> filters)
+        {
+            var filterExpression = BuilderPredicate.GetExpression<Horario>(filters);
+
+            if (filterExpression == null)
+            {
+                return BadRequest("Invalid filter expression.");
+            }
+            return await _context.horarios.Include(h => h.DetallesHorario).ThenInclude(d => d.Hora)
+                            .Include(h => h.DetallesHorario).ThenInclude(d => d.Aula)
+                            .Include(h => h.Materia).ThenInclude(m => m.AnioCarrera).ThenInclude(a => a.Carrera)
+                            .Include(h => h.IntegrantesHorario).ThenInclude(i => i.Docente)
+                            .Where(filterExpression).AsNoTracking().ToListAsync();
+        }
+
 
         // GET: api/ApiHorarios/5
         [HttpGet("{id}")]

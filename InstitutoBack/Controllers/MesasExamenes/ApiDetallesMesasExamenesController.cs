@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using InstitutoBack.DataContext;
 using InstitutoServices.Models.MesasExamenes;
+using InstitutoServices.Class;
 
 namespace InstitutoBack.Controllers.MesasExamenes
 {
@@ -25,7 +26,19 @@ namespace InstitutoBack.Controllers.MesasExamenes
         [HttpGet]
         public async Task<ActionResult<IEnumerable<DetalleMesaExamen>>> Getdetallesmesasexamenes()
         {
-            return await _context.detallesmesasexamenes.ToListAsync();
+            return await _context.detallesmesasexamenes.Include(d=>d.Docente).ToListAsync();
+        }
+
+        [HttpPost("filter")]
+        public async Task<ActionResult<IEnumerable<DetalleMesaExamen>>> Getdetallesmesasexamenes([FromBody] List<FilterDTO> filters)
+        {
+            var filterExpression = BuilderPredicate.GetExpression<DetalleMesaExamen>(filters);
+
+            if (filterExpression == null)
+            {
+                return BadRequest("Invalid filter expression.");
+            }
+            return await _context.detallesmesasexamenes.Include(d => d.Docente).Where(filterExpression).AsNoTracking().ToListAsync();
         }
 
         // GET: api/ApiDetallesMesasExamenes/5

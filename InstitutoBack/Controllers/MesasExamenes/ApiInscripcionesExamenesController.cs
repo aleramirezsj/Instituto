@@ -9,6 +9,7 @@ using InstitutoBack.DataContext;
 using InstitutoServices.Models.MesasExamenes;
 using InstitutoServices.Models.Commons;
 using InstitutoServices.Models.Horarios;
+using InstitutoServices.Class;
 
 namespace InstitutoBack.Controllers.MesasExamenes
 {
@@ -32,9 +33,28 @@ namespace InstitutoBack.Controllers.MesasExamenes
                 .Include(i=>i.Carrera)
                 .Include(i=>i.TurnoExamen)
                 .Include(i=>i.detallesInscripcionesExamenes)
-                    .ThenInclude(d=>d.Materia).ThenInclude(m=>m.AnioCarrera)
+                    .ThenInclude(d=>d.Materia).ThenInclude(m=>m.AnioCarrera).AsNoTracking()
                     .ToListAsync();
         }
+
+        [HttpPost("filter")]
+        public async Task<ActionResult<IEnumerable<InscripcionExamen>>> GetinscripcionesExamenes([FromBody] List<FilterDTO> filters)
+        {
+            var filterExpression = BuilderPredicate.GetExpression<InscripcionExamen>(filters);
+
+            if (filterExpression == null)
+            {
+                return BadRequest("Invalid filter expression.");
+            }
+            return await _context.inscripcionesExamenes
+                .Include(i => i.Alumno)
+                .Include(i => i.Carrera)
+                .Include(i => i.TurnoExamen)
+                .Include(i => i.detallesInscripcionesExamenes)
+                    .ThenInclude(d => d.Materia).ThenInclude(m => m.AnioCarrera).Where(filterExpression).AsNoTracking()
+                    .ToListAsync();
+        }
+
 
         // GET: api/ApiInscripcionesExamenes/5
         [HttpGet("{id}")]

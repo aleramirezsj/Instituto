@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using InstitutoServices.Models;
 using InstitutoBack.DataContext;
 using InstitutoServices.Models.MesasExamenes;
+using InstitutoServices.Class;
 
 namespace InstitutoBack.Controllers.MesasExamenes
 {
@@ -27,6 +28,18 @@ namespace InstitutoBack.Controllers.MesasExamenes
         public async Task<ActionResult<IEnumerable<TurnoExamen>>> Getturnosexamenes()
         {
             return await _context.turnosexamenes.Include(t=>t.CicloLectivo).ToListAsync();
+        }
+
+        [HttpPost("filter")]
+        public async Task<ActionResult<IEnumerable<TurnoExamen>>> Getturnosexamenes([FromBody] List<FilterDTO> filters)
+        {
+            var filterExpression = BuilderPredicate.GetExpression<TurnoExamen>(filters);
+
+            if (filterExpression == null)
+            {
+                return BadRequest("Invalid filter expression.");
+            }
+            return await _context.turnosexamenes.Include(t => t.CicloLectivo).Where(filterExpression).AsNoTracking().ToListAsync();
         }
 
         // GET: api/ApiTurnosExamenes/5

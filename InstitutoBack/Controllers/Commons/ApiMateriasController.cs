@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using InstitutoServices.Models;
 using InstitutoBack.DataContext;
 using InstitutoServices.Models.Commons;
+using InstitutoServices.Class;
 
 namespace InstitutoBack.Controllers.Commons
 {
@@ -30,11 +31,24 @@ namespace InstitutoBack.Controllers.Commons
             {
                 return await _context.materias.Include(m => m.AnioCarrera).ThenInclude(anio=>anio.Carrera).Where(m => m.AnioCarreraId.Equals(idAnioCarrera)).AsNoTracking().ToListAsync();
             }
-            return await _context.materias.Include(m=>m.AnioCarrera).AsNoTracking().ToListAsync();
+            return await _context.materias.Include(m=>m.AnioCarrera).ThenInclude(anio=>anio.Carrera).AsNoTracking().ToListAsync();
         }
 
-        // GET: api/ApiMaterias/5
-        [HttpGet("{id}")]
+        [HttpPost("filter")]
+        public async Task<ActionResult<IEnumerable<Materia>>> Getmaterias([FromBody] List<FilterDTO> filters)
+        {
+            var filterExpression = BuilderPredicate.GetExpression<Materia>(filters);
+
+            if (filterExpression == null)
+            {
+                return BadRequest("Invalid filter expression.");
+            }
+            return await _context.materias.Include(m => m.AnioCarrera).ThenInclude(anio => anio.Carrera).Where(filterExpression).AsNoTracking().ToListAsync();
+        }
+
+
+            // GET: api/ApiMaterias/5
+            [HttpGet("{id}")]
         public async Task<ActionResult<Materia>> GetMateria(int id)
         {
             var materia = await _context.materias.FindAsync(id);

@@ -9,6 +9,7 @@ using InstitutoServices.Models;
 using InstitutoBack.DataContext;
 using InstitutoServices.Models.Commons;
 using System.Text.RegularExpressions;
+using InstitutoServices.Class;
 
 namespace InstitutoBack.Controllers.Commons
 {
@@ -30,6 +31,17 @@ namespace InstitutoBack.Controllers.Commons
             return await _context.usuarios.ToListAsync();
         }
 
+        [HttpPost("filter")]
+        public async Task<ActionResult<IEnumerable<Usuario>>> Getusuarios([FromBody] List<FilterDTO> filters)
+        {
+            var filterExpression = BuilderPredicate.GetExpression<Usuario>(filters);
+
+            if (filterExpression == null)
+            {
+                return BadRequest("Invalid filter expression.");
+            }
+            return await _context.usuarios.Where(filterExpression).AsNoTracking().ToListAsync();
+        }
 
 
         // GET: api/ApiUsuarios/5

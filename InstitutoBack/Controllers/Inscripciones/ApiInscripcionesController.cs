@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using InstitutoServices.Models;
 using InstitutoBack.DataContext;
 using InstitutoServices.Models.Inscripciones;
+using InstitutoServices.Class;
 
 namespace InstitutoBack.Controllers.Inscripciones
 {
@@ -28,6 +29,19 @@ namespace InstitutoBack.Controllers.Inscripciones
         {
             return await _context.inscripciones.Include(i => i.Carrera).Include(i => i.Alumno).ToListAsync();
         }
+
+        [HttpPost("filter")]
+        public async Task<ActionResult<IEnumerable<Inscripcion>>> Getinscripciones([FromBody] List<FilterDTO> filters)
+        {
+            var filterExpression = BuilderPredicate.GetExpression<Inscripcion>(filters);
+
+            if (filterExpression == null)
+            {
+                return BadRequest("Invalid filter expression.");
+            }
+            return await _context.inscripciones.Include(i => i.Carrera).Include(i => i.Alumno).Where(filterExpression).ToListAsync();
+        }
+
 
         // GET: api/ApiInscripciones/5
         [HttpGet("{id}")]

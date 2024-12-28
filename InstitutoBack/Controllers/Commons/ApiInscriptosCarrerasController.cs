@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using InstitutoServices.Models;
 using InstitutoBack.DataContext;
 using InstitutoServices.Models.Commons;
+using InstitutoServices.Class;
 
 namespace InstitutoBack.Controllers.Commons
 {
@@ -28,6 +29,19 @@ namespace InstitutoBack.Controllers.Commons
         {
             return await _context.inscriptoscarreras.Include(i=>i.Carrera).Include(i=>i.Alumno).AsNoTracking().ToListAsync();
         }
+
+        [HttpPost("filter")]
+        public async Task<ActionResult<IEnumerable<InscriptoCarrera>>> Getinscriptoscarreras([FromBody] List<FilterDTO> filters)
+        {
+            var filterExpression = BuilderPredicate.GetExpression<InscriptoCarrera>(filters);
+
+            if (filterExpression == null)
+            {
+                return BadRequest("Invalid filter expression.");
+            }
+            return await _context.inscriptoscarreras.Include(i => i.Carrera).Include(i => i.Alumno).Where(filterExpression).AsNoTracking().ToListAsync();
+        }
+
 
         //agrego un metodo que obtenga las inscripciones a carreras que tiene un determinado alumno
         [HttpGet("getByAlumno")]

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using InstitutoBack.DataContext;
 using InstitutoServices.Models.Commons;
+using InstitutoServices.Class;
 
 namespace InstitutoBack.Controllers.Commons
 {
@@ -26,6 +27,18 @@ namespace InstitutoBack.Controllers.Commons
         public async Task<ActionResult<IEnumerable<Aula>>> Getaulas()
         {
             return await _context.aulas.ToListAsync();
+        }
+
+        [HttpPost("filter")]
+        public async Task<ActionResult<IEnumerable<Aula>>> Getaulas([FromBody] List<FilterDTO> filters)
+        {
+            var filterExpression = BuilderPredicate.GetExpression<Aula>(filters);
+
+            if (filterExpression == null)
+            {
+                return BadRequest("Invalid filter expression.");
+            }
+            return await _context.aulas.Where(filterExpression).AsNoTracking().ToListAsync();
         }
 
         // GET: api/ApiAulas/5

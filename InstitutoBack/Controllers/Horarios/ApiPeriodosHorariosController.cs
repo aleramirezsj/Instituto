@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using InstitutoBack.DataContext;
 using InstitutoServices.Models.Horarios;
 using InstitutoServices.Models.Inscripciones;
+using InstitutoServices.Class;
 
 namespace InstitutoBack.Controllers.Horarios
 {
@@ -28,6 +29,19 @@ namespace InstitutoBack.Controllers.Horarios
         {
             return await _context.periodoshorarios.Include(p=>p.CicloLectivo).ToListAsync();
         }
+
+        [HttpPost("filter")]
+        public async Task<ActionResult<IEnumerable<PeriodoHorario>>> Getperiodoshorarios([FromBody] List<FilterDTO> filters)
+        {
+            var filterExpression = BuilderPredicate.GetExpression<PeriodoHorario>(filters);
+
+            if (filterExpression == null)
+            {
+                return BadRequest("Invalid filter expression.");
+            }
+            return await _context.periodoshorarios.Where(filterExpression).AsNoTracking().ToListAsync();
+        }
+
 
         // GET: api/ApiPeriodosHorarios/5
         [HttpGet("{id}")]

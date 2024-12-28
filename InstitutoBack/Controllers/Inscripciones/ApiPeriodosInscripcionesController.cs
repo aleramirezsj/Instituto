@@ -9,6 +9,7 @@ using InstitutoBack.DataContext;
 using InstitutoServices.Models.Inscripciones;
 using InstitutoServices.Models.Horarios;
 using InstitutoServices.Models.MesasExamenes;
+using InstitutoServices.Class;
 
 namespace InstitutoBack.Controllers.Inscripciones
 {
@@ -29,6 +30,19 @@ namespace InstitutoBack.Controllers.Inscripciones
         {
             return await _context.periodosinscripciones.Include(p=>p.CicloLectivo).ToListAsync();
         }
+
+        [HttpPost("filter")]
+        public async Task<ActionResult<IEnumerable<PeriodoInscripcion>>> Getperiodosinscripciones([FromBody] List<FilterDTO> filters)
+        {
+            var filterExpression = BuilderPredicate.GetExpression<PeriodoInscripcion>(filters);
+
+            if (filterExpression == null)
+            {
+                return BadRequest("Invalid filter expression.");
+            }
+            return await _context.periodosinscripciones.Include(p => p.CicloLectivo).Where(filterExpression).AsNoTracking().ToListAsync();
+        }
+
 
         // GET: api/ApiPeriodosInscripciones/5
         [HttpGet("{id}")]
