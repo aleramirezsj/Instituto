@@ -5,6 +5,9 @@ public static class BuilderPredicate
 {
     public static Expression<Func<T, bool>> GetExpression<T>(List<FilterDTO> filters)
     {
+        if (filters == null || !filters.Any())
+            return x => true;
+
         var parameter = Expression.Parameter(typeof(T), "x");
         Expression? expression = null;
 
@@ -21,17 +24,15 @@ public static class BuilderPredicate
             }
         }
 
-        return expression != null ? Expression.Lambda<Func<T, bool>>(expression, parameter) : x => true;
+        return Expression.Lambda<Func<T, bool>>(expression!, parameter);
     }
 
     private static Expression BuildExpression(ParameterExpression parameter, FilterDTO filter)
     {
         if (string.IsNullOrWhiteSpace(filter.PropertyName))
         {
-            if (filter.SubFilters == null || filter.SubFilters.Count == 0)
-            {
-                throw new ArgumentException("El FilterDTO con PropertyName vacío debe tener SubFilters.", nameof(filter.SubFilters));
-            }
+            if (filter.SubFilters == null || !filter.SubFilters.Any())
+                throw new ArgumentException("FilterDTO with empty PropertyName must have SubFilters.");
 
             Expression? combinedExpression = null;
             foreach (var subFilter in filter.SubFilters)
@@ -47,7 +48,7 @@ public static class BuilderPredicate
                     {
                         "AndAlso" => Expression.AndAlso(combinedExpression, subExpression),
                         "OrElse" => Expression.OrElse(combinedExpression, subExpression),
-                        _ => throw new NotSupportedException($"La operación lógica {filter.Operation} no es compatible.")
+                        _ => throw new NotSupportedException($"Operación lógica no soportada: {filter.Operation}")
                     };
                 }
             }
@@ -74,7 +75,7 @@ public static class BuilderPredicate
                 "Contains" => Expression.Call(member, typeof(string).GetMethod("Contains", new[] { typeof(string) })!, constant),
                 "StartsWith" => Expression.Call(member, typeof(string).GetMethod("StartsWith", new[] { typeof(string) })!, constant),
                 "EndsWith" => Expression.Call(member, typeof(string).GetMethod("EndsWith", new[] { typeof(string) })!, constant),
-                _ => throw new NotSupportedException($"La operación {filter.Operation} no es compatible.")
+                _ => throw new NotSupportedException($"Operación no soportada: {filter.Operation}")
             };
         }
     }
@@ -82,44 +83,31 @@ public static class BuilderPredicate
     private static Expression GetConstantExpression(string? value, Type targetType)
     {
         if (string.IsNullOrEmpty(value))
-        {
             return Expression.Constant(null, targetType);
-        }
 
-        // Manejar el caso especial de Convert(value, type)
+        // Handle Convert(value, type) pattern
         if (value.StartsWith("Convert(") && value.EndsWith(")"))
         {
-            var content = value.Substring(8, value.Length - 9); // Remover "Convert(" y ")"
+            var content = value.Substring(8, value.Length - 9);
             var parts = content.Split(new[] { ',' }, 2);
             if (parts.Length == 2)
             {
-                var valueStr = parts[0].Trim();
-
-                if (targetType.IsGenericType && targetType.GetGenericTypeDefinition() == typeof(Nullable<>))
-                {
-                    var underlyingType = Nullable.GetUnderlyingType(targetType);
-                    var convertedValue = Convert.ChangeType(valueStr, underlyingType);
-                    return Expression.Constant(convertedValue, targetType);
-                }
-                else
-                {
-                    var convertedValue = Convert.ChangeType(valueStr, targetType);
-                    return Expression.Constant(convertedValue, targetType);
-                }
+                value = parts[0].Trim();
             }
         }
 
-        // Manejar tipos nullables
+        // Handle nullable types
         if (targetType.IsGenericType && targetType.GetGenericTypeDefinition() == typeof(Nullable<>))
         {
             var underlyingType = Nullable.GetUnderlyingType(targetType);
-            var convertedValue = Convert.ChangeType(value, underlyingType);
-            return Expression.Constant(convertedValue, targetType);
+            if (underlyingType != null)
+            {
+                var convertedValue = Convert.ChangeType(value, underlyingType);
+                return Expression.Constant(convertedValue, targetType);
+            }
         }
-        else
-        {
-            var convertedValue = Convert.ChangeType(value, targetType);
-            return Expression.Constant(convertedValue, targetType);
-        }
+
+        var directConvertedValue = Convert.ChangeType(value, targetType);
+        return Expression.Constant(directConvertedValue, targetType);
     }
 }
