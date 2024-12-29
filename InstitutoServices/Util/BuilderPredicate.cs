@@ -96,7 +96,39 @@ public static class BuilderPredicate
             }
         }
 
-        // Handle nullable types
+        // Handle Enum types
+        if (targetType.IsEnum)
+        {
+            // Try to parse the numeric value
+            if (int.TryParse(value, out int enumValue))
+            {
+                var enumResult = Enum.ToObject(targetType, enumValue);
+                return Expression.Constant(enumResult, targetType);
+            }
+            // If it's not a number, try parsing the enum string value
+            return Expression.Constant(Enum.Parse(targetType, value), targetType);
+        }
+
+        // Handle nullable Enum types
+        if (targetType.IsGenericType &&
+            targetType.GetGenericTypeDefinition() == typeof(Nullable<>) &&
+            Nullable.GetUnderlyingType(targetType)?.IsEnum == true)
+        {
+            var underlyingType = Nullable.GetUnderlyingType(targetType);
+            if (underlyingType != null)
+            {
+                // Try to parse the numeric value
+                if (int.TryParse(value, out int enumValue))
+                {
+                    var enumResult = Enum.ToObject(underlyingType, enumValue);
+                    return Expression.Constant(enumResult, targetType);
+                }
+                // If it's not a number, try parsing the enum string value
+                return Expression.Constant(Enum.Parse(underlyingType, value), targetType);
+            }
+        }
+
+        // Handle other nullable types
         if (targetType.IsGenericType && targetType.GetGenericTypeDefinition() == typeof(Nullable<>))
         {
             var underlyingType = Nullable.GetUnderlyingType(targetType);
