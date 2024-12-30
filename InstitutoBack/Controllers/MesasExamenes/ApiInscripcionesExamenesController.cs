@@ -179,6 +179,11 @@ namespace InstitutoBack.Controllers.MesasExamenes
                 {
                     //detalle.Materia.AnioCarrera = null;
                     var AttachAnioExist = _context.Set<AnioCarrera>().Local.FirstOrDefault(entry => entry.Id.Equals(detalle.Materia.AnioCarrera.Id));
+                    var AttachCarreraExist = _context.Set<Carrera>().Local.FirstOrDefault(entry => entry.Id.Equals(detalle.Materia.AnioCarrera.Carrera.Id));
+                    if(AttachCarreraExist == null)
+                        _context.Attach(detalle.Materia.AnioCarrera.Carrera);
+                    else
+                        detalle.Materia.AnioCarrera.Carrera = AttachCarreraExist;
                     if (AttachAnioExist == null)
                         _context.Attach(detalle.Materia.AnioCarrera);
                     else
