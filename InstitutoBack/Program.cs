@@ -23,19 +23,19 @@ string keyPath = "/app/certs/instituto.key";
 
 //string certPath = "/app/certs/instituto.pfx";
 
-builder.WebHost.ConfigureKestrel(options =>
-{
-    options.ListenAnyIP(80); // HTTP
-    options.ListenAnyIP(443, listenOptions =>
-    {
-        if (!File.Exists(certPath))
-        {
-            throw new FileNotFoundException($"Certificados no encontrados. Verifica las rutas: {certPath}, {keyPath}");
-        }
-        listenOptions.UseHttps(certPath, password);
-    });
+//builder.WebHost.ConfigureKestrel(options =>
+//{
+//    options.ListenAnyIP(80); // HTTP
+//    options.ListenAnyIP(443, listenOptions =>
+//    {
+//        if (!File.Exists(certPath))
+//        {
+//            throw new FileNotFoundException($"Certificados no encontrados. Verifica las rutas: {certPath}, {keyPath}");
+//        }
+//        listenOptions.UseHttps(certPath, password);
+//    });
     
-});
+//});
 
 var configuration = new ConfigurationBuilder()
         .AddJsonFile("appsettings.json")
@@ -70,7 +70,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigins",
         builder => builder
-            .WithOrigins("https://datainstituto.azurewebsites.net", "https://institutoweb.azurewebsites.net", "https://localhost:7189","http://app.isp20.edu.ar","https://app.isp20.edu.ar","https://localhost:443","http://localhost","https://localhost")
+            .WithOrigins("https://institutoweb.azurewebsites.net", "https://localhost:7189","http://app.isp20.edu.ar","https://app.isp20.edu.ar","https://localhost:443","http://localhost","https://localhost")
             .AllowAnyHeader()
             .AllowAnyMethod());
 });
