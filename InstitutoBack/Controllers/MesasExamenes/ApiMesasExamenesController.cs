@@ -9,6 +9,7 @@ using InstitutoServices.Models;
 using InstitutoBack.DataContext;
 using InstitutoServices.Models.MesasExamenes;
 using InstitutoServices.Models.Horarios;
+using InstitutoServices.Class;
 
 namespace InstitutoBack.Controllers.MesasExamenes
 {
@@ -47,6 +48,27 @@ namespace InstitutoBack.Controllers.MesasExamenes
                             .ThenInclude(a => a.Carrera)
                             .AsNoTracking()
                 .ToListAsync();
+        }
+
+        [HttpPost("filter")]
+        public async Task<ActionResult<IEnumerable<MesaExamen>>> Getmesasexamenes([FromBody] List<FilterDTO> filters)
+        {
+            var filterExpression = BuilderPredicate.GetExpression<MesaExamen>(filters);
+
+            if (filterExpression == null)
+            {
+                return BadRequest("Invalid filter expression.");
+            }
+            return await _context.mesasexamenes
+                            .Include(m => m.TurnoExamen)
+                            .Include(m => m.DetallesMesaExamen)
+                                        .ThenInclude(d => d.Docente)
+                                .Include(m => m.Materia)
+                                        .ThenInclude(m => m.AnioCarrera)
+                                        .ThenInclude(a => a.Carrera)
+                                        .Where(filterExpression)
+                                        .AsNoTracking()
+                            .ToListAsync();
         }
 
         // GET: api/ApiMesasExamenes/5
