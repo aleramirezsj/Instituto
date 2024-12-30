@@ -1,10 +1,5 @@
 ﻿using InstitutoServices.Class;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InstitutoServices.Util
 {
@@ -96,6 +91,33 @@ namespace InstitutoServices.Util
 
         private static FilterDTO? CreateFilterFromMethodCallExpression(MethodCallExpression methodCallExpression)
         {
+            // Si es un Contains (u otro método de string) que tiene como objeto un ToString
+            if (methodCallExpression.Method.DeclaringType == typeof(string) &&
+                methodCallExpression.Object is MethodCallExpression innerMethod &&
+                innerMethod.Method.Name == "ToString" &&
+                innerMethod.Object is MemberExpression memberExpr)
+            {
+                return new FilterDTO
+                {
+                    PropertyName = GetFullPropertyPath(memberExpr),
+                    Operation = $"ToString.{methodCallExpression.Method.Name}",
+                    Value = ((ConstantExpression)methodCallExpression.Arguments[0]).Value?.ToString()
+                };
+            }
+
+            // Manejar ToString() directo
+            if (methodCallExpression.Method.Name == "ToString" &&
+                methodCallExpression.Object is MemberExpression memberExpr2)
+            {
+                return new FilterDTO
+                {
+                    PropertyName = GetFullPropertyPath(memberExpr2),
+                    Operation = "ToString",
+                    Value = null
+                };
+            }
+
+            // Manejar Equals en objetos
             if (methodCallExpression.Method.Name == "Equals" &&
                 methodCallExpression.Object is MemberExpression memberExpression)
             {
@@ -110,6 +132,7 @@ namespace InstitutoServices.Util
                 };
             }
 
+            // Manejar métodos de string (Contains, StartsWith, EndsWith) directos
             if (methodCallExpression.Method.DeclaringType == typeof(string))
             {
                 if (methodCallExpression.Object is MemberExpression memberExpression2 &&
@@ -126,7 +149,6 @@ namespace InstitutoServices.Util
 
             return null;
         }
-
         private static string GetValueFromExpression(Expression expression)
         {
             if (expression is ConstantExpression constantExpression)
@@ -164,7 +186,18 @@ namespace InstitutoServices.Util
                 ExpressionType.LessThanOrEqual => "LessThanOrEquals",
                 ExpressionType.AndAlso => "AndAlso",
                 ExpressionType.OrElse => "OrElse",
-                _ => throw new NotSupportedException($"Operación no soportada: {expressionType}")
+                ExpressionType.Not => "Not",
+                ExpressionType.Add => "Add",
+                ExpressionType.Subtract => "Subtract",
+                ExpressionType.Multiply => "Multiply",
+                ExpressionType.Divide => "Divide",
+                ExpressionType.Modulo => "Modulo",
+                ExpressionType.And => "BitwiseAnd",
+                ExpressionType.Or => "BitwiseOr",
+                ExpressionType.ExclusiveOr => "ExclusiveOr",
+                ExpressionType.Coalesce => "Coalesce",
+                ExpressionType.Conditional => "Conditional",
+                _ => throw new NotSupportedException($"La operación {expressionType} no es compatible.")
             };
         }
     }

@@ -62,6 +62,25 @@ public static class BuilderPredicate
                 member = Expression.Property(member, property);
             }
 
+            // Manejar operaciones que involucran ToString()
+            if (filter.Operation.StartsWith("ToString"))
+            {
+                // Convertir la propiedad a string
+                var toStringMethod = member.Type.GetMethod("ToString", Type.EmptyTypes);
+                var toStringCall = Expression.Call(member, toStringMethod!);
+
+                // Si hay una operación adicional después del ToString
+                if (filter.Operation.Contains("."))
+                {
+                    var secondOperation = filter.Operation.Split('.')[1];
+                    var stringMethod = typeof(string).GetMethod(secondOperation, new[] { typeof(string) });
+                    var constant2 = Expression.Constant(filter.Value);
+                    return Expression.Call(toStringCall, stringMethod!, constant2);
+                }
+
+                return toStringCall;
+            }
+
             var constant = GetConstantExpression(filter.Value, member.Type);
 
             return filter.Operation switch
@@ -99,13 +118,11 @@ public static class BuilderPredicate
         // Handle Enum types
         if (targetType.IsEnum)
         {
-            // Try to parse the numeric value
             if (int.TryParse(value, out int enumValue))
             {
                 var enumResult = Enum.ToObject(targetType, enumValue);
                 return Expression.Constant(enumResult, targetType);
             }
-            // If it's not a number, try parsing the enum string value
             return Expression.Constant(Enum.Parse(targetType, value), targetType);
         }
 
@@ -117,13 +134,11 @@ public static class BuilderPredicate
             var underlyingType = Nullable.GetUnderlyingType(targetType);
             if (underlyingType != null)
             {
-                // Try to parse the numeric value
                 if (int.TryParse(value, out int enumValue))
                 {
                     var enumResult = Enum.ToObject(underlyingType, enumValue);
                     return Expression.Constant(enumResult, targetType);
                 }
-                // If it's not a number, try parsing the enum string value
                 return Expression.Constant(Enum.Parse(underlyingType, value), targetType);
             }
         }
