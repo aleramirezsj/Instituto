@@ -70,7 +70,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigins",
         builder => builder
-            .WithOrigins("https://institutoweb.azurewebsites.net", "https://localhost:7189","http://app.isp20.edu.ar","https://app.isp20.edu.ar","https://localhost:443","http://localhost","https://localhost")
+            .WithOrigins("https://datainstituto.azurewebsites.net", "https://institutoweb.azurewebsites.net", "https://localhost:7189","http://app.isp20.edu.ar","https://app.isp20.edu.ar","https://localhost:443","http://localhost","https://localhost")
             .AllowAnyHeader()
             .AllowAnyMethod());
 });
