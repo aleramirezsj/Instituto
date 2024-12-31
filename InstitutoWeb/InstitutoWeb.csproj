@@ -6,7 +6,10 @@
     <ImplicitUsings>enable</ImplicitUsings>
 	<Optimize>False</Optimize>
     <Configuration>Debug</Configuration>
-	<BlazorWebAssemblyEnableSWC>true</BlazorWebAssemblyEnableSWC>
+	  <InvariantGlobalization>false</InvariantGlobalization>
+	  <BlazorWebAssemblyEnableSWC>true</BlazorWebAssemblyEnableSWC>
+	<BlazorEnableCompression>true</BlazorEnableCompression>
+    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
   </PropertyGroup>
 
 

@@ -367,3 +367,6 @@ FodyWeavers.xsd
 /DockerfileBack
 /.dockerignore
 /nginx.conf
+/nginxLocalFuncionando.conf
+/DockerfileBackLocalFuncionando
+/DockerfileWebLocalFuncionando

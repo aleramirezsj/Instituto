@@ -6,18 +6,12 @@ using System.Threading.Tasks;
 
 namespace InstitutoDesktop.Interfaces.Commons
 {
-    public interface ICrudViewState
+    public interface ICrudViewState: IBaseViewState
     {
-        Task LoadData();
-        void LoadGrid();
-        void LoadGridFilter(string filterText);
         void OnAgregar();
         Task OnGuardar();
         void OnModificar();
         Task OnEliminar();
         void OnCancelar();
-        void OnBuscar();
-        void OnSalir();
-        void UpdateUI();
     }
 }

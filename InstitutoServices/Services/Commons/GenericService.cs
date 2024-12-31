@@ -29,16 +29,16 @@ namespace InstitutoServices.Services.Commons
         {
             this.client = new HttpClient();
             this.options = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
-            string urlApi= "https://datainstituto.azurewebsites.net/api/";
-            //string urlApi;
-            //if (Properties.Resources.Remoto == "false")
-            //{
-            //    urlApi = Properties.Resources.UrlApiLocal;
-            //}
-            //else
-            //{
-            //    urlApi = Properties.Resources.UrlApiRemoto;
-            //}
+            //string urlApi= "https://datainstituto.azurewebsites.net/api/";
+            string urlApi;
+            if (Properties.Resources.Remoto == "false")
+            {
+                urlApi = Properties.Resources.UrlApiLocal;
+            }
+            else
+            {
+                urlApi = Properties.Resources.UrlApiRemoto;
+            }
 
             this._endpoint = urlApi+ApiEndpoints.GetEndpoint(typeof(T).Name);
         }
