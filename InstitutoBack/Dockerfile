@@ -4,7 +4,7 @@ WORKDIR /src
 
 # Copiar archivos de la solución y proyectos
 COPY ["../Instituto.sln", "./"]
-COPY ["InstitutoBack.csproj", "./InstitutoBack/"]
+COPY ["./InstitutoBack.csproj", "./InstitutoBack/"]
 COPY ["../InstitutoServices/InstitutoServices.csproj", "./InstitutoServices/"]
 
 # Restaurar dependencias
