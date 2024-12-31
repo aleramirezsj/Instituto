@@ -1,0 +1,41 @@
+# .github/workflows/docker-build.yml
+name: Build and Push Docker Images
+
+on:
+  push:
+    branches: [ dev ]
+  pull_request:
+    branches: [ dev ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Login to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: Build and push backend
+      uses: docker/build-push-action@v4
+      with:
+        context: .
+        file: ./InstitutoBack/Dockerfile
+        push: true
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/instituto-backend:latest
+
+    - name: Build and push frontend
+      uses: docker/build-push-action@v4
+      with:
+        context: .
+        file: ./InstitutoWeb/Dockerfile
+        push: true
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/instituto-frontend:latest
