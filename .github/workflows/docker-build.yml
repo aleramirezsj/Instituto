@@ -28,7 +28,7 @@ jobs:
       uses: docker/build-push-action@v4
       with:
         context: .
-        file: ./InstitutoBack/Dockerfile
+        file: ./DockerfileBack
         push: true
         tags: ${{ secrets.DOCKERHUB_USERNAME }}/instituto-backend:latest
 
@@ -36,6 +36,6 @@ jobs:
       uses: docker/build-push-action@v4
       with:
         context: .
-        file: ./InstitutoWeb/Dockerfile
+        file: ./Dockerfile
         push: true
         tags: ${{ secrets.DOCKERHUB_USERNAME }}/instituto-frontend:latest
