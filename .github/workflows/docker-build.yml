@@ -25,7 +25,7 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
     - name: Build and push backend
-      uses: docker/build-push-action@v4
+      uses: docker/build-push-action@v1
       with:
         context: .
         file: ./DockerfileBack
@@ -33,9 +33,9 @@ jobs:
         tags: ${{ secrets.DOCKERHUB_USERNAME }}/instituto-backend:latest
 
     - name: Build and push frontend
-      uses: docker/build-push-action@v4
+      uses: docker/build-push-action@v1
       with:
         context: .
-        file: ./Dockerfile
+        file: ./DockerfileWeb
         push: true
         tags: ${{ secrets.DOCKERHUB_USERNAME }}/instituto-frontend:latest
