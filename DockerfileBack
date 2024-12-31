@@ -3,20 +3,20 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
 # Copiar archivos de la solución y proyectos
-COPY ["../Instituto.sln", "./"]
-COPY ["InstitutoBack.csproj", "./InstitutoBack/"]
-COPY ["../InstitutoServices/InstitutoServices.csproj", "./InstitutoServices/"]
+COPY ["Instituto.sln", "./"]
+COPY ["InstitutoBack/InstitutoBack.csproj", "./InstitutoBack/"]
+COPY ["InstitutoServices/InstitutoServices.csproj", "./InstitutoServices/"]
 
 # Restaurar dependencias
-RUN dotnet restore "./InstitutoBack/InstitutoBack.csproj"
+RUN dotnet restore "InstitutoBack/InstitutoBack.csproj"
 
 # Copiar todo el código fuente
-COPY ["../InstitutoServices/", "./InstitutoServices/"]
+COPY ["InstitutoServices/", "./InstitutoServices/"]
 COPY ["./" , "./InstitutoBack/"]
 
 # Compilar y publicar
 WORKDIR "/src/InstitutoBack"
-RUN dotnet publish "InstitutoBack.csproj" -c Release -o /app/publish
+RUN dotnet publish "InstitutoBack/InstitutoBack.csproj" -c Release -o /app/publish
 
 # Etapa 2: Runtime
 FROM mcr.microsoft.com/dotnet/aspnet:8.0

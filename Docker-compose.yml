@@ -34,7 +34,7 @@ services:
     image: aleramirezsj/instituto-backend:latest
     build:
       context: .
-      dockerfile: InstitutoBack/Dockerfile
+      dockerfile: DockerfileBack
     restart: always
     environment:
       - ASPNETCORE_URLS=http://+:80
@@ -52,7 +52,7 @@ services:
     image: aleramirezsj/instituto-frontend:latest
     build:
       context: .
-      dockerfile: InstitutoWeb/Dockerfile
+      dockerfile: DockerfileWeb
     restart: always
     environment:
       - VIRTUAL_HOST=app2.isp20.edu.ar
