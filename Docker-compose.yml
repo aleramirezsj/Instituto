@@ -1,3 +1,4 @@
+
 services:
   nginx-proxy:
     image: jwilder/nginx-proxy
@@ -31,6 +32,7 @@ services:
       - app_network
 
   backend:
+    image: aleramirezsj/instituto-backend:latest
     build:
       context: .
       dockerfile: InstitutoBack/Dockerfile
@@ -48,6 +50,7 @@ services:
       - nginx-proxy
 
   frontend:
+    image: aleramirezsj/instituto-frontend:latest
     build:
       context: .
       dockerfile: InstitutoWeb/Dockerfile
