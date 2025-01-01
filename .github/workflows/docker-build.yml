@@ -1,6 +1,5 @@
 # .github/workflows/docker-build.yml
 name: Build and Push Docker Images
-
 on:
   push:
     branches: [ dev ]
@@ -40,30 +39,105 @@ jobs:
         tags: ${{ secrets.DOCKERHUB_USERNAME }}/instituto-frontend:latest
 
   deploy:
-      runs-on: ubuntu-latest
-      needs: build
+    runs-on: ubuntu-latest
+    needs: build
       
-      steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
         
-      - name: Copy docker-compose file to server
-        uses: appleboy/scp-action@master
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USERNAME }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          source: "docker-compose.yml"
-          target: "/opt/instituto"
+    - name: Generate production docker-compose
+      run: |
+        cat > docker-compose.prod.yml << 'EOL'
+        version: '3.8'
+        
+        services:
+          nginx-proxy:
+            image: jwilder/nginx-proxy
+            restart: always
+            ports:
+              - "80:80"
+              - "443:443"
+            volumes:
+              - /var/run/docker.sock:/tmp/docker.sock:ro
+              - certs:/etc/nginx/certs:ro
+              - html:/usr/share/nginx/html
+              - vhost:/etc/nginx/vhost.d
+              - acme:/etc/acme.sh
+            labels:
+              - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
+            networks:
+              - app_network
 
-      - name: Deploy to server
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USERNAME }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          script: |
-            cd /opt/instituto
-            docker compose pull
-            docker compose up -d
+          letsencrypt:
+            image: jrcs/letsencrypt-nginx-proxy-companion
+            restart: always
+            volumes:
+              - /var/run/docker.sock:/var/run/docker.sock:ro
+              - certs:/etc/nginx/certs:rw
+              - html:/usr/share/nginx/html
+              - vhost:/etc/nginx/vhost.d
+              - acme:/etc/acme.sh
+            depends_on:
+              - nginx-proxy
+            networks:
+              - app_network
 
+          backend:
+            image: ${{ secrets.DOCKERHUB_USERNAME }}/instituto-backend:latest
+            restart: always
+            environment:
+              - ASPNETCORE_URLS=http://+:80
+              - VIRTUAL_HOST=${{ secrets.BACKEND_DOMAIN }}
+              - VIRTUAL_PORT=80
+              - LETSENCRYPT_HOST=${{ secrets.BACKEND_DOMAIN }}
+              - LETSENCRYPT_EMAIL=${{ secrets.LETSENCRYPT_EMAIL }}
+            networks:
+              - app_network
+            depends_on:
+              - nginx-proxy
+
+          frontend:
+            image: ${{ secrets.DOCKERHUB_USERNAME }}/instituto-frontend:latest
+            restart: always
+            environment:
+              - VIRTUAL_HOST=${{ secrets.FRONTEND_DOMAIN }}
+              - LETSENCRYPT_HOST=${{ secrets.FRONTEND_DOMAIN }}
+              - LETSENCRYPT_EMAIL=${{ secrets.LETSENCRYPT_EMAIL }}
+            networks:
+              - app_network
+            depends_on:
+              - nginx-proxy
+              - backend
+
+        networks:
+          app_network:
+            driver: bridge
+
+        volumes:
+          certs:
+          html:
+          vhost:
+          acme:
+        EOL
+        
+    - name: Copy docker-compose to server
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.SERVER_HOST }}
+        username: ${{ secrets.SERVER_USERNAME }}
+        key: ${{ secrets.SERVER_SSH_KEY }}
+        source: "docker-compose.prod.yml"
+        target: "/opt/instituto"
+        
+    - name: Deploy to server
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SERVER_HOST }}
+        username: ${{ secrets.SERVER_USERNAME }}
+        key: ${{ secrets.SERVER_SSH_KEY }}
+        script: |
+          cd /opt/instituto
+          mv docker-compose.prod.yml docker-compose.yml
+          docker compose pull
+          docker compose up -d
