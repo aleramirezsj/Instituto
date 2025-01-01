@@ -4,8 +4,7 @@ name: Build and Push Docker Images
 on:
   push:
     branches: [ dev ]
-  pull_request:
-    branches: [ dev ]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -42,7 +41,7 @@ jobs:
 
   deploy:
       runs-on: ubuntu-latest
-      if: ${{ github.event.workflow_run.conclusion == 'success' }}
+      needs: build
       
       steps:
       - name: Checkout code
