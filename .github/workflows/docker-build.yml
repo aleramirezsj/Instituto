@@ -39,3 +39,32 @@ jobs:
         file: ./DockerfileWeb
         push: true
         tags: ${{ secrets.DOCKERHUB_USERNAME }}/instituto-frontend:latest
+
+  deploy:
+      runs-on: ubuntu-latest
+      if: ${{ github.event.workflow_run.conclusion == 'success' }}
+      
+      steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        
+      - name: Copy docker-compose file to server
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          source: "docker-compose.yml"
+          target: "/opt/instituto"
+
+      - name: Deploy to server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          script: |
+            cd /opt/instituto
+            docker compose pull
+            docker compose up -d
+
