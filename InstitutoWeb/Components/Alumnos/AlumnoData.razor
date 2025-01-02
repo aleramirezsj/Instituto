@@ -1,4 +1,4 @@
-@inject IInscriptoCarreraService inscriptoCarreraService
+锘緻inject IInscriptoCarreraService inscriptoCarreraService
 @inject IGenericService<Carrera> carreraService
 @inject ILogger<AlumnoData> logger
 @inject NavigationManager NavigationManager
@@ -11,10 +11,10 @@
 
 
 <div>
-    <h4>Datos del Alumno</h4>
+    <h4>Datos del Alumno.</h4>
     <p>Nombre: @alumno.ApellidoNombre</p>
-    <p>Direcci髇: @alumno.Direccion</p>
-    <p>Tel閒ono: @alumno.Telefono</p>
+    <p>Direcci贸n: @alumno.Direccion</p>
+    <p>Tel茅fono: @alumno.Telefono</p>
 </div>
 <NavigationLock OnBeforeInternalNavigation="OnBeforeInternalNavigation" />
 <button class="btn btn-primary" @onclick="()=>HandleInscribirseACarrera()">Seleccionar @tituloTableCarrera</button>
@@ -24,7 +24,7 @@
 }
 else
 {
-    <h4>@tituloTableCarrera en la que est醩 inscripto</h4>
+    <h4>@tituloTableCarrera en la que est谩s inscripto</h4>
    
     <table class="table">
         <tbody>
@@ -58,7 +58,7 @@ else
         inscripcionesACarreras = (List<InscriptoCarrera>) alumno.InscripcionesACarreras;
         //inscripcionesACarreras = await inscriptoCarreraService.GetByAlumno(alumno.Id);
         logger.LogInformation("inscripciones "+inscripcionesACarreras.Count().ToString());
-        //marco las carreras que ya est醤 inscriptas usando el campo Eliminado
+        //marco las carreras que ya est谩n inscriptas usando el campo Eliminado
         foreach (var carrera in carreras)
         {
             carrera.Eliminado = inscripcionesACarreras.Any(i => i.CarreraId == carrera.Id);
@@ -122,17 +122,17 @@ else
     {
         if(inscripcionesACarreras.Count==0)
         {
-            SweetAlert.FireAsync("Alumno creado con exito", "Para completar tu perfil debes indicar las carreras en las que est醩 inscripto.", SweetAlertIcon.Info);
+            SweetAlert.FireAsync("Alumno creado con exito", "Para completar tu perfil debes indicar las carreras en las que est谩s inscripto.", SweetAlertIcon.Info);
             context.PreventNavigation();
         }  
         return Task.CompletedTask;
     }
     // private Task OnBeforeInternalNavigation(LocationChangingContext context)
     // {
-    //     // L骻ica para evitar la navegaci髇 si es necesario.
+    //     // L贸gica para evitar la navegaci贸n si es necesario.
     //     if (context.TargetLocation.Contains("restricted"))
     //     {
-    //         context.PreventNavigation(); // Evita la navegaci髇 si es necesario.
+    //         context.PreventNavigation(); // Evita la navegaci贸n si es necesario.
     //     }
 
     //     return Task.CompletedTask;

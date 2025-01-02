@@ -10,6 +10,7 @@
 	  <BlazorWebAssemblyEnableSWC>true</BlazorWebAssemblyEnableSWC>
 	<BlazorEnableCompression>true</BlazorEnableCompression>
     <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  <FileEncoding>utf-8</FileEncoding>
   </PropertyGroup>
 
 
