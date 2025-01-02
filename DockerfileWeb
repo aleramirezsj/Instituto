@@ -12,25 +12,23 @@ RUN dotnet restore "InstitutoWeb/InstitutoWeb.csproj"
 RUN dotnet restore "InstitutoServices/InstitutoServices.csproj"
 
 # Copiar todo el código fuente
-COPY ["InstitutoServices/", "./InstitutoServices/"]
-COPY ["./" , "./InstitutoWeb/"]
+COPY . .
 
 # Publicar
 WORKDIR "/app/InstitutoWeb"
-RUN dotnet publish "InstitutoWeb/InstitutoWeb.csproj" -c Release -o /app/publish
+RUN dotnet publish -c Release -o /app/publish
 
 # Etapa 2: Runtime
 FROM nginx:alpine
 WORKDIR /usr/share/nginx/html
 
-# Copiar los archivos publicados
+# Copiar los archivos publicados y mantener la estructura de directorios
 COPY --from=build /app/publish/wwwroot .
 COPY InstitutoWeb/nginx.conf /etc/nginx/conf.d/default.conf
 
-RUN mkdir -p _framework && \
-    chmod -R 755 . && \
-    chmod -R 644 _framework/*
+# Asegurar permisos correctos
+RUN chmod -R 755 . && \
+    find . -type f -exec chmod 644 {} \;
 
 EXPOSE 80
-
 CMD ["nginx", "-g", "daemon off;"]
