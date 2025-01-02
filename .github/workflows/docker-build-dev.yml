@@ -55,15 +55,15 @@ jobs:
           nginx-proxy:
             image: jwilder/nginx-proxy
             restart: always
-            ports:
-              - "80:80"
-              - "443:443"
-            volumes:
-              - /var/run/docker.sock:/tmp/docker.sock:ro
-              - certs:/etc/nginx/certs:ro
-              - html:/usr/share/nginx/html
-              - vhost:/etc/nginx/vhost.d
-              - acme:/etc/acme.sh
+        ports:
+          - "8080:80"    # Cambiado de 80:80
+          - "8443:443"   # Cambiado de 443:443
+        volumes:
+          - /var/run/docker.sock:/tmp/docker.sock:ro
+          - certs_dev:/etc/nginx/certs:ro     # Renombrado
+          - html_dev:/usr/share/nginx/html     # Renombrado
+          - vhost_dev:/etc/nginx/vhost.d       # Renombrado
+          - acme_dev:/etc/acme.sh             # Renombrado
             labels:
               - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
             networks:
@@ -74,10 +74,10 @@ jobs:
             restart: always
             volumes:
               - /var/run/docker.sock:/var/run/docker.sock:ro
-              - certs:/etc/nginx/certs:rw
-              - html:/usr/share/nginx/html
-              - vhost:/etc/nginx/vhost.d
-              - acme:/etc/acme.sh
+              - certs_dev:/etc/nginx/certs:rw     # Renombrado
+              - html_dev:/usr/share/nginx/html     # Renombrado
+              - vhost_dev:/etc/nginx/vhost.d       # Renombrado
+              - acme_dev:/etc/acme.sh             # Renombrado
             depends_on:
               - nginx-proxy
             networks:
@@ -115,10 +115,10 @@ jobs:
             driver: bridge
 
         volumes:
-          certs:
-          html:
-          vhost:
-          acme:
+          certs_dev:                              # Renombrado
+          html_dev:                               # Renombrado
+          vhost_dev:                              # Renombrado
+          acme_dev:                               # Renombrado
         EOL
         
     - name: Copy docker-compose to server
