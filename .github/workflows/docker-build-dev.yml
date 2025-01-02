@@ -73,6 +73,7 @@ jobs:
 
           letsencrypt:
             container_name: letsencrypt-dev
+            image: jrcs/letsencrypt-nginx-proxy-companion
             environment:
               - NGINX_PROXY_CONTAINER=nginx-proxy-dev
             restart: always
