@@ -59,6 +59,9 @@ jobs:
             ports:
               - "8080:80"    # Cambiado de 80:80
               - "8443:443"   # Cambiado de 443:443
+            environment:
+              - NGINX_PROXY_DEBUG=1  # Añadir esto para ver más logs
+              - DEFAULT_HOST=${{ secrets.FRONTEND_DEV_DOMAIN }}  # Añadir esto
             volumes:
               - /var/run/docker.sock:/tmp/docker.sock:ro
               - certs_dev:/etc/nginx/certs:ro     # Renombrado
