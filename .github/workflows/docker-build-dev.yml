@@ -65,7 +65,8 @@ jobs:
               - vhost_dev:/etc/nginx/vhost.d       # Renombrado
               - acme_dev:/etc/acme.sh             # Renombrado
             labels:
-              - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
+              - "com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy=true"
+              - "com.github.nginx-proxy.docker-gen"  # Añadir esta etiqueta
             networks:
               - app_network
 
