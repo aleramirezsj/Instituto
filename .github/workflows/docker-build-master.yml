@@ -1,8 +1,8 @@
 # .github/workflows/docker-build.yml
-name: Build and Push Docker Images
+name: Build app.isp20.edu.ar
 on:
   push:
-    branches: [ dev ]
+    branches: [ master ]
   workflow_dispatch:
 
 jobs:
