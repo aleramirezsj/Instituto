@@ -53,6 +53,7 @@ jobs:
         
         services:
           nginx-proxy:
+            container_name: nginx-proxy-prod
             image: jwilder/nginx-proxy
             restart: always
             ports:
@@ -71,6 +72,9 @@ jobs:
               - app_network
 
           letsencrypt:
+            container_name: letsencrypt-prod
+            environment:
+              - NGINX_PROXY_CONTAINER=nginx-proxy-prod
             image: jrcs/letsencrypt-nginx-proxy-companion
             restart: always
             volumes:
@@ -85,6 +89,7 @@ jobs:
               - app_network
 
           backend:
+            container_name: backend-prod
             image: ${{ secrets.DOCKERHUB_USERNAME }}/instituto-backend:latest
             restart: always
             environment:
@@ -99,6 +104,7 @@ jobs:
               - nginx-proxy
 
           frontend:
+            container_name: frontend-prod
             image: ${{ secrets.DOCKERHUB_USERNAME }}/instituto-frontend:latest
             restart: always
             environment:
@@ -113,6 +119,7 @@ jobs:
 
         networks:
           app_network:
+            name: instituto_prod_network
             driver: bridge
 
         volumes:
