@@ -1,20 +1,20 @@
-@inject IJefaturaSeccionService jefaturaSeccionService
+ï»¿@inject IJefaturaSeccionService jefaturaSeccionService
 @inject IGenericService<Carrera> carreraService
 @inject ILogger<JefeSeccionData> logger
 
 <div>
-    <h4>Datos del Jefe de sección</h4>
+    <h4>Datos del Jefe de secciÃ³n</h4>
     <p>Nombre: @docente.Nombre</p>
 </div>
 
 <button class="btn btn-primary" @onclick="()=>HandleInscribirseACarrera()">Seleccionar @tituloTableCarrera</button>
 @if (jefaturasSecciones==null||jefaturasSecciones.Count==0)
 {
-    <p><em>Eres un nuevo usuario, necesitamos completar tu perfil selecciona la o las carreras en las que eres jefe de sección</em></p>
+    <p><em>Eres un nuevo usuario, necesitamos completar tu perfil selecciona ls carreras en las que eres Jefe de SecciÃ³n</em></p>
 }
 else
 {
-    <h4>@tituloTableCarrera en las que eres jefe de sección</h4>
+    <h4>@tituloTableCarrera en las que eres Jefe de SecciÃ³n</h4>
    
     <table class="table">
         <tbody>
@@ -47,7 +47,7 @@ else
         carreras = await carreraService.GetAllAsync();
         jefaturasSecciones = await jefaturaSeccionService.GetByDocente(docente.Id);
         //logger.LogInformation(inscripcionesACarreras.Count().ToString());
-        //marco las carreras que ya están inscriptas usando el campo Eliminado
+        //marco las carreras que ya estÃ¡n inscriptas usando el campo Eliminado
         foreach (var carrera in carreras)
         {
             carrera.Eliminado = jefaturasSecciones.Any(i => i.CarreraId == carrera.Id);
