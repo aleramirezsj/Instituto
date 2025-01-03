@@ -1,0 +1,2 @@
+[*.{cs,razor}]
+charset = utf-8

@@ -1,0 +1,99 @@
+name: Build app2.isp20.edu.ar
+on:
+  push:
+    branches: [ dev ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Login to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: Build and push backend
+      uses: docker/build-push-action@v4
+      with:
+        context: .
+        file: ./DockerfileBackDev
+        push: true
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/instituto-dev-backend:latest
+
+    - name: Build and push frontend
+      uses: docker/build-push-action@v4
+      with:
+        context: .
+        file: ./DockerfileWebDev
+        push: true
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/instituto-dev-frontend:latest
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+      
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+        
+    - name: Generate development docker-compose
+      run: |
+        cat > docker-compose.dev.yml << 'EOL'
+        version: '3.8'
+        
+        services:
+          backend:
+            container_name: backend-dev
+            image: ${{ secrets.DOCKERHUB_USERNAME }}/instituto-dev-backend:latest
+            restart: always
+            environment:
+              - ASPNETCORE_URLS=http://+:80
+            ports:
+              - "1280:80" # Mapear el puerto 80 del contenedor al 1280 en el host
+            networks:
+              - app_network
+
+          frontend:
+            container_name: frontend-dev
+            image: ${{ secrets.DOCKERHUB_USERNAME }}/instituto-dev-frontend:latest
+            restart: always
+            ports:
+              - "1380:80" # Mapear el puerto 80 del contenedor al 1380 en el host
+            networks:
+              - app_network
+
+        networks:
+          app_network:
+            name: instituto_dev_network
+            driver: bridge
+        EOL
+        
+    - name: Copy docker-compose to server
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.SERVER_HOST }}
+        username: ${{ secrets.SERVER_USERNAME }}
+        key: ${{ secrets.SERVER_SSH_KEY }}
+        source: "docker-compose.dev.yml"
+        target: "/opt/institutodev"
+        
+    - name: Deploy to server
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SERVER_HOST }}
+        username: ${{ secrets.SERVER_USERNAME }}
+        key: ${{ secrets.SERVER_SSH_KEY }}
+        script: |
+          cd /opt/institutodev
+          mv docker-compose.dev.yml docker-compose.yml
+          docker compose pull
+          docker compose up -d

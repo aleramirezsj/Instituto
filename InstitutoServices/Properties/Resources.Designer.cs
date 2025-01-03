@@ -125,7 +125,7 @@ namespace InstitutoServices.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a https://datainstituto.azurewebsites.net/api/.
+        ///   Busca una cadena traducida similar a https://api.isp20.edu.ar/api/.
         /// </summary>
         public static string UrlApiRemoto {
             get {

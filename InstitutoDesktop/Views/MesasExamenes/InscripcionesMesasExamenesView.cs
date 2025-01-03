@@ -1,24 +1,24 @@
 ﻿using InstitutoDesktop.Interfaces.MesasExamenes;
 using InstitutoDesktop.Services;
-using InstitutoDesktop.States.MesasExamenes.MesasExamenes;
+using InstitutoDesktop.States.MesasExamenes.InscripcionesExamenes;
 using InstitutoServices.Models.Commons;
 using InstitutoServices.Models.MesasExamenes;
 
 namespace InstitutoDesktop.Views
 {
-    public partial class InscripcionesMesasExamenesView : Form
+    public partial class InscripcionesExamenesView : Form
     {
         public List<TurnoExamen>? listaTurnosExamenes = new List<TurnoExamen>();
         public List<Carrera>? listaCarreras = new List<Carrera>();
         public List<AnioCarrera>? listaAnioCarreras = new List<AnioCarrera>();
         public List<Materia>? listaMaterias = new List<Materia>();
-        public List<InscripcionExamen>? listaInscripcionExamen = new List<InscripcionExamen>();
+        public List<InscripcionExamen>? listaInscripcionesExamenes = new List<InscripcionExamen>();
 
         public readonly MemoryCacheServiceWinForms _memoryCache;
 
-        public IMesasExamenesViewState _currentState;
+        public IInscripcionesExamenesViewState _currentState;
 
-        public InscripcionesMesasExamenesView(MemoryCacheServiceWinForms memoryCacheService, MenuPrincipalView menuPrincipal)
+        public InscripcionesExamenesView(MemoryCacheServiceWinForms memoryCacheService, MenuPrincipalView menuPrincipal)
         {
             InitializeComponent();
             _memoryCache = memoryCacheService;
@@ -29,17 +29,10 @@ namespace InstitutoDesktop.Views
             this.WindowState = FormWindowState.Maximized;
         }
 
-        public void TransitionTo(IMesasExamenesViewState state) => _currentState = state;
-        private void btnAgregar_Click(object sender, EventArgs e) => _currentState.OnAgregar();
-        private void btnGuardar_Click(object sender, EventArgs e) => _currentState.OnGuardar();
-        private void btnModificar_Click(object sender, EventArgs e) => _currentState.OnModificar();
-        private void btnEliminar_Click(object sender, EventArgs e) => _currentState.OnEliminar();
-        private void btnCancelar_Click(object sender, EventArgs e) => _currentState.OnCancelar();
+        public void TransitionTo(IInscripcionesExamenesViewState state) => _currentState = state;
         private void BtnBuscar_Click(object sender, EventArgs e) => _currentState.OnBuscar();
         private void txtFiltro_TextChanged(object sender, EventArgs e) => BtnBuscar.PerformClick();
         private void btnSalir_Click(object sender, EventArgs e) => this.Close();
-        private void btnAgregarDocenteADetalle_Click(object sender, EventArgs e) => _currentState.OnAgregarDocenteADetalle();
-        private void BtnEditarDocenteDeDetalle_Click(object sender, EventArgs e) => _currentState.OnEditarDocenteDeDetalle();
-        private void btnQuitarDocenteDeDetalle_Click(object sender, EventArgs e) => _currentState.OnQuitarDocenteDeDetalle();
+        
     }
 }

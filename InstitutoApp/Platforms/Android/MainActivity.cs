@@ -14,7 +14,7 @@ namespace InstitutoApp
             // Assuming you want to call AuthenticateAsync instead
             Task.Run(async () =>
             {
-                await WebAuthenticator.AuthenticateAsync(new Uri(data.Data.ToString()), new Uri($"com.googleusercontent.apps.{Properties.Resources.client_id}:/auth"));
+                await WebAuthenticator.AuthenticateAsync(new Uri(data.Data.ToString()), new Uri($"com.googleusercontent.apps.{InstitutoServices.Properties.Resources.client_id}:/auth"));
             });
         }
     }

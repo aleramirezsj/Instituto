@@ -364,6 +364,8 @@ FodyWeavers.xsd
 /Certs/instituto.key
 /Certs/instituto.crt
 /Dockerfile
-/DockerfileBack
 /.dockerignore
 /nginx.conf
+/nginxLocalFuncionando.conf
+/DockerfileBackLocalFuncionando
+/DockerfileWebLocalFuncionando

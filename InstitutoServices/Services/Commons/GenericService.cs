@@ -29,7 +29,7 @@ namespace InstitutoServices.Services.Commons
         {
             this.client = new HttpClient();
             this.options = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
-            string urlApi= "https://datainstituto.azurewebsites.net/api/";
+            string urlApi= "https://api.isp20.edu.ar/api/";
             //string urlApi;
             //if (Properties.Resources.Remoto == "false")
             //{

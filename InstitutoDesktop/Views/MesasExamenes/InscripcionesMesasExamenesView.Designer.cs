@@ -1,6 +1,6 @@
 ﻿namespace InstitutoDesktop.Views
 {
-    partial class InscripcionesMesasExamenesView
+    partial class InscripcionesExamenesView
     {
         /// <summary>
         /// Required designer variable.
@@ -40,20 +40,20 @@
             label1 = new Label();
             tabControl = new TabControl();
             tabPageLista = new TabPage();
+            dataGridInscripcionSeleccioanda = new DataGridView();
             btnSalir = new FontAwesome.Sharp.IconButton();
             BtnBuscar = new FontAwesome.Sharp.IconButton();
             label3 = new Label();
             txtFiltro = new TextBox();
-            btnModificar = new FontAwesome.Sharp.IconButton();
-            btnAgregar = new FontAwesome.Sharp.IconButton();
+            btnImprimirSeleccionada = new FontAwesome.Sharp.IconButton();
+            btnImprimirTodas = new FontAwesome.Sharp.IconButton();
             dataGridInscripciones = new DataGridView();
             tabPageAgregarEditar = new TabPage();
-            dataGridInscripcionSeleccioanda = new DataGridView();
             panel1.SuspendLayout();
             tabControl.SuspendLayout();
             tabPageLista.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridInscripciones).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridInscripcionSeleccioanda).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridInscripciones).BeginInit();
             SuspendLayout();
             // 
             // panel1
@@ -157,8 +157,8 @@
             tabPageLista.Controls.Add(BtnBuscar);
             tabPageLista.Controls.Add(label3);
             tabPageLista.Controls.Add(txtFiltro);
-            tabPageLista.Controls.Add(btnModificar);
-            tabPageLista.Controls.Add(btnAgregar);
+            tabPageLista.Controls.Add(btnImprimirSeleccionada);
+            tabPageLista.Controls.Add(btnImprimirTodas);
             tabPageLista.Controls.Add(dataGridInscripciones);
             tabPageLista.Location = new Point(4, 29);
             tabPageLista.Margin = new Padding(2);
@@ -168,6 +168,32 @@
             tabPageLista.TabIndex = 0;
             tabPageLista.Text = "Ver por alumnos";
             tabPageLista.UseVisualStyleBackColor = true;
+            // 
+            // dataGridInscripcionSeleccioanda
+            // 
+            dataGridInscripcionSeleccioanda.AllowUserToAddRows = false;
+            dataGridInscripcionSeleccioanda.AllowUserToDeleteRows = false;
+            dataGridInscripcionSeleccioanda.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dataGridInscripcionSeleccioanda.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridInscripcionSeleccioanda.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = SystemColors.Window;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle3.Format = "d";
+            dataGridViewCellStyle3.NullValue = null;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            dataGridInscripcionSeleccioanda.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridInscripcionSeleccioanda.Location = new Point(6, 390);
+            dataGridInscripcionSeleccioanda.Margin = new Padding(2);
+            dataGridInscripcionSeleccioanda.Name = "dataGridInscripcionSeleccioanda";
+            dataGridInscripcionSeleccioanda.ReadOnly = true;
+            dataGridInscripcionSeleccioanda.RowHeadersWidth = 62;
+            dataGridInscripcionSeleccioanda.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridInscripcionSeleccioanda.Size = new Size(1293, 168);
+            dataGridInscripcionSeleccioanda.TabIndex = 15;
             // 
             // btnSalir
             // 
@@ -225,39 +251,37 @@
             txtFiltro.TabIndex = 11;
             txtFiltro.TextChanged += txtFiltro_TextChanged;
             // 
-            // btnModificar
+            // btnImprimirSeleccionada
             // 
-            btnModificar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnModificar.IconChar = FontAwesome.Sharp.IconChar.Print;
-            btnModificar.IconColor = Color.Black;
-            btnModificar.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            btnModificar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnModificar.Location = new Point(1303, 126);
-            btnModificar.Margin = new Padding(2);
-            btnModificar.Name = "btnModificar";
-            btnModificar.Size = new Size(142, 63);
-            btnModificar.TabIndex = 4;
-            btnModificar.Text = "Imprimir seleccionada";
-            btnModificar.TextAlign = ContentAlignment.MiddleRight;
-            btnModificar.UseVisualStyleBackColor = true;
-            btnModificar.Click += btnModificar_Click;
+            btnImprimirSeleccionada.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnImprimirSeleccionada.IconChar = FontAwesome.Sharp.IconChar.Print;
+            btnImprimirSeleccionada.IconColor = Color.Black;
+            btnImprimirSeleccionada.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnImprimirSeleccionada.ImageAlign = ContentAlignment.MiddleLeft;
+            btnImprimirSeleccionada.Location = new Point(1303, 126);
+            btnImprimirSeleccionada.Margin = new Padding(2);
+            btnImprimirSeleccionada.Name = "btnImprimirSeleccionada";
+            btnImprimirSeleccionada.Size = new Size(142, 63);
+            btnImprimirSeleccionada.TabIndex = 4;
+            btnImprimirSeleccionada.Text = "Imprimir seleccionada";
+            btnImprimirSeleccionada.TextAlign = ContentAlignment.MiddleRight;
+            btnImprimirSeleccionada.UseVisualStyleBackColor = true;
             // 
-            // btnAgregar
+            // btnImprimirTodas
             // 
-            btnAgregar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnAgregar.IconChar = FontAwesome.Sharp.IconChar.Print;
-            btnAgregar.IconColor = Color.Black;
-            btnAgregar.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            btnAgregar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnAgregar.Location = new Point(1303, 66);
-            btnAgregar.Margin = new Padding(2);
-            btnAgregar.Name = "btnAgregar";
-            btnAgregar.Size = new Size(142, 56);
-            btnAgregar.TabIndex = 3;
-            btnAgregar.Text = "Imprimir\ntodas";
-            btnAgregar.TextAlign = ContentAlignment.MiddleRight;
-            btnAgregar.UseVisualStyleBackColor = true;
-            btnAgregar.Click += btnAgregar_Click;
+            btnImprimirTodas.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnImprimirTodas.IconChar = FontAwesome.Sharp.IconChar.Print;
+            btnImprimirTodas.IconColor = Color.Black;
+            btnImprimirTodas.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnImprimirTodas.ImageAlign = ContentAlignment.MiddleLeft;
+            btnImprimirTodas.Location = new Point(1303, 66);
+            btnImprimirTodas.Margin = new Padding(2);
+            btnImprimirTodas.Name = "btnImprimirTodas";
+            btnImprimirTodas.Size = new Size(142, 56);
+            btnImprimirTodas.TabIndex = 3;
+            btnImprimirTodas.Text = "Imprimir\ntodas";
+            btnImprimirTodas.TextAlign = ContentAlignment.MiddleRight;
+            btnImprimirTodas.UseVisualStyleBackColor = true;
             // 
             // dataGridInscripciones
             // 
@@ -266,16 +290,16 @@
             dataGridInscripciones.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             dataGridInscripciones.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridInscripciones.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = SystemColors.Window;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle3.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle3.Format = "d";
-            dataGridViewCellStyle3.NullValue = null;
-            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-            dataGridInscripciones.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = SystemColors.Window;
+            dataGridViewCellStyle4.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle4.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle4.Format = "d";
+            dataGridViewCellStyle4.NullValue = null;
+            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
+            dataGridInscripciones.DefaultCellStyle = dataGridViewCellStyle4;
             dataGridInscripciones.Location = new Point(6, 63);
             dataGridInscripciones.Margin = new Padding(2);
             dataGridInscripciones.Name = "dataGridInscripciones";
@@ -291,36 +315,10 @@
             tabPageAgregarEditar.Margin = new Padding(2);
             tabPageAgregarEditar.Name = "tabPageAgregarEditar";
             tabPageAgregarEditar.Padding = new Padding(2);
-            tabPageAgregarEditar.Size = new Size(1450, 513);
+            tabPageAgregarEditar.Size = new Size(1450, 571);
             tabPageAgregarEditar.TabIndex = 1;
             tabPageAgregarEditar.Text = "Ver por materias";
             tabPageAgregarEditar.UseVisualStyleBackColor = true;
-            // 
-            // dataGridInscripcionSeleccioanda
-            // 
-            dataGridInscripcionSeleccioanda.AllowUserToAddRows = false;
-            dataGridInscripcionSeleccioanda.AllowUserToDeleteRows = false;
-            dataGridInscripcionSeleccioanda.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            dataGridInscripcionSeleccioanda.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridInscripcionSeleccioanda.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = SystemColors.Window;
-            dataGridViewCellStyle4.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle4.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle4.Format = "d";
-            dataGridViewCellStyle4.NullValue = null;
-            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
-            dataGridInscripcionSeleccioanda.DefaultCellStyle = dataGridViewCellStyle4;
-            dataGridInscripcionSeleccioanda.Location = new Point(6, 390);
-            dataGridInscripcionSeleccioanda.Margin = new Padding(2);
-            dataGridInscripcionSeleccioanda.Name = "dataGridInscripcionSeleccioanda";
-            dataGridInscripcionSeleccioanda.ReadOnly = true;
-            dataGridInscripcionSeleccioanda.RowHeadersWidth = 62;
-            dataGridInscripcionSeleccioanda.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridInscripcionSeleccioanda.Size = new Size(1293, 168);
-            dataGridInscripcionSeleccioanda.TabIndex = 15;
             // 
             // InscripcionesMesasExamenesView
             // 
@@ -338,8 +336,8 @@
             tabControl.ResumeLayout(false);
             tabPageLista.ResumeLayout(false);
             tabPageLista.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridInscripciones).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridInscripcionSeleccioanda).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridInscripciones).EndInit();
             ResumeLayout(false);
         }
 
@@ -351,8 +349,8 @@
         public TabPage tabPageLista;
         public DataGridView dataGridInscripciones;
         public TabPage tabPageAgregarEditar;
-        public FontAwesome.Sharp.IconButton btnAgregar;
-        public FontAwesome.Sharp.IconButton btnModificar;
+        public FontAwesome.Sharp.IconButton btnImprimirTodas;
+        public FontAwesome.Sharp.IconButton btnImprimirSeleccionada;
         public FontAwesome.Sharp.IconButton btnSalir;
         public FontAwesome.Sharp.IconButton BtnBuscar;
         private Label label3;

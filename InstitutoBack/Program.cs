@@ -34,7 +34,7 @@ string keyPath = "/app/certs/instituto.key";
 //        }
 //        listenOptions.UseHttps(certPath, password);
 //    });
-    
+
 //});
 
 var configuration = new ConfigurationBuilder()
@@ -70,7 +70,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigins",
         builder => builder
-            .WithOrigins("https://institutoweb.azurewebsites.net", "https://localhost:7189","http://app.isp20.edu.ar","https://app.isp20.edu.ar","https://localhost:443","http://localhost","https://localhost")
+            .WithOrigins("https://institutoweb.azurewebsites.net", "https://localhost:7189","http://app.isp20.edu.ar","https://app.isp20.edu.ar","https://localhost:443","http://localhost","https://localhost", "http://app2.isp20.edu.ar", "https://app2.isp20.edu.ar")
             .AllowAnyHeader()
             .AllowAnyMethod());
 });
