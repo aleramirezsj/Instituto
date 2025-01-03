@@ -58,7 +58,7 @@ jobs:
             environment:
               - ASPNETCORE_URLS=http://+:80
             ports:
-              - "5080:80" # Mapear el puerto 80 del contenedor al 5080 en el host
+              - "1280:80" # Mapear el puerto 80 del contenedor al 1280 en el host
             networks:
               - app_network
 
@@ -67,7 +67,7 @@ jobs:
             image: ${{ secrets.DOCKERHUB_USERNAME }}/instituto-dev-frontend:latest
             restart: always
             ports:
-              - "5081:80" # Mapear el puerto 80 del contenedor al 5081 en el host
+              - "1380:80" # Mapear el puerto 80 del contenedor al 1380 en el host
             networks:
               - app_network
 
