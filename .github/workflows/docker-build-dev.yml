@@ -95,5 +95,8 @@ jobs:
         script: |
           cd /opt/institutodev
           mv docker-compose.dev.yml docker-compose.yml
+          docker compose down
+          docker rmi ${{ secrets.DOCKERHUB_USERNAME }}/instituto-dev-backend:latest
+          docker rmi ${{ secrets.DOCKERHUB_USERNAME }}/instituto-dev-frontend:latest 
           docker compose pull
           docker compose up -d
