@@ -1,7 +1,7 @@
 name: Build app.isp20.edu.ar
 on:
   push:
-    branches: [ dev ]
+    branches: [ master ]
   workflow_dispatch:
 
 jobs:
