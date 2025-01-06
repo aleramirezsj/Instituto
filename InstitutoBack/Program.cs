@@ -12,7 +12,7 @@ bool isContainer = Environment.GetEnvironmentVariable("IS_CONTAINER") == "true";
                    File.Exists("/.dockerenv") || // Algunos contenedores crean este archivo
                    File.ReadAllText("/proc/1/cgroup").Contains("docker");*/
 
-// Configurar las rutas de los certificados din·micamente
+// Configurar las rutas de los certificados din√°micamente
 //string certPath = isContainer ? "/app/certs/instituto.crt" : "../Certs/instituto.crt";
 //string keyPath = isContainer ? "/app/certs/instituto.key" : "../Certs/instituto.key";
 string certPath = isContainer ? "/app/certs/instituto.pfx" : "../Certs/instituto.pfx";
@@ -46,7 +46,7 @@ string cadenaConexion = configuration.GetConnectionString("mysqlremoto");
 
 builder.Services.AddControllers();
 
-//configuraciÛn de inyecciÛn de dependencias del DBContext
+//configuraci√≥n de inyecci√≥n de dependencias del DBContext
 builder.Services.AddDbContext<InstitutoContext>(
     options => options.UseMySql(cadenaConexion,
                                 ServerVersion.AutoDetect(cadenaConexion),
@@ -55,7 +55,7 @@ builder.Services.AddDbContext<InstitutoContext>(
                                         maxRetryDelay: System.TimeSpan.FromSeconds(30),
                                        errorNumbersToAdd: null)
                                 ));
-// Configura el serializador JSON para manejar referencias cÌclicas
+// Configura el serializador JSON para manejar referencias c√≠clicas
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
@@ -65,12 +65,12 @@ builder.Services.AddControllers()
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Configurar una polÌtica de CORS
+// Configurar una pol√≠tica de CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigins",
         builder => builder
-            .WithOrigins("https://institutoweb.azurewebsites.net", "https://localhost:7189","http://app.isp20.edu.ar","https://app.isp20.edu.ar","https://localhost:443","http://localhost","https://localhost", "http://app2.isp20.edu.ar", "https://app2.isp20.edu.ar")
+            .WithOrigins("https://localhost:7189","http://app.isp20.edu.ar","https://app.isp20.edu.ar","https://localhost:443","http://localhost","https://localhost", "http://app2.isp20.edu.ar", "https://app2.isp20.edu.ar")
             .AllowAnyHeader()
             .AllowAnyMethod());
 });
