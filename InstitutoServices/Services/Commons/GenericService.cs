@@ -1,4 +1,4 @@
-﻿using InstitutoServices.Class;
+using InstitutoServices.Class;
 using InstitutoServices.Interfaces;
 using InstitutoServices.Models;
 using InstitutoServices.Util;

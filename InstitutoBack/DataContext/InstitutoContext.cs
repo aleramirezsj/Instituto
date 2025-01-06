@@ -1,4 +1,4 @@
-﻿using InstitutoServices.Enums;
+using InstitutoServices.Enums;
 using InstitutoServices.Models.Commons;
 using InstitutoServices.Models.Horarios;
 using InstitutoServices.Models.Inscripciones;
@@ -20,7 +20,7 @@ namespace InstitutoBack.DataContext
                 .AddJsonFile("appsettings.json")
                 .Build();
 
-            string cadenaConexion = configuration.GetConnectionString("mysqlremoto");
+            string cadenaConexion = configuration.GetConnectionString("mysqlremotodev");
 
             //optionsBuilder.UseSqlServer(cadenaConexion) ;
             optionsBuilder.UseMySql(cadenaConexion,
