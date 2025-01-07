@@ -6,20 +6,25 @@ using System.Text.Json.Serialization;
 var builder = WebApplication.CreateBuilder(args);
 
 
-// Detectar si estamos en un contenedor
-string password = Environment.GetEnvironmentVariable("PASSWORD")??InstitutoBack.Properties.Resources.pass;
-bool isContainer = Environment.GetEnvironmentVariable("IS_CONTAINER") == "true"; /*||
-                   File.Exists("/.dockerenv") || // Algunos contenedores crean este archivo
-                   File.ReadAllText("/proc/1/cgroup").Contains("docker");*/
+//// Detectar en que rama estamos para determinar con que backend trabaja
+string branch = Environment.GetEnvironmentVariable("BRANCH")??"master";
+string mysql_setting;
+if(branch == "master")
+    mysql_setting = "mysqlremoto";
+else
+    mysql_setting = "mysqlremotodev";
+//bool isContainer = Environment.GetEnvironmentVariable("IS_CONTAINER") == "true"; /*||
+//                   File.Exists("/.dockerenv") || // Algunos contenedores crean este archivo
+//                   File.ReadAllText("/proc/1/cgroup").Contains("docker");*/
 
-// Configurar las rutas de los certificados dinámicamente
-//string certPath = isContainer ? "/app/certs/instituto.crt" : "../Certs/instituto.crt";
-//string keyPath = isContainer ? "/app/certs/instituto.key" : "../Certs/instituto.key";
-string certPath = isContainer ? "/app/certs/instituto.pfx" : "../Certs/instituto.pfx";
+//// Configurar las rutas de los certificados dinámicamente
+////string certPath = isContainer ? "/app/certs/instituto.crt" : "../Certs/instituto.crt";
+////string keyPath = isContainer ? "/app/certs/instituto.key" : "../Certs/instituto.key";
+//string certPath = isContainer ? "/app/certs/instituto.pfx" : "../Certs/instituto.pfx";
 
 
-//string certPath = "/app/certs/instituto.crt";
-string keyPath = "/app/certs/instituto.key";
+////string certPath = "/app/certs/instituto.crt";
+//string keyPath = "/app/certs/instituto.key";
 
 //string certPath = "/app/certs/instituto.pfx";
 
@@ -40,7 +45,7 @@ string keyPath = "/app/certs/instituto.key";
 var configuration = new ConfigurationBuilder()
         .AddJsonFile("appsettings.json")
         .Build();
-string cadenaConexion = configuration.GetConnectionString("mysqlremoto");
+string cadenaConexion = configuration.GetConnectionString(mysql_setting);
 
 // Add services to the container.
 

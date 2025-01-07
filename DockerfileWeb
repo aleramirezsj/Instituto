@@ -21,6 +21,8 @@ RUN dotnet publish -c Release -o /app/publish
 # Etapa 2: Runtime
 FROM nginx:alpine
 WORKDIR /usr/share/nginx/html
+ENV BRANCH=master
+
 
 # Copiar los archivos publicados y mantener la estructura de directorios
 COPY --from=build /app/publish/wwwroot .

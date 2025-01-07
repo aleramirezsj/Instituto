@@ -21,7 +21,7 @@ RUN dotnet publish "InstitutoBack/InstitutoBack.csproj" -c Release -o /app/publi
 # Etapa 2: Runtime
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
-ENV IS_CONTAINER=true
+ENV BRANCH=dev
 
 # Copiar la aplicación publicada
 COPY --from=build /app/publish .

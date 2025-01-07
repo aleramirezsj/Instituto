@@ -14,18 +14,6 @@ namespace InstitutoBack.DataContext
         {
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            var configuration = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json")
-                .Build();
-
-            string cadenaConexion = configuration.GetConnectionString("mysqlremotodev");
-
-            //optionsBuilder.UseSqlServer(cadenaConexion) ;
-            optionsBuilder.UseMySql(cadenaConexion,
-                                    ServerVersion.AutoDetect(cadenaConexion));
-        }
 
         ///ESTE CÓDIGO LO DEBEN AGREGAR A LA CLASE DBCONTEXT DESPUÉS DE HABER CREADO EL MODELO MATERIA
         protected override void OnModelCreating(ModelBuilder modelBuilder)
