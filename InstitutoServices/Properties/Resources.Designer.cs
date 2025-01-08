@@ -88,7 +88,7 @@ namespace InstitutoServices.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a dev.
+        ///   Busca una cadena traducida similar a master.
         /// </summary>
         public static string branch {
             get {
