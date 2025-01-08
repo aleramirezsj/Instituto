@@ -88,6 +88,15 @@ namespace InstitutoServices.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a dev.
+        /// </summary>
+        public static string branch {
+            get {
+                return ResourceManager.GetString("branch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a 243005933117-9jrpnqa9f296itha7jlaa3nmh23et4vu.
         /// </summary>
         public static string client_id {

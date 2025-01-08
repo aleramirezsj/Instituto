@@ -1,4 +1,4 @@
-﻿using InstitutoServices.Enums;
+using InstitutoServices.Enums;
 using InstitutoServices.Models.Commons;
 using InstitutoServices.Models.Horarios;
 using InstitutoServices.Models.Inscripciones;
@@ -14,18 +14,6 @@ namespace InstitutoBack.DataContext
         {
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            var configuration = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json")
-                .Build();
-
-            string cadenaConexion = configuration.GetConnectionString("mysqlremoto");
-
-            //optionsBuilder.UseSqlServer(cadenaConexion) ;
-            optionsBuilder.UseMySql(cadenaConexion,
-                                    ServerVersion.AutoDetect(cadenaConexion));
-        }
 
         ///ESTE CÓDIGO LO DEBEN AGREGAR A LA CLASE DBCONTEXT DESPUÉS DE HABER CREADO EL MODELO MATERIA
         protected override void OnModelCreating(ModelBuilder modelBuilder)

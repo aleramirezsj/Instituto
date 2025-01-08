@@ -1,4 +1,4 @@
-﻿using InstitutoServices.Class;
+using InstitutoServices.Class;
 using InstitutoServices.Interfaces;
 using InstitutoServices.Models;
 using InstitutoServices.Util;
@@ -29,7 +29,12 @@ namespace InstitutoServices.Services.Commons
         {
             this.client = new HttpClient();
             this.options = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
-            string urlApi= "https://api.isp20.edu.ar/api/";
+            string branch = Properties.Resources.branch;
+            string urlApi;
+            if (branch == "master")
+                urlApi = "https://api.isp20.edu.ar/api/";
+            else
+                urlApi = "https://api2.isp20.edu.ar/api/";
             //string urlApi;
             //if (Properties.Resources.Remoto == "false")
             //{
