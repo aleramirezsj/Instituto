@@ -24,9 +24,15 @@ var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 builder.Logging.SetMinimumLevel(LogLevel.Debug);
-string urlApi = builder.Configuration.GetValue<string>("UrlApiLocal");
-if (builder.Configuration.GetValue<bool>("Remote")==true)
-     urlApi = builder.Configuration.GetValue<string>("UrlApiRemoto");
+string branch = builder.Configuration.GetValue<string>("branch");
+string urlApi;
+if (branch == "master")
+    urlApi = "https://api.isp20.edu.ar/api/";
+else
+    urlApi = "https://api2.isp20.edu.ar/api/";
+//string urlApi = builder.Configuration.GetValue<string>("UrlApiLocal");
+//if (builder.Configuration.GetValue<bool>("Remote")==true)
+//     urlApi = builder.Configuration.GetValue<string>("UrlApiRemoto");
 
 builder.Services.AddMemoryCache();
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(urlApi) });
@@ -38,7 +44,7 @@ builder.Services.AddScoped<IMesaExamenService, MesaExamenService>();
 builder.Services.AddScoped<IHorarioService, HorarioService>();
 builder.Services.AddScoped<IDetalleHorarioService, DetalleHorarioService>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
-builder.Services.AddScoped<UsuarioService>(); // Añade esta línea
+builder.Services.AddScoped<UsuarioService>(); // AÃ±ade esta lÃ­nea
 
 builder.Services.AddScoped<IInscriptoCarreraService, InscriptoCarreraService>();
 builder.Services.AddScoped<IJefaturaSeccionService, JefaturaSeccionService>();
@@ -56,7 +62,7 @@ AppDomain.CurrentDomain.UnhandledException += (sender, eventArgs) =>
 {
     var exception = eventArgs.ExceptionObject as Exception;
     // muestro el mensaje, la fuente y la pila de llamada de la excepcion no manejada
-    Console.WriteLine($"Excepción no manejada: {exception?.Message}");
+    Console.WriteLine($"ExcepciÃ³n no manejada: {exception?.Message}");
     Console.WriteLine($"Origen: {exception?.Source}");
     Console.WriteLine($"Pila de llamadas: {exception?.StackTrace}");
     //si la innerException no es nula, muestro el mensaje, la fuente y la pila de llamada de la innerException  
