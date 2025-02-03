@@ -120,8 +120,8 @@
                 await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
 
                 try {
-                    const result = await firebase.auth().signInWithRedirect(provider);
-                    //const result = await firebase.auth().signInWithPopup(provider);
+                    //const result = await firebase.auth().signInWithRedirect(provider);
+                    const result = await firebase.auth().signInWithPopup(provider);
                     const user = result.user;
                     console.log(user);
                     return user;
