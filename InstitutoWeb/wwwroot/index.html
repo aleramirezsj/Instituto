@@ -40,7 +40,7 @@
         document.addEventListener("DOMContentLoaded", function () {
             const firebaseConfig = {
                 apiKey: "AIzaSyBmHgrN0BoHgd0ZlDqY9f_BygkzOfhuP_E",
-                authDomain: "instituto20-435114.firebaseapp.com",
+                authDomain: "app2.isp20.edu.ar",
                 projectId: "instituto20-435114",
                 storageBucket: "instituto20-435114.appspot.com",
                 messagingSenderId: "243005933117",
@@ -114,16 +114,11 @@
             },
             loginWithGoogle: async function () {
                 var provider = new firebase.auth.GoogleAuthProvider();
-
-                //await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
-
                 try {
                     const result = await firebase.auth().signInWithPopup(provider);
-                    const user = result.user;
-                    console.log(user);
-                    return user;
+                    return result.user;
                 } catch (error) {
-                    console.error("Error durante el inicio de sesión:", error);
+                    console.error("Error durante el inicio de sesión:", error.code, error.message);
                     return null;
                 }
             },
