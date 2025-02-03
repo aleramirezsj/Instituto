@@ -114,9 +114,6 @@
             },
             loginWithGoogle: async function () {
                 var provider = new firebase.auth.GoogleAuthProvider();
-                provider.setCustomParameters({
-                    prompt: 'select_account' // Forzar selección de cuenta
-                });
                 await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
 
                 try {
