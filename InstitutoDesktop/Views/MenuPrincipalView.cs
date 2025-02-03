@@ -57,14 +57,14 @@ namespace InstitutoDesktop
         {
             if (!logueado)
             {
-                if(iniciarSesionView== null)
+                if (iniciarSesionView == null)
                 {
                     iniciarSesionView = ActivatorUtilities.CreateInstance<IniciarSesionView>(_serviceProvider);
                 }
-                iniciarSesionView.OnLoginSuccess += (s, e) =>LoginFinalizado(e);
-                
+                iniciarSesionView.OnLoginSuccess += (s, e) => LoginFinalizado(e);
+
                 iniciarSesionView.Show();
-                
+
             }
 
         }
@@ -72,9 +72,9 @@ namespace InstitutoDesktop
         private void LoginFinalizado(bool isLogin)
         {
             toolStrip1.Visible = isLogin;
-            menuStrip1.Visible= isLogin;
+            menuStrip1.Visible = isLogin;
             logueado = isLogin;
-            if(!isLogin)
+            if (!isLogin)
                 this.Close();
         }
 
@@ -117,7 +117,7 @@ namespace InstitutoDesktop
             carrerasView.Show();
         }
 
-        private void subMenuAÒosCarreras_Click(object sender, EventArgs e)
+        private void subMenuA√±osCarreras_Click(object sender, EventArgs e)
         {
             AniosCarrerasView aniosCarreraView = ActivatorUtilities.CreateInstance<AniosCarrerasView>(_serviceProvider, this);
             aniosCarreraView.Show();
@@ -149,7 +149,7 @@ namespace InstitutoDesktop
             horariosView.Show();
         }
 
-        private void subMenuTurnosEx·menes_Click(object sender, EventArgs e)
+        private void subMenuTurnosEx√°menes_Click(object sender, EventArgs e)
         {
             TurnosExamenesView turnoExamenesView = ActivatorUtilities.CreateInstance<TurnosExamenesView>(_serviceProvider, this);
             turnoExamenesView.Show();
@@ -171,6 +171,12 @@ namespace InstitutoDesktop
         {
             UsuariosView usuariosView = ActivatorUtilities.CreateInstance<UsuariosView>(_serviceProvider, this);
             usuariosView.Show();
+        }
+
+        private void subMenuInscripciones_Click(object sender, EventArgs e)
+        {
+            InscripcionesExamenesView inscripcionesExamenesView = ActivatorUtilities.CreateInstance<InscripcionesExamenesView>(_serviceProvider, this);
+            inscripcionesExamenesView.Show();
         }
     }
 }

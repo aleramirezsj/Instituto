@@ -1,4 +1,4 @@
-﻿using InstitutoDesktop.Interfaces.MesasExamenes;
+using InstitutoDesktop.Interfaces.MesasExamenes;
 using InstitutoDesktop.Services;
 using InstitutoDesktop.States.MesasExamenes.InscripcionesExamenes;
 using InstitutoServices.Models.Commons;

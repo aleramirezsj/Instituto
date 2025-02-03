@@ -92,7 +92,7 @@
             subMenuCiclosLectivos.IconColor = Color.Black;
             subMenuCiclosLectivos.IconFont = FontAwesome.Sharp.IconFont.Auto;
             subMenuCiclosLectivos.Name = "subMenuCiclosLectivos";
-            subMenuCiclosLectivos.Size = new Size(224, 26);
+            subMenuCiclosLectivos.Size = new Size(228, 30);
             subMenuCiclosLectivos.Text = "Ciclos Lectivos";
             subMenuCiclosLectivos.Click += subMenuCiclosLectivos_Click;
             // 
@@ -102,14 +102,14 @@
             subMenuAulas.IconColor = Color.Black;
             subMenuAulas.IconFont = FontAwesome.Sharp.IconFont.Auto;
             subMenuAulas.Name = "subMenuAulas";
-            subMenuAulas.Size = new Size(224, 26);
+            subMenuAulas.Size = new Size(228, 30);
             subMenuAulas.Text = "Aulas";
             subMenuAulas.Click += subMenuAulas_Click;
             // 
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new Size(221, 6);
+            toolStripSeparator1.Size = new Size(225, 6);
             // 
             // subMenuAlumnos
             // 
@@ -117,7 +117,7 @@
             subMenuAlumnos.IconColor = Color.Black;
             subMenuAlumnos.IconFont = FontAwesome.Sharp.IconFont.Auto;
             subMenuAlumnos.Name = "subMenuAlumnos";
-            subMenuAlumnos.Size = new Size(224, 26);
+            subMenuAlumnos.Size = new Size(228, 30);
             subMenuAlumnos.Text = "Alumnos";
             subMenuAlumnos.Click += subMenuAlumnos_Click;
             // 
@@ -127,14 +127,14 @@
             subMenuDocentes.IconColor = Color.Pink;
             subMenuDocentes.IconFont = FontAwesome.Sharp.IconFont.Solid;
             subMenuDocentes.Name = "subMenuDocentes";
-            subMenuDocentes.Size = new Size(224, 26);
+            subMenuDocentes.Size = new Size(228, 30);
             subMenuDocentes.Text = "Docentes";
             subMenuDocentes.Click += subMenuDocentes_Click;
             // 
             // toolStripSeparator2
             // 
             toolStripSeparator2.Name = "toolStripSeparator2";
-            toolStripSeparator2.Size = new Size(221, 6);
+            toolStripSeparator2.Size = new Size(225, 6);
             // 
             // subMenuCarreras
             // 
@@ -142,7 +142,7 @@
             subMenuCarreras.IconColor = Color.Black;
             subMenuCarreras.IconFont = FontAwesome.Sharp.IconFont.Auto;
             subMenuCarreras.Name = "subMenuCarreras";
-            subMenuCarreras.Size = new Size(224, 26);
+            subMenuCarreras.Size = new Size(228, 30);
             subMenuCarreras.Text = "Carreras";
             subMenuCarreras.Click += subMenuCarreras_Click;
             // 
@@ -152,7 +152,7 @@
             subMenuAñosCarreras.IconColor = Color.Black;
             subMenuAñosCarreras.IconFont = FontAwesome.Sharp.IconFont.Auto;
             subMenuAñosCarreras.Name = "subMenuAñosCarreras";
-            subMenuAñosCarreras.Size = new Size(224, 26);
+            subMenuAñosCarreras.Size = new Size(228, 30);
             subMenuAñosCarreras.Text = "Años de las carreras";
             subMenuAñosCarreras.Click += subMenuAñosCarreras_Click;
             // 
@@ -162,14 +162,14 @@
             subMenuMaterias.IconColor = Color.Black;
             subMenuMaterias.IconFont = FontAwesome.Sharp.IconFont.Auto;
             subMenuMaterias.Name = "subMenuMaterias";
-            subMenuMaterias.Size = new Size(224, 26);
+            subMenuMaterias.Size = new Size(228, 30);
             subMenuMaterias.Text = "Materias";
             subMenuMaterias.Click += subMenuMaterias_Click;
             // 
             // toolStripSeparator4
             // 
             toolStripSeparator4.Name = "toolStripSeparator4";
-            toolStripSeparator4.Size = new Size(221, 6);
+            toolStripSeparator4.Size = new Size(225, 6);
             // 
             // subMenuUsuarios
             // 
@@ -177,7 +177,7 @@
             subMenuUsuarios.IconColor = Color.Black;
             subMenuUsuarios.IconFont = FontAwesome.Sharp.IconFont.Auto;
             subMenuUsuarios.Name = "subMenuUsuarios";
-            subMenuUsuarios.Size = new Size(224, 26);
+            subMenuUsuarios.Size = new Size(228, 30);
             subMenuUsuarios.Text = "Usuarios";
             subMenuUsuarios.Click += subMenuUsuarios_Click;
             // 
@@ -237,7 +237,7 @@
             subMenuTurnosExámenes.IconColor = Color.Black;
             subMenuTurnosExámenes.IconFont = FontAwesome.Sharp.IconFont.Auto;
             subMenuTurnosExámenes.Name = "subMenuTurnosExámenes";
-            subMenuTurnosExámenes.Size = new Size(343, 26);
+            subMenuTurnosExámenes.Size = new Size(347, 30);
             subMenuTurnosExámenes.Text = "Turnos de exámenes";
             subMenuTurnosExámenes.Click += subMenuTurnosExámenes_Click;
             // 
@@ -247,14 +247,14 @@
             subMenuConformacionMesasExamenes.IconColor = Color.Black;
             subMenuConformacionMesasExamenes.IconFont = FontAwesome.Sharp.IconFont.Auto;
             subMenuConformacionMesasExamenes.Name = "subMenuConformacionMesasExamenes";
-            subMenuConformacionMesasExamenes.Size = new Size(343, 26);
+            subMenuConformacionMesasExamenes.Size = new Size(347, 30);
             subMenuConformacionMesasExamenes.Text = "Conformación de Mesas de exámenes";
             subMenuConformacionMesasExamenes.Click += subMenuConformacionMesasExamenes_Click;
             // 
             // toolStripSeparator3
             // 
             toolStripSeparator3.Name = "toolStripSeparator3";
-            toolStripSeparator3.Size = new Size(340, 6);
+            toolStripSeparator3.Size = new Size(344, 6);
             // 
             // subMenuPeriodosInscripciones
             // 
@@ -262,7 +262,7 @@
             subMenuPeriodosInscripciones.IconColor = Color.Black;
             subMenuPeriodosInscripciones.IconFont = FontAwesome.Sharp.IconFont.Auto;
             subMenuPeriodosInscripciones.Name = "subMenuPeriodosInscripciones";
-            subMenuPeriodosInscripciones.Size = new Size(343, 26);
+            subMenuPeriodosInscripciones.Size = new Size(347, 30);
             subMenuPeriodosInscripciones.Text = "Períodos de inscripciones";
             subMenuPeriodosInscripciones.Click += subMenuPeriodosInscripciones_Click;
             // 
@@ -272,8 +272,9 @@
             subMenuInscripciones.IconColor = Color.Black;
             subMenuInscripciones.IconFont = FontAwesome.Sharp.IconFont.Auto;
             subMenuInscripciones.Name = "subMenuInscripciones";
-            subMenuInscripciones.Size = new Size(343, 26);
+            subMenuInscripciones.Size = new Size(347, 30);
             subMenuInscripciones.Text = "Inscripciones de alumnos";
+            subMenuInscripciones.Click += subMenuInscripciones_Click;
             // 
             // menuInformes
             // 
@@ -360,8 +361,8 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Center;
             ClientSize = new Size(1091, 662);
-            Controls.Add(toolStrip1);
             Controls.Add(menuStrip1);
+            Controls.Add(toolStrip1);
             DoubleBuffered = true;
             IsMdiContainer = true;
             MainMenuStrip = menuStrip1;

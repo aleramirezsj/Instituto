@@ -66,9 +66,6 @@
     <Compile Update="Views\Inscripciones\CiclosLectivosView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Views\MesasExamenes\InscripcionesMesasExamenesView.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="Views\MesasExamenes\MesasExamenesView.cs">
       <SubType>Form</SubType>
     </Compile>

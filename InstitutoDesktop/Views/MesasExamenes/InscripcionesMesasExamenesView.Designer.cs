@@ -1,4 +1,4 @@
-﻿namespace InstitutoDesktop.Views
+namespace InstitutoDesktop.Views
 {
     partial class InscripcionesExamenesView
     {
@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             panel1 = new Panel();
-            checkBox1 = new CheckBox();
+            chkFiltrarPorAñoCarrera = new CheckBox();
             chkFiltrarPorCarrera = new CheckBox();
             cboAniosCarreras = new ComboBox();
             cboCarreras = new ComboBox();
@@ -40,6 +40,8 @@
             label1 = new Label();
             tabControl = new TabControl();
             tabPageLista = new TabPage();
+            statusbar = new StatusStrip();
+            statusBarMessage = new ToolStripStatusLabel();
             dataGridInscripcionSeleccioanda = new DataGridView();
             btnSalir = new FontAwesome.Sharp.IconButton();
             BtnBuscar = new FontAwesome.Sharp.IconButton();
@@ -52,6 +54,7 @@
             panel1.SuspendLayout();
             tabControl.SuspendLayout();
             tabPageLista.SuspendLayout();
+            statusbar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridInscripcionSeleccioanda).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridInscripciones).BeginInit();
             SuspendLayout();
@@ -59,7 +62,7 @@
             // panel1
             // 
             panel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            panel1.Controls.Add(checkBox1);
+            panel1.Controls.Add(chkFiltrarPorAñoCarrera);
             panel1.Controls.Add(chkFiltrarPorCarrera);
             panel1.Controls.Add(cboAniosCarreras);
             panel1.Controls.Add(cboCarreras);
@@ -72,15 +75,15 @@
             panel1.Size = new Size(1458, 60);
             panel1.TabIndex = 0;
             // 
-            // checkBox1
+            // chkFiltrarPorAñoCarrera
             // 
-            checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(1254, 5);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(175, 24);
-            checkBox1.TabIndex = 9;
-            checkBox1.Text = "Filtrar por año carrera";
-            checkBox1.UseVisualStyleBackColor = true;
+            chkFiltrarPorAñoCarrera.AutoSize = true;
+            chkFiltrarPorAñoCarrera.Location = new Point(1254, 5);
+            chkFiltrarPorAñoCarrera.Name = "chkFiltrarPorAñoCarrera";
+            chkFiltrarPorAñoCarrera.Size = new Size(175, 24);
+            chkFiltrarPorAñoCarrera.TabIndex = 9;
+            chkFiltrarPorAñoCarrera.Text = "Filtrar por año carrera";
+            chkFiltrarPorAñoCarrera.UseVisualStyleBackColor = true;
             // 
             // chkFiltrarPorCarrera
             // 
@@ -104,6 +107,7 @@
             // cboCarreras
             // 
             cboCarreras.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            cboCarreras.Enabled = false;
             cboCarreras.FormattingEnabled = true;
             cboCarreras.Location = new Point(807, 30);
             cboCarreras.Name = "cboCarreras";
@@ -152,6 +156,7 @@
             // 
             // tabPageLista
             // 
+            tabPageLista.Controls.Add(statusbar);
             tabPageLista.Controls.Add(dataGridInscripcionSeleccioanda);
             tabPageLista.Controls.Add(btnSalir);
             tabPageLista.Controls.Add(BtnBuscar);
@@ -169,23 +174,37 @@
             tabPageLista.Text = "Ver por alumnos";
             tabPageLista.UseVisualStyleBackColor = true;
             // 
+            // statusbar
+            // 
+            statusbar.ImageScalingSize = new Size(20, 20);
+            statusbar.Items.AddRange(new ToolStripItem[] { statusBarMessage });
+            statusbar.Location = new Point(2, 547);
+            statusbar.Name = "statusbar";
+            statusbar.Size = new Size(1446, 22);
+            statusbar.TabIndex = 16;
+            // 
+            // statusBarMessage
+            // 
+            statusBarMessage.Name = "statusBarMessage";
+            statusBarMessage.Size = new Size(0, 16);
+            // 
             // dataGridInscripcionSeleccioanda
             // 
             dataGridInscripcionSeleccioanda.AllowUserToAddRows = false;
             dataGridInscripcionSeleccioanda.AllowUserToDeleteRows = false;
-            dataGridInscripcionSeleccioanda.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dataGridInscripcionSeleccioanda.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dataGridInscripcionSeleccioanda.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridInscripcionSeleccioanda.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = SystemColors.Window;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle3.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle3.Format = "d";
-            dataGridViewCellStyle3.NullValue = null;
-            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-            dataGridInscripcionSeleccioanda.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Window;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle1.Format = "d";
+            dataGridViewCellStyle1.NullValue = null;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
+            dataGridInscripcionSeleccioanda.DefaultCellStyle = dataGridViewCellStyle1;
             dataGridInscripcionSeleccioanda.Location = new Point(6, 390);
             dataGridInscripcionSeleccioanda.Margin = new Padding(2);
             dataGridInscripcionSeleccioanda.Name = "dataGridInscripcionSeleccioanda";
@@ -290,16 +309,16 @@
             dataGridInscripciones.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             dataGridInscripciones.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridInscripciones.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = SystemColors.Window;
-            dataGridViewCellStyle4.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle4.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle4.Format = "d";
-            dataGridViewCellStyle4.NullValue = null;
-            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
-            dataGridInscripciones.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.Format = "d";
+            dataGridViewCellStyle2.NullValue = null;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            dataGridInscripciones.DefaultCellStyle = dataGridViewCellStyle2;
             dataGridInscripciones.Location = new Point(6, 63);
             dataGridInscripciones.Margin = new Padding(2);
             dataGridInscripciones.Name = "dataGridInscripciones";
@@ -320,7 +339,7 @@
             tabPageAgregarEditar.Text = "Ver por materias";
             tabPageAgregarEditar.UseVisualStyleBackColor = true;
             // 
-            // InscripcionesMesasExamenesView
+            // InscripcionesExamenesView
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -328,7 +347,7 @@
             Controls.Add(tabControl);
             Controls.Add(panel1);
             Margin = new Padding(2);
-            Name = "InscripcionesMesasExamenesView";
+            Name = "InscripcionesExamenesView";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Inscripciones a mesas de exámenes";
             panel1.ResumeLayout(false);
@@ -336,6 +355,8 @@
             tabControl.ResumeLayout(false);
             tabPageLista.ResumeLayout(false);
             tabPageLista.PerformLayout();
+            statusbar.ResumeLayout(false);
+            statusbar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridInscripcionSeleccioanda).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridInscripciones).EndInit();
             ResumeLayout(false);
@@ -359,8 +380,10 @@
         public ComboBox cboTurnosExamenes;
         public ComboBox cboCarreras;
         public ComboBox cboAniosCarreras;
-        private CheckBox checkBox1;
-        private CheckBox chkFiltrarPorCarrera;
+        public CheckBox chkFiltrarPorAñoCarrera;
+        public CheckBox chkFiltrarPorCarrera;
         public DataGridView dataGridInscripcionSeleccioanda;
+        public StatusStrip statusbar;
+        public ToolStripStatusLabel statusBarMessage;
     }
 }

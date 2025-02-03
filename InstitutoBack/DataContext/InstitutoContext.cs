@@ -14,6 +14,9 @@ namespace InstitutoBack.DataContext
         {
         }
 
+        public InstitutoContext() { } // Constructor sin parámetros
+
+
 
         ///ESTE CÓDIGO LO DEBEN AGREGAR A LA CLASE DBCONTEXT DESPUÉS DE HABER CREADO EL MODELO MATERIA
         protected override void OnModelCreating(ModelBuilder modelBuilder)
