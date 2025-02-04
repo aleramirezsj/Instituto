@@ -41,7 +41,12 @@ namespace InstitutoBack.Controllers.MesasExamenes
             {
                 return BadRequest("Invalid filter expression.");
             }
-            return await _context.detallesInscripcionesExamenes.Where(filterExpression).AsNoTracking().ToListAsync();
+            return await _context.detallesInscripcionesExamenes
+                .Include(d => d.InscripcionExamen).ThenInclude(i => i.Alumno)
+                .Include(d => d.InscripcionExamen).ThenInclude(i => i.Carrera)
+                .Include(d => d.InscripcionExamen).ThenInclude(i => i.TurnoExamen)
+                .Include(d => d.Materia).ThenInclude(d => d.AnioCarrera)
+                .Where(filterExpression).AsNoTracking().ToListAsync();
         }
 
 
@@ -49,7 +54,12 @@ namespace InstitutoBack.Controllers.MesasExamenes
         [HttpGet("{id}")]
         public async Task<ActionResult<DetalleInscripcionExamen>> GetDetalleInscripcionExamen(int id)
         {
-            var detalleInscripcionExamen = await _context.detallesInscripcionesExamenes.FindAsync(id);
+            var detalleInscripcionExamen = await _context.detallesInscripcionesExamenes
+                .Include(d => d.InscripcionExamen).ThenInclude(i => i.Alumno)
+                .Include(d => d.InscripcionExamen).ThenInclude(i => i.Carrera)
+                .Include(d => d.InscripcionExamen).ThenInclude(i => i.TurnoExamen)
+                .Include(d => d.Materia).ThenInclude(d => d.AnioCarrera)
+                .FirstOrDefaultAsync(d=>d.Id.Equals(id));
 
             if (detalleInscripcionExamen == null)
             {
