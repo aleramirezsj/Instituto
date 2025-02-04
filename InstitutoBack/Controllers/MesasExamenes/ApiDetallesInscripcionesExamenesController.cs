@@ -26,7 +26,7 @@ namespace InstitutoBack.Controllers.MesasExamenes
         [HttpGet]
         public async Task<ActionResult<IEnumerable<DetalleInscripcionExamen>>> GetdetallesInscripcionesExamenes()
         {
-            return await _context.detallesInscripcionesExamenes.Include(d=>d.InscripcionExamen).Include(d=>d.Materia).AsNoTracking().ToListAsync();
+            return await _context.detallesInscripcionesExamenes.Include(d=>d.InscripcionExamen).ThenInclude(i=>i.Alumno).Include(d=>d.Materia).AsNoTracking().ToListAsync();
         }
 
         [HttpPost("filter")]
