@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -26,7 +26,7 @@ namespace InstitutoBack.Controllers.MesasExamenes
         [HttpGet]
         public async Task<ActionResult<IEnumerable<DetalleInscripcionExamen>>> GetdetallesInscripcionesExamenes()
         {
-            return await _context.detallesInscripcionesExamenes.Include(d=>d.Materia).ToListAsync();
+            return await _context.detallesInscripcionesExamenes.Include(d=>d.InscripcionExamen).Include(d=>d.Materia).AsNoTracking().ToListAsync();
         }
 
         [HttpPost("filter")]
