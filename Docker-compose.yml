@@ -55,8 +55,9 @@ services:
       dockerfile: DockerfileWeb
     restart: always
     environment:
-      - VIRTUAL_HOST=app2.isp20.edu.ar
-      - LETSENCRYPT_HOST=app2.isp20.edu.ar
+      - VIRTUAL_PROTO=https # ✅ Asegura que el proxy inverso use HTTPS
+      - VIRTUAL_HOST=app.isp20.edu.ar
+      - LETSENCRYPT_HOST=app.isp20.edu.ar
       - LETSENCRYPT_EMAIL=aleramirezsj@gmail.com
     networks:
       - app_network

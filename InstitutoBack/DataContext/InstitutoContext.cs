@@ -4,6 +4,7 @@ using InstitutoServices.Models.Horarios;
 using InstitutoServices.Models.Inscripciones;
 using InstitutoServices.Models.MesasExamenes;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 using System.Drawing.Drawing2D;
 
 namespace InstitutoBack.DataContext
@@ -14,10 +15,28 @@ namespace InstitutoBack.DataContext
         {
         }
 
-        public InstitutoContext() { } // Constructor sin parámetros
+        public InstitutoContext()
+        {
+            
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                var configuration = new ConfigurationBuilder()
+                    .AddJsonFile("appsettings.json")
+                    .Build();
+
+                string? cadenaConexion = configuration.GetConnectionString("mysqlremoto");
 
 
-
+                optionsBuilder
+                    .LogTo(m => Debug.WriteLine(m), new[] { DbLoggerCategory.Database.Name }, LogLevel.Information)
+                    .EnableSensitiveDataLogging()
+                    .UseMySql(cadenaConexion, ServerVersion.AutoDetect(cadenaConexion));
+            }
+        }
         ///ESTE CÓDIGO LO DEBEN AGREGAR A LA CLASE DBCONTEXT DESPUÉS DE HABER CREADO EL MODELO MATERIA
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
