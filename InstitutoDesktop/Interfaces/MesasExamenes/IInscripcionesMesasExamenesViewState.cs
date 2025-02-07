@@ -1,4 +1,4 @@
-﻿using InstitutoDesktop.Interfaces.Commons;
+using InstitutoDesktop.Interfaces.Commons;
 
 namespace InstitutoDesktop.Interfaces.MesasExamenes
 {
@@ -7,6 +7,9 @@ namespace InstitutoDesktop.Interfaces.MesasExamenes
         void LoadComboboxTurnosExamenes();
         void LoadComboboxCarreras();
         void LoadComboboxAniosCarreras();
-        void LoadComboboxMaterias();
+        void OnImprimirTodasPorAlumno();
+        void OnImprimirTodasPorMateria();
+        void OnImprimirSeleccionadaPorAlumno();
+        void OnImprimirSeleccionadaPorMateria();
     }
 }

@@ -22,6 +22,8 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Reports\DocentesReport.rdlc" />
+    <EmbeddedResource Include="Reports\InscripcionExamenMateriaReport.rdlc" />
+    <EmbeddedResource Include="Reports\InscripcionExamenAlumnoReport.rdlc" />
     <EmbeddedResource Include="Resources\fondosplash.jpg" />
     <EmbeddedResource Include="Resources\loading.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -46,6 +48,12 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Update="ViewReports\InscripcionExamenMateriaViewReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="ViewReports\InscripcionExamenAlumnoViewReport.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Update="Views\Commons\CarrerasView.cs">
       <SubType>Form</SubType>

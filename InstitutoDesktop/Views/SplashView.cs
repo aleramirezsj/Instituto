@@ -1,4 +1,4 @@
-﻿using InstitutoDesktop.Services;
+using InstitutoDesktop.Services;
 using InstitutoDesktop.ViewReports;
 using InstitutoServices.Models.Commons;
 using InstitutoServices.Models.Horarios;

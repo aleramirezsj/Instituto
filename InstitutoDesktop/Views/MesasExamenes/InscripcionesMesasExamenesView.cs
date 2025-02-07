@@ -13,6 +13,10 @@ namespace InstitutoDesktop.Views
         public List<AnioCarrera>? listaAnioCarreras = new List<AnioCarrera>();
         public List<Materia>? listaMaterias = new List<Materia>();
         public List<InscripcionExamen>? listaInscripcionesExamenes = new List<InscripcionExamen>();
+        public List<InscripcionExamen>? listaInscripcionesExamenesFiltrada = new List<InscripcionExamen>();
+
+        public List<DetalleInscripcionExamen>? listaDetallesInscripcionesExamenes = new List<DetalleInscripcionExamen>();
+
 
         public readonly MemoryCacheServiceWinForms _memoryCache;
 
@@ -33,6 +37,12 @@ namespace InstitutoDesktop.Views
         private void BtnBuscar_Click(object sender, EventArgs e) => _currentState.OnBuscar();
         private void txtFiltro_TextChanged(object sender, EventArgs e) => BtnBuscar.PerformClick();
         private void btnSalir_Click(object sender, EventArgs e) => this.Close();
-        
+
+        private void btnImprimirTodas_Click(object sender, EventArgs e) => _currentState.OnImprimirTodasPorAlumno();
+        private void btnImprimirSeleccionada_Click_1(object sender, EventArgs e) => _currentState.OnImprimirSeleccionadaPorAlumno();
+
+        private void btnImprimirTodasMaterias_Click(object sender, EventArgs e) => _currentState.OnImprimirTodasPorMateria();
+
+        private void btnImprimirMateriaSeleccionada_Click(object sender, EventArgs e) => _currentState.OnImprimirSeleccionadaPorMateria();
     }
 }

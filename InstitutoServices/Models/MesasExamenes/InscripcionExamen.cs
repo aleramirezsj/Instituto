@@ -1,4 +1,4 @@
-﻿using InstitutoServices.Interfaces;
+using InstitutoServices.Interfaces;
 using InstitutoServices.Models.Commons;
 using System;
 using System.Collections.Generic;

@@ -1,6 +1,7 @@
 using InstitutoDesktop.Interfaces.Commons;
 using InstitutoDesktop.Interfaces.MesasExamenes;
 using InstitutoDesktop.Views;
+using InstitutoDesktop.ViewReports;
 using InstitutoDesktop.Views.Inscripciones;
 using InstitutoDesktop.Views.MesasExamenes;
 using InstitutoServices.Models.Inscripciones;
@@ -8,7 +9,7 @@ using InstitutoServices.Models.MesasExamenes;
 
 namespace InstitutoDesktop.States.MesasExamenes.InscripcionesExamenes
 {
-    public class ActionsState : IMesasExamenesViewState
+    public class ActionsState : IInscripcionesExamenesViewState
     {
         private readonly InscripcionesExamenesView _form;
 
@@ -17,60 +18,62 @@ namespace InstitutoDesktop.States.MesasExamenes.InscripcionesExamenes
             _form = form;
         }
 
-        public void OnAgregar()
-        {
-            //form.mesaExamenCurrent = new MesaExamen();
-            _form.TransitionTo(new EditionState(_form));
-        }
-
-        public void OnModificar()
-        {
-            //if (_form.dataGridMesasExamenes.CurrentRow == null)
-            //{
-            //    MessageBox.Show("Debe seleccionar una measa de examen", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //    return;
-            //}
-            //_form.mesaExamenCurrent = (MesaExamen)_form.dataGridMesasExamenes.CurrentRow.DataBoundItem;
-            //_form.TransitionTo(new EditionState(_form));
-        }
-
-        public async Task OnEliminar()
-        {
-            //_form.mesaExamenCurrent = (MesaExamen)_form.dataGridMesasExamenes.CurrentRow.DataBoundItem;
-            //var result = MessageBox.Show(
-            //    $"¿Está seguro que desea eliminar la mesa de examen de la materia {_form.mesaExamenCurrent.Materia.Nombre}?",
-            //    "Eliminar",
-            //    MessageBoxButtons.YesNo,
-            //    MessageBoxIcon.Question
-            //);
-
-            //if (result == DialogResult.Yes)
-            //{
-            //    await _form._memoryCache.DeleteCacheAsync<MesaExamen>(_form.mesaExamenCurrent.Id);
-            //}
-            //_form.mesaExamenCurrent = null;
-            _form.TransitionTo(new InitialDisplayState(_form));
-        }
-
-
         // Estos métodos no aplican en este estado
         public Task LoadData() => Task.CompletedTask;
         public void LoadGrid()  { }
         public void LoadGridFilter(string filterText) {}
         public void OnBuscar() { }
         public void UpdateUI() { }
-        public Task OnGuardar() => Task.CompletedTask;
-        public void OnCancelar() { }
         public void OnSalir() => _form.Close();
-        public void LoadComboboxCiclosLectivos() {}
         public void LoadComboboxTurnosExamenes() {}
         public void LoadComboboxCarreras() {}
         public void LoadComboboxAniosCarreras() {}
-        public void LoadComboboxMaterias() {}
-        public void LoadComboboxDocentes() {}
-        public void LoadComboboxTipoIntegrante(){}
-        public void OnAgregarDocenteADetalle() {}
-        public void OnQuitarDocenteDeDetalle() {}
-        public void OnEditarDocenteDeDetalle() {}
+
+        public void OnImprimirTodasPorAlumno()
+        {
+            //necesito filtrar la lista de _form.listaDetallesInscripcionesExamenes dejando solo las que sean de alguna de las inscripciones a exámenes existentes en la lista _form.listaInscripcionesExamene
+
+
+
+            Form InscripcionExamenViewReport = new InscripcionExamenAlumnoViewReport((MenuPrincipalView)_form.MdiParent, _form.listaDetallesInscripcionesExamenes.Where(d => _form.listaInscripcionesExamenesFiltrada.Any(i => i.Id.Equals(d.InscripcionExamenId))).ToList());
+            InscripcionExamenViewReport.Show();
+            _form.TransitionTo(new InitialDisplayState(_form));
+
+        }
+
+        public void OnImprimirTodasPorMateria()
+        {
+            Form InscripcionExamenViewReport = new InscripcionExamenMateriaViewReport((MenuPrincipalView)_form.MdiParent, _form.listaDetallesInscripcionesExamenes.Where(d => d.InscripcionExamen.TurnoExamenId.Equals((int)_form.cboTurnosExamenes.SelectedValue) &&
+                              d.InscripcionExamen.CarreraId.Equals((int)_form.cboCarreras.SelectedValue) &&
+                              d.Materia.AnioCarreraId.Equals((int)_form.cboAniosCarreras.SelectedValue))
+                        .OrderBy(x => x.Materia?.Nombre).ThenBy(x => x.InscripcionExamen?.Alumno?.ApellidoNombre)
+                        .ToList());
+            InscripcionExamenViewReport.Show();
+            _form.TransitionTo(new InitialDisplayState(_form));
+        }
+
+        public void OnImprimirSeleccionadaPorAlumno()
+        {
+            //tomo la inscripción seleccionada de la grilla dataGridViewInscripciones
+            InscripcionExamen inscripcionSeleccionada = (InscripcionExamen)_form.dataGridInscripciones.CurrentRow.DataBoundItem;
+            Form InscripcionExamenViewReport = new InscripcionExamenAlumnoViewReport((MenuPrincipalView)_form.MdiParent, _form.listaDetallesInscripcionesExamenes.Where(d => d.InscripcionExamenId.Equals(inscripcionSeleccionada.Id)).ToList());
+            InscripcionExamenViewReport.Show();
+            _form.TransitionTo(new InitialDisplayState(_form));
+        }
+
+        public void OnImprimirSeleccionadaPorMateria()
+        {
+            //tomo la materia seleccionada de la grilla dataGridMaterias
+            var idMateria = (int)_form.dataGridMaterias.CurrentRow.Cells[0].Value;
+
+            Form InscripcionExamenViewReport = new InscripcionExamenMateriaViewReport((MenuPrincipalView)_form.MdiParent, _form.listaDetallesInscripcionesExamenes.Where(d => d.InscripcionExamen.TurnoExamenId.Equals((int)_form.cboTurnosExamenes.SelectedValue) &&
+                              d.InscripcionExamen.CarreraId.Equals((int)_form.cboCarreras.SelectedValue) &&
+                              d.Materia.AnioCarreraId.Equals((int)_form.cboAniosCarreras.SelectedValue) &&
+                              d.MateriaId.Equals(idMateria))
+                        .OrderBy(x => x.InscripcionExamen?.Alumno?.ApellidoNombre)
+                        .ToList());
+            InscripcionExamenViewReport.Show();
+            _form.TransitionTo(new InitialDisplayState(_form));
+        }
     }
 }

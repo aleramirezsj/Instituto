@@ -1,4 +1,4 @@
-﻿
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -150,17 +150,30 @@ namespace InstitutoDesktop.ExtensionMethods
 
         public static void EstablecerAnchoDeColumnas(this DataGridView grid, int[] anchos)
         {
-            //form.EstaVisible() &&
-            if (grid.ColumnCount > 0)
+            if (grid.RowCount > 0 && grid.ColumnCount > 0)
             {
-                int i = 0;
-                foreach (int ancho in anchos)
+                int visibleColumnIndex = 0;
+                for (int i = 0; i < anchos.Length; i++)
                 {
-                    grid.Columns[i].Width = ancho;
-                    i++;
+                    // Encuentra la siguiente columna visible
+                    while (visibleColumnIndex < grid.Columns.Count && !grid.Columns[visibleColumnIndex].Visible)
+                    {
+                        visibleColumnIndex++;
+                    }
+
+                    // Si no hay más columnas visibles, sal del bucle
+                    if (visibleColumnIndex >= grid.Columns.Count)
+                    {
+                        break;
+                    }
+
+                    // Establece el ancho de la columna visible
+                    grid.Columns[visibleColumnIndex].Width = anchos[i];
+                    visibleColumnIndex++;
                 }
             }
         }
+
 
 
 
