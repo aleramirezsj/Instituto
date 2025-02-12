@@ -1,4 +1,4 @@
-﻿@page "/mesasexamenes"
+@page "/mesasexamenes"
 
 @inject SweetAlertService SweetAlert
 @inject ILogger<MesasExamenes> logger
@@ -15,63 +15,72 @@
 }
 else
 {
-    
-    if(idTurnoExamenSeleccionado==null)
+    if (noHayMesasCargadasParaElTurnoDeExamen)
     {
-        <ListCard ListEntity="@(turnosExamenes.Cast<IEntityIdNombre>().ToList())" OnSeleccionar="SeleccionarTurnoExamem" TituloCard="Turno de examen" />
+        <h3>No hay mesas cargadas aún para el turno de examen actual</h3>
     }
     else
     {
-        <div class="row">
-            <div class="text-end">
-                @if (usuarioStateService.Usuario != null)
-                {
+        if (idTurnoExamenSeleccionado == null)
+        {
+            <ListCard ListEntity="@(turnosExamenes.Cast<IEntityIdNombre>().ToList())" OnSeleccionar="SeleccionarTurnoExamem" TituloCard="Turno de examen" />
+        }
+        else
+        {
+            <div class="row">
+                <div class="text-end">
+                    @if (usuarioStateService.Usuario != null)
+                    {
 
                         <ButtonSelected text="Hoy" condition="@verMesasDeHoy" OnClick="VerMesasDeHoy" />
-                    <ButtonSelected text="Mis mesas" condition="!verTodasLasMesas && !verMesasDeHoy" OnClick="VerSoloMisMesas" />
-                }
+                        <ButtonSelected text="Mis mesas" condition="!verTodasLasMesas && !verMesasDeHoy" OnClick="VerSoloMisMesas" />
+                    }
                     <ButtonSelected text="Todas las mesas" condition="verTodasLasMesas&&!verMesasDeHoy" OnClick="VerMesasDeTodasLasCarreras" />
-                
-            </div>
-        </div>
-        if(idCarreraSeleccionada==null)
-        {
-            <ListCard ListEntity="@(carreras.Cast<IEntityIdNombre>().ToList())" OnSeleccionar="SeleccionarCarrera" TituloCard="Carrera" />
-        }else
-        {
 
-            if (usuarioStateService.Usuario==null||usuarioStateService.Usuario.TipoUsuario == TipoUsuarioEnum.Alumno)
+                </div>
+            </div>
+            if (idCarreraSeleccionada == null)
             {
-                if(verMesasDeHoy)
-                {
-                    <ListCardMesasHoyAlumnos ListMesasExamenes="mesasExamenes" IdCarreraSeleccionada="@idCarreraSeleccionada" IdTurnoExamenSeleccionado="@idTurnoExamenSeleccionado"/>
-                }
-                else
-                {
-                    <TableMesaExamen MesasExamenes="mesasExamenes"/>
-                }
-            } else
+                <ListCard ListEntity="@(carreras.Cast<IEntityIdNombre>().ToList())" OnSeleccionar="SeleccionarCarrera" TituloCard="Carrera" />
+            }
+            else
             {
-                if(verMesasDeHoy)
+
+                if (usuarioStateService.Usuario == null || usuarioStateService.Usuario.TipoUsuario == TipoUsuarioEnum.Alumno)
                 {
-                    <ListCardMesasHoyDocentes ListMesasExamenes="mesasExamenes" />
-                }
-                else
-                {
-                    if(verTodasLasMesas)
+                    if (verMesasDeHoy)
                     {
-                        <TableMesaExamen MesasExamenes="mesasExamenes"/>
+                        <ListCardMesasHoyAlumnos ListMesasExamenes="mesasExamenes" IdCarreraSeleccionada="@idCarreraSeleccionada" IdTurnoExamenSeleccionado="@idTurnoExamenSeleccionado" />
                     }
                     else
                     {
-                        <TableMesaExamenDocente MesasExamenes="mesasExamenes"/>
+                        <TableMesaExamen MesasExamenes="mesasExamenes" />
                     }
                 }
+                else
+                {
+                    if (verMesasDeHoy)
+                    {
+                        <ListCardMesasHoyDocentes ListMesasExamenes="mesasExamenes" />
+                    }
+                    else
+                    {
+                        if (verTodasLasMesas)
+                        {
+                            <TableMesaExamen MesasExamenes="mesasExamenes" />
+                        }
+                        else
+                        {
+                            <TableMesaExamenDocente MesasExamenes="mesasExamenes" />
+                        }
+                    }
+                }
+
             }
 
         }
-        
     }
+    
 }
 
 @code {
@@ -83,6 +92,7 @@ else
     private int? idCarreraSeleccionada;
     private bool verTodasLasMesas = false;
     private bool verMesasDeHoy = false;
+    private bool noHayMesasCargadasParaElTurnoDeExamen = false;
 
     //private Carrera carreraSeleccionada;
 
@@ -93,6 +103,8 @@ else
         mesasExamenes = await _memoryCache.GetAllCacheAsync<MesaExamen>();
         if(turnosExamenes.Any(turno=>turno.Actual))
             idTurnoExamenSeleccionado = turnosExamenes.FirstOrDefault(turno=>turno.Actual).Id;
+        if (!mesasExamenes.Any(m => m.TurnoExamenId == idTurnoExamenSeleccionado))
+            noHayMesasCargadasParaElTurnoDeExamen = true;
 
         if(usuarioStateService.Usuario!=null)
         {
