@@ -1,4 +1,4 @@
-﻿@page "/inscripcionmesasexamenes"
+@page "/inscripcionmesasexamenes"
 
 @inject SweetAlertService SweetAlert
 @inject ILogger<InscripcionMesasExamenes> logger
@@ -31,7 +31,7 @@ else
         {
                 <button class="btn btn-dark me-2" @onclick="TooglePdf">@textoBotonPDF</button>
         }
-        @if (inscripcionCurrent != null && !modificarInscripcion && !visualizarPDF && carreraSeleccionada != null)
+        @if (inscripcionCurrent != null && !modificarInscripcion && !visualizarPDF && carreraSeleccionada != null && inscripcionAbierta)
         {
             <button class="btn btn-dark me-2" @onclick="ModificarInscripcion">Modificar inscripción</button> 
         }
@@ -46,8 +46,16 @@ else
         {
             if (inscripcionCurrent == null||modificarInscripcion)
             {
-                <h3>Carrera: @carreraSeleccionada.Nombre </h3>
-                <ListCardInscripcionMesasExamenes Materias="@materias" OnFinalizarInscripcion="FinalizarInscripcion" />
+                if (inscripcionAbierta)
+                {
+                    <h3>Carrera: @carreraSeleccionada.Nombre </h3>
+                    <ListCardInscripcionMesasExamenes Materias="@materias" OnFinalizarInscripcion="FinalizarInscripcion" />
+                }
+                else
+                {
+                    <h3>La inscripción a mesas de examen no está habilitada</h3>
+                }
+                
             }
             else
             {
@@ -76,13 +84,16 @@ else
     private bool visualizarPDF = false;
     private bool modificarInscripcion = false;
     private string textoBotonPDF=>visualizarPDF?"Ocultar PDF":"Ver PDF";
+    private bool inscripcionAbierta = false;
 
     protected override async Task OnInitializedAsync()
     {
         carreras = await _memoryCache.GetAllCacheAsync<Carrera>();
         turnosExamenes = await _memoryCache.GetAllCacheAsync<TurnoExamen>();
+        if (turnosExamenes.Any(c => c.Actual))
+            turnoExamenSeleccionado = turnosExamenes.Where(c => c.Actual).FirstOrDefault();
         if (turnosExamenes.Any(c => c.InscripcionHabilitada))
-            turnoExamenSeleccionado = turnosExamenes.Where(c => c.InscripcionHabilitada).FirstOrDefault();
+            inscripcionAbierta = true;
         if (usuarioStateService.Usuario != null && usuarioStateService.Usuario.TipoUsuario == TipoUsuarioEnum.Alumno)
         {
             if (usuarioStateService.Usuario.Alumno.InscripcionesACarreras.Count > 1)
