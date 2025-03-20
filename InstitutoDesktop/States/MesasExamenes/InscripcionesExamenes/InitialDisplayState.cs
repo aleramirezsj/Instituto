@@ -268,7 +268,7 @@ namespace InstitutoDesktop.States.MesasExamenes.InscripcionesExamenes
             _form.cboTurnosExamenes.DataSource = _form.listaTurnosExamenes.ToList();
             _form.cboTurnosExamenes.DisplayMember = "Nombre";
             _form.cboTurnosExamenes.ValueMember = "Id";
-            _form.cboTurnosExamenes.SelectedValue=_form.listaTurnosExamenes.FirstOrDefault(turno=>turno.InscripcionHabilitada).Id;
+            _form.cboTurnosExamenes.SelectedValue=_form.listaTurnosExamenes.FirstOrDefault(turno=>turno.Actual).Id;
         }
 
         public void LoadComboboxCarreras()
