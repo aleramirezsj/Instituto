@@ -33,6 +33,7 @@ namespace InstitutoBack.Controllers.Inscripciones
                 .Include(i => i.Carrera)
                 .Include(i => i.Alumno)
                 .Include(i=>i.PeriodoInscripcion)
+                    .ThenInclude(p => p.CicloLectivo)
                 .Include(i=>i.detallesInscripciones)
                     .ThenInclude(d=>d.Materia)
                     .ThenInclude(m=>m.AnioCarrera).AsNoTracking()
@@ -52,6 +53,7 @@ namespace InstitutoBack.Controllers.Inscripciones
                 .Include(i => i.Carrera)
                 .Include(i => i.Alumno)
                 .Include(i=>i.PeriodoInscripcion)
+                    .ThenInclude(p => p.CicloLectivo)
                 .Include(i=>i.detallesInscripciones)
                     .ThenInclude(d=>d.Materia)
                     .ThenInclude(m=>m.AnioCarrera).Where(filterExpression).AsNoTracking().ToListAsync();
@@ -66,6 +68,7 @@ namespace InstitutoBack.Controllers.Inscripciones
                 .Include(i => i.Carrera)
                 .Include(i => i.Alumno)
                 .Include(i => i.PeriodoInscripcion)
+                    .ThenInclude(p=>p.CicloLectivo)
                 .Include(i => i.detallesInscripciones)
                     .ThenInclude(d => d.Materia)
                     .ThenInclude(m => m.AnioCarrera).AsNoTracking()
@@ -84,9 +87,13 @@ namespace InstitutoBack.Controllers.Inscripciones
         [HttpPut("{id}")]
         public async Task<IActionResult> PutInscripcion(int id, Inscripcion inscripcion)
         {
+            var json = Newtonsoft.Json.JsonConvert.SerializeObject(inscripcion);
+            var filePath = Path.Combine(AppContext.BaseDirectory, "putinscripcion.json");
+            System.IO.File.WriteAllText(filePath, json);
+
             if (inscripcion.Carrera != null) _context.Attach(inscripcion.Carrera);
             if (inscripcion.PeriodoInscripcion != null) _context.Attach(inscripcion.PeriodoInscripcion);
-            if (inscripcion.PeriodoInscripcion.CicloLectivo != null) _context.Attach(inscripcion.PeriodoInscripcion.CicloLectivo);
+            if (inscripcion.PeriodoInscripcion?.CicloLectivo != null) _context.Attach(inscripcion.PeriodoInscripcion.CicloLectivo);
 
             foreach (var insc_carrera in inscripcion.Alumno.InscripcionesACarreras)
             {
@@ -167,11 +174,15 @@ namespace InstitutoBack.Controllers.Inscripciones
         [HttpPost]
         public async Task<ActionResult<Inscripcion>> PostInscripcion(Inscripcion inscripcion)
         {
+            var json = Newtonsoft.Json.JsonConvert.SerializeObject(inscripcion);
+            var filePath = Path.Combine(AppContext.BaseDirectory, "inscripcion.json");
+            System.IO.File.WriteAllText(filePath, json);
+
             try
             {
                 if (inscripcion.Carrera != null) _context.Attach(inscripcion.Carrera);
                 if (inscripcion.PeriodoInscripcion != null) _context.Attach(inscripcion.PeriodoInscripcion);
-                if (inscripcion.PeriodoInscripcion.CicloLectivo != null) _context.Attach(inscripcion.PeriodoInscripcion.CicloLectivo);
+                if (inscripcion.PeriodoInscripcion?.CicloLectivo != null) _context.Attach(inscripcion.PeriodoInscripcion.CicloLectivo);
 
                 foreach (var insc_carrera in inscripcion.Alumno.InscripcionesACarreras)
                 {
@@ -209,7 +220,7 @@ namespace InstitutoBack.Controllers.Inscripciones
                 throw new InvalidOperationException("Error al adjuntar entidades relacionadas o guardar la inscripción de examen.", ex);
             }
 
-            return CreatedAtAction("GetInscripcionExamen", new { id = inscripcion.Id }, inscripcion);
+            return CreatedAtAction("GetInscripcion", new { id = inscripcion.Id }, inscripcion);
         }
 
         // DELETE: api/ApiInscripciones/5

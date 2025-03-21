@@ -49,7 +49,7 @@ else
                 if (inscripcionAbierta)
                 {
                     <h3>Carrera: @carreraSeleccionada.Nombre </h3>
-                    <ListCardInscripcionMaterias Materias="@materias" OnFinalizarInscripcion="FinalizarInscripcion" />
+                    <ListCardInscripcionMaterias DetallesInscripcion="@detallesInscripcion" OnFinalizarInscripcion="FinalizarInscripcion" />
                 }
                 else
                 {
@@ -77,6 +77,7 @@ else
     private Carrera? carreraSeleccionada;
     private List<AnioCarrera>? aniosCarrera;
     private List<Materia>? materias;
+    private List<DetalleInscripcion>? detallesInscripcion;
 
     private int? idCarreraSeleccionada;
     private string? pdfBase64;
@@ -115,10 +116,22 @@ else
         materias = (await _memoryCache.GetAllCacheAsync<Materia>())
                     .Where(m => m.AnioCarrera.CarreraId == inscripcionCurrent.CarreraId &&
                            m.EsRecreo.Equals(false)).OrderBy(m => m.AnioCarreraId).ThenBy(m => m.Nombre).ToList();
-        //marco las materias que ya estan inscriptas
+        //creo tantos detalles inscripción como materias tenga la carrera
+        detallesInscripcion = new List<DetalleInscripcion>();
+        bool materiaInscripta = false;  
         foreach (var materia in materias)
         {
-            materia.Eliminado = inscripcionCurrent.detallesInscripciones.Any(d => d.MateriaId == materia.Id);
+            materiaInscripta = inscripcionCurrent.detallesInscripciones.Any(d => d.MateriaId == materia.Id);
+            detallesInscripcion.Add(new DetalleInscripcion
+                {
+                    MateriaId = materia.Id,
+                    Materia = materia,
+                    ModalidadCursado = materiaInscripta ? (inscripcionCurrent.detallesInscripciones
+                                                            .Find(d => d.MateriaId == materia.Id))
+                                                            .ModalidadCursado:ModalidadCursadoEnum.Presencial,
+                    Eliminado = materiaInscripta
+
+                });
         }
         StateHasChanged();
     }
@@ -146,7 +159,7 @@ else
                 AllowEnterKey = false
             };
         SweetAlert.FireAsync(options);
-        var html = await renderer.RenderComponentAsync<InscripcionPDF>(new Dictionary<string, object?>
+        var html = await renderer.RenderComponentAsync<InscripcionMateriasPDF>(new Dictionary<string, object?>
         {
             { "inscripcion", inscripcionCurrent }
         });
@@ -171,13 +184,24 @@ else
         materias = (await _memoryCache.GetAllCacheAsync<Materia>())
             .Where(m => m.AnioCarrera.CarreraId == carreraSeleccionada.Id &&
                 m.EsRecreo.Equals(false)).OrderBy(m=>m.AnioCarreraId).ThenBy(m=>m.Nombre).ToList();
+        //creo tantos detalles inscripción como materias tenga la carrera
+        detallesInscripcion = new List<DetalleInscripcion>();
+        foreach (var materia in materias)
+        {
+            detallesInscripcion.Add(new DetalleInscripcion
+                {
+                    MateriaId = materia.Id,
+                    Materia = materia,
+                    ModalidadCursado = ModalidadCursadoEnum.Presencial
+                });
+        }
         inscripcionCurrent = (await _memoryCache.GetAllCacheAsync<Inscripcion>())
         .Where(i => i.AlumnoId == usuarioStateService.Usuario.Alumno.Id &&
                i.PeriodoInscripcionId == periodoInscripcionSeleccionado.Id &&
                 i.CarreraId == carreraSeleccionada.Id).FirstOrDefault();
     }
 
-    private async Task FinalizarInscripcion(List<Materia> materiasInscripcion)
+    private async Task FinalizarInscripcion(List<DetalleInscripcion> detallesInscripcion)
     {
         if (inscripcionCurrent == null)
         {
@@ -191,30 +215,31 @@ else
                     PeriodoInscripcion = periodoInscripcionSeleccionado,
                     Fecha = DateTime.Now
                 };
-            foreach (var materia in materiasInscripcion)
+            foreach (var detalle in detallesInscripcion)
             {
                 nuevaInscripcion.detallesInscripciones.Add(new DetalleInscripcion
                     {
-                        MateriaId = materia.Id,
-                        Materia = materia,
-                        ModalidadCursado = ModalidadCursadoEnum.Presencial
+                        MateriaId = detalle.Materia.Id,
+                        Materia = detalle.Materia,
+                        ModalidadCursado = detalle.ModalidadCursado
                         
                     });
             }
 
 
-            await _memoryCache.AddCacheAsync<Inscripcion>(nuevaInscripcion);
-            inscripcionCurrent = nuevaInscripcion;
+            inscripcionCurrent=await _memoryCache.AddCacheAsync<Inscripcion>(nuevaInscripcion);
+            //inscripcionCurrent = nuevaInscripcion;
         }
         else
         {
             inscripcionCurrent.detallesInscripciones.Clear();
-            foreach (var materia in materiasInscripcion)
+            foreach (var detalle in detallesInscripcion)
             {
                 inscripcionCurrent.detallesInscripciones.Add(new DetalleInscripcion
                 {
-                    MateriaId = materia.Id,
-                    Materia = materia
+                    MateriaId = detalle.Materia.Id,
+                    Materia = detalle.Materia,
+                    ModalidadCursado = detalle.ModalidadCursado
                 });
             }
             await _memoryCache.UpdateCacheAsync<Inscripcion>(inscripcionCurrent);

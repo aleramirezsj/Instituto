@@ -1,4 +1,4 @@
-@if(inscripcion!=null)
+@if (inscripcion != null)
 {
     var materiasAgrupadasPorAnio = inscripcion.detallesInscripciones.OrderBy(m => m?.Materia?.AnioCarreraId).ThenBy(m => m?.Materia?.Nombre).GroupBy(m => m?.Materia?.AnioCarreraId);
 
@@ -12,23 +12,42 @@
     {
         var primeraMateria = grupo.First();
 
-        <table class="table table-striped table-hover" style="width:100%">
+        <table class="table table-striped table-hover inscripcion-table" style="width:100%">
             <thead class="table-dark">
-            <tr>
-                    <th style="background-color:lightgray; color:black; text-align:left">@primeraMateria.Materia.AnioCarrera.Nombre</th>
-            </tr>
+                <tr>
+                    <th class="table-header">Año: @primeraMateria.Materia.AnioCarrera.Nombre</th>
+                    <th class="table-header">Modalidad de cursado</th>
+                </tr>
             </thead>
             <tbody style="border:solid 1px #000">
-            @foreach (var inscripcion in grupo)
-            {
-                <tr>
-                        <td >@inscripcion.Materia.Nombre</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+                @foreach (var inscripcion in grupo)
+                {
+                    <tr>
+                        <td class="table-cell">@inscripcion.Materia.Nombre</td>
+                        <td class="table-cell">@inscripcion.ModalidadCursado</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     }
 }
+
+<style>
+    .inscripcion-table {
+        table-layout: fixed;
+        width: 100%;
+    }
+
+    .table-header {
+        background-color: lightslategray;
+        text-align: left;
+        width: 50%;
+    }
+
+    .table-cell {
+        width: 50%;
+    }
+</style>
 
 @code {
     [Parameter]

@@ -201,8 +201,8 @@ else
             }
 
 
-            await _memoryCache.AddCacheAsync<InscripcionExamen>(nuevaInscripcion);
-            inscripcionCurrent = nuevaInscripcion;
+            inscripcionCurrent=await _memoryCache.AddCacheAsync<InscripcionExamen>(nuevaInscripcion);
+             
         }
         else
         {
