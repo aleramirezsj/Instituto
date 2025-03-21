@@ -201,7 +201,7 @@ namespace InstitutoBack.Controllers.Inscripciones
                 }
                 if (inscripcion.Alumno != null) _context.Attach(inscripcion.Alumno);
 
-                _context.inscripcionesExamenes.Add(inscripcion);
+                _context.inscripciones.Add(inscripcion);
                 await _context.SaveChangesAsync();
             }
             catch (Exception ex)
