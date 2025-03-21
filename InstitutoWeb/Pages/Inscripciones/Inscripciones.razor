@@ -16,7 +16,7 @@
 }
 else
 {
-    <h3>Periodo inscripción: @periodoInscripcionSeleccionado.Nombre</h3>
+    
     @if (carreraSeleccionada == null)
     {
         <ListCard ListEntity="@(carreras.Cast<IEntityIdNombre>().ToList())" OnSeleccionar="SeleccionarCarrera" TituloCard="Carrera" />
@@ -53,6 +53,7 @@ else
                 }
                 else
                 {
+                    <h3>Periodo inscripción: @periodoInscripcionSeleccionado?.Nombre</h3>
                     <h5>La inscripción a materias para este período no está habilitada</h5>
                 }
                 
