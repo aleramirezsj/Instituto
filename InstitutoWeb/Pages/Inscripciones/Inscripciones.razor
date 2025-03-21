@@ -1,63 +1,236 @@
-﻿@page "/inscripciones"
+@page "/inscripciones"
 
-@inject IGenericService<Inscripcion> inscripcionService
-@inject IGenericService<CicloLectivo> cicloLectivoService
 @inject SweetAlertService SweetAlert
+@inject ILogger<Inscripciones> logger
+@inject IMemoryCacheService _memoryCache
+@inject IUsuarioStateService usuarioStateService
+@inject RazorRenderer renderer
+@inject PdfGenerator pdfGenerator
+@inject IJSRuntime JSRuntime
 
-<PageTitle>Inscripciones</PageTitle>
-<h1>Inscripciones a materias</h1>
+<PageTitle>Inscripción a Materias</PageTitle>
 
-@if (inscripciones == null && cicloslectivos== null)
+@if (periodoInscripcionSeleccionado == null)
 {
-    <p><em>Cargando...</em></p>
+    <p><em>Se está cargando la información de la inscripción, espere un momento por favor</em></p>
 }
 else
 {
-    if (idCicloLectivoSeleccionado == null)
+    <h3>Periodo inscripción: @periodoInscripcionSeleccionado.Nombre</h3>
+    @if (carreraSeleccionada == null)
     {
-        <ListCard ListEntity="@(cicloslectivos.Cast<IEntityIdNombre>().ToList())" OnSeleccionar="SeleccionarCicloLectivo" TituloCard="Ciclo Lectivo" />
-    }else
-    {
-        <NavLink class="nav-link" href=@($"nuevainscripcion?idCicloLectivo={idCicloLectivoSeleccionado}")> Nueva Inscripción</NavLink>
-
-        <TableInscripciones Inscripciones="@inscripciones" OnEliminar="Eliminar" />
+        <ListCard ListEntity="@(carreras.Cast<IEntityIdNombre>().ToList())" OnSeleccionar="SeleccionarCarrera" TituloCard="Carrera" />
     }
+    
+    <div class="text-end">
+        @if (usuarioStateService.Usuario.Alumno.InscripcionesACarreras.Count > 1 && carreraSeleccionada != null && !visualizarPDF)
+        {
+            <button class="btn btn-dark me-2" @onclick="()=>{carreraSeleccionada=null; materias=null;StateHasChanged();}">Cambiar de carrera</button>
+        }
+        @if (inscripcionCurrent!=null&&carreraSeleccionada!=null)
+        {
+                <button class="btn btn-dark me-2" @onclick="TooglePdf">@textoBotonPDF</button>
+        }
+        @if (inscripcionCurrent != null && !modificarInscripcion && !visualizarPDF && carreraSeleccionada != null && inscripcionAbierta)
+        {
+            <button class="btn btn-dark me-2" @onclick="ModificarInscripcion">Modificar inscripción</button> 
+        }
+    </div>
+    @if (!string.IsNullOrEmpty(pdfBase64)&&visualizarPDF)
+    {
+        <iframe src="data:application/pdf;base64,@pdfBase64" width="100%" height="600px"></iframe>
+    }
+    else
+    {
+        if (carreraSeleccionada != null && materias != null)
+        {
+            if (inscripcionCurrent == null||modificarInscripcion)
+            {
+                if (inscripcionAbierta)
+                {
+                    <h3>Carrera: @carreraSeleccionada.Nombre </h3>
+                    <ListCardInscripcionMaterias Materias="@materias" OnFinalizarInscripcion="FinalizarInscripcion" />
+                }
+                else
+                {
+                    <h3>La inscripción a materias para este período ya no está habilitada</h3>
+                }
+                
+            }
+            else
+            {
+                <InscripcionMateriasPDF inscripcion="@inscripcionCurrent" />
+                
+            }
+        }
+    }
+    
 }
 
-@code {
 
-    private List<Inscripcion>? inscripciones;
-    private List<CicloLectivo>? cicloslectivos;
-    private int? idCicloLectivoSeleccionado;
+
+
+@code {
+    private List<PeriodoInscripcion>? periodosInscripciones;
+    private List<Carrera>? carreras;
+    private PeriodoInscripcion? periodoInscripcionSeleccionado;
+    private Carrera? carreraSeleccionada;
+    private List<AnioCarrera>? aniosCarrera;
+    private List<Materia>? materias;
+
+    private int? idCarreraSeleccionada;
+    private string? pdfBase64;
+    private Inscripcion? inscripcionCurrent;
+    private bool visualizarPDF = false;
+    private bool modificarInscripcion = false;
+    private string textoBotonPDF=>visualizarPDF?"Ocultar PDF":"Ver PDF";
+    private bool inscripcionAbierta = false;
 
     protected override async Task OnInitializedAsync()
     {
-        inscripciones = await inscripcionService.GetAllAsync();
-        cicloslectivos = await cicloLectivoService.GetAllAsync();
-    }
-
-    private async void Eliminar(Inscripcion inscripcion)
-    {
-        SweetAlertResult respuesta = await SweetAlert.FireAsync(new SweetAlertOptions
-            {
-                Title = "Borrando Inscripción",
-                Text = $"¿Está seguro que desea borrar la inscripción de {inscripcion.Alumno?.ApellidoNombre}",
-                Icon = SweetAlertIcon.Warning,
-                ShowCancelButton = true,
-                ConfirmButtonText = "Si, quiero borrarlo!",
-                CancelButtonText = "No, espera"
-            });
-        if (respuesta.IsConfirmed)
+        carreras = await _memoryCache.GetAllCacheAsync<Carrera>();
+        periodosInscripciones = await _memoryCache.GetAllCacheAsync<PeriodoInscripcion>();
+        if (periodosInscripciones.Any(c =>c.InscripcionHabilitada))
+            periodoInscripcionSeleccionado = periodosInscripciones.Where(c => c.InscripcionHabilitada).FirstOrDefault();
+        if (periodosInscripciones.Any(c => c.InscripcionHabilitada))
+            inscripcionAbierta = true;
+        if (usuarioStateService.Usuario != null && usuarioStateService.Usuario.TipoUsuario == TipoUsuarioEnum.Alumno)
         {
-            await inscripcionService.DeleteAsync(inscripcion.Id);
-            inscripciones = await inscripcionService.GetAllAsync();
-            StateHasChanged();
+            if (usuarioStateService.Usuario.Alumno.InscripcionesACarreras.Count > 1)
+                carreras = carreras
+                            .Where(c => usuarioStateService.Usuario.Alumno.InscripcionesACarreras.Select(i => i.CarreraId).Contains(c.Id)).ToList();
+            else
+            {
+                carreraSeleccionada = usuarioStateService.Usuario.Alumno.InscripcionesACarreras.FirstOrDefault().Carrera;
+                aniosCarrera = (await _memoryCache.GetAllCacheAsync<AnioCarrera>())
+                                .Where(a => a.CarreraId == carreraSeleccionada.Id).ToList();
+                await ObtenerMateriasEInscripcion();
+            }
         }
     }
-
-    private async Task SeleccionarCicloLectivo(int idCicloLectivo)
+    private async Task ModificarInscripcion()
     {
-        idCicloLectivoSeleccionado = idCicloLectivo;
+        modificarInscripcion = true;
+        //obtengo las materias de la carrega
+        materias = (await _memoryCache.GetAllCacheAsync<Materia>())
+                    .Where(m => m.AnioCarrera.CarreraId == inscripcionCurrent.CarreraId &&
+                           m.EsRecreo.Equals(false)).OrderBy(m => m.AnioCarreraId).ThenBy(m => m.Nombre).ToList();
+        //marco las materias que ya estan inscriptas
+        foreach (var materia in materias)
+        {
+            materia.Eliminado = inscripcionCurrent.detallesInscripciones.Any(d => d.MateriaId == materia.Id);
+        }
+        StateHasChanged();
+    }
+    private async Task TooglePdf()
+    {
+        visualizarPDF = !visualizarPDF;
+        if(string.IsNullOrEmpty(pdfBase64)&&visualizarPDF)
+        {
+            await GenerarPDF();
+        }
+        StateHasChanged();
+    }
+    private async Task GenerarPDF()
+    {
+        SweetAlertOptions options = new SweetAlertOptions
+            {
+                Title = "Generando PDF",
+                Text = "El archivo PDF se está generando...",
+                Icon = SweetAlertIcon.Info,
+                ShowCancelButton = false,
+                ShowConfirmButton = false,
+                ShowCloseButton = false,
+                AllowOutsideClick = false,
+                AllowEscapeKey = false,
+                AllowEnterKey = false
+            };
+        SweetAlert.FireAsync(options);
+        var html = await renderer.RenderComponentAsync<InscripcionPDF>(new Dictionary<string, object?>
+        {
+            { "inscripcion", inscripcionCurrent }
+        });
+        var pdfBytes = await pdfGenerator.GeneratePdfAsync(html);
+
+        // Convertir el PDF a base64
+        pdfBase64 = Convert.ToBase64String(pdfBytes);
+
+        if (!string.IsNullOrEmpty(pdfBase64))
+        {
+            await SweetAlert.FireAsync("Éxito", "El archivo PDF se ha generado correctamente.", SweetAlertIcon.Success);
+        }
+        else
+        {
+            // Hubo un problema al almacenar el archivo
+            await SweetAlert.FireAsync("Error", "Hubo un problema al generar el archivo PDF.", SweetAlertIcon.Error);
+        }
+    }
+    private async Task  ObtenerMateriasEInscripcion()
+    {
+        //muestro cuantos anios carrera tiene la carrera seleccionada con el logger
+        materias = (await _memoryCache.GetAllCacheAsync<Materia>())
+            .Where(m => m.AnioCarrera.CarreraId == carreraSeleccionada.Id &&
+                m.EsRecreo.Equals(false)).OrderBy(m=>m.AnioCarreraId).ThenBy(m=>m.Nombre).ToList();
+        inscripcionCurrent = (await _memoryCache.GetAllCacheAsync<Inscripcion>())
+        .Where(i => i.AlumnoId == usuarioStateService.Usuario.Alumno.Id &&
+               i.PeriodoInscripcionId == periodoInscripcionSeleccionado.Id &&
+                i.CarreraId == carreraSeleccionada.Id).FirstOrDefault();
+    }
+
+    private async Task FinalizarInscripcion(List<Materia> materiasInscripcion)
+    {
+        if (inscripcionCurrent == null)
+        {
+            var nuevaInscripcion = new Inscripcion
+                {
+                    AlumnoId = usuarioStateService.Usuario.Alumno.Id,
+                    Alumno = usuarioStateService.Usuario.Alumno,
+                    CarreraId = carreraSeleccionada.Id,
+                    Carrera = carreraSeleccionada,
+                    PeriodoInscripcionId = periodoInscripcionSeleccionado.Id,
+                    PeriodoInscripcion = periodoInscripcionSeleccionado,
+                    Fecha = DateTime.Now
+                };
+            foreach (var materia in materiasInscripcion)
+            {
+                nuevaInscripcion.detallesInscripciones.Add(new DetalleInscripcion
+                    {
+                        MateriaId = materia.Id,
+                        Materia = materia,
+                        ModalidadCursado = ModalidadCursadoEnum.Presencial
+                        
+                    });
+            }
+
+
+            await _memoryCache.AddCacheAsync<Inscripcion>(nuevaInscripcion);
+            inscripcionCurrent = nuevaInscripcion;
+        }
+        else
+        {
+            inscripcionCurrent.detallesInscripciones.Clear();
+            foreach (var materia in materiasInscripcion)
+            {
+                inscripcionCurrent.detallesInscripciones.Add(new DetalleInscripcion
+                {
+                    MateriaId = materia.Id,
+                    Materia = materia
+                });
+            }
+            await _memoryCache.UpdateCacheAsync<Inscripcion>(inscripcionCurrent);
+            modificarInscripcion = false;
+        }
+        StateHasChanged();
+    }
+
+    private async Task SeleccionarCarrera(int idCarrera)
+    {
+        idCarreraSeleccionada = idCarrera;
+        modificarInscripcion = false;
+        visualizarPDF = false;
+        carreraSeleccionada = carreras.FirstOrDefault(c => c.Id == idCarreraSeleccionada);
+        await ObtenerMateriasEInscripcion();
         StateHasChanged();
     }
 }
+

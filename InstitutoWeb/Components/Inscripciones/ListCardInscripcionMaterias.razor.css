@@ -1,0 +1,36 @@
+﻿.card:hover {
+    cursor: pointer;
+}
+.card {
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card-seleccionada {
+    transform: translateY(5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: lightgray;
+}
+
+.nav-link {
+    cursor: pointer;
+    font-size: 1.25rem; /* Tamaño de fuente similar a h5 */
+    font-weight: bold; /* Peso de fuente similar a h5 */
+    color: #000; /* Color de texto */
+    /*padding: 0.5rem 1rem; /* Espaciado interno */
+    /*/border: none; /* Sin borde */
+    background-color: transparent; /* Fondo transparente */
+}
+
+    .nav-link:hover {
+        color: #007bff; /* Color de texto al pasar el cursor */
+        text-decoration: none; /* Sin subrayado al pasar el cursor */
+    }
+
+    .nav-link.active {
+        color: #007bff; /* Color de texto para la pestaña activa */
+        border-bottom: 2px solid #007bff; /* Borde inferior para la pestaña activa */
+    }
+.card-body {
+    flex: 1 1 auto;
+    padding: 0.4rem 1rem;
+}

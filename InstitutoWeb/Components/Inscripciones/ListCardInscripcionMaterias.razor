@@ -1,0 +1,72 @@
+@inject SweetAlertService SweetAlert
+
+<div class="container my-4">
+    <ul class="nav nav-tabs">
+        @foreach (var anioCarrera in aniosCarrera)
+        {
+            <li class="nav-item">
+                <a class="nav-link @((anioCarrera.Id == anioCarreraSeleccionado) ? "active" : "")" @onclick="()=>{anioCarreraSeleccionado=anioCarrera.Id; materiasSeleccionadas= Materias.Where(m=>m.AnioCarrera.Id == anioCarreraSeleccionado).ToList();}">@anioCarrera.Nombre</a>
+            </li>
+        }
+    </ul>
+    <div class="row">
+        @foreach (var entity in materiasSeleccionadas)
+        {
+            <div class="col-12 mb-2">
+                <div class="card text-center d-flex flex-row align-items-center p-1 @((entity.Eliminado) ? "card-seleccionada" : "")" @onclick="()=>ToggleSeleccion(entity)">
+                    <img src="images/academico.png" class="img-fluid rounded-start" alt="Icono escolar">
+                    <div class="card-body text-start">
+                        <h5 class="card-title">@entity.Nombre</h5>
+                    </div>
+                    <div class="ms-auto p-1">
+                        <button class="btn @((entity.Eliminado) ? "btn-dark" : "btn-outline-dark")">
+                            @((entity.Eliminado) ? "Seleccionada" : "Seleccionar")
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+        }
+        <button class="btn btn-primary" @onclick="()=>HandleFinalizarInscripcion(Materias)">Finalizar inscripción</button>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public List<Materia> Materias { get; set; } = new List<Materia>();
+
+    [Parameter]
+    public EventCallback<List<Materia>> OnFinalizarInscripcion { get; set; }
+
+    int anioCarreraSeleccionado;
+
+    private List<AnioCarrera> aniosCarrera = new List<AnioCarrera>();
+    private List<Materia> materiasSeleccionadas = new List<Materia>();
+
+    private async Task HandleFinalizarInscripcion(List<Materia> listSelected)
+    {
+        SweetAlertResult respuesta = await SweetAlert.FireAsync(new SweetAlertOptions
+            {
+                Title = "Finalizar inscripción",
+                Text = $"¿Está seguro que desea finalizar la inscripción",
+                Icon = SweetAlertIcon.Warning,
+                ShowCancelButton = true,
+                ConfirmButtonText = "Si, quiero finalizarla",
+                CancelButtonText = "No, espera"
+            });
+        if (respuesta.IsConfirmed)
+            await OnFinalizarInscripcion.InvokeAsync(listSelected.Where(e => e.Eliminado == true).ToList()??null);
+    }
+
+    private void ToggleSeleccion(Materia entity)
+    {
+        entity.Eliminado = !entity.Eliminado;
+    }
+
+    protected override void OnInitialized()
+    {
+        aniosCarrera = Materias.Select(m => m.AnioCarrera).Distinct().ToList() ?? new List<AnioCarrera>();
+        anioCarreraSeleccionado = aniosCarrera.FirstOrDefault()?.Id ?? 0;
+        materiasSeleccionadas = Materias.Where(m => m.AnioCarrera?.Id == anioCarreraSeleccionado).ToList();
+    }
+}
