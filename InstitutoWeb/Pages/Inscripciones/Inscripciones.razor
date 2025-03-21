@@ -53,7 +53,7 @@ else
                 }
                 else
                 {
-                    <h3>La inscripción a materias para este período ya no está habilitada</h3>
+                    <h5>La inscripción a materias para este período no está habilitada</h5>
                 }
                 
             }
@@ -91,10 +91,13 @@ else
     {
         carreras = await _memoryCache.GetAllCacheAsync<Carrera>();
         periodosInscripciones = await _memoryCache.GetAllCacheAsync<PeriodoInscripcion>();
-        if (periodosInscripciones.Any(c =>c.InscripcionHabilitada))
-            periodoInscripcionSeleccionado = periodosInscripciones.Where(c => c.InscripcionHabilitada).FirstOrDefault();
-        if (periodosInscripciones.Any(c => c.InscripcionHabilitada))
-            inscripcionAbierta = true;
+        periodoInscripcionSeleccionado = periodosInscripciones.Where(c => c.InscripcionHabilitada && c.CicloLectivo.Actual.Equals(true)).FirstOrDefault();
+        if (periodoInscripcionSeleccionado==null)
+        {
+            inscripcionAbierta = false;
+            periodoInscripcionSeleccionado = periodosInscripciones.Where(c => c.CicloLectivo.Actual.Equals(true)).LastOrDefault();
+        }
+        else inscripcionAbierta = true;
         if (usuarioStateService.Usuario != null && usuarioStateService.Usuario.TipoUsuario == TipoUsuarioEnum.Alumno)
         {
             if (usuarioStateService.Usuario.Alumno.InscripcionesACarreras.Count > 1)
