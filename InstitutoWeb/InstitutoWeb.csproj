@@ -55,6 +55,9 @@
     <Content Update="Components\Horarios\TableHoras.razor">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>
+    <Content Update="Components\Inscripciones\InscripcionMateriasPDF.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
     <Content Update="Components\MesasExamenes\ListCardMesasHoyDocentes.razor">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>

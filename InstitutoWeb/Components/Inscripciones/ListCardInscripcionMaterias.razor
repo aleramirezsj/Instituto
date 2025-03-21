@@ -1,0 +1,90 @@
+@inject SweetAlertService SweetAlert
+
+<div class="container my-4">
+    <ul class="nav nav-tabs">
+        @foreach (var anioCarrera in aniosCarrera)
+        {
+            <li class="nav-item">
+                <a class="nav-link @((anioCarrera.Id == anioCarreraSeleccionado) ? "active" : "")" @onclick="()=>{anioCarreraSeleccionado=anioCarrera.Id; detallesInscripcionSeleccionados= DetallesInscripcion.Where(m=>m.Materia?.AnioCarrera?.Id == anioCarreraSeleccionado).ToList();}">@anioCarrera.Nombre</a>
+            </li>
+        }
+    </ul>
+    <div class="row">
+        @foreach (var entity in detallesInscripcionSeleccionados)
+        {
+            <div class="col-12 mb-2">
+                <div class="card text-center d-flex flex-row align-items-center p-1 @((entity.Eliminado) ? "card-seleccionada" : "")" >
+                    <img src="images/academico.png" class="img-fluid rounded-start" alt="Icono escolar">
+                    <div class="card-body text-start">
+                        <h5 class="card-title">@entity?.Materia?.Nombre</h5>
+                        <p class="card-text">
+                            @if (entity.Eliminado)
+                            {
+                                <select @onchange="(e) => UpdateModalidadCursado(entity, e.Value)">
+                                    @foreach (var modalidad in Enum.GetValues(typeof(ModalidadCursadoEnum)))
+                                    {
+                                        <option value="@modalidad" selected="@(modalidad.Equals(entity.ModalidadCursado))">@modalidad</option>
+                                    }
+                                </select>
+                            }
+                        </p>
+                    </div>
+                    <div class="ms-auto p-1" @onclick="()=>ToggleSeleccion(entity)">
+                        <button class="btn @((entity.Eliminado) ? "btn-dark" : "btn-outline-dark")">
+                            @((entity.Eliminado) ? "Seleccionada" : "Seleccionar")
+                        </button>
+                    </div>
+                </div>
+            </div>
+        }
+        <button class="btn btn-primary" @onclick="()=>HandleFinalizarInscripcion(DetallesInscripcion)">Finalizar inscripción</button>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public List<DetalleInscripcion> DetallesInscripcion { get; set; } = new List<DetalleInscripcion>();
+
+    [Parameter]
+    public EventCallback<List<DetalleInscripcion>> OnFinalizarInscripcion { get; set; }
+
+    int anioCarreraSeleccionado;
+
+    private List<AnioCarrera> aniosCarrera = new List<AnioCarrera>();
+    private List<DetalleInscripcion> detallesInscripcionSeleccionados = new List<DetalleInscripcion>();
+
+    private async Task HandleFinalizarInscripcion(List<DetalleInscripcion> listSelected)
+    {
+        SweetAlertResult respuesta = await SweetAlert.FireAsync(new SweetAlertOptions
+            {
+                Title = "Finalizar inscripción",
+                Text = $"¿Está seguro que desea finalizar la inscripción",
+                Icon = SweetAlertIcon.Warning,
+                ShowCancelButton = true,
+                ConfirmButtonText = "Si, quiero finalizarla",
+                CancelButtonText = "No, espera"
+            });
+        if (respuesta.IsConfirmed)
+            await OnFinalizarInscripcion.InvokeAsync(listSelected.Where(e => e.Eliminado == true).ToList() ?? null);
+    }
+
+    private void ToggleSeleccion(DetalleInscripcion entity)
+    {
+        entity.Eliminado = !entity.Eliminado;
+    }
+
+    private void UpdateModalidadCursado(DetalleInscripcion entity, object value)
+    {
+        if (Enum.TryParse<ModalidadCursadoEnum>(value.ToString(), out var modalidad))
+        {
+            entity.ModalidadCursado = modalidad;
+        }
+    }
+
+    protected override void OnInitialized()
+    {
+        aniosCarrera = DetallesInscripcion.Select(m => m.Materia.AnioCarrera).Distinct().ToList() ?? new List<AnioCarrera>();
+        anioCarreraSeleccionado = aniosCarrera.FirstOrDefault()?.Id ?? 0;
+        detallesInscripcionSeleccionados = DetallesInscripcion.Where(m => m.Materia?.AnioCarrera?.Id == anioCarreraSeleccionado).ToList();
+    }
+}

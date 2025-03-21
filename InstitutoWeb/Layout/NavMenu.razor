@@ -1,4 +1,4 @@
-﻿@using InstitutoServices.Models.Login
+@using InstitutoServices.Models.Login
 @inject AuthenticationService AuthService
 @inject NavigationManager NavigationManager
 @inject IUsuarioService usuarioService
@@ -35,6 +35,11 @@
                 <div class="nav-item px-3">
                     <NavLink class="nav-link nav-link-multiline" href="inscripcionmesasexamenes">
                         <span class="bi bi-inscripcion-mesas-examenes" aria-hidden="true"></span> Inscripción a<br />mesas de exámenes
+                    </NavLink>
+                </div>
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link nav-link-multiline" href="inscripciones">
+                        <span class="bi bi-inscripcion-mesas-examenes" aria-hidden="true"></span> Inscripción a<br />materias
                     </NavLink>
                 </div>
             }

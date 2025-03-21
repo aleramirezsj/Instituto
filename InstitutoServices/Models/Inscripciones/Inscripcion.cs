@@ -1,5 +1,6 @@
-﻿using InstitutoServices.Interfaces;
+using InstitutoServices.Interfaces;
 using InstitutoServices.Models.Commons;
+using InstitutoServices.Models.MesasExamenes;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -18,6 +19,8 @@ namespace InstitutoServices.Models.Inscripciones
         public int? PeriodoInscripcionId { get; set; }
         public PeriodoInscripcion? PeriodoInscripcion { get; set; }
         public bool Eliminado { get; set; } = false;
+
+        public List<DetalleInscripcion> detallesInscripciones { get; set; } = new List<DetalleInscripcion>();
 
 
         [NotMapped]
