@@ -16,7 +16,6 @@
 }
 else
 {
-    <h3>Turno: @turnoExamenSeleccionado.Nombre</h3>
     @if (carreraSeleccionada == null)
     {
         <ListCard ListEntity="@(carreras.Cast<IEntityIdNombre>().ToList())" OnSeleccionar="SeleccionarCarrera" TituloCard="Carrera" />
@@ -53,7 +52,9 @@ else
                 }
                 else
                 {
-                    <h3>La inscripción a mesas de examen no está habilitada</h3>
+                    <h3>Turno: @turnoExamenSeleccionado.Nombre</h3>
+
+                    <h5>La inscripción a mesas de examen para este período no está habilitada</h5>
                 }
                 
             }
