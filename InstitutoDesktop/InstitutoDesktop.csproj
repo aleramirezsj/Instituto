@@ -22,6 +22,8 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Reports\DocentesReport.rdlc" />
+    <EmbeddedResource Include="Reports\InscripcionPorMateriasReport.rdlc" />
+    <EmbeddedResource Include="Reports\InscripcionMateriasAlumnoReport.rdlc" />
     <EmbeddedResource Include="Reports\InscripcionExamenMateriaReport.rdlc" />
     <EmbeddedResource Include="Reports\InscripcionExamenAlumnoReport.rdlc" />
     <EmbeddedResource Include="Resources\fondosplash.jpg" />
@@ -49,6 +51,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Update="ViewReports\InscripcionPorMateriasViewReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="ViewReports\InscripcionMateriasAlumnoViewReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="ViewReports\InscripcionExamenMateriaViewReport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -72,6 +80,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Views\Inscripciones\CiclosLectivosView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Views\Inscripciones\InscripcionesMateriasView.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Views\MesasExamenes\MesasExamenesView.cs">

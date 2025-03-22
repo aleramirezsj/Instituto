@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -29,9 +29,14 @@ namespace InstitutoBack.Controllers.Inscripciones
         {
             if (idInscripcion != null)
             {
-                return await _context.detallesinscripciones.Include(d => d.Materia).ThenInclude(m => m.AnioCarrera).Where(d => d.InscripcionId.Equals(idInscripcion)).OrderBy(d => d.Materia.AnioCarreraId).ToListAsync();
+                return await _context.detallesinscripciones
+                    .Include(d=>d.Inscripcion)
+                    .Include(d => d.Materia).ThenInclude(m => m.AnioCarrera).Where(d => d.InscripcionId.Equals(idInscripcion)).OrderBy(d => d.Materia.AnioCarreraId).ToListAsync();
             }
-            return await _context.detallesinscripciones.Include(d => d.Materia).ThenInclude(m => m.AnioCarrera).OrderBy(d => d.Materia.AnioCarreraId).ToListAsync();
+            return await _context.detallesinscripciones
+                .Include(d => d.Inscripcion)
+                .Include(d => d.Materia).ThenInclude(m => m.AnioCarrera)
+                .OrderBy(d => d.Materia.AnioCarreraId).ThenBy(d=>d.Materia.Nombre).ToListAsync();
         }
 
         [HttpPost("filter")]
@@ -43,7 +48,10 @@ namespace InstitutoBack.Controllers.Inscripciones
             {
                 return BadRequest("Invalid filter expression.");
             }
-            return await _context.detallesinscripciones.Include(d => d.Materia).ThenInclude(m => m.AnioCarrera).Where(filterExpression).OrderBy(d => d.Materia.AnioCarreraId).ToListAsync();
+            return await _context.detallesinscripciones
+                .Include(d => d.Inscripcion)    
+                .Include(d => d.Materia).ThenInclude(m => m.AnioCarrera).Where(filterExpression)
+                .OrderBy(d => d.Materia.AnioCarreraId).ThenBy(d=>d.Materia.Nombre).ToListAsync();
         }
 
 

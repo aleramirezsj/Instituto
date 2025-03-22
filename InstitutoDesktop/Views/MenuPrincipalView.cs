@@ -178,5 +178,11 @@ namespace InstitutoDesktop
             InscripcionesExamenesView inscripcionesExamenesView = ActivatorUtilities.CreateInstance<InscripcionesExamenesView>(_serviceProvider, this);
             inscripcionesExamenesView.Show();
         }
+
+        private void subMenuInscripcionesMaterias_Click(object sender, EventArgs e)
+        {
+            InscripcionesMateriasView inscripcionesMateriasView = ActivatorUtilities.CreateInstance<InscripcionesMateriasView>(_serviceProvider, this);
+            inscripcionesMateriasView.Show();
+        }
     }
 }
