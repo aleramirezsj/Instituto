@@ -277,7 +277,36 @@
                           <rd:DefaultName>Materia1</rd:DefaultName>
                           <Left>0.03569cm</Left>
                           <Height>0.6cm</Height>
-                          <Width>16.46942cm</Width>
+                          <Width>9.27275cm</Width>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                        <Textbox Name="ModalidadCursado">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!ModalidadCursado.Value</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>ModalidadCursado</rd:DefaultName>
+                          <Left>9.379cm</Left>
+                          <Height>0.6cm</Height>
+                          <Width>7.12611cm</Width>
+                          <ZIndex>1</ZIndex>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -351,7 +380,7 @@
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
-        <DataSetName>DSInscripcionExamen</DataSetName>
+        <DataSetName>DSInscripcionMaterias</DataSetName>
         <Top>0.28787cm</Top>
         <Left>0.03569cm</Left>
         <Height>5.68317cm</Height>
@@ -388,7 +417,7 @@
     </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="DSInscripcionExamen">
+    <DataSet Name="DSInscripcionMaterias">
       <Query>
         <DataSourceName>InstitutoDataSet</DataSourceName>
         <CommandText>/* Local Query */</CommandText>

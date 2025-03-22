@@ -299,7 +299,7 @@
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
-        <DataSetName>DSInscripcionExamen</DataSetName>
+        <DataSetName>DSInscripcionMaterias</DataSetName>
         <Top>0.28787cm</Top>
         <Left>0.03569cm</Left>
         <Height>4.68516cm</Height>
@@ -336,7 +336,7 @@
     </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="DSInscripcionExamen">
+    <DataSet Name="DSInscripcionMaterias">
       <Query>
         <DataSourceName>InstitutoDataSet</DataSourceName>
         <CommandText>/* Local Query */</CommandText>

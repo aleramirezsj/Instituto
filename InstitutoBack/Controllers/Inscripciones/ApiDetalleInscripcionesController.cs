@@ -30,11 +30,11 @@ namespace InstitutoBack.Controllers.Inscripciones
             if (idInscripcion != null)
             {
                 return await _context.detallesinscripciones
-                    .Include(d=>d.Inscripcion)
+                    .Include(d=>d.Inscripcion).ThenInclude(i=>i.Alumno)
                     .Include(d => d.Materia).ThenInclude(m => m.AnioCarrera).Where(d => d.InscripcionId.Equals(idInscripcion)).OrderBy(d => d.Materia.AnioCarreraId).ToListAsync();
             }
             return await _context.detallesinscripciones
-                .Include(d => d.Inscripcion)
+                .Include(d => d.Inscripcion).ThenInclude(i=>i.Alumno)
                 .Include(d => d.Materia).ThenInclude(m => m.AnioCarrera)
                 .OrderBy(d => d.Materia.AnioCarreraId).ThenBy(d=>d.Materia.Nombre).ToListAsync();
         }
@@ -49,7 +49,7 @@ namespace InstitutoBack.Controllers.Inscripciones
                 return BadRequest("Invalid filter expression.");
             }
             return await _context.detallesinscripciones
-                .Include(d => d.Inscripcion)    
+                .Include(d => d.Inscripcion).ThenInclude(i=>i.Alumno)    
                 .Include(d => d.Materia).ThenInclude(m => m.AnioCarrera).Where(filterExpression)
                 .OrderBy(d => d.Materia.AnioCarreraId).ThenBy(d=>d.Materia.Nombre).ToListAsync();
         }
@@ -59,7 +59,10 @@ namespace InstitutoBack.Controllers.Inscripciones
         [HttpGet("{id}")]
         public async Task<ActionResult<DetalleInscripcion>> GetDetalleInscripcion(int id)
         {
-            var detalleInscripcion = await _context.detallesinscripciones.Include(d => d.Materia).Where(d => d.Id.Equals(id)).FirstOrDefaultAsync();
+            var detalleInscripcion = await _context.detallesinscripciones
+                .Include(d => d.Inscripcion).ThenInclude(i => i.Alumno)
+                .Include(d => d.Materia).ThenInclude(m => m.AnioCarrera)
+                .FirstOrDefaultAsync(d => d.Id.Equals(id));
 
             if (detalleInscripcion == null)
             {
