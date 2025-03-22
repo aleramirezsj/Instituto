@@ -31,10 +31,14 @@ namespace InstitutoBack.Controllers.Inscripciones
             {
                 return await _context.detallesinscripciones
                     .Include(d=>d.Inscripcion).ThenInclude(i=>i.Alumno)
+                    .Include(d=>d.Inscripcion).ThenInclude(i=>i.Carrera)
+                    .Include(d => d.Inscripcion).ThenInclude(i => i.PeriodoInscripcion)
                     .Include(d => d.Materia).ThenInclude(m => m.AnioCarrera).Where(d => d.InscripcionId.Equals(idInscripcion)).OrderBy(d => d.Materia.AnioCarreraId).ToListAsync();
             }
             return await _context.detallesinscripciones
                 .Include(d => d.Inscripcion).ThenInclude(i=>i.Alumno)
+                .Include(d => d.Inscripcion).ThenInclude(i => i.Carrera)
+                .Include(d => d.Inscripcion).ThenInclude(i => i.PeriodoInscripcion)
                 .Include(d => d.Materia).ThenInclude(m => m.AnioCarrera)
                 .OrderBy(d => d.Materia.AnioCarreraId).ThenBy(d=>d.Materia.Nombre).ToListAsync();
         }
@@ -49,7 +53,9 @@ namespace InstitutoBack.Controllers.Inscripciones
                 return BadRequest("Invalid filter expression.");
             }
             return await _context.detallesinscripciones
-                .Include(d => d.Inscripcion).ThenInclude(i=>i.Alumno)    
+                .Include(d => d.Inscripcion).ThenInclude(i=>i.Alumno)
+                .Include(d => d.Inscripcion).ThenInclude(i => i.Carrera)
+                .Include(d => d.Inscripcion).ThenInclude(i => i.PeriodoInscripcion)
                 .Include(d => d.Materia).ThenInclude(m => m.AnioCarrera).Where(filterExpression)
                 .OrderBy(d => d.Materia.AnioCarreraId).ThenBy(d=>d.Materia.Nombre).ToListAsync();
         }
@@ -61,6 +67,8 @@ namespace InstitutoBack.Controllers.Inscripciones
         {
             var detalleInscripcion = await _context.detallesinscripciones
                 .Include(d => d.Inscripcion).ThenInclude(i => i.Alumno)
+                .Include(d => d.Inscripcion).ThenInclude(i => i.Carrera)
+                .Include(d => d.Inscripcion).ThenInclude(i => i.PeriodoInscripcion)
                 .Include(d => d.Materia).ThenInclude(m => m.AnioCarrera)
                 .FirstOrDefaultAsync(d => d.Id.Equals(id));
 

@@ -1,8 +1,4 @@
-using InstitutoDesktop.Services;
-using InstitutoServices.Enums;
-using InstitutoServices.Models.Commons;
 using InstitutoServices.Models.Inscripciones;
-using InstitutoServices.Models.MesasExamenes;
 using Microsoft.Reporting.WinForms;
 
 namespace InstitutoDesktop.ViewReports
