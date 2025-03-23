@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,8 +9,7 @@ namespace InstitutoDesktop.Interfaces.Inscripciones
     public interface ICiclosLectivosState
     {
         Task LoadData();
-        void LoadGrid();
-        void LoadGridFilter(string filterText);
+        void LoadGrid(string filterText);
         void OnAgregar();
         Task OnGuardar();
         void OnModificar();

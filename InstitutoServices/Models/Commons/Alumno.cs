@@ -1,5 +1,7 @@
-﻿using InstitutoServices.Interfaces;
+using InstitutoServices.Interfaces;
+using InstitutoServices.Models.Horarios;
 using InstitutoServices.Models.Inscripciones;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace InstitutoServices.Models.Commons
 {
@@ -13,6 +15,15 @@ namespace InstitutoServices.Models.Commons
         public bool Eliminado { get; set; } = false;
 
         public ICollection<InscriptoCarrera> InscripcionesACarreras { get; set; } = new List<InscriptoCarrera>();
+
+        [NotMapped]
+        public string Inscripto_a_Carrera
+        {
+            get
+            {
+                return string.Join(", ", InscripcionesACarreras.Select(x => x.Carrera?.Nombre));
+            }
+        }
 
 
         public override string ToString()

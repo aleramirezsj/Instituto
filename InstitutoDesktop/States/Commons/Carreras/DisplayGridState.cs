@@ -1,4 +1,4 @@
-﻿using InstitutoDesktop.ExtensionMethods;
+using InstitutoDesktop.ExtensionMethods;
 using InstitutoDesktop.Interfaces.Commons;
 using InstitutoDesktop.Util;
 using InstitutoDesktop.Views;
@@ -28,17 +28,10 @@ namespace InstitutoDesktop.States.Commons.Carreras
             ShowInActivity.Show("Cargando Aulas...");
             _form.listaCarreras = await _form._memoryCache.GetAllCacheAsync<Carrera>();
             ShowInActivity.Hide();
-            LoadGrid();
+            LoadGrid(_form.txtFiltro.Text);
         }
 
-        public void LoadGrid()
-        {
-            if (_form.listaCarreras != null && _form.listaCarreras.Count > 0)
-                _form.Grilla.DataSource = _form.listaCarreras.OrderBy(ciclo => ciclo.Nombre).ToList();
-            _form.Grilla.OcultarColumnas(new string[] { "Id", "Eliminado" });
-        }
-
-        public void LoadGridFilter(string filterText)
+        public void LoadGrid(string filterText)
         {
             if (_form.listaCarreras != null && _form.listaCarreras.Count > 0)
                 _form.Grilla.DataSource = _form.listaCarreras
@@ -78,21 +71,18 @@ namespace InstitutoDesktop.States.Commons.Carreras
             if (result == DialogResult.Yes)
             {
                 await _form._memoryCache.DeleteCacheAsync<Carrera>(_form.carreraCurrent.Id);
-                LoadGrid();
+                LoadGrid(_form.txtFiltro.Text);
             }
             _form.carreraCurrent = null;
         }
         public void OnBuscar()
         {
-            if (_form.txtFiltro.Text == "")
-                LoadGrid();
-            else
-                LoadGridFilter(_form.txtFiltro.Text);
+            LoadGrid(_form.txtFiltro.Text);
         }
 
         public void UpdateUI()
         {
-            LoadGrid();
+            LoadGrid(_form.txtFiltro.Text);
             _form.tabPageAgregarEditar.Enabled = false;
             _form.tabPageLista.Enabled = true;
             _form.tabControl.SelectTab(_form.tabPageLista);

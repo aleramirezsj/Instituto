@@ -155,12 +155,6 @@ namespace InstitutoDesktop
             turnoExamenesView.Show();
         }
 
-        private void subMenuPeriodosInscripciones_Click(object sender, EventArgs e)
-        {
-            PeriodosInscripcionesView periodoInscripcionView = ActivatorUtilities.CreateInstance<PeriodosInscripcionesView>(_serviceProvider, this);
-            periodoInscripcionView.Show();
-        }
-
         private void subMenuConformacionMesasExamenes_Click(object sender, EventArgs e)
         {
             MesasExamenesView mesasExamenesView = ActivatorUtilities.CreateInstance<MesasExamenesView>(_serviceProvider, this);
@@ -183,6 +177,12 @@ namespace InstitutoDesktop
         {
             InscripcionesMateriasView inscripcionesMateriasView = ActivatorUtilities.CreateInstance<InscripcionesMateriasView>(_serviceProvider, this);
             inscripcionesMateriasView.Show();
+        }
+
+        private void subMenuPeriodosInscripciones_Click_1(object sender, EventArgs e)
+        {
+            PeriodosInscripcionesView periodoInscripcionView = ActivatorUtilities.CreateInstance<PeriodosInscripcionesView>(_serviceProvider, this);
+            periodoInscripcionView.Show();
         }
     }
 }

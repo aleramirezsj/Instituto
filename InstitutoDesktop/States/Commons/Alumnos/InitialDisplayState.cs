@@ -1,4 +1,4 @@
-﻿using InstitutoDesktop.ExtensionMethods;
+using InstitutoDesktop.ExtensionMethods;
 using InstitutoDesktop.Interfaces.Commons;
 using InstitutoDesktop.Interfaces.MesasExamenes;
 using InstitutoDesktop.Util;
@@ -33,39 +33,30 @@ namespace InstitutoDesktop.States.Commons.Alumnos
             ShowInActivity.Show("Cargando alumnos...");
             _form.listaAlumnos = await _form._memoryCache.GetAllCacheAsync<Alumno>();
             ShowInActivity.Hide();
-            LoadGrid();
+            LoadGrid(_form.txtFiltro.Text);
         }
 
-        public void LoadGrid()
-        {
-            if (_form.listaAlumnos != null && _form.listaAlumnos.Count > 0)
-                _form.Grilla.DataSource = _form.listaAlumnos.OrderBy(alumno => alumno.ApellidoNombre).ToList();
-            _form.Grilla.OcultarColumnas(new string[] { "Id", "Eliminado" });
-        }
 
-        public void LoadGridFilter(string filterText)
+        public void LoadGrid(string filterText)
         {
             if (_form.listaAlumnos != null && _form.listaAlumnos.Count > 0)
                 _form.Grilla.DataSource = _form.listaAlumnos
                     .Where(alumno => alumno.ApellidoNombre.ToUpper().Contains(filterText.ToUpper()))
                     .OrderBy(alumno => alumno.ApellidoNombre)
                     .ToList();
-            _form.Grilla.OcultarColumnas(new string[] { "Id", "Eliminado" });
+            _form.Grilla.OcultarColumnas(new string[] { "Id", "Eliminado", "InscripcionesACarreras" });
         }
 
 
         public void OnBuscar()
         {
-            if (string.IsNullOrEmpty(_form.txtFiltro.Text))
-                LoadGrid();
-            else
-                LoadGridFilter(_form.txtFiltro.Text);
+            LoadGrid(_form.txtFiltro.Text);
         }
 
         public async void UpdateUI()
         {
-            
-            LoadGrid();
+
+            LoadGrid(_form.txtFiltro.Text);
             _form.tabPageAgregarEditar.Enabled = false;
             _form.tabPageLista.Enabled = true;
             _form.tabControl.SelectTab(_form.tabPageLista);

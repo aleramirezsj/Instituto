@@ -1,4 +1,4 @@
-﻿using InstitutoDesktop.ExtensionMethods;
+using InstitutoDesktop.ExtensionMethods;
 using InstitutoDesktop.Interfaces.Commons;
 using InstitutoDesktop.Util;
 using InstitutoDesktop.Views;
@@ -30,17 +30,11 @@ namespace InstitutoDesktop.States.Horarios.Horas
             ShowInActivity.Show("Cargando Horas...");
             _form.listaHoras = await _form._memoryCache.GetAllCacheAsync<Hora>();
             ShowInActivity.Hide();
-            LoadGrid();
+            LoadGrid(_form.txtFiltro.Text);
         }
 
-        public void LoadGrid()
-        {
-            if (_form.listaHoras != null && _form.listaHoras.Count > 0)
-                _form.Grilla.DataSource = _form.listaHoras.OrderBy(ciclo => ciclo.Nombre).ToList();
-            _form.Grilla.OcultarColumnas(new string[] { "Id", "Desde", "Hasta", "Eliminado" });
-        }
 
-        public void LoadGridFilter(string filterText)
+        public void LoadGrid(string filterText)
         {
             if (_form.listaHoras != null && _form.listaHoras.Count > 0)
                 _form.Grilla.DataSource = _form.listaHoras
@@ -80,21 +74,18 @@ namespace InstitutoDesktop.States.Horarios.Horas
             if (result == DialogResult.Yes)
             {
                 await _form._memoryCache.DeleteCacheAsync<Hora>(_form.horaCurrent.Id);
-                LoadGrid();
+                LoadGrid(_form.txtFiltro.Text);
             }
             _form.horaCurrent = null;
         }
         public void OnBuscar()
         {
-            if (_form.txtFiltro.Text == "")
-                LoadGrid();
-            else
-                LoadGridFilter(_form.txtFiltro.Text);
+            LoadGrid(_form.txtFiltro.Text);
         }
 
         public void UpdateUI()
         {
-            LoadGrid();
+            LoadGrid(_form.txtFiltro.Text);
             _form.tabPageAgregarEditar.Enabled = false;
             _form.tabPageLista.Enabled = true;
             _form.tabControl.SelectTab(_form.tabPageLista);

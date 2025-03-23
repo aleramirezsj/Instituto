@@ -1,4 +1,4 @@
-﻿using InstitutoDesktop.ExtensionMethods;
+using InstitutoDesktop.ExtensionMethods;
 using InstitutoDesktop.Interfaces.Horarios;
 using InstitutoDesktop.Util;
 using InstitutoDesktop.Views;
@@ -27,7 +27,7 @@ namespace InstitutoDesktop.States.Horarios.Horarios
         {
             if (_form.cboPeriodosHorarios.SelectedValue != null && _form.cboPeriodosHorarios.SelectedValue.GetType() == typeof(int))
             {
-                LoadGrid();
+                LoadGrid(_form.txtFiltro.Text);
             }
         }
 
@@ -36,7 +36,7 @@ namespace InstitutoDesktop.States.Horarios.Horarios
             if (_form.cboAniosCarreras.SelectedValue != null && _form.cboAniosCarreras.SelectedValue.GetType() == typeof(int))
             {
                 LoadComboboxMaterias();
-                LoadGrid();
+                LoadGrid(_form.txtFiltro.Text);
             }
         }
 
@@ -80,26 +80,13 @@ namespace InstitutoDesktop.States.Horarios.Horarios
             LoadComboboxAulas();
             LoadComboboxHoras();
             LoadComboboxDias();
-            LoadGrid();
+            LoadGrid(_form.txtFiltro.Text);
         }
 
         
 
-        public void LoadGrid()
-        {
-            if (_form.listaHorarios != null && _form.listaHorarios.Count > 0 &&
-                _form.cboPeriodosHorarios.SelectedValue!=null&&
-                _form.cboCarreras.SelectedValue!=null&&
-                _form.cboAniosCarreras.SelectedValue!=null)
-                _form.dataGridHorarios.DataSource = _form.listaHorarios.
-                    Where(h => h.PeriodoHorarioId.Equals((int)_form.cboPeriodosHorarios.SelectedValue) &&
-                          h.Materia.AnioCarrera.CarreraId.Equals((int)_form.cboCarreras.SelectedValue) &&
-                          h.Materia.AnioCarreraId.Equals((int)_form.cboAniosCarreras.SelectedValue)).
-                          OrderBy(h=>h.Materia.Nombre).ToList();
-            _form.dataGridHorarios.OcultarColumnas(new string[] { "Id", "MateriaId", "PeriodoHorario", "DetallesHorario", "IntegrantesHorario", "PeriodoHorarioId", "Eliminado" });
-        }
 
-        public void LoadGridFilter(string filterText)
+        public void LoadGrid(string filterText)
         {
             if (_form.listaHorarios != null && _form.listaHorarios.Count > 0 && _form.cboPeriodosHorarios.SelectedValue != null && _form.cboCarreras.SelectedValue != null && _form.cboAniosCarreras.SelectedValue != null)
                 _form.dataGridHorarios.DataSource = _form.listaHorarios.
@@ -114,15 +101,12 @@ namespace InstitutoDesktop.States.Horarios.Horarios
 
         public void OnBuscar()
         {
-            if (string.IsNullOrEmpty(_form.txtFiltro.Text))
-                LoadGrid();
-            else
-                LoadGridFilter(_form.txtFiltro.Text);
+            LoadGrid(_form.txtFiltro.Text);
         }
 
         public async void UpdateUI()
         {
-            LoadGrid();
+            LoadGrid(_form.txtFiltro.Text);
             _form.tabPageAgregarEditar.Enabled = false;
             _form.tabPageLista.Enabled = true;
             _form.tabControl.SelectTab(_form.tabPageLista);

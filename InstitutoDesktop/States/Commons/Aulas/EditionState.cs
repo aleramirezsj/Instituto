@@ -1,4 +1,4 @@
-﻿using InstitutoDesktop.Interfaces.Commons;
+using InstitutoDesktop.Interfaces.Commons;
 using InstitutoDesktop.Views;
 using InstitutoDesktop.Views.Commons;
 using InstitutoServices.Models.Commons;
@@ -54,8 +54,7 @@ namespace InstitutoDesktop.States.Commons.Aulas
 
         // Estos métodos no aplican en este estado
         public Task LoadData() => Task.CompletedTask;
-        public void LoadGrid() {}
-        public void LoadGridFilter(string filterText) {}
+        public void LoadGrid(string filterText) {}
         public void OnAgregar() { }
         public void OnModificar() { }
         public void OnBuscar() { }

@@ -63,7 +63,7 @@ namespace InstitutoDesktop.States.Inscripciones.InscripcionesMaterias
                 //cargo el grid de inscripciones seleccionadas
                 _form.dataGridAlumnos.DataSource = _form.listaDetallesInscripciones
                     .Where(d => d.MateriaId.Equals(idMateria) && d.Inscripcion.PeriodoInscripcionId.Equals((int)_form.cboPeriodosInscripciones.SelectedValue) && d.Inscripcion.CarreraId.Equals((int)_form.cboCarreras.SelectedValue))
-                    .Select(Alumno => new { Alumno = Alumno.Inscripcion.Alumno.ApellidoNombre })
+                    .Select(Alumno => new { Alumno = Alumno.Inscripcion.Alumno.ApellidoNombre, Modalidad_cursado = Alumno.ModalidadCursado.ToString() })
                     .OrderBy(x=>x.Alumno).ToList();
                 //oculto las columnas que no quiero mostrar
                 _form.dataGridAlumnos.OcultarColumnas(new string[] { "Id", "InscripcionExamenId", "Materia","MateriaId","Eliminado" });
@@ -84,7 +84,7 @@ namespace InstitutoDesktop.States.Inscripciones.InscripcionesMaterias
                 //cargo el grid de inscripciones seleccionadas
                 _form.dataGridInscripcionSeleccioanda.DataSource = _form.listaDetallesInscripciones
                     .Where(d=>d.InscripcionId.Equals(inscripcion.Id))
-                        .Select(x=> new {Año=x?.Materia?.AnioCarrera?.Nombre, Materia=x?.Materia?.Nombre}).ToList();
+                        .Select(x=> new {Año=x?.Materia?.AnioCarrera?.Nombre, Materia=x?.Materia?.Nombre, Modalidad_cursado=x.ModalidadCursado.ToString()}).ToList();
                 //establezco el ancho de las columnas si la grilla existe
                 if (_form.dataGridInscripcionSeleccioanda?.ColumnCount > 0)
                 {
@@ -144,21 +144,22 @@ namespace InstitutoDesktop.States.Inscripciones.InscripcionesMaterias
             LoadComboboxPeriodosInscripciones();
             LoadComboboxCarreras();
             LoadComboboxAniosCarreras();
-            LoadGrid();
+            LoadGrid(_form.txtFiltro.Text);
         }
 
-        public void LoadGrid()
+        public void LoadGrid(string filterText="")
         {
             //_form.dataGridInscripciones.DataSource = null;
-            //este método tiene que cargar las inscripciones a mesas de exámenes según el turno de exámenes seleccionado y si el checkbox de ver por carrera está seleccionado tiene que filtar por el turno de exámenes y la carrera seleccionada y si está seleccionado el checkbox de ver por año carrera tiene que filtrar por el turno de exámenes, la carrera y el año seleccionado
+            //este método tiene que cargar las inscripciones a mesas de exámenes según el turno de exámenes seleccionado y si el checkbox de ver por carrera está seleccionado tiene que filtrar por el turno de exámenes y la carrera seleccionada y si está seleccionado el checkbox de ver por año carrera tiene que filtrar por el turno de exámenes, la carrera y el año seleccionado
             if (!_form.chkFiltrarPorCarrera.Checked && !_form.chkFiltrarPorAñoCarrera.Checked)
             {
                 if (_form.listaInscripciones != null && _form.listaInscripciones.Count > 0
                     && _form.cboPeriodosInscripciones.SelectedValue != null)
                 {
                     _form.listaInscripcionesFiltrada = _form.listaInscripciones.
-                        Where(h => h.PeriodoInscripcionId.Equals((int)_form.cboPeriodosInscripciones.SelectedValue))
-                        .OrderBy(h => h.Alumno.ApellidoNombre).ToList();
+                        Where(i => i.PeriodoInscripcionId.Equals((int)_form.cboPeriodosInscripciones.SelectedValue) &&
+                              i.Alumno.ApellidoNombre.ToUpper().Contains(filterText.ToUpper()))
+                        .OrderBy(i=>i.Carrera.Nombre).ThenBy(i => i.Alumno.ApellidoNombre).ToList();
                     //                    var columnaOcultar = (_form.cboTurnosExamenes.SelectedItem as TurnoExamen).TieneLLamado2 ? "" : "Llamado2";
                     _form.dataGridInscripciones.DataSource = _form.listaInscripcionesFiltrada;
                     //_form.dataGridInscripciones.EstablecerAnchoDeColumnas(new int[] { 100 });
@@ -172,8 +173,9 @@ namespace InstitutoDesktop.States.Inscripciones.InscripcionesMaterias
                     && _form.cboPeriodosInscripciones.SelectedValue != null && _form.cboCarreras.SelectedValue != null)
                 {
                     _form.listaInscripcionesFiltrada = _form.listaInscripciones.
-                        Where(h => h.PeriodoInscripcionId.Equals((int)_form.cboPeriodosInscripciones.SelectedValue) &&
-                              h.CarreraId.Equals((int)_form.cboCarreras.SelectedValue))
+                        Where(i => i.PeriodoInscripcionId.Equals((int)_form.cboPeriodosInscripciones.SelectedValue) &&
+                              i.CarreraId.Equals((int)_form.cboCarreras.SelectedValue) &&
+                              i.Alumno.ApellidoNombre.ToUpper().Contains(filterText.ToUpper()))
                         .OrderBy(h => h.Alumno.ApellidoNombre).ToList();
 
                     _form.dataGridInscripciones.DataSource = _form.listaInscripcionesFiltrada;
@@ -196,61 +198,25 @@ namespace InstitutoDesktop.States.Inscripciones.InscripcionesMaterias
                         .OrderBy(x => x.FirstOrDefault().Materia.Nombre)
                         .ToList();
                     //listo las materias agrupadas en la grilla mostrando el nombre y la cantidad de inscripciones
-                    _form.dataGridMaterias.DataSource = listaMateriasAgrupadas.Select(x => new { Id=x.FirstOrDefault().MateriaId,Materia = x.FirstOrDefault().Materia.Nombre, Inscriptos = x.Count() }).ToList();
+                    _form.dataGridMaterias.DataSource = listaMateriasAgrupadas.Select(x => new { Id=x.FirstOrDefault().MateriaId,Materia = x.FirstOrDefault().Materia.Nombre, Inscriptos = x.Count() })
+                        .OrderBy(x => x.Materia).ToList();
                 }
             }
-            _form.dataGridInscripciones.OcultarColumnas(new string[] { "Id", "CarreraId", "AlumnoId", "TurnoExamen", "DetallesInscripcionesExamenes", "TurnoExamenId", "Eliminado" });
+            _form.dataGridInscripciones.OcultarColumnas(new string[] { "Id", "CarreraId", "AlumnoId", "PeriodoInscripcionId", "DetallesInscripcionesExamenes", "PeriodoInscripcion", "Eliminado","Inscripto" });
             _form.statusBarMessage.Text = $"Total de inscripciones a mesas de exámenes obtenidas: {_form.dataGridInscripciones.Rows.Count}";
         }
 
-        public void LoadGridFilter(string filterText)
-        {
-            _form.dataGridInscripciones.DataSource = null;
-            //este método tiene que cargar las inscripciones a mesas de exámenes según el turno de exámenes seleccionado y si el checkbox de ver por carrera está seleccionado tiene que filtar por el turno de exámenes y la carrera seleccionada y si está seleccionado el checkbox de ver por año carrera tiene que filtrar por el turno de exámenes, la carrera y el año seleccionado
-            if (!_form.chkFiltrarPorCarrera.Checked && !_form.chkFiltrarPorAñoCarrera.Checked)
-            {
-                if (_form.listaInscripciones != null && _form.listaInscripciones.Count > 0
-                    && _form.cboPeriodosInscripciones.SelectedValue != null)
-                {
-                    _form.listaInscripcionesFiltrada = _form.listaInscripciones.
-                        Where(i => i.PeriodoInscripcionId.Equals((int)_form.cboPeriodosInscripciones.SelectedValue)&&
-                              i.Alumno.ApellidoNombre.ToUpper().Contains(filterText.ToUpper()))
-                        .OrderBy(i=>i.Alumno.ApellidoNombre).ToList();
-                    //                    var columnaOcultar = (_form.cboTurnosExamenes.SelectedItem as TurnoExamen).TieneLLamado2 ? "" : "Llamado2";
-                    _form.dataGridInscripciones.DataSource = _form.listaInscripcionesFiltrada;
-                    //_form.dataGridInscripciones.EstablecerAnchoDeColumnas(new int[] { 100 });
-
-
-                }
-            }
-            //si está seleccionado el checkbox de ver por carrera
-            else if (_form.chkFiltrarPorCarrera.Checked && !_form.chkFiltrarPorAñoCarrera.Checked)
-            {
-                if (_form.listaInscripciones != null && _form.listaInscripciones.Count > 0
-                    && _form.cboPeriodosInscripciones.SelectedValue != null && _form.cboCarreras.SelectedValue != null)
-                {
-                    _form.listaInscripcionesFiltrada = _form.listaInscripciones.
-                        Where(h => h.PeriodoInscripcionId.Equals((int)_form.cboPeriodosInscripciones.SelectedValue) &&
-                              h.CarreraId.Equals((int)_form.cboCarreras.SelectedValue) &&
-                              h.Alumno.ApellidoNombre.ToUpper().Contains(filterText.ToUpper()))
-                       .OrderBy(i => i.Alumno.ApellidoNombre).ToList();
-                    _form.dataGridInscripciones.DataSource = _form.listaInscripcionesFiltrada;
-                    //_form.dataGridInscripciones.EstablecerAnchoDeColumnas(new int[] { 100 });
-
-
-                }
-            }
-            _form.dataGridInscripciones.OcultarColumnas(new string[] { "Id", "CarreraId", "AlumnoId", "TurnoExamen", "DetallesInscripcionesExamenes", "TurnoExamenId", "Eliminado" });
-            _form.statusBarMessage.Text = $"Total de inscripciones a mesas de exámenes obtenidas: {_form.dataGridInscripciones.Rows.Count}";
-        }
+        
 
 
         public void OnBuscar()
         {
-            if (string.IsNullOrEmpty(_form.txtFiltro.Text))
-                LoadGrid();
-            else
-                LoadGridFilter(_form.txtFiltro.Text);
+            LoadGrid(_form.txtFiltro.Text);
+
+            //if (string.IsNullOrEmpty(_form.txtFiltro.Text))
+            //    LoadGrid();
+            //else
+            //    LoadGrid(_form.txtFiltro.Text);
         }
 
         public async void UpdateUI()

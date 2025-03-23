@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -31,7 +31,10 @@ namespace InstitutoBack.Controllers.Commons
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Alumno>>> Getalumnos()
         {
-            return await _context.alumnos.Include(alumno=>alumno.InscripcionesACarreras).AsNoTracking().ToListAsync();
+            return await _context.alumnos
+                .Include(alumno=>alumno.InscripcionesACarreras)
+                .ThenInclude(inscripcion => inscripcion.Carrera)
+                .AsNoTracking().ToListAsync();
         }
         [HttpPost("filter")]
         public async Task<ActionResult<IEnumerable<Alumno>>> Getalumnos([FromBody] List<FilterDTO> filters)

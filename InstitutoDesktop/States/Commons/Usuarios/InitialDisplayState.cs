@@ -1,4 +1,4 @@
-﻿using InstitutoDesktop.ExtensionMethods;
+using InstitutoDesktop.ExtensionMethods;
 using InstitutoDesktop.Interfaces.Commons;
 using InstitutoDesktop.Util;
 using InstitutoDesktop.Views.Commons;
@@ -32,17 +32,10 @@ namespace InstitutoDesktop.States.Commons.Usuarios
             await LoadComboboxDocentes();
             await LoadComboboxAlumnos();
             LoadComboboxTipoUsuario();
-            LoadGrid();
+            LoadGrid(_form.txtFiltro.Text);
         }
 
-        public void LoadGrid()
-        {
-            if (_form.listaUsuarios != null && _form.listaUsuarios.Count > 0)
-                _form.Grilla.DataSource = _form.listaUsuarios.OrderBy(usuario => usuario.Nombre).ToList();
-            _form.Grilla.OcultarColumnas(new string[] { "Id", "Eliminado" });
-        }
-
-        public void LoadGridFilter(string filterText)
+        public void LoadGrid(string filterText)
         {
             if (_form.listaUsuarios != null && _form.listaUsuarios.Count > 0)
                 _form.Grilla.DataSource = _form.listaUsuarios
@@ -55,16 +48,13 @@ namespace InstitutoDesktop.States.Commons.Usuarios
 
         public void OnBuscar()
         {
-            if (string.IsNullOrEmpty(_form.txtFiltro.Text))
-                LoadGrid();
-            else
-                LoadGridFilter(_form.txtFiltro.Text);
+            LoadGrid(_form.txtFiltro.Text);
         }
 
         public async void UpdateUI()
         {
-            
-            LoadGrid();
+
+            LoadGrid(_form.txtFiltro.Text);
             _form.tabPageAgregarEditar.Enabled = false;
             _form.tabPageLista.Enabled = true;
             _form.tabControl.SelectTab(_form.tabPageLista);

@@ -1,4 +1,4 @@
-﻿using InstitutoDesktop.ExtensionMethods;
+using InstitutoDesktop.ExtensionMethods;
 using InstitutoDesktop.Interfaces.Commons;
 using InstitutoDesktop.Util;
 using InstitutoDesktop.Views;
@@ -36,19 +36,10 @@ namespace InstitutoDesktop.States.Commons.Materias
             await LoadComboboxCarreras();
             await LoadComboboxAniosCarreras();
             LoadComboTipoMaterias();
-            LoadGrid();
+            LoadGrid(_form.txtFiltro.Text);
         }
 
-        public void LoadGrid()
-        {
-            var anioCarrera=_form.comboBoxAñosCarreras.SelectedItem as AnioCarrera;
-
-            if (_form.listaMaterias != null && _form.listaMaterias.Count > 0)
-                _form.Grilla.DataSource = _form.listaMaterias.Where(materia=>materia.AnioCarreraId.Equals(anioCarrera.Id)).OrderBy(materia => materia.Nombre).ToList();
-            _form.Grilla.OcultarColumnas(new string[] { "Id", "AnioCarrera", "AnioCarreraId", "Eliminado" });
-        }
-
-        public void LoadGridFilter(string filterText)
+        public void LoadGrid(string filterText)
         {
             var anioCarrera = _form.comboBoxAñosCarreras.SelectedItem as AnioCarrera;
 
@@ -91,23 +82,19 @@ namespace InstitutoDesktop.States.Commons.Materias
             if (result == DialogResult.Yes)
             {
                 await _form._memoryCache.DeleteCacheAsync<Materia>(_form.materiaCurrent.Id);
-                LoadGrid();
+                LoadGrid(_form.txtFiltro.Text);
             }
             _form.materiaCurrent = null;
         }
 
         public void OnBuscar()
         {
-            if (string.IsNullOrEmpty(_form.txtFiltro.Text))
-                LoadGrid();
-            else
-                LoadGridFilter(_form.txtFiltro.Text);
+            LoadGrid(_form.txtFiltro.Text);
         }
 
         public async void UpdateUI()
         {
-            
-            LoadGrid();
+            LoadGrid(_form.txtFiltro.Text);
             _form.tabPageAgregarEditar.Enabled = false;
             _form.tabPageLista.Enabled = true;
             _form.tabControl.SelectTab(_form.tabPageLista);

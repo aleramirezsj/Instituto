@@ -1,4 +1,4 @@
-﻿using InstitutoDesktop.Interfaces.Inscripciones;
+using InstitutoDesktop.Interfaces.Inscripciones;
 using InstitutoDesktop.Views;
 using InstitutoServices.Models.Inscripciones;
 using System;
@@ -62,8 +62,7 @@ namespace InstitutoDesktop.States.Inscripciones.CiclosLectivos
 
         // Estos métodos no aplican en este estado
         public Task LoadData() => Task.CompletedTask;
-        public void LoadGrid() {}
-        public void LoadGridFilter(string filterText) {}
+        public void LoadGrid(string filterText) {}
         public void OnAgregar() { }
         public void OnModificar() { }
         public void OnBuscar() { }

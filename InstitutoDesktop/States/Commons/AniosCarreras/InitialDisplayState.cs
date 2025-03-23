@@ -1,4 +1,4 @@
-﻿using InstitutoDesktop.ExtensionMethods;
+using InstitutoDesktop.ExtensionMethods;
 using InstitutoDesktop.Interfaces.Commons;
 using InstitutoDesktop.Util;
 using InstitutoDesktop.Views;
@@ -37,17 +37,11 @@ namespace InstitutoDesktop.States.Commons.AniosCarreras
             _form.listaAniosCarreras = await _form._memoryCache.GetAllCacheAsync<AnioCarrera>();
             ShowInActivity.Hide();
             await LoadComboboxCarreras();
-            LoadGrid();
+            LoadGrid(_form.txtFiltro.Text);
         }
 
-        public void LoadGrid()
-        {
-            if (_form.listaAniosCarreras != null && _form.listaAniosCarreras.Count > 0)
-                _form.Grilla.DataSource = _form.listaAniosCarreras.Where(anio=>anio.CarreraId.Equals((int)_form.comboBoxCarreras.SelectedValue)).OrderBy(anio => anio.Nombre).ToList();
-            _form.Grilla.OcultarColumnas(new string[] { "Id", "Carrera", "CarreraId", "AñoYCarrera", "Eliminado" });
-        }
 
-        public void LoadGridFilter(string filterText)
+        public void LoadGrid(string filterText)
         {
             if (_form.listaAniosCarreras != null && _form.listaAniosCarreras.Count > 0)
                 _form.Grilla.DataSource = _form.listaAniosCarreras
@@ -61,16 +55,13 @@ namespace InstitutoDesktop.States.Commons.AniosCarreras
 
         public void OnBuscar()
         {
-            if (string.IsNullOrEmpty(_form.txtFiltro.Text))
-                LoadGrid();
-            else
-                LoadGridFilter(_form.txtFiltro.Text);
+            LoadGrid(_form.txtFiltro.Text);
         }
 
         public async void UpdateUI()
         {
-            
-            LoadGrid();
+
+            LoadGrid(_form.txtFiltro.Text);
             _form.tabPageAgregarEditar.Enabled = false;
             _form.tabPageLista.Enabled = true;
             _form.tabControl.SelectTab(_form.tabPageLista);

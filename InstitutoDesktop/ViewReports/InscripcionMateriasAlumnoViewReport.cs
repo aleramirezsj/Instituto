@@ -29,7 +29,7 @@ namespace InstitutoDesktop.ViewReports
                 Alumno = x.Inscripcion?.Alumno?.ApellidoNombre.ToString(),
                 Carrera = x.Inscripcion?.Carrera?.Nombre.ToString(),
                 PeriodoInscripcion = x.Inscripcion?.PeriodoInscripcion?.Nombre.ToString(),
-                FechaInscripcion = x.Inscripcion?.Fecha,
+                FechaInscripcion = x.Inscripcion?.Fecha.Date.ToShortDateString(),
                 AnioCarrera = x.Materia?.AnioCarrera?.Nombre.ToString(),
                 Materia = x.Materia?.Nombre.ToString(),
                 ModalidadCursado = x.ModalidadCursado.ToString()

@@ -25,14 +25,14 @@ namespace InstitutoDesktop.ViewReports
 
         private async void InscripcionExamenViewReport_Load(object sender, EventArgs e)
         {
-            reporte.LocalReport.ReportEmbeddedResource = "InstitutoDesktop.Reports.InscripcionPorMateriaReport.rdlc";
+            reporte.LocalReport.ReportEmbeddedResource = "InstitutoDesktop.Reports.InscripcionPorMateriasReport.rdlc";
             //extraigo de _detallesInscripcionesExamenes los datos que necesito para el reporte, Alumno, Carrera, Turno, FechaInscripcion, AnioCarrera, Materia, usando el select
             var inscripciones = _detalleInscripcion.Select(x => new
             {
                 Alumno = x.Inscripcion?.Alumno?.ApellidoNombre.ToString(),
                 Carrera = x.Inscripcion?.Carrera?.Nombre.ToString(),
                 PeriodoInscripcion = x.Inscripcion?.PeriodoInscripcion?.Nombre.ToString(),
-                FechaInscripcion = x.Inscripcion?.Fecha,
+                FechaInscripcion = x.Inscripcion?.Fecha.Date.ToShortDateString(),
                 AnioCarrera = x.Materia?.AnioCarrera?.Nombre.ToString(),
                 Materia = x.Materia?.Nombre.ToString(),
                 ModalidadCursado = x.ModalidadCursado.ToString()

@@ -20,8 +20,7 @@ namespace InstitutoDesktop.States.MesasExamenes.InscripcionesExamenes
 
         // Estos métodos no aplican en este estado
         public Task LoadData() => Task.CompletedTask;
-        public void LoadGrid()  { }
-        public void LoadGridFilter(string filterText) {}
+        public void LoadGrid(string filterText)  { }
         public void OnBuscar() { }
         public void UpdateUI() { }
         public void OnSalir() => _form.Close();

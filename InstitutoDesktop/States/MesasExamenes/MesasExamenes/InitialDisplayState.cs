@@ -1,4 +1,4 @@
-﻿using InstitutoDesktop.ExtensionMethods;
+using InstitutoDesktop.ExtensionMethods;
 using InstitutoDesktop.Interfaces.MesasExamenes;
 using InstitutoDesktop.Util;
 using InstitutoDesktop.Views;
@@ -29,7 +29,7 @@ namespace InstitutoDesktop.States.MesasExamenes.MesasExamenes
                 _form.dateTime2doLlamado.Visible = (_form.cboTurnosExamenes.SelectedItem as TurnoExamen).TieneLLamado2;
                 _form.lbl2doLlamado.Visible = (_form.cboTurnosExamenes.SelectedItem as TurnoExamen).TieneLLamado2;
                 _form.lblPrimerLlamado.Text = (_form.cboTurnosExamenes.SelectedItem as TurnoExamen).TieneLLamado2 ? "Primer llamado" : "Fecha mesa:";
-                LoadGrid();
+                LoadGrid(_form.txtFiltro.Text);
             }
         }
 
@@ -38,7 +38,7 @@ namespace InstitutoDesktop.States.MesasExamenes.MesasExamenes
             if (_form.cboAniosCarreras.SelectedValue != null && _form.cboAniosCarreras.SelectedValue.GetType() == typeof(int))
             {
                 LoadComboboxMaterias();
-                LoadGrid();
+                LoadGrid(_form.txtFiltro.Text);
             }
         }
 
@@ -78,27 +78,10 @@ namespace InstitutoDesktop.States.MesasExamenes.MesasExamenes
             LoadComboboxMaterias();
             LoadComboboxDocentes();
             LoadComboboxTipoIntegrante();
-            LoadGrid();
+            LoadGrid(_form.txtFiltro.Text);
         }
 
-        public void LoadGrid()
-        {
-            _form.dataGridMesasExamenes.DataSource = null;
-            if (_form.listaMesasExamenes != null && _form.listaMesasExamenes.Count > 0
-                && _form.cboTurnosExamenes.SelectedValue != null && _form.cboCarreras.SelectedValue != null
-                && _form.cboMaterias.SelectedValue != null)
-            {
-                _form.dataGridMesasExamenes.DataSource = _form.listaMesasExamenes.
-                    Where(h => h.TurnoExamenId.Equals((int)_form.cboTurnosExamenes.SelectedValue) &&
-                          h.Materia.AnioCarrera.CarreraId.Equals((int)_form.cboCarreras.SelectedValue) &&
-                          h.Materia.AnioCarreraId.Equals((int)_form.cboAniosCarreras.SelectedValue)).ToList();
-                var columnaOcultar = (_form.cboTurnosExamenes.SelectedItem as TurnoExamen).TieneLLamado2 ? "" : "Llamado2";
-
-                _form.dataGridMesasExamenes.OcultarColumnas(new string[] { "Id", "MateriaId", "TurnoExamen", "DetallesMesaExamen", "TurnoExamenId", "Eliminado", columnaOcultar });
-            }
-        }
-
-        public void LoadGridFilter(string filterText)
+        public void LoadGrid(string filterText)
         {
             _form.dataGridMesasExamenes.DataSource = null;
             if (_form.listaMesasExamenes != null && _form.listaMesasExamenes.Count > 0)
@@ -115,15 +98,12 @@ namespace InstitutoDesktop.States.MesasExamenes.MesasExamenes
 
         public void OnBuscar()
         {
-            if (string.IsNullOrEmpty(_form.txtFiltro.Text))
-                LoadGrid();
-            else
-                LoadGridFilter(_form.txtFiltro.Text);
+            LoadGrid(_form.txtFiltro.Text);
         }
 
         public async void UpdateUI()
         {
-            LoadGrid();
+            LoadGrid(_form.txtFiltro.Text);
             _form.tabPageAgregarEditar.Enabled = false;
             _form.tabPageLista.Enabled = true;
             _form.tabControl.SelectTab(_form.tabPageLista);

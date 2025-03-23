@@ -1,4 +1,4 @@
-﻿using InstitutoDesktop.ExtensionMethods;
+using InstitutoDesktop.ExtensionMethods;
 using InstitutoDesktop.Interfaces.Commons;
 using InstitutoDesktop.Util;
 using InstitutoDesktop.Views.Horarios;
@@ -31,17 +31,10 @@ namespace InstitutoDesktop.States.Inscripciones.PeriodosInscripciones
             _form.listaPeriodosInscripciones = await _form._memoryCache.GetAllCacheAsync<PeriodoInscripcion>();
             ShowInActivity.Hide();
             await LoadComboboxCiclosLectivos();
-            LoadGrid();
+            LoadGrid(_form.txtFiltro.Text);
         }
 
-        public void LoadGrid()
-        {
-            if (_form.listaPeriodosInscripciones != null && _form.listaPeriodosInscripciones.Count > 0)
-                _form.Grilla.DataSource = _form.listaPeriodosInscripciones.OrderBy(periodo => periodo.CicloLectivoId).ToList();
-            _form.Grilla.OcultarColumnas(new string[] { "Id","CicloLectivoId","Es2doCuatrimestre",  "Eliminado" });
-        }
-
-        public void LoadGridFilter(string filterText)
+        public void LoadGrid(string filterText)
         {
             if (_form.listaPeriodosInscripciones != null && _form.listaPeriodosInscripciones.Count > 0)
                 _form.Grilla.DataSource = _form.listaPeriodosInscripciones
@@ -54,16 +47,13 @@ namespace InstitutoDesktop.States.Inscripciones.PeriodosInscripciones
 
         public void OnBuscar()
         {
-            if (string.IsNullOrEmpty(_form.txtFiltro.Text))
-                LoadGrid();
-            else
-                LoadGridFilter(_form.txtFiltro.Text);
+            LoadGrid(_form.txtFiltro.Text);
         }
 
         public async void UpdateUI()
         {
-            
-            LoadGrid();
+
+            LoadGrid(_form.txtFiltro.Text);
             _form.tabPageAgregarEditar.Enabled = false;
             _form.tabPageLista.Enabled = true;
             _form.tabControl.SelectTab(_form.tabPageLista);

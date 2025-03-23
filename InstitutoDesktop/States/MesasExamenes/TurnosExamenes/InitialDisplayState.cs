@@ -1,4 +1,4 @@
-﻿using InstitutoDesktop.ExtensionMethods;
+using InstitutoDesktop.ExtensionMethods;
 using InstitutoDesktop.Interfaces.Commons;
 using InstitutoDesktop.Interfaces.MesasExamenes;
 using InstitutoDesktop.Util;
@@ -32,17 +32,10 @@ namespace InstitutoDesktop.States.MesasExamenes.TurnosExamenes
             _form.listaTurnosExamenes = await _form._memoryCache.GetAllCacheAsync<TurnoExamen>();
             ShowInActivity.Hide();
             await LoadComboboxCiclosLectivos();
-            LoadGrid();
+            LoadGrid(_form.txtFiltro.Text);
         }
 
-        public void LoadGrid()
-        {
-            if (_form.listaTurnosExamenes != null && _form.listaTurnosExamenes.Count > 0)
-                _form.Grilla.DataSource = _form.listaTurnosExamenes.OrderBy(periodo => periodo.CicloLectivoId).ToList();
-            _form.Grilla.OcultarColumnas(new string[] { "Id","CicloLectivoId",  "Eliminado" });
-        }
-
-        public void LoadGridFilter(string filterText)
+        public void LoadGrid(string filterText)
         {
             if (_form.listaTurnosExamenes != null && _form.listaTurnosExamenes.Count > 0)
                 _form.Grilla.DataSource = _form.listaTurnosExamenes
@@ -55,16 +48,13 @@ namespace InstitutoDesktop.States.MesasExamenes.TurnosExamenes
 
         public void OnBuscar()
         {
-            if (string.IsNullOrEmpty(_form.txtFiltro.Text))
-                LoadGrid();
-            else
-                LoadGridFilter(_form.txtFiltro.Text);
+            LoadGrid(_form.txtFiltro.Text);
         }
 
         public async void UpdateUI()
         {
-            
-            LoadGrid();
+
+            LoadGrid(_form.txtFiltro.Text);
             _form.tabPageAgregarEditar.Enabled = false;
             _form.tabPageLista.Enabled = true;
             _form.tabControl.SelectTab(_form.tabPageLista);

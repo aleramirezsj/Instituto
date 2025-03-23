@@ -1,4 +1,4 @@
-﻿using InstitutoDesktop.Interfaces.Horarios;
+using InstitutoDesktop.Interfaces.Horarios;
 using InstitutoDesktop.Views;
 using InstitutoServices.Models.Horarios;
 using InstitutoServices.Models.MesasExamenes;
@@ -52,8 +52,7 @@ namespace InstitutoDesktop.States.Horarios.Horarios
 
         // Estos métodos no aplican en este estado
         public Task LoadData() => Task.CompletedTask;
-        public void LoadGrid()  { }
-        public void LoadGridFilter(string filterText) {}
+        public void LoadGrid(string filterText)  { }
         public void OnBuscar() { }
         public void UpdateUI() { }
         public Task OnGuardar() => Task.CompletedTask;
