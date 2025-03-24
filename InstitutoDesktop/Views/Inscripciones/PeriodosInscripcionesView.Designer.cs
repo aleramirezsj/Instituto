@@ -41,6 +41,7 @@
             btnAgregar = new FontAwesome.Sharp.IconButton();
             Grilla = new DataGridView();
             tabPageAgregarEditar = new TabPage();
+            checkVisualizarMateriasAnualesY1erCuatrimestre = new CheckBox();
             checkMaterias2doCuatrimestre = new CheckBox();
             checkInscripcionHabilitada = new CheckBox();
             lblCicloLectivoHorarioView = new Label();
@@ -239,6 +240,7 @@
             // 
             // tabPageAgregarEditar
             // 
+            tabPageAgregarEditar.Controls.Add(checkVisualizarMateriasAnualesY1erCuatrimestre);
             tabPageAgregarEditar.Controls.Add(checkMaterias2doCuatrimestre);
             tabPageAgregarEditar.Controls.Add(checkInscripcionHabilitada);
             tabPageAgregarEditar.Controls.Add(lblCicloLectivoHorarioView);
@@ -256,16 +258,31 @@
             tabPageAgregarEditar.Text = "Agregar/Editar";
             tabPageAgregarEditar.UseVisualStyleBackColor = true;
             // 
+            // checkVisualizarMateriasAnualesY1erCuatrimestre
+            // 
+            checkVisualizarMateriasAnualesY1erCuatrimestre.Anchor = AnchorStyles.None;
+            checkVisualizarMateriasAnualesY1erCuatrimestre.AutoSize = true;
+            checkVisualizarMateriasAnualesY1erCuatrimestre.Checked = true;
+            checkVisualizarMateriasAnualesY1erCuatrimestre.CheckState = CheckState.Checked;
+            checkVisualizarMateriasAnualesY1erCuatrimestre.Location = new Point(412, 287);
+            checkVisualizarMateriasAnualesY1erCuatrimestre.Name = "checkVisualizarMateriasAnualesY1erCuatrimestre";
+            checkVisualizarMateriasAnualesY1erCuatrimestre.Size = new Size(360, 24);
+            checkVisualizarMateriasAnualesY1erCuatrimestre.TabIndex = 33;
+            checkVisualizarMateriasAnualesY1erCuatrimestre.Text = "Visualizar materias anuales y del 1er Cuatrimentre";
+            checkVisualizarMateriasAnualesY1erCuatrimestre.UseVisualStyleBackColor = true;
+            checkVisualizarMateriasAnualesY1erCuatrimestre.CheckedChanged += checkVisualizarMateriasAnualesY1erCuatrimestre_CheckedChanged;
+            // 
             // checkMaterias2doCuatrimestre
             // 
             checkMaterias2doCuatrimestre.Anchor = AnchorStyles.None;
             checkMaterias2doCuatrimestre.AutoSize = true;
-            checkMaterias2doCuatrimestre.Location = new Point(412, 287);
+            checkMaterias2doCuatrimestre.Location = new Point(412, 336);
             checkMaterias2doCuatrimestre.Name = "checkMaterias2doCuatrimestre";
             checkMaterias2doCuatrimestre.Size = new Size(381, 24);
             checkMaterias2doCuatrimestre.TabIndex = 32;
             checkMaterias2doCuatrimestre.Text = "Visualizar únicamente materias del 2do Cuatrimentre";
             checkMaterias2doCuatrimestre.UseVisualStyleBackColor = true;
+            checkMaterias2doCuatrimestre.CheckedChanged += checkMaterias2doCuatrimestre_CheckedChanged;
             // 
             // checkInscripcionHabilitada
             // 
@@ -400,5 +417,6 @@
         public CheckBox checkInscripcionHabilitada;
         private Label lblCicloLectivoHorarioView;
         public ComboBox comboBoxCiclosLectivos;
+        public CheckBox checkVisualizarMateriasAnualesY1erCuatrimestre;
     }
 }

@@ -174,7 +174,21 @@ namespace InstitutoDesktop.ExtensionMethods
             }
         }
 
-
+        public static void SetTitleToColumn<T>(this DataGridView grid, Expression<Func<T, object>> propertyExpression, string newTitle)
+        {
+            if (grid.ColumnCount > 0)
+            {
+                var member = propertyExpression.Body as MemberExpression ?? ((UnaryExpression)propertyExpression.Body).Operand as MemberExpression;
+                if (member != null)
+                {
+                    string nameColumn = member.Member.Name;
+                    if (grid.Columns.Contains(nameColumn))
+                    {
+                        grid.Columns[nameColumn].HeaderText = newTitle;
+                    }
+                }
+            }
+        }
 
 
 

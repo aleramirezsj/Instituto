@@ -26,12 +26,12 @@ namespace InstitutoDesktop.States.Inscripciones.InscripcionesMaterias
             _form.chkFiltrarPorCarrera.CheckedChanged += (sender, e) =>
             {
                 _form.cboCarreras.Enabled = _form.chkFiltrarPorCarrera.Checked;
-                LoadGrid();
+                LoadGrid(_form.txtFiltro.Text);
             };
             _form.chkFiltrarPorAñoCarrera.CheckedChanged += (sender, e) =>
             {
                 _form.cboAniosCarreras.Enabled = _form.chkFiltrarPorAñoCarrera.Checked;
-                LoadGrid();
+                LoadGrid(_form.txtFiltro.Text);
             };
             _form.cboPeriodosInscripciones.SelectedIndexChanged += (sender, e) => UpdateGridInscripciones();
             _form.cboCarreras.SelectedIndexChanged += (sender, e) => UpdateCboAnios();
@@ -98,7 +98,7 @@ namespace InstitutoDesktop.States.Inscripciones.InscripcionesMaterias
         {
             if (_form.cboPeriodosInscripciones.SelectedValue != null && _form.cboPeriodosInscripciones.SelectedValue.GetType() == typeof(int))
             {
-                LoadGrid();
+                LoadGrid(_form.txtFiltro.Text);
             }
         }
 
@@ -106,7 +106,7 @@ namespace InstitutoDesktop.States.Inscripciones.InscripcionesMaterias
         {
             if (_form.cboAniosCarreras.SelectedValue != null && _form.cboAniosCarreras.SelectedValue.GetType() == typeof(int))
             {
-                LoadGrid();
+                LoadGrid(_form.txtFiltro.Text);
             }
         }
 
@@ -212,11 +212,6 @@ namespace InstitutoDesktop.States.Inscripciones.InscripcionesMaterias
         public void OnBuscar()
         {
             LoadGrid(_form.txtFiltro.Text);
-
-            //if (string.IsNullOrEmpty(_form.txtFiltro.Text))
-            //    LoadGrid();
-            //else
-            //    LoadGrid(_form.txtFiltro.Text);
         }
 
         public async void UpdateUI()

@@ -50,6 +50,31 @@ namespace InstitutoDesktop.States.Inscripciones.InscripcionesMaterias
             _form.TransitionTo(new InitialDisplayState(_form));
         }
 
+        public void OnImprimirSeleccionadaPorMateria()
+        {
+            //tomo la materia seleccionada de la grilla dataGridMaterias
+            var idMateria = (int)_form.dataGridMaterias.CurrentRow.Cells[0].Value;
+
+            Form InscripcionExamenViewReport = new InscripcionPorMateriasViewReport((MenuPrincipalView)_form.MdiParent, _form.listaDetallesInscripciones.Where(d => d.Inscripcion.PeriodoInscripcionId.Equals((int)_form.cboPeriodosInscripciones.SelectedValue) &&
+                              d.Inscripcion.CarreraId.Equals((int)_form.cboCarreras.SelectedValue) &&
+                              d.Materia.AnioCarreraId.Equals((int)_form.cboAniosCarreras.SelectedValue) &&
+                              d.Materia.Id.Equals(idMateria))
+                        .OrderBy(x => x.Materia?.Nombre).ThenBy(x => x.Inscripcion?.Alumno?.ApellidoNombre)
+                        .ToList());
+            InscripcionExamenViewReport.Show();
+            _form.TransitionTo(new InitialDisplayState(_form));
+
+            _form.dataGridAlumnos.DataSource = _form.listaDetallesInscripciones
+    .Where(d => d.MateriaId.Equals(idMateria) &&
+                d.Inscripcion.PeriodoInscripcionId.Equals((int)_form.cboPeriodosInscripciones.SelectedValue) &&
+                d.Inscripcion.CarreraId.Equals((int)_form.cboCarreras.SelectedValue))
+    .Select(Alumno => new { Alumno = Alumno.Inscripcion.Alumno.ApellidoNombre, Modalidad_cursado = Alumno.ModalidadCursado.ToString() })
+    .OrderBy(x => x.Alumno).ToList();
+
+
+
+        }
+
         public void OnImprimirSeleccionadaPorAlumno()
         {
             //tomo la inscripción seleccionada de la grilla dataGridViewInscripciones
@@ -58,22 +83,6 @@ namespace InstitutoDesktop.States.Inscripciones.InscripcionesMaterias
             InscripcionExamenViewReport.Show();
             _form.TransitionTo(new InitialDisplayState(_form));
         }
-
-        public void OnImprimirSeleccionadaPorMateria()
-        {
-            //tomo la materia seleccionada de la grilla dataGridMaterias
-            var idMateria = (int)_form.dataGridMaterias.CurrentRow.Cells[0].Value;
-
-            Form InscripcionExamenViewReport = new InscripcionPorMateriasViewReport((MenuPrincipalView)_form.MdiParent, _form.listaDetallesInscripciones.Where(d => d.Inscripcion.PeriodoInscripcion.Equals((int)_form.cboPeriodosInscripciones.SelectedValue) &&
-                              d.Inscripcion.CarreraId.Equals((int)_form.cboCarreras.SelectedValue) &&
-                              d.Materia.AnioCarreraId.Equals((int)_form.cboAniosCarreras.SelectedValue) &&
-                              d.MateriaId.Equals(idMateria))
-                        .OrderBy(x => x.Inscripcion?.Alumno?.ApellidoNombre)
-                        .ToList());
-            InscripcionExamenViewReport.Show();
-            _form.TransitionTo(new InitialDisplayState(_form));
-        }
-
 
     }
 }

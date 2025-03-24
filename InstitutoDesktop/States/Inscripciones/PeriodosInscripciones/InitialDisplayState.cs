@@ -41,7 +41,10 @@ namespace InstitutoDesktop.States.Inscripciones.PeriodosInscripciones
                     .Where(periodo => periodo.Nombre.ToUpper().Contains(filterText.ToUpper()))
                     .OrderBy(periodo => periodo.CicloLectivoId)
                     .ToList();
-            _form.Grilla.OcultarColumnas(new string[] { "Id", "CicloLectivoId", "Es2doCuatrimestre", "Eliminado" });
+            _form.Grilla.OcultarColumnas(new string[] { "Id", "CicloLectivoId", "Eliminado" });
+            _form.Grilla.SetTitleToColumn<PeriodoInscripcion>(p => p.Es2doCuatrimestre, "Visualizar únicamente materias del 2do Cuatrimentre");
+            _form.Grilla.SetTitleToColumn<PeriodoInscripcion>(p => p.Es1erCuatrimestre, "Visualizar materias anuales y del 1er Cuatrimentre");
+
         }
 
 

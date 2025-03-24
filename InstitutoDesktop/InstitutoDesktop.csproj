@@ -16,12 +16,14 @@
 
   <ItemGroup>
     <None Remove="Reports\DocentesReport.rdlc" />
+    <None Remove="Reports\InscripcionPorMateriasReport - Copia.rdlc" />
     <None Remove="Resources\fondosplash.jpg" />
     <None Remove="Resources\loading.gif" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Reports\DocentesReport.rdlc" />
+    <EmbeddedResource Include="Reports\InscripcionPorMateriasReport - Copia.rdlc" />
     <EmbeddedResource Include="Reports\InscripcionPorMateriasReport.rdlc" />
     <EmbeddedResource Include="Reports\InscripcionMateriasAlumnoReport.rdlc" />
     <EmbeddedResource Include="Reports\InscripcionExamenMateriaReport.rdlc" />

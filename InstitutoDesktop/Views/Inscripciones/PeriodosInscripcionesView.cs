@@ -1,4 +1,4 @@
-﻿using InstitutoDesktop.Interfaces.Commons;
+using InstitutoDesktop.Interfaces.Commons;
 using InstitutoDesktop.Services;
 using InstitutoDesktop.States.Inscripciones.PeriodosInscripciones;
 using InstitutoServices.Models.Commons;
@@ -76,8 +76,14 @@ namespace InstitutoDesktop.Views.Inscripciones
             this.Close();
         }
 
+        private void checkVisualizarMateriasAnualesY1erCuatrimestre_CheckedChanged(object sender, EventArgs e)
+        {
+            this.checkMaterias2doCuatrimestre.Checked = !checkVisualizarMateriasAnualesY1erCuatrimestre.Checked;
+        }
 
-
-
+        private void checkMaterias2doCuatrimestre_CheckedChanged(object sender, EventArgs e)
+        {
+            this.checkVisualizarMateriasAnualesY1erCuatrimestre.Checked=!this.checkMaterias2doCuatrimestre.Checked;
+        }
     }
 }
