@@ -93,7 +93,7 @@ else
     private Inscripcion? inscripcionCurrent;
     private bool visualizarPDF = false;
     private bool modificarInscripcion = false;
-    private string textoBotonPDF=>visualizarPDF?"Ocultar PDF":"Ver PDF";
+    private string textoBotonPDF => visualizarPDF ? "Ocultar PDF" : "Ver PDF";
     private bool inscripcionAbierta = false;
 
     protected override async Task OnInitializedAsync()
@@ -129,6 +129,7 @@ else
         }
         StateHasChanged();
     }
+
     private async Task ModificarInscripcion()
     {
         modificarInscripcion = true;
@@ -138,7 +139,7 @@ else
                            m.EsRecreo.Equals(false)).OrderBy(m => m.AnioCarreraId).ThenBy(m => m.Nombre).ToList();
         //creo tantos detalles inscripción como materias tenga la carrera
         detallesInscripcion = new List<DetalleInscripcion>();
-        bool materiaInscripta = false;  
+        bool materiaInscripta = false;
         foreach (var materia in materias)
         {
             materiaInscripta = inscripcionCurrent.detallesInscripciones.Any(d => d.MateriaId == materia.Id);
@@ -147,23 +148,25 @@ else
                     MateriaId = materia.Id,
                     Materia = materia,
                     ModalidadCursado = materiaInscripta ? (inscripcionCurrent.detallesInscripciones
-                                                            .Find(d => d.MateriaId == materia.Id))
-                                                            .ModalidadCursado:ModalidadCursadoEnum.Presencial,
+                                                                .Find(d => d.MateriaId == materia.Id))
+                                                                .ModalidadCursado : ModalidadCursadoEnum.Presencial,
                     Eliminado = materiaInscripta
 
                 });
         }
         StateHasChanged();
     }
+
     private async Task TooglePdf()
     {
         visualizarPDF = !visualizarPDF;
-        if(string.IsNullOrEmpty(pdfBase64)&&visualizarPDF)
+        if (string.IsNullOrEmpty(pdfBase64) && visualizarPDF)
         {
             await GenerarPDF();
         }
         StateHasChanged();
     }
+
     private async Task GenerarPDF()
     {
         SweetAlertOptions options = new SweetAlertOptions
@@ -198,7 +201,8 @@ else
             await SweetAlert.FireAsync("Error", "Hubo un problema al generar el archivo PDF.", SweetAlertIcon.Error);
         }
     }
-    private async Task  ObtenerMateriasEInscripcion()
+
+    private async Task ObtenerMateriasEInscripcion()
     {
         //muestro cuantos anios carrera tiene la carrera seleccionada con el logger
         if (periodoInscripcionSeleccionado.Es1erCuatrimestre)
@@ -206,7 +210,7 @@ else
             materias = (await _memoryCache.GetAllCacheAsync<Materia>())
             .Where(m => m.AnioCarrera.CarreraId == carreraSeleccionada.Id &&
                     m.EsRecreo.Equals(false) &&
-                    (m.TipoMateria.Equals(TipoMateriaEnum.Cuatrimestre_1)||m.TipoMateria.Equals(TipoMateriaEnum.Anual)))
+                    (m.TipoMateria.Equals(TipoMateriaEnum.Cuatrimestre_1) || m.TipoMateria.Equals(TipoMateriaEnum.Anual)))
                 .OrderBy(m => m.AnioCarreraId).ThenBy(m => m.Nombre).ToList();
         }
         else
@@ -217,7 +221,7 @@ else
                     (m.TipoMateria.Equals(TipoMateriaEnum.Cuatrimestre_2)))
                 .OrderBy(m => m.AnioCarreraId).ThenBy(m => m.Nombre).ToList();
         }
-        
+
         //creo tantos detalles inscripción como materias tenga la carrera
         detallesInscripcion = new List<DetalleInscripcion>();
         foreach (var materia in materias)
@@ -256,12 +260,11 @@ else
                         MateriaId = detalle.Materia.Id,
                         Materia = detalle.Materia,
                         ModalidadCursado = detalle.ModalidadCursado
-                        
+
                     });
             }
 
-
-            inscripcionCurrent=await _memoryCache.AddCacheAsync<Inscripcion>(nuevaInscripcion);
+            inscripcionCurrent = await _memoryCache.AddCacheAsync<Inscripcion>(nuevaInscripcion);
             //inscripcionCurrent = nuevaInscripcion;
         }
         else
@@ -270,11 +273,11 @@ else
             foreach (var detalle in detallesInscripcion)
             {
                 inscripcionCurrent.detallesInscripciones.Add(new DetalleInscripcion
-                {
-                    MateriaId = detalle.Materia.Id,
-                    Materia = detalle.Materia,
-                    ModalidadCursado = detalle.ModalidadCursado
-                });
+                    {
+                        MateriaId = detalle.Materia.Id,
+                        Materia = detalle.Materia,
+                        ModalidadCursado = detalle.ModalidadCursado
+                    });
             }
             await _memoryCache.UpdateCacheAsync<Inscripcion>(inscripcionCurrent);
             modificarInscripcion = false;
@@ -292,4 +295,3 @@ else
         StateHasChanged();
     }
 }
-

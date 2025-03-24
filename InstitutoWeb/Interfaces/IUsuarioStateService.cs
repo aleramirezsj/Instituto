@@ -1,4 +1,4 @@
-﻿using InstitutoServices.Models.Commons;
+using InstitutoServices.Models.Commons;
 using InstitutoServices.Models.Login;
 
 namespace InstitutoWeb.Interfaces
