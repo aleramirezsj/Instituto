@@ -1,4 +1,4 @@
-﻿using InstitutoServices.Models.Commons;
+using InstitutoServices.Models.Commons;
 using InstitutoServices.Models.Login;
 
 namespace InstitutoWeb.Interfaces
@@ -11,5 +11,7 @@ namespace InstitutoWeb.Interfaces
         event Action OnChange;
 
         void SetUsuario(Usuario? usuario, FirebaseUser? firebaseUser);
+        public Task InitializeAsync();
+
     }
 }
