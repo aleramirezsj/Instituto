@@ -7,68 +7,76 @@
 @inject RazorRenderer renderer
 @inject PdfGenerator pdfGenerator
 @inject IJSRuntime JSRuntime
+@inject NavigationManager NavigationManager
 
 <PageTitle>Inscripción a Materias</PageTitle>
 
-@if (periodoInscripcionSeleccionado == null)
+@if (usuarioStateService.Usuario == null)
 {
-    <p><em>Se está cargando la información de la inscripción, espere un momento por favor</em></p>
+    <p><em>Se está cargando la información del usuario, espere un momento por favor</em></p>
 }
 else
 {
-    
-    @if (carreraSeleccionada == null)
+   
+    @if (periodoInscripcionSeleccionado == null)
     {
-        <ListCard ListEntity="@(carreras.Cast<IEntityIdNombre>().ToList())" OnSeleccionar="SeleccionarCarrera" TituloCard="Carrera" />
-    }
-    
-    <div class="text-end">
-        @if (usuarioStateService.Usuario.Alumno.InscripcionesACarreras.Count > 1 && carreraSeleccionada != null && !visualizarPDF)
-        {
-            <button class="btn btn-dark me-2" @onclick="()=>{carreraSeleccionada=null; materias=null;StateHasChanged();}">Cambiar de carrera</button>
-        }
-        @if (inscripcionCurrent!=null&&carreraSeleccionada!=null)
-        {
-                <button class="btn btn-dark me-2" @onclick="TooglePdf">@textoBotonPDF</button>
-        }
-        @if (inscripcionCurrent != null && !modificarInscripcion && !visualizarPDF && carreraSeleccionada != null && inscripcionAbierta)
-        {
-            <button class="btn btn-dark me-2" @onclick="ModificarInscripcion">Modificar inscripción</button> 
-        }
-    </div>
-    @if (!string.IsNullOrEmpty(pdfBase64)&&visualizarPDF)
-    {
-        <iframe src="data:application/pdf;base64,@pdfBase64" width="100%" height="600px"></iframe>
+        <p><em>Se está cargando la información de la inscripción, espere un momento por favor</em></p>
     }
     else
     {
-        if (carreraSeleccionada != null && materias != null)
+    
+        @if (carreraSeleccionada == null)
         {
-            if (inscripcionCurrent == null||modificarInscripcion)
+            <ListCard ListEntity="@(carreras.Cast<IEntityIdNombre>().ToList())" OnSeleccionar="SeleccionarCarrera" TituloCard="Carrera" />
+        }
+    
+        <div class="text-end">
+            @if (usuarioStateService.Usuario.Alumno.InscripcionesACarreras.Count > 1 && carreraSeleccionada != null && !visualizarPDF)
             {
-                if (inscripcionAbierta)
+                <button class="btn btn-dark me-2" @onclick="()=>{carreraSeleccionada=null; materias=null;StateHasChanged();}">Cambiar de carrera</button>
+            }
+            @if (inscripcionCurrent!=null&&carreraSeleccionada!=null)
+            {
+                    <button class="btn btn-dark me-2" @onclick="TooglePdf">@textoBotonPDF</button>
+            }
+            @if (inscripcionCurrent != null && !modificarInscripcion && !visualizarPDF && carreraSeleccionada != null && inscripcionAbierta)
+            {
+                <button class="btn btn-dark me-2" @onclick="ModificarInscripcion">Modificar inscripción</button> 
+            }
+        </div>
+        @if (!string.IsNullOrEmpty(pdfBase64)&&visualizarPDF)
+        {
+            <iframe src="data:application/pdf;base64,@pdfBase64" width="100%" height="600px"></iframe>
+        }
+        else
+        {
+            if (carreraSeleccionada != null && materias != null)
+            {
+                if (inscripcionCurrent == null||modificarInscripcion)
                 {
-                    <h3>Carrera: @carreraSeleccionada.Nombre </h3>
-                    <ListCardInscripcionMaterias DetallesInscripcion="@detallesInscripcion" OnFinalizarInscripcion="FinalizarInscripcion" />
+                    if (inscripcionAbierta)
+                    {
+                        <h3>Carrera: @carreraSeleccionada.Nombre </h3>
+                        <ListCardInscripcionMaterias DetallesInscripcion="@detallesInscripcion" OnFinalizarInscripcion="FinalizarInscripcion" />
+                    }
+                    else
+                    {
+                        <h3>Periodo inscripción: @periodoInscripcionSeleccionado?.Nombre</h3>
+                        <h5>La inscripción a materias para este período no está habilitada</h5>
+                    }
+                
                 }
                 else
                 {
-                    <h3>Periodo inscripción: @periodoInscripcionSeleccionado?.Nombre</h3>
-                    <h5>La inscripción a materias para este período no está habilitada</h5>
+                    <InscripcionMateriasPDF inscripcion="@inscripcionCurrent" />
+                
                 }
-                
-            }
-            else
-            {
-                <InscripcionMateriasPDF inscripcion="@inscripcionCurrent" />
-                
             }
         }
-    }
     
+    }
+
 }
-
-
 
 
 @code {
@@ -90,28 +98,36 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        carreras = await _memoryCache.GetAllCacheAsync<Carrera>();
-        periodosInscripciones = await _memoryCache.GetAllCacheAsync<PeriodoInscripcion>();
-        periodoInscripcionSeleccionado = periodosInscripciones.Where(c => c.InscripcionHabilitada && c.CicloLectivo.Actual.Equals(true)).FirstOrDefault();
-        if (periodoInscripcionSeleccionado==null)
+        usuarioStateService.OnChange += LoginUsuarioStateServiceCompleto;
+    }
+    private async void LoginUsuarioStateServiceCompleto()
+    {
+        if (usuarioStateService.Usuario != null)
         {
-            inscripcionAbierta = false;
-            periodoInscripcionSeleccionado = periodosInscripciones.Where(c => c.CicloLectivo.Actual.Equals(true)).LastOrDefault();
-        }
-        else inscripcionAbierta = true;
-        if (usuarioStateService.Usuario != null && usuarioStateService.Usuario.TipoUsuario == TipoUsuarioEnum.Alumno)
-        {
-            if (usuarioStateService.Usuario.Alumno.InscripcionesACarreras.Count > 1)
-                carreras = carreras
-                            .Where(c => usuarioStateService.Usuario.Alumno.InscripcionesACarreras.Select(i => i.CarreraId).Contains(c.Id)).ToList();
-            else
+            carreras = await _memoryCache.GetAllCacheAsync<Carrera>();
+            periodosInscripciones = await _memoryCache.GetAllCacheAsync<PeriodoInscripcion>();
+            periodoInscripcionSeleccionado = periodosInscripciones.Where(c => c.InscripcionHabilitada && c.CicloLectivo.Actual.Equals(true)).FirstOrDefault();
+            if (periodoInscripcionSeleccionado == null)
             {
-                carreraSeleccionada = usuarioStateService.Usuario.Alumno.InscripcionesACarreras.FirstOrDefault().Carrera;
-                aniosCarrera = (await _memoryCache.GetAllCacheAsync<AnioCarrera>())
-                                .Where(a => a.CarreraId == carreraSeleccionada.Id).ToList();
-                await ObtenerMateriasEInscripcion();
+                inscripcionAbierta = false;
+                periodoInscripcionSeleccionado = periodosInscripciones.Where(c => c.CicloLectivo.Actual.Equals(true)).LastOrDefault();
+            }
+            else inscripcionAbierta = true;
+            if (usuarioStateService.Usuario != null && usuarioStateService.Usuario.TipoUsuario == TipoUsuarioEnum.Alumno)
+            {
+                if (usuarioStateService.Usuario.Alumno.InscripcionesACarreras.Count > 1)
+                    carreras = carreras
+                                .Where(c => usuarioStateService.Usuario.Alumno.InscripcionesACarreras.Select(i => i.CarreraId).Contains(c.Id)).ToList();
+                else
+                {
+                    carreraSeleccionada = usuarioStateService.Usuario.Alumno.InscripcionesACarreras.FirstOrDefault().Carrera;
+                    aniosCarrera = (await _memoryCache.GetAllCacheAsync<AnioCarrera>())
+                                    .Where(a => a.CarreraId == carreraSeleccionada.Id).ToList();
+                    await ObtenerMateriasEInscripcion();
+                }
             }
         }
+        StateHasChanged();
     }
     private async Task ModificarInscripcion()
     {
