@@ -126,8 +126,13 @@ else
                     await ObtenerMateriasEInscripcion();
                 }
             }
+            StateHasChanged();
         }
-        StateHasChanged();
+        else
+        {
+            NavigationManager.NavigateTo("/login");
+        }
+
     }
 
     private async Task ModificarInscripcion()
