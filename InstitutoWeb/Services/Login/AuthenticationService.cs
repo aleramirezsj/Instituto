@@ -1,4 +1,5 @@
-﻿using InstitutoServices.Interfaces.Commons;
+using InstitutoServices.Interfaces.Commons;
+using InstitutoServices.Models.Commons;
 using InstitutoServices.Models.Login;
 using InstitutoServices.Services.Commons;
 using InstitutoWeb.Interfaces;
@@ -80,6 +81,7 @@ namespace InstitutoWeb.Services.Login
             }
             else
             {
+                _usuarioStateService.SetUsuario(null, null);
                 return null;
             }
         }
