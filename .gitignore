@@ -369,4 +369,3 @@ FodyWeavers.xsd
 /nginxLocalFuncionando.conf
 /DockerfileBackLocalFuncionando
 /DockerfileWebLocalFuncionando
-/InstitutoServices/Services/Commons/GenericService.cs
