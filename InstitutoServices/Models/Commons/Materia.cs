@@ -1,4 +1,4 @@
-﻿using InstitutoServices.Enums;
+using InstitutoServices.Enums;
 using InstitutoServices.Interfaces;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -13,7 +13,7 @@ namespace InstitutoServices.Models.Commons
         public int AnioCarreraId { get; set; }
         [Display(Name = "Año carrera")]
         public AnioCarrera? AnioCarrera { get; set; }
-        public TipoMateriaEnum TipoMateria { get; set; }
+        public TipoPeriodoEnum TipoPeriodo { get; set; }
         public bool EsRecreo { get; set; } = false;
         public bool Eliminado { get; set; } = false;
 

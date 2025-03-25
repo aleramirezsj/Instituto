@@ -56,7 +56,7 @@ namespace InstitutoDesktop.Views
             dataGridAlumnos = new DataGridView();
             btnBuscarMateria = new FontAwesome.Sharp.IconButton();
             label2 = new Label();
-            textBox1 = new TextBox();
+            txtFiltroPorMateria = new TextBox();
             btnImprimirMateriaSeleccionada = new FontAwesome.Sharp.IconButton();
             btnImprimirTodasMaterias = new FontAwesome.Sharp.IconButton();
             dataGridMaterias = new DataGridView();
@@ -350,7 +350,7 @@ namespace InstitutoDesktop.Views
             tabPageVerPorMaterias.Controls.Add(dataGridAlumnos);
             tabPageVerPorMaterias.Controls.Add(btnBuscarMateria);
             tabPageVerPorMaterias.Controls.Add(label2);
-            tabPageVerPorMaterias.Controls.Add(textBox1);
+            tabPageVerPorMaterias.Controls.Add(txtFiltroPorMateria);
             tabPageVerPorMaterias.Controls.Add(btnImprimirMateriaSeleccionada);
             tabPageVerPorMaterias.Controls.Add(btnImprimirTodasMaterias);
             tabPageVerPorMaterias.Controls.Add(dataGridMaterias);
@@ -406,6 +406,7 @@ namespace InstitutoDesktop.Views
             btnBuscarMateria.Text = "&Buscar";
             btnBuscarMateria.TextAlign = ContentAlignment.MiddleRight;
             btnBuscarMateria.UseVisualStyleBackColor = false;
+            btnBuscarMateria.Click += btnBuscarMateria_Click;
             // 
             // label2
             // 
@@ -416,12 +417,13 @@ namespace InstitutoDesktop.Views
             label2.TabIndex = 20;
             label2.Text = "Buscar materia:";
             // 
-            // textBox1
+            // txtFiltroPorMateria
             // 
-            textBox1.Location = new Point(177, 20);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(483, 27);
-            textBox1.TabIndex = 19;
+            txtFiltroPorMateria.Location = new Point(177, 20);
+            txtFiltroPorMateria.Name = "txtFiltroPorMateria";
+            txtFiltroPorMateria.Size = new Size(483, 27);
+            txtFiltroPorMateria.TabIndex = 19;
+            txtFiltroPorMateria.TextChanged += txtFiltroPorMateria_TextChanged;
             // 
             // btnImprimirMateriaSeleccionada
             // 
@@ -536,7 +538,7 @@ namespace InstitutoDesktop.Views
         public DataGridView dataGridAlumnos;
         public FontAwesome.Sharp.IconButton btnBuscarMateria;
         private Label label2;
-        public TextBox textBox1;
+        public TextBox txtFiltroPorMateria;
         public FontAwesome.Sharp.IconButton btnImprimirMateriaSeleccionada;
         public FontAwesome.Sharp.IconButton btnImprimirTodasMaterias;
         public DataGridView dataGridMaterias;

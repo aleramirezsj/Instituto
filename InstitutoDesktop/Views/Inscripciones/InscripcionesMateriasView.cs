@@ -3,7 +3,6 @@ using InstitutoDesktop.Services;
 using InstitutoDesktop.States.Inscripciones.InscripcionesMaterias;
 using InstitutoServices.Models.Commons;
 using InstitutoServices.Models.Inscripciones;
-using InstitutoServices.Models.MesasExamenes;
 
 namespace InstitutoDesktop.Views
 {
@@ -37,6 +36,7 @@ namespace InstitutoDesktop.Views
         public void TransitionTo(IInscripcionesMateriasViewState state) => _currentState = state;
         private void BtnBuscar_Click(object sender, EventArgs e) => _currentState.OnBuscar();
         private void txtFiltro_TextChanged(object sender, EventArgs e) => BtnBuscar.PerformClick();
+
         private void btnSalir_Click(object sender, EventArgs e) => this.Close();
 
         private void btnImprimirTodas_Click(object sender, EventArgs e) => _currentState.OnImprimirTodasPorAlumno();
@@ -45,5 +45,9 @@ namespace InstitutoDesktop.Views
         private void btnImprimirTodasMaterias_Click(object sender, EventArgs e) => _currentState.OnImprimirTodasPorMateria();
 
         private void btnImprimirMateriaSeleccionada_Click(object sender, EventArgs e) => _currentState.OnImprimirSeleccionadaPorMateria();
+
+        private void txtFiltroPorMateria_TextChanged(object sender, EventArgs e) => btnBuscarMateria.PerformClick();
+
+        private void btnBuscarMateria_Click(object sender, EventArgs e) => _currentState.OnBuscar();
     }
 }

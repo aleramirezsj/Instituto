@@ -25,7 +25,7 @@ namespace InstitutoDesktop.States.Commons.Materias
 
         private void LoadComboTipoMaterias()
         {
-            _form.comboBoxTipoMateria.DataSource = Enum.GetValues(typeof(TipoMateriaEnum));
+            _form.comboBoxTipoMateria.DataSource = Enum.GetValues(typeof(TipoPeriodoEnum));
         }
 
         public async Task LoadData()
