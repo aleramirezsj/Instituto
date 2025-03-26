@@ -146,7 +146,13 @@ namespace InstitutoDesktop.ExtensionMethods
             }
         }
 
-
+        public static void EstablecerAnchoDeColumna(this DataGridView grid, int nroColumna, int ancho)
+        {
+            if (grid.Visible && grid.RowCount > 0 && grid.ColumnCount > 0 && grid.Columns[nroColumna].Width!=ancho)
+            {
+                grid.Columns[nroColumna].Width = ancho;
+            }
+        }
 
         public static void EstablecerAnchoDeColumnas(this DataGridView grid, int[] anchos)
         {

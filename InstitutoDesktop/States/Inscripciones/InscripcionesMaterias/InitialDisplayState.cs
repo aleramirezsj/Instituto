@@ -277,6 +277,7 @@ namespace InstitutoDesktop.States.Inscripciones.InscripcionesMaterias
                         .OrderBy(x => x.Carrera).ThenBy(x => x.Año).ThenBy(x=>x.Materia).ToList();
                 }
             }
+            _form.dataGridMaterias.EstablecerAnchoDeColumna(0,100);
             _form.dataGridInscripciones.OcultarColumnas(new string[] { "Id", "CarreraId", "AlumnoId", "PeriodoInscripcionId", "DetallesInscripcionesExamenes", "PeriodoInscripcion", "Eliminado","Inscripto" });
             _form.statusBarMessage.Text = $"Total de inscripciones a mesas de exámenes obtenidas: {_form.dataGridInscripciones.Rows.Count}";
         }
