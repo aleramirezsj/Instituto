@@ -159,6 +159,9 @@ else
                     ModalidadCursado = materiaInscripta ? (inscripcionCurrent.detallesInscripciones
                                                                 .Find(d => d.MateriaId == materia.Id))
                                                                 .ModalidadCursado : ModalidadCursadoEnum.Presencial,
+                    TipoCursado = materiaInscripta ? (inscripcionCurrent.detallesInscripciones
+                                                                    .Find(d => d.MateriaId == materia.Id))
+                                                                    .TipoCursado : TipoCursadoEnum.Cursar,
                     Eliminado = materiaInscripta
 
                 });
