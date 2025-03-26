@@ -1,4 +1,4 @@
-﻿using InstitutoServices.Enums;
+using InstitutoServices.Enums;
 using InstitutoServices.Interfaces;
 using InstitutoServices.Models.Commons;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -13,6 +13,7 @@ namespace InstitutoServices.Models.Inscripciones
         public Inscripcion? Inscripcion { get; set; }
         public int MateriaId { get; set; }
         public Materia? Materia { get; set; }
+        public TipoCursadoEnum TipoCursado { get; set; }= TipoCursadoEnum.Cursar;
         public bool Eliminado { get; set; } = false;
 
 

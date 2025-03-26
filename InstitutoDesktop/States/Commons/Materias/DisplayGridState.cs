@@ -25,7 +25,7 @@ namespace InstitutoDesktop.States.Commons.Materias
 
         private void LoadComboTipoMaterias()
         {
-            _form.comboBoxTipoMateria.DataSource = Enum.GetValues(typeof(TipoPeriodoEnum));
+            _form.comboBoxTipoMateria.DataSource = Enum.GetValues(typeof(TipoMateriaEnum));
         }
 
         public async Task LoadData()
@@ -36,7 +36,13 @@ namespace InstitutoDesktop.States.Commons.Materias
             await LoadComboboxCarreras();
             await LoadComboboxAniosCarreras();
             LoadComboTipoMaterias();
+            LoadComboTipoPeriodo();
             LoadGrid(_form.txtFiltro.Text);
+        }
+
+        private void LoadComboTipoPeriodo()
+        {
+            _form.comboBoxTipoPeriodo.DataSource = Enum.GetValues(typeof(TipoPeriodoEnum));
         }
 
         public void LoadGrid(string filterText)

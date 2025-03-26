@@ -1,4 +1,4 @@
-﻿namespace InstitutoDesktop.Views.Commons
+namespace InstitutoDesktop.Views.Commons
 {
     partial class MateriasView
     {
@@ -44,9 +44,11 @@
             btnAgregar = new FontAwesome.Sharp.IconButton();
             Grilla = new DataGridView();
             tabPageAgregarEditar = new TabPage();
+            label6 = new Label();
+            comboBoxTipoMateria = new ComboBox();
             chkEsRecreo = new CheckBox();
             label5 = new Label();
-            comboBoxTipoMateria = new ComboBox();
+            comboBoxTipoPeriodo = new ComboBox();
             txtNombre = new TextBox();
             label2 = new Label();
             btnCancelar = new FontAwesome.Sharp.IconButton();
@@ -278,9 +280,11 @@
             // 
             // tabPageAgregarEditar
             // 
+            tabPageAgregarEditar.Controls.Add(label6);
+            tabPageAgregarEditar.Controls.Add(comboBoxTipoMateria);
             tabPageAgregarEditar.Controls.Add(chkEsRecreo);
             tabPageAgregarEditar.Controls.Add(label5);
-            tabPageAgregarEditar.Controls.Add(comboBoxTipoMateria);
+            tabPageAgregarEditar.Controls.Add(comboBoxTipoPeriodo);
             tabPageAgregarEditar.Controls.Add(txtNombre);
             tabPageAgregarEditar.Controls.Add(label2);
             tabPageAgregarEditar.Controls.Add(btnCancelar);
@@ -294,11 +298,31 @@
             tabPageAgregarEditar.Text = "Agregar/Editar";
             tabPageAgregarEditar.UseVisualStyleBackColor = true;
             // 
+            // label6
+            // 
+            label6.Anchor = AnchorStyles.None;
+            label6.AutoSize = true;
+            label6.Location = new Point(258, 280);
+            label6.Margin = new Padding(2, 0, 2, 0);
+            label6.Name = "label6";
+            label6.Size = new Size(97, 20);
+            label6.TabIndex = 10;
+            label6.Text = "Tipo materia:";
+            // 
+            // comboBoxTipoMateria
+            // 
+            comboBoxTipoMateria.Anchor = AnchorStyles.None;
+            comboBoxTipoMateria.FormattingEnabled = true;
+            comboBoxTipoMateria.Location = new Point(371, 272);
+            comboBoxTipoMateria.Name = "comboBoxTipoMateria";
+            comboBoxTipoMateria.Size = new Size(284, 28);
+            comboBoxTipoMateria.TabIndex = 9;
+            // 
             // chkEsRecreo
             // 
             chkEsRecreo.Anchor = AnchorStyles.None;
             chkEsRecreo.AutoSize = true;
-            chkEsRecreo.Location = new Point(372, 265);
+            chkEsRecreo.Location = new Point(371, 338);
             chkEsRecreo.Name = "chkEsRecreo";
             chkEsRecreo.Size = new Size(91, 24);
             chkEsRecreo.TabIndex = 8;
@@ -312,18 +336,18 @@
             label5.Location = new Point(237, 215);
             label5.Margin = new Padding(2, 0, 2, 0);
             label5.Name = "label5";
-            label5.Size = new Size(118, 20);
+            label5.Size = new Size(119, 20);
             label5.TabIndex = 7;
-            label5.Text = "Tipo de materia:";
+            label5.Text = "Periodo cursado:";
             // 
-            // comboBoxTipoMateria
+            // comboBoxTipoPeriodo
             // 
-            comboBoxTipoMateria.Anchor = AnchorStyles.None;
-            comboBoxTipoMateria.FormattingEnabled = true;
-            comboBoxTipoMateria.Location = new Point(371, 207);
-            comboBoxTipoMateria.Name = "comboBoxTipoMateria";
-            comboBoxTipoMateria.Size = new Size(284, 28);
-            comboBoxTipoMateria.TabIndex = 6;
+            comboBoxTipoPeriodo.Anchor = AnchorStyles.None;
+            comboBoxTipoPeriodo.FormattingEnabled = true;
+            comboBoxTipoPeriodo.Location = new Point(371, 207);
+            comboBoxTipoPeriodo.Name = "comboBoxTipoPeriodo";
+            comboBoxTipoPeriodo.Size = new Size(284, 28);
+            comboBoxTipoPeriodo.TabIndex = 6;
             // 
             // txtNombre
             // 
@@ -429,7 +453,9 @@
         public ComboBox comboBoxAñosCarreras;
         private Label label4;
         private Label label5;
-        public ComboBox comboBoxTipoMateria;
+        public ComboBox comboBoxTipoPeriodo;
         public CheckBox chkEsRecreo;
+        private Label label6;
+        public ComboBox comboBoxTipoMateria;
     }
 }
