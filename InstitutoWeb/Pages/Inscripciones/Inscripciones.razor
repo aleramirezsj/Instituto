@@ -268,7 +268,9 @@ else
                     {
                         MateriaId = detalle.Materia.Id,
                         Materia = detalle.Materia,
-                        ModalidadCursado = detalle.ModalidadCursado
+                        ModalidadCursado = detalle.ModalidadCursado,
+                        TipoCursado = detalle.TipoCursado
+                        
 
                     });
             }
@@ -285,7 +287,9 @@ else
                     {
                         MateriaId = detalle.Materia.Id,
                         Materia = detalle.Materia,
-                        ModalidadCursado = detalle.ModalidadCursado
+                        ModalidadCursado = detalle.ModalidadCursado,
+                        TipoCursado = detalle.TipoCursado
+                        
                     });
             }
             await _memoryCache.UpdateCacheAsync<Inscripcion>(inscripcionCurrent);

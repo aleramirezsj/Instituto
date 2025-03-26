@@ -146,13 +146,40 @@ namespace InstitutoDesktop.ExtensionMethods
             }
         }
 
-        public static void EstablecerAnchoDeColumna(this DataGridView grid, int nroColumna, int ancho)
+        public static void SetWidthToColumn(this DataGridView grid, int nroColumna, int ancho)
         {
             if (grid.Visible && grid.RowCount > 0 && grid.ColumnCount > 0 && grid.Columns[nroColumna].Width!=ancho)
             {
+                grid.Columns[nroColumna].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
                 grid.Columns[nroColumna].Width = ancho;
             }
         }
+        public static void SetWidthToColumn(this DataGridView grid, string nombreColumna, int ancho)
+        {
+            if (grid.Columns.Contains(nombreColumna))
+            {
+                grid.Columns[nombreColumna].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+                grid.Columns[nombreColumna].Width = ancho;
+            }
+        }
+
+        public static void SetWidthToColumn<T>(this DataGridView grid, Expression<Func<T, object>> propertyExpression, int ancho)
+        {
+            var member = propertyExpression.Body as MemberExpression ?? ((UnaryExpression)propertyExpression.Body).Operand as MemberExpression;
+            if (member != null)
+            {
+                string nameColumn = member.Member.Name;
+                if (grid.Columns.Contains(nameColumn))
+                {
+                    if (grid.Columns.Contains(nameColumn))
+                    {
+                        grid.Columns[nameColumn].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+                        grid.Columns[nameColumn].Width = ancho;
+                    }
+                }
+            }
+        }
+
 
         public static void EstablecerAnchoDeColumnas(this DataGridView grid, int[] anchos)
         {
@@ -174,6 +201,7 @@ namespace InstitutoDesktop.ExtensionMethods
                     }
 
                     // Establece el ancho de la columna visible
+                    grid.Columns[visibleColumnIndex].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
                     grid.Columns[visibleColumnIndex].Width = anchos[i];
                     visibleColumnIndex++;
                 }

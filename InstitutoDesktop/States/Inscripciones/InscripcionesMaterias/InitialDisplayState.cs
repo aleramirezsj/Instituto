@@ -7,6 +7,7 @@ using InstitutoServices.Enums;
 using InstitutoServices.Models.Commons;
 using InstitutoServices.Models.Inscripciones;
 using InstitutoServices.Models.MesasExamenes;
+using System.Windows.Forms;
 
 namespace InstitutoDesktop.States.Inscripciones.InscripcionesMaterias
 {
@@ -21,7 +22,21 @@ namespace InstitutoDesktop.States.Inscripciones.InscripcionesMaterias
             _form.dataGridInscripciones.DataBindingComplete += (sender, e) => {
                 EnableDisableButtons();
             };
+            _form.dataGridMaterias.DataBindingComplete += (sender, e) =>
+            {
+                if (_form.dataGridMaterias.Columns.Count == 0) return;
 
+                // Modifica la primera columna
+                _form.dataGridMaterias.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+                _form.dataGridMaterias.Columns[0].Width = 100;
+            };
+            _form.dataGridInscripcionSeleccioanda.DataBindingComplete += (sender, e) =>
+            {
+                if (_form.dataGridInscripcionSeleccioanda.Columns.Count == 0) return;
+                // Modifica la primera columna
+                _form.dataGridInscripcionSeleccioanda.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+                _form.dataGridInscripcionSeleccioanda.Columns[0].Width = 100;
+            };
 
             _form.chkFiltrarPorCarrera.CheckedChanged += (sender, e) =>
             {
@@ -277,7 +292,7 @@ namespace InstitutoDesktop.States.Inscripciones.InscripcionesMaterias
                         .OrderBy(x => x.Carrera).ThenBy(x => x.Año).ThenBy(x=>x.Materia).ToList();
                 }
             }
-            _form.dataGridMaterias.EstablecerAnchoDeColumna(0,100);
+            _form.dataGridInscripciones.SetWidthToColumn<Inscripcion>(i => i.Fecha, 100);
             _form.dataGridInscripciones.OcultarColumnas(new string[] { "Id", "CarreraId", "AlumnoId", "PeriodoInscripcionId", "DetallesInscripcionesExamenes", "PeriodoInscripcion", "Eliminado","Inscripto" });
             _form.statusBarMessage.Text = $"Total de inscripciones a mesas de exámenes obtenidas: {_form.dataGridInscripciones.Rows.Count}";
         }

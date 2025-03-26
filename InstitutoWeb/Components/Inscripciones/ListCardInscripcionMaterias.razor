@@ -13,10 +13,14 @@
         @foreach (var entity in detallesInscripcionSeleccionados)
         {
             <div class="col-12 mb-2">
-                <div class="card text-center d-flex flex-row align-items-center p-1 @((entity.Eliminado) ? "card-seleccionada" : "")" >
+                <div class="card text-center d-flex flex-row align-items-center p-1 @((entity.Eliminado) ? "card-seleccionada" : "")">
                     <img src="images/academico.png" class="img-fluid rounded-start" alt="Icono escolar">
                     <div class="card-body text-start">
                         <h5 class="card-title">@entity?.Materia?.Nombre</h5>
+                        <p class="card-text">
+                            <strong>Periodo cursado:</strong> @entity?.Materia?.TipoPeriodo<br />
+                            <strong>Tipo Materia:</strong> @entity?.Materia?.TipoMateria
+                        </p>
                         <p class="card-text">
                             @if (entity.Eliminado)
                             {
@@ -24,6 +28,12 @@
                                     @foreach (var modalidad in Enum.GetValues(typeof(ModalidadCursadoEnum)))
                                     {
                                         <option value="@modalidad" selected="@(modalidad.Equals(entity.ModalidadCursado))">@modalidad</option>
+                                    }
+                                </select>
+                                <select @onchange="(e) => UpdateTipoCursado(entity, e.Value)">
+                                    @foreach (var tipoCursado in Enum.GetValues(typeof(TipoCursadoEnum)))
+                                    {
+                                        <option value="@tipoCursado" selected="@(tipoCursado.Equals(entity.TipoCursado))">@tipoCursado</option>
                                     }
                                 </select>
                             }
@@ -78,6 +88,14 @@
         if (Enum.TryParse<ModalidadCursadoEnum>(value.ToString(), out var modalidad))
         {
             entity.ModalidadCursado = modalidad;
+        }
+    }
+
+    private void UpdateTipoCursado(DetalleInscripcion entity, object value)
+    {
+        if (Enum.TryParse<TipoCursadoEnum>(value.ToString(), out var tipoCursado))
+        {
+            entity.TipoCursado = tipoCursado;
         }
     }
 
