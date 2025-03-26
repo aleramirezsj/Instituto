@@ -219,7 +219,7 @@ else
             materias = (await _memoryCache.GetAllCacheAsync<Materia>())
             .Where(m => m.AnioCarrera.CarreraId == carreraSeleccionada.Id &&
                     m.EsRecreo.Equals(false) &&
-                    (m.TipoMateria.Equals(TipoMateriaEnum.Cuatrimestre_1) || m.TipoMateria.Equals(TipoMateriaEnum.Anual)))
+                    (m.TipoPeriodo.Equals(TipoPeriodoEnum.Cuatrimestre_1) || m.TipoPeriodo.Equals(TipoPeriodoEnum.Anual)))
                 .OrderBy(m => m.AnioCarreraId).ThenBy(m => m.Nombre).ToList();
         }
         else
@@ -227,7 +227,7 @@ else
             materias = (await _memoryCache.GetAllCacheAsync<Materia>())
             .Where(m => m.AnioCarrera.CarreraId == carreraSeleccionada.Id &&
                     m.EsRecreo.Equals(false) &&
-                    (m.TipoMateria.Equals(TipoMateriaEnum.Cuatrimestre_2)))
+                    (m.TipoPeriodo.Equals(TipoPeriodoEnum.Cuatrimestre_2)))
                 .OrderBy(m => m.AnioCarreraId).ThenBy(m => m.Nombre).ToList();
         }
 

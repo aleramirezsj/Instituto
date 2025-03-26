@@ -41,12 +41,34 @@ namespace InstitutoDesktop.States.Inscripciones.InscripcionesMaterias
 
         public void OnImprimirTodasPorMateria()
         {
-            Form InscripcionExamenViewReport = new InscripcionPorMateriasViewReport((MenuPrincipalView)_form.MdiParent, _form.listaDetallesInscripciones.Where(d => d.Inscripcion.PeriodoInscripcionId.Equals((int)_form.cboPeriodosInscripciones.SelectedValue) &&
-                              d.Inscripcion.CarreraId.Equals((int)_form.cboCarreras.SelectedValue) &&
-                              d.Materia.AnioCarreraId.Equals((int)_form.cboAniosCarreras.SelectedValue))
-                        .OrderBy(x => x.Materia?.Nombre).ThenBy(x => x.Inscripcion?.Alumno?.ApellidoNombre)
-                        .ToList());
-            InscripcionExamenViewReport.Show();
+            if (_form.chkFiltrarPorCarrera.Checked)
+            {
+                if (_form.chkFiltrarPorAñoCarrera.Checked)
+                {
+                    Form InscripcionExamenViewReport = new InscripcionPorMateriasViewReport((MenuPrincipalView)_form.MdiParent, _form.listaDetallesInscripciones.Where(d=>d.Materia.Nombre.ToUpper().Contains(_form.txtFiltroPorMateria.Text.ToUpper())&&
+                         d.Inscripcion.PeriodoInscripcionId.Equals((int)_form.cboPeriodosInscripciones.SelectedValue) &&
+                                      d.Inscripcion.CarreraId.Equals((int)_form.cboCarreras.SelectedValue) &&
+                                      d.Materia.AnioCarreraId.Equals((int)_form.cboAniosCarreras.SelectedValue))
+                                .OrderBy(x => x.Materia?.Nombre).ThenBy(x => x.Inscripcion?.Alumno?.ApellidoNombre)
+                                .ToList());
+                    InscripcionExamenViewReport.Show();
+                }
+                else
+                {
+                    Form InscripcionExamenViewReport = new InscripcionPorMateriasViewReport((MenuPrincipalView)_form.MdiParent, _form.listaDetallesInscripciones.Where(d => d.Materia.Nombre.ToUpper().Contains(_form.txtFiltroPorMateria.Text.ToUpper()) && d.Inscripcion.PeriodoInscripcionId.Equals((int)_form.cboPeriodosInscripciones.SelectedValue) &&
+                        d.Inscripcion.CarreraId.Equals((int)_form.cboCarreras.SelectedValue))
+                  .OrderBy(x => x.Materia?.Nombre).ThenBy(x => x.Inscripcion?.Alumno?.ApellidoNombre)
+                  .ToList());
+                    InscripcionExamenViewReport.Show();
+                }
+            }
+            else
+            {
+                Form InscripcionExamenViewReport = new InscripcionPorMateriasViewReport((MenuPrincipalView)_form.MdiParent, _form.listaDetallesInscripciones.Where(d => d.Materia.Nombre.ToUpper().Contains(_form.txtFiltroPorMateria.Text.ToUpper()) && d.Inscripcion.PeriodoInscripcionId.Equals((int)_form.cboPeriodosInscripciones.SelectedValue))
+                    .OrderBy(x => x.Materia?.Nombre).ThenBy(x => x.Inscripcion?.Alumno?.ApellidoNombre)
+                    .ToList());
+                InscripcionExamenViewReport.Show();
+            }
             _form.TransitionTo(new InitialDisplayState(_form));
         }
 
@@ -55,14 +77,26 @@ namespace InstitutoDesktop.States.Inscripciones.InscripcionesMaterias
             //tomo la materia seleccionada de la grilla dataGridMaterias
             var idMateria = (int)_form.dataGridMaterias.CurrentRow.Cells[0].Value;
 
-            Form InscripcionExamenViewReport = new InscripcionPorMateriasViewReport((MenuPrincipalView)_form.MdiParent, _form.listaDetallesInscripciones.Where(d => d.Inscripcion.PeriodoInscripcionId.Equals((int)_form.cboPeriodosInscripciones.SelectedValue) &&
-                              d.Inscripcion.CarreraId.Equals((int)_form.cboCarreras.SelectedValue) &&
-                              d.Materia.AnioCarreraId.Equals((int)_form.cboAniosCarreras.SelectedValue) &&
-                              d.Materia.Id.Equals(idMateria))
-                        .OrderBy(x => x.Materia?.Nombre).ThenBy(x => x.Inscripcion?.Alumno?.ApellidoNombre)
-                        .ToList());
-            InscripcionExamenViewReport.Show();
-            _form.TransitionTo(new InitialDisplayState(_form));
+            if (_form.chkFiltrarPorAñoCarrera.Checked)
+            {
+                Form InscripcionExamenViewReport = new InscripcionPorMateriasViewReport((MenuPrincipalView)_form.MdiParent, _form.listaDetallesInscripciones.Where(d => d.Inscripcion.PeriodoInscripcionId.Equals((int)_form.cboPeriodosInscripciones.SelectedValue) &&
+                                  d.Inscripcion.CarreraId.Equals((int)_form.cboCarreras.SelectedValue) &&
+                                  d.Materia.AnioCarreraId.Equals((int)_form.cboAniosCarreras.SelectedValue) &&
+                                  d.Materia.Id.Equals(idMateria))
+                            .OrderBy(x => x.Materia?.Nombre).ThenBy(x => x.Inscripcion?.Alumno?.ApellidoNombre)
+                            .ToList());
+                InscripcionExamenViewReport.Show();
+                _form.TransitionTo(new InitialDisplayState(_form));
+            }
+            else
+            {
+                Form InscripcionExamenViewReport = new InscripcionPorMateriasViewReport((MenuPrincipalView)_form.MdiParent, _form.listaDetallesInscripciones.Where(d => d.Materia.Id.Equals(idMateria) && d.Inscripcion.PeriodoInscripcionId.Equals((int)_form.cboPeriodosInscripciones.SelectedValue) &&
+              d.Inscripcion.CarreraId.Equals((int)_form.cboCarreras.SelectedValue))
+        .OrderBy(x => x.Materia?.Nombre).ThenBy(x => x.Inscripcion?.Alumno?.ApellidoNombre)
+        .ToList());
+                InscripcionExamenViewReport.Show();
+
+            }
 
             _form.dataGridAlumnos.DataSource = _form.listaDetallesInscripciones
     .Where(d => d.MateriaId.Equals(idMateria) &&

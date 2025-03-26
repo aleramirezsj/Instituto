@@ -31,7 +31,7 @@ namespace InstitutoDesktop.States.Commons.Materias
 
             _form.materiaCurrent.Nombre = _form.txtNombre.Text;
             _form.materiaCurrent.AnioCarreraId = (int)_form.comboBoxAñosCarreras.SelectedValue;
-            _form.materiaCurrent.TipoMateria = (TipoMateriaEnum)_form.comboBoxTipoMateria.SelectedItem;
+            _form.materiaCurrent.TipoPeriodo = (TipoPeriodoEnum)_form.comboBoxTipoMateria.SelectedItem;
             _form.materiaCurrent.EsRecreo = _form.chkEsRecreo.Checked;
 
             if (_form.materiaCurrent.Id == 0)
@@ -60,7 +60,7 @@ namespace InstitutoDesktop.States.Commons.Materias
             _form.tabControl.SelectTab(_form.tabPageAgregarEditar);
 
             _form.txtNombre.Text = _form.materiaCurrent.Nombre;
-            _form.comboBoxTipoMateria.SelectedItem = _form.materiaCurrent.TipoMateria;
+            _form.comboBoxTipoMateria.SelectedItem = _form.materiaCurrent.TipoPeriodo;
             _form.chkEsRecreo.Checked = _form.materiaCurrent.EsRecreo;
 
         }

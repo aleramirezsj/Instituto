@@ -1,6 +1,6 @@
-﻿namespace InstitutoServices.Enums
+namespace InstitutoServices.Enums
 {
-    public enum TipoMateriaEnum
+    public enum TipoPeriodoEnum
     {
         Anual,
         Cuatrimestre_1,
