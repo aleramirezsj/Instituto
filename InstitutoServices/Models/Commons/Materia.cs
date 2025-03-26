@@ -14,6 +14,7 @@ namespace InstitutoServices.Models.Commons
         [Display(Name = "Año carrera")]
         public AnioCarrera? AnioCarrera { get; set; }
         public TipoPeriodoEnum TipoPeriodo { get; set; }
+        public TipoMateriaEnum TipoMateria { get; set; } = TipoMateriaEnum.Materia;
         public bool EsRecreo { get; set; } = false;
         public bool Eliminado { get; set; } = false;
 
