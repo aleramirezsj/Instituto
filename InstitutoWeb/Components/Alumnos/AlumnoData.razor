@@ -1,4 +1,4 @@
-﻿@inject IInscriptoCarreraService inscriptoCarreraService
+@inject IInscriptoCarreraService inscriptoCarreraService
 @inject IGenericService<Carrera> carreraService
 @inject ILogger<AlumnoData> logger
 @inject NavigationManager NavigationManager
@@ -13,7 +13,9 @@
 <div>
     <h4>Datos del Alumno.</h4>
     <p>Nombre: @alumno.ApellidoNombre</p>
+    <p>DNI: @alumno.Dni</p>
     <p>Dirección: @alumno.Direccion</p>
+    <p>Localidad: @alumno.Localidad</p>
     <p>Teléfono: @alumno.Telefono</p>
 </div>
 <NavigationLock OnBeforeInternalNavigation="OnBeforeInternalNavigation" />

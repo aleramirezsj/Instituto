@@ -24,14 +24,24 @@
     }
     else //muestro los datos del alumno
     {
-        <AlumnoData alumno="@alumno" />
+        @if (modificarAlumno)
+        {
+            <FormAlumno Alumno="@alumno" OnGuardarAlumno="GuardarAlumno" />
+        }
+        else
+        {
+            <AlumnoData alumno="@alumno" />
+            <button class="btn btn-primary" @onclick="()=>ModificarAlumno()">Modificar datos de alumno</button>
+        }
+
+
     }
 }
 @if (tipoUsuario == TipoUsuarioEnum.Docente)
 {
     @if (docente == null)
     {
-        <p><em>Eres un nuevo usuario del sistema, necesitamos completar tu perfil selecciona que docente eres, si no te encuentras pidele a un directivo o jefe de sección que te cargue en el sistema</em></p>
+        <p><em>Eres un nuevo usuario del sistema, necesitamos completar tu perfil selecciona que docente eres, si no te encuentras pidele a un directivo o jefe de secciÃ³n que te cargue en el sistema</em></p>
         <FormDocente OnSeleccionarDocente="SeleccionarDocente" />
     }
     else //muestro los datos del docente
@@ -43,7 +53,7 @@
 {
     @if (docente == null)
     {
-        <p><em>Eres un nuevo usuario del sistema, necesitamos completar tu perfil selecciona que docente eres, , si no te encuentras pidele a un directivo o jefe de sección que te cargue en el sistema</em></p>
+        <p><em>Eres un nuevo usuario del sistema, necesitamos completar tu perfil selecciona que docente eres, , si no te encuentras pidele a un directivo o jefe de secciÃ³n que te cargue en el sistema</em></p>
         <FormJefeSeccion OnSeleccionarDocente="SeleccionarDocente" />
     }
     else //muestro los datos del docente
@@ -76,6 +86,7 @@
     Alumno? alumno { get; set; }
     Docente? docente { get; set; }
     int idDocente { get; set; }
+    bool modificarAlumno { get; set; } = false;
 
 
     protected override async Task OnInitializedAsync()
@@ -87,31 +98,30 @@
             docente = usuario.Docente;
         }
     }
+    private void ModificarAlumno()
+    {
+        modificarAlumno = true;
+        StateHasChanged();
+    }
 
     private async Task GuardarAlumno(Alumno alumno)
     {
         this.alumno = alumno;
-        var nuevoUsuarioCacheado = _memoryCacheService.GetCache<Usuario>(usuarioFirebase?.Email);
-        usuario = new Usuario()
-            {
-                Email = usuarioFirebase?.Email,
-                Password = nuevoUsuarioCacheado?.Password ?? string.Empty,
-                Nombre = alumno.ApellidoNombre,
-                TipoUsuario = tipoUsuario,
-                AlumnoId = alumno.Id
-            };
-        //logger.LogInformation($"Guardando usuario={usuario.PropertiesToString()}{Environment.NewLine} el alumno a guardar es={alumno.PropertiesToString()}");
-        await _memoryCacheService.AddCacheAsync<Usuario>(usuario);
-        @* await SweetAlert.FireAsync(new SweetAlertOptions
-            {
-                Title = $"{tipoUsuario} creado con éxito",
-                Text = $"El {tipoUsuario} {usuario.Nombre} fue creado correctamente",
-                Icon = SweetAlertIcon.Info,
-                ShowCancelButton = false,
-                ConfirmButtonText = "Ok",
-            });*@
-        usuarioStateService.SetUsuario(usuario, usuarioFirebase); 
-        StateHasChanged();
+        if (usuarioStateService.Usuario == null)
+        {
+            var nuevoUsuarioCacheado = _memoryCacheService.GetCache<Usuario>(usuarioFirebase?.Email);
+            usuario = new Usuario()
+                {
+                    Email = usuarioFirebase?.Email,
+                    Password = nuevoUsuarioCacheado?.Password ?? string.Empty,
+                    Nombre = alumno.ApellidoNombre,
+                    TipoUsuario = tipoUsuario,
+                    AlumnoId = alumno.Id
+                };
+            await _memoryCacheService.AddCacheAsync<Usuario>(usuario);
+            usuarioStateService.SetUsuario(usuario, usuarioFirebase);
+            StateHasChanged();
+        }
     }
     private async Task SeleccionarDocente(Docente docente)
     {
@@ -129,7 +139,7 @@
         await usuarioService.AddAsync(usuario);
         await SweetAlert.FireAsync(new SweetAlertOptions
             {
-                Title = $"{tipoUsuario} creado con éxito",
+                Title = $"{tipoUsuario} creado con Ã©xito",
                 Text = $"El {tipoUsuario} {usuario.Nombre} fue creado correctamente",
                 Icon = SweetAlertIcon.Info,
                 ShowCancelButton = false,

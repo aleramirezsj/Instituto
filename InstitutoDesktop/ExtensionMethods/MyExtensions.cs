@@ -72,7 +72,6 @@ namespace InstitutoDesktop.ExtensionMethods
             }
             return hashObtenido.ToString();
         }
-
         public static int IdSeleccionado(this ComboBox combo)
         {
             if (combo.SelectedValue != null && combo.SelectedValue.GetType() == typeof(int))
@@ -89,8 +88,6 @@ namespace InstitutoDesktop.ExtensionMethods
             else
                 return "";
         }
-
-
         public static void MensajeAdvertenciaDeSalida(this Form form)
         {
             var respuesta = MessageBox.Show($"¿Está seguro que desea salir del formulario {form.Text}", "Atención", MessageBoxButtons.YesNo);
@@ -102,10 +99,6 @@ namespace InstitutoDesktop.ExtensionMethods
             return int.Parse(grid.CurrentRow.Cells[0].Value.ToString());
         }
         //método sobre las grillas que oculta las columnas que normalmente no se muestran
-
-
-
-
         public static void DarColorAFilas(this DataGridView grid, int nroColumna, Func<decimal, bool> condicion, Color color)
         {
             foreach (DataGridViewRow row in grid.Rows)
@@ -126,7 +119,6 @@ namespace InstitutoDesktop.ExtensionMethods
                 }
             }
         }
-
         public static void OcultarColumnas(this DataGridView grid, string[] columnasAOcultar)
         {
             //form.EstaVisible() &&
@@ -145,7 +137,6 @@ namespace InstitutoDesktop.ExtensionMethods
                 }
             }
         }
-
         public static void SetWidthToColumn(this DataGridView grid, int nroColumna, int ancho)
         {
             if (grid.Visible && grid.RowCount > 0 && grid.ColumnCount > 0 && grid.Columns[nroColumna].Width!=ancho)
@@ -162,7 +153,6 @@ namespace InstitutoDesktop.ExtensionMethods
                 grid.Columns[nombreColumna].Width = ancho;
             }
         }
-
         public static void SetWidthToColumn<T>(this DataGridView grid, Expression<Func<T, object>> propertyExpression, int ancho)
         {
             var member = propertyExpression.Body as MemberExpression ?? ((UnaryExpression)propertyExpression.Body).Operand as MemberExpression;
@@ -179,8 +169,6 @@ namespace InstitutoDesktop.ExtensionMethods
                 }
             }
         }
-
-
         public static void EstablecerAnchoDeColumnas(this DataGridView grid, int[] anchos)
         {
             if (grid.RowCount > 0 && grid.ColumnCount > 0)
@@ -207,7 +195,6 @@ namespace InstitutoDesktop.ExtensionMethods
                 }
             }
         }
-
         public static void SetTitleToColumn<T>(this DataGridView grid, Expression<Func<T, object>> propertyExpression, string newTitle)
         {
             if (grid.ColumnCount > 0)
@@ -223,15 +210,10 @@ namespace InstitutoDesktop.ExtensionMethods
                 }
             }
         }
-
-
-
-
         public static bool EstaVisible(this Form form)
         {
             return Application.OpenForms.OfType<Form>().Where(f => f.Name == form.Name).SingleOrDefault<Form>() != null;
         }
-
         public static void SetDataAndAutoComplete<T>(this ComboBox combo, List<T> dataSource) where T : class,IEntityIdNombre
         {
             combo.DataSource = dataSource.ToList();
@@ -247,7 +229,6 @@ namespace InstitutoDesktop.ExtensionMethods
             combo.AutoCompleteSource = AutoCompleteSource.CustomSource;
             combo.AutoCompleteCustomSource = autoCompleteEntitys;
         }
-
         public static void SetDataAndAutoCompleteWithToString<T>(this ComboBox combo, List<T> dataSource) where T : class, IEntityWithId
         {
             combo.DataSource = dataSource.ToList();
@@ -263,7 +244,6 @@ namespace InstitutoDesktop.ExtensionMethods
             combo.AutoCompleteSource = AutoCompleteSource.CustomSource;
             combo.AutoCompleteCustomSource = autoCompleteEntitys;
         }
-
     }
 
 }

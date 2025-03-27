@@ -11,6 +11,8 @@ namespace InstitutoServices.Models.Commons
         public string ApellidoNombre { get; set; } = string.Empty;
         public string Telefono { get; set; } = string.Empty;
         public string Direccion { get; set; } = string.Empty;
+        public string Dni { get; set; } = string.Empty;
+        public string Localidad { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         public bool Eliminado { get; set; } = false;
 

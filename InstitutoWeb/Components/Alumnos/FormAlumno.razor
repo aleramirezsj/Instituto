@@ -1,4 +1,3 @@
-@inject IGenericService<Alumno> alumnoService
 @inject IMemoryCacheService _memoryCacheService
 
 
@@ -6,12 +5,17 @@
     <DataAnnotationsValidator />
     <label class="form-label mb-2">Alumno:</label>
     <InputText class="form-control mb-2" type="text" @bind-Value="alumno.ApellidoNombre" />
-    <label class="form-label mb-2">Dirección:</label>
+    <label class="form-label mb-2">DNI:</label>
+    <InputText class="form-control mb-2" type="text" @bind-Value="alumno.Dni" />
+    <label class="form-label mb-2">DirecciÃ³n:</label>
     <InputText class="form-control mb-2" type="text" @bind-Value="alumno.Direccion" />
-    <label class="form-label mb-2">Teléfono:</label>
+    <label class="form-label mb-2">Localidad:</label>
+    <InputText class="form-control mb-2" type="text" @bind-Value="alumno.Localidad" />
+    <label class="form-label mb-2">TelÃ©fono:</label>
     <InputText class="form-control mb-2" type="tel" @bind-Value="alumno.Telefono" />
     <label class="form-label mb-2">Email:</label>
     <InputText class="form-control mb-2" type="email" @bind-Value="alumno.Email" disabled />
+
     <ValidationSummary />
     <button class="btn btn-primary mb-2" type="submit">Guardar</button>
 </EditForm>
@@ -26,16 +30,30 @@
     [Parameter]
     public EventCallback<Alumno> OnGuardarAlumno { get; set; }
 
+    [Parameter]
+    public Alumno Alumno { get; set; }
+
     private Alumno alumno = new Alumno();
 
     protected override async Task OnInitializedAsync()
     {
         alumno.ApellidoNombre = ApellidoNombre;
         alumno.Email = Email;
+        if (Alumno != null)
+        {
+            alumno = Alumno;
+        }   
     }
     private async Task HandleGuardarAlumno()
     {
-        var nuevoAlumno = await _memoryCacheService.AddCacheAsync<Alumno>(alumno);
+        Alumno nuevoAlumno;
+        if (alumno.Id == 0)
+        {
+            nuevoAlumno = await _memoryCacheService.AddCacheAsync<Alumno>(alumno);
+        }else{
+             await _memoryCacheService.UpdateCacheAsync<Alumno>(alumno);
+            nuevoAlumno = alumno;
+        }
         await OnGuardarAlumno.InvokeAsync(nuevoAlumno);
     }
 }
