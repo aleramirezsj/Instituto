@@ -30,8 +30,8 @@
         }
         else
         {
-            <AlumnoData alumno="@alumno" />
             <button class="btn btn-primary" @onclick="()=>ModificarAlumno()">Modificar datos de alumno</button>
+            <AlumnoData alumno="@alumno" />
         }
 
 
@@ -120,8 +120,9 @@
                 };
             await _memoryCacheService.AddCacheAsync<Usuario>(usuario);
             usuarioStateService.SetUsuario(usuario, usuarioFirebase);
-            StateHasChanged();
         }
+        modificarAlumno = false;
+        StateHasChanged();
     }
     private async Task SeleccionarDocente(Docente docente)
     {

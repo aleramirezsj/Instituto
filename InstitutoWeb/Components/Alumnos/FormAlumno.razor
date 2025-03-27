@@ -51,7 +51,7 @@
         {
             nuevoAlumno = await _memoryCacheService.AddCacheAsync<Alumno>(alumno);
         }else{
-             await _memoryCacheService.UpdateCacheAsync<Alumno>(alumno);
+             var algo=await _memoryCacheService.UpdateCacheAsync<Alumno>(alumno);
             nuevoAlumno = alumno;
         }
         await OnGuardarAlumno.InvokeAsync(nuevoAlumno);
