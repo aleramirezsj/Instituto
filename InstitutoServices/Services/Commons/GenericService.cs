@@ -29,7 +29,7 @@ namespace InstitutoServices.Services.Commons
         {
             this.client = new HttpClient();
             this.options = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
-            string branch = "master";
+            string branch = "dev";
             string urlApi;
             if (branch == "master")
                 urlApi = "https://api.isp20.edu.ar/api/";
