@@ -2,6 +2,8 @@
 {
     var materiasAgrupadasPorAnio = inscripcion.detallesInscripciones.OrderBy(m => m?.Materia?.AnioCarreraId).ThenBy(m => m?.Materia?.Nombre).GroupBy(m => m?.Materia?.AnioCarreraId);
 
+    <img class="img-thumbnail" src="logoISP20.png" style="display: block; margin-left: auto; margin-right: auto; width: 150px;" />
+
     <h2>Inscripción de: @inscripcion?.Alumno?.ApellidoNombre</h2>
     <h3>Carrera: @inscripcion?.Carrera?.Nombre</h3>
     <p>Fecha de inscripción: @inscripcion?.Fecha.ToShortDateString()</p>
