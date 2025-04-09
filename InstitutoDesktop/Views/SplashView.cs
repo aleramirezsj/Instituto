@@ -77,6 +77,7 @@ namespace InstitutoDesktop.Views
                 Task.Run(async () => await _cacheService.GetAllCacheAsync<DetalleInscripcionExamen>()),
                 Task.Run(async () => await _cacheService.GetAllCacheAsync<PeriodoHorario>()),
                 Task.Run(async () => await _cacheService.GetAllCacheAsync<PeriodoInscripcion>()),
+                Task.Run(async () => await _cacheService.GetAllCacheAsync<Institucion>()),
             });
             dataReady = true;
         }

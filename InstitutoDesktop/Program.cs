@@ -83,6 +83,8 @@ namespace InstitutoDesktop
             services.AddScoped<IniciarSesionView>();
             services.AddScoped<UsuariosView>();
             services.AddScoped<InscripcionesMateriasView>();
+            services.AddScoped<MesasExamenesView>();
+            services.AddScoped<InstitucionView>();
 
 
 

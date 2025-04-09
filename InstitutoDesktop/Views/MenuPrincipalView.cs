@@ -184,5 +184,11 @@ namespace InstitutoDesktop
             PeriodosInscripcionesView periodoInscripcionView = ActivatorUtilities.CreateInstance<PeriodosInscripcionesView>(_serviceProvider, this);
             periodoInscripcionView.Show();
         }
+
+        private void iconMenuDatosInstitucion_Click(object sender, EventArgs e)
+        {
+            InstitucionView institucionView = ActivatorUtilities.CreateInstance<InstitucionView>(_serviceProvider, this);
+            institucionView.Show();
+        }
     }
 }

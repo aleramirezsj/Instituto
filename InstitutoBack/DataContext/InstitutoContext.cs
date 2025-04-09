@@ -40,6 +40,10 @@ namespace InstitutoBack.DataContext
         ///ESTE CÓDIGO LO DEBEN AGREGAR A LA CLASE DBCONTEXT DESPUÉS DE HABER CREADO EL MODELO MATERIA
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            #region Datos semilla de Institucion
+            var institucion = new Institucion { Id = 1, NombreCompleto = "Instituto Superior de Profesorado N° 20 \"Senador Nestor Juan Zamaro\"", NombreCorto= "Instituto Superior de Profesorado N°20", Sigla = "ISP20", CodigoPostal="3040", Direccion= "Bv. Patria, Bv. Libertad y calle las Magnolias", Email= "secretariaisp20@gmail.com", Localidad="San Justo", Provincia="Santa Fe", Telefono= "3498 15526026" };
+            modelBuilder.Entity<Institucion>().HasData(institucion);
+            #endregion
             #region Datos semilla de carreras
             var tsds = new Carrera { Id = 1, Nombre = "Tecnicatura Superior en Desarrollo de Software", Sigla = "TSDS" };
             var tssi = new Carrera { Id = 2, Nombre = "Tecnicatura Superior en Soporte de Infraestructura", Sigla = "TSSITI" };
@@ -1105,6 +1109,7 @@ namespace InstitutoBack.DataContext
         public virtual DbSet<Aula> aulas { get; set; }
         public virtual DbSet<PeriodoHorario> periodoshorarios { get; set; }
         public virtual DbSet<PeriodoInscripcion> periodosinscripciones { get; set; }
+        public virtual DbSet<Institucion> instituciones { get; set; }
 
 
     }

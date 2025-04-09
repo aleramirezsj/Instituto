@@ -1,4 +1,4 @@
-﻿using InstitutoServices.Models.Commons;
+using InstitutoServices.Models.Commons;
 using InstitutoServices.Models.Horarios;
 
 namespace InstitutoServices.Class
@@ -28,6 +28,7 @@ namespace InstitutoServices.Class
         public static string PeriodoHorario { get; set; } = "apiperiodoshorarios";
         public static string InscripcionExamen { get; set; } = "apiinscripcionesexamenes";
         public static string DetalleInscripcionExamen { get; set; } = "apidetallesinscripcionesexamenes";
+        public static string Institucion { get; set; } = "apiinstituciones";
 
 
 
@@ -60,6 +61,7 @@ namespace InstitutoServices.Class
                 nameof(PeriodoInscripcion) => PeriodoInscripcion,
                 nameof(InscripcionExamen) => InscripcionExamen,
                 nameof(DetalleInscripcionExamen) => DetalleInscripcionExamen,
+                nameof(Institucion) => Institucion,
                 _ => throw new ArgumentException($"Endpoint '{name}' no está definido.")
             };
         }
