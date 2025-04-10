@@ -1,4 +1,4 @@
-﻿using InstitutoDesktop.ExtensionMethods;
+using InstitutoDesktop.ExtensionMethods;
 using InstitutoDesktop.Interfaces.Inscripciones;
 using InstitutoDesktop.Services;
 using InstitutoDesktop.States.Inscripciones.CiclosLectivos;

@@ -66,17 +66,17 @@ namespace InstitutoDesktop.Views
             panel1.Location = new Point(1, 1);
             panel1.Margin = new Padding(2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1351, 60);
+            panel1.Size = new Size(1689, 75);
             panel1.TabIndex = 0;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 16F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            label1.Location = new Point(9, 6);
+            label1.Location = new Point(11, 8);
             label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(302, 37);
+            label1.Size = new Size(357, 45);
             label1.TabIndex = 0;
             label1.Text = "Datos de la institución";
             // 
@@ -84,11 +84,11 @@ namespace InstitutoDesktop.Views
             // 
             tabControl.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             tabControl.Controls.Add(tabPageAgregarEditar);
-            tabControl.Location = new Point(1, 65);
+            tabControl.Location = new Point(1, 81);
             tabControl.Margin = new Padding(2);
             tabControl.Name = "tabControl";
             tabControl.SelectedIndex = 0;
-            tabControl.Size = new Size(1351, 768);
+            tabControl.Size = new Size(1689, 960);
             tabControl.TabIndex = 1;
             // 
             // tabPageAgregarEditar
@@ -113,11 +113,11 @@ namespace InstitutoDesktop.Views
             tabPageAgregarEditar.Controls.Add(label6);
             tabPageAgregarEditar.Controls.Add(btnCancelar);
             tabPageAgregarEditar.Controls.Add(btnGuardar);
-            tabPageAgregarEditar.Location = new Point(4, 29);
+            tabPageAgregarEditar.Location = new Point(4, 34);
             tabPageAgregarEditar.Margin = new Padding(2);
             tabPageAgregarEditar.Name = "tabPageAgregarEditar";
             tabPageAgregarEditar.Padding = new Padding(2);
-            tabPageAgregarEditar.Size = new Size(1343, 735);
+            tabPageAgregarEditar.Size = new Size(1681, 922);
             tabPageAgregarEditar.TabIndex = 1;
             tabPageAgregarEditar.Text = "Editar";
             tabPageAgregarEditar.UseVisualStyleBackColor = true;
@@ -126,10 +126,10 @@ namespace InstitutoDesktop.Views
             // 
             TxtNombreCorto.Anchor = AnchorStyles.None;
             TxtNombreCorto.Font = new Font("Segoe UI", 11F);
-            TxtNombreCorto.Location = new Point(325, 133);
+            TxtNombreCorto.Location = new Point(406, 166);
             TxtNombreCorto.Margin = new Padding(2);
             TxtNombreCorto.Name = "TxtNombreCorto";
-            TxtNombreCorto.Size = new Size(437, 32);
+            TxtNombreCorto.Size = new Size(545, 37);
             TxtNombreCorto.TabIndex = 1;
             // 
             // label25
@@ -137,10 +137,10 @@ namespace InstitutoDesktop.Views
             label25.Anchor = AnchorStyles.None;
             label25.AutoSize = true;
             label25.Font = new Font("Segoe UI", 11F);
-            label25.Location = new Point(130, 140);
+            label25.Location = new Point(162, 175);
             label25.Margin = new Padding(2, 0, 2, 0);
             label25.Name = "label25";
-            label25.Size = new Size(174, 25);
+            label25.Size = new Size(202, 30);
             label25.TabIndex = 44;
             label25.Text = "Nombre abreviado:";
             // 
@@ -148,10 +148,10 @@ namespace InstitutoDesktop.Views
             // 
             TxtEmail.Anchor = AnchorStyles.None;
             TxtEmail.Font = new Font("Segoe UI", 11F);
-            TxtEmail.Location = new Point(329, 588);
+            TxtEmail.Location = new Point(411, 735);
             TxtEmail.Margin = new Padding(2);
             TxtEmail.Name = "TxtEmail";
-            TxtEmail.Size = new Size(437, 32);
+            TxtEmail.Size = new Size(545, 37);
             TxtEmail.TabIndex = 10;
             // 
             // label11
@@ -159,10 +159,10 @@ namespace InstitutoDesktop.Views
             label11.Anchor = AnchorStyles.None;
             label11.AutoSize = true;
             label11.Font = new Font("Segoe UI", 11F);
-            label11.Location = new Point(242, 595);
+            label11.Location = new Point(302, 744);
             label11.Margin = new Padding(2, 0, 2, 0);
             label11.Name = "label11";
-            label11.Size = new Size(62, 25);
+            label11.Size = new Size(69, 30);
             label11.TabIndex = 40;
             label11.Text = "Email:";
             // 
@@ -170,10 +170,10 @@ namespace InstitutoDesktop.Views
             // 
             TxtCodigoPostal.Anchor = AnchorStyles.None;
             TxtCodigoPostal.Font = new Font("Segoe UI", 11F);
-            TxtCodigoPostal.Location = new Point(327, 328);
+            TxtCodigoPostal.Location = new Point(409, 410);
             TxtCodigoPostal.Margin = new Padding(2);
             TxtCodigoPostal.Name = "TxtCodigoPostal";
-            TxtCodigoPostal.Size = new Size(437, 32);
+            TxtCodigoPostal.Size = new Size(545, 37);
             TxtCodigoPostal.TabIndex = 9;
             // 
             // label10
@@ -181,10 +181,10 @@ namespace InstitutoDesktop.Views
             label10.Anchor = AnchorStyles.None;
             label10.AutoSize = true;
             label10.Font = new Font("Segoe UI", 11F);
-            label10.Location = new Point(171, 335);
+            label10.Location = new Point(214, 419);
             label10.Margin = new Padding(2, 0, 2, 0);
             label10.Name = "label10";
-            label10.Size = new Size(133, 25);
+            label10.Size = new Size(153, 30);
             label10.TabIndex = 38;
             label10.Text = "Código postal:";
             // 
@@ -192,10 +192,10 @@ namespace InstitutoDesktop.Views
             // 
             TxtProvincia.Anchor = AnchorStyles.None;
             TxtProvincia.Font = new Font("Segoe UI", 11F);
-            TxtProvincia.Location = new Point(327, 393);
+            TxtProvincia.Location = new Point(409, 491);
             TxtProvincia.Margin = new Padding(2);
             TxtProvincia.Name = "TxtProvincia";
-            TxtProvincia.Size = new Size(437, 32);
+            TxtProvincia.Size = new Size(545, 37);
             TxtProvincia.TabIndex = 8;
             // 
             // label9
@@ -203,10 +203,10 @@ namespace InstitutoDesktop.Views
             label9.Anchor = AnchorStyles.None;
             label9.AutoSize = true;
             label9.Font = new Font("Segoe UI", 11F);
-            label9.Location = new Point(210, 400);
+            label9.Location = new Point(262, 500);
             label9.Margin = new Padding(2, 0, 2, 0);
             label9.Name = "label9";
-            label9.Size = new Size(94, 25);
+            label9.Size = new Size(105, 30);
             label9.TabIndex = 36;
             label9.Text = "Provincia:";
             // 
@@ -214,10 +214,10 @@ namespace InstitutoDesktop.Views
             // 
             TxtLocalidad.Anchor = AnchorStyles.None;
             TxtLocalidad.Font = new Font("Segoe UI", 11F);
-            TxtLocalidad.Location = new Point(325, 263);
+            TxtLocalidad.Location = new Point(406, 329);
             TxtLocalidad.Margin = new Padding(2);
             TxtLocalidad.Name = "TxtLocalidad";
-            TxtLocalidad.Size = new Size(437, 32);
+            TxtLocalidad.Size = new Size(545, 37);
             TxtLocalidad.TabIndex = 7;
             // 
             // label8
@@ -225,10 +225,10 @@ namespace InstitutoDesktop.Views
             label8.Anchor = AnchorStyles.None;
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI", 11F);
-            label8.Location = new Point(207, 270);
+            label8.Location = new Point(259, 338);
             label8.Margin = new Padding(2, 0, 2, 0);
             label8.Name = "label8";
-            label8.Size = new Size(97, 25);
+            label8.Size = new Size(109, 30);
             label8.TabIndex = 34;
             label8.Text = "Localidad:";
             // 
@@ -236,10 +236,10 @@ namespace InstitutoDesktop.Views
             // 
             TxtTelefono.Anchor = AnchorStyles.None;
             TxtTelefono.Font = new Font("Segoe UI", 11F);
-            TxtTelefono.Location = new Point(329, 523);
+            TxtTelefono.Location = new Point(411, 654);
             TxtTelefono.Margin = new Padding(2);
             TxtTelefono.Name = "TxtTelefono";
-            TxtTelefono.Size = new Size(437, 32);
+            TxtTelefono.Size = new Size(545, 37);
             TxtTelefono.TabIndex = 6;
             // 
             // label3
@@ -247,10 +247,10 @@ namespace InstitutoDesktop.Views
             label3.Anchor = AnchorStyles.None;
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 11F);
-            label3.Location = new Point(216, 530);
+            label3.Location = new Point(270, 662);
             label3.Margin = new Padding(2, 0, 2, 0);
             label3.Name = "label3";
-            label3.Size = new Size(88, 25);
+            label3.Size = new Size(102, 30);
             label3.TabIndex = 32;
             label3.Text = "Teléfono:";
             // 
@@ -258,10 +258,10 @@ namespace InstitutoDesktop.Views
             // 
             TxtDomicilio.Anchor = AnchorStyles.None;
             TxtDomicilio.Font = new Font("Segoe UI", 11F);
-            TxtDomicilio.Location = new Point(329, 458);
+            TxtDomicilio.Location = new Point(411, 572);
             TxtDomicilio.Margin = new Padding(2);
             TxtDomicilio.Name = "TxtDomicilio";
-            TxtDomicilio.Size = new Size(437, 32);
+            TxtDomicilio.Size = new Size(545, 37);
             TxtDomicilio.TabIndex = 5;
             // 
             // label7
@@ -269,10 +269,10 @@ namespace InstitutoDesktop.Views
             label7.Anchor = AnchorStyles.None;
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 11F);
-            label7.Location = new Point(208, 465);
+            label7.Location = new Point(260, 581);
             label7.Margin = new Padding(2, 0, 2, 0);
             label7.Name = "label7";
-            label7.Size = new Size(96, 25);
+            label7.Size = new Size(108, 30);
             label7.TabIndex = 29;
             label7.Text = "Dirección:";
             // 
@@ -280,10 +280,10 @@ namespace InstitutoDesktop.Views
             // 
             TxtSigla.Anchor = AnchorStyles.None;
             TxtSigla.Font = new Font("Segoe UI", 11F);
-            TxtSigla.Location = new Point(327, 198);
+            TxtSigla.Location = new Point(409, 248);
             TxtSigla.Margin = new Padding(2);
             TxtSigla.Name = "TxtSigla";
-            TxtSigla.Size = new Size(437, 32);
+            TxtSigla.Size = new Size(545, 37);
             TxtSigla.TabIndex = 2;
             // 
             // label2
@@ -291,10 +291,10 @@ namespace InstitutoDesktop.Views
             label2.Anchor = AnchorStyles.None;
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 11F);
-            label2.Location = new Point(247, 205);
+            label2.Location = new Point(309, 256);
             label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
-            label2.Size = new Size(57, 25);
+            label2.Size = new Size(64, 30);
             label2.TabIndex = 25;
             label2.Text = "Sigla:";
             // 
@@ -302,10 +302,10 @@ namespace InstitutoDesktop.Views
             // 
             TxtNombreCompleto.Anchor = AnchorStyles.None;
             TxtNombreCompleto.Font = new Font("Segoe UI", 11F);
-            TxtNombreCompleto.Location = new Point(325, 68);
+            TxtNombreCompleto.Location = new Point(406, 85);
             TxtNombreCompleto.Margin = new Padding(2);
             TxtNombreCompleto.Name = "TxtNombreCompleto";
-            TxtNombreCompleto.Size = new Size(437, 32);
+            TxtNombreCompleto.Size = new Size(545, 37);
             TxtNombreCompleto.TabIndex = 0;
             // 
             // label6
@@ -313,10 +313,10 @@ namespace InstitutoDesktop.Views
             label6.Anchor = AnchorStyles.None;
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 11F);
-            label6.Location = new Point(135, 75);
+            label6.Location = new Point(169, 94);
             label6.Margin = new Padding(2, 0, 2, 0);
             label6.Name = "label6";
-            label6.Size = new Size(169, 25);
+            label6.Size = new Size(197, 30);
             label6.TabIndex = 19;
             label6.Text = "Nombre completo:";
             // 
@@ -328,10 +328,10 @@ namespace InstitutoDesktop.Views
             btnCancelar.IconColor = Color.Black;
             btnCancelar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnCancelar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnCancelar.Location = new Point(1204, 278);
+            btnCancelar.Location = new Point(1505, 348);
             btnCancelar.Margin = new Padding(2);
             btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(122, 57);
+            btnCancelar.Size = new Size(152, 71);
             btnCancelar.TabIndex = 12;
             btnCancelar.Text = "Cancelar";
             btnCancelar.TextAlign = ContentAlignment.MiddleRight;
@@ -346,10 +346,10 @@ namespace InstitutoDesktop.Views
             btnGuardar.IconColor = Color.Black;
             btnGuardar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnGuardar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnGuardar.Location = new Point(1204, 218);
+            btnGuardar.Location = new Point(1505, 272);
             btnGuardar.Margin = new Padding(2);
             btnGuardar.Name = "btnGuardar";
-            btnGuardar.Size = new Size(122, 57);
+            btnGuardar.Size = new Size(152, 71);
             btnGuardar.TabIndex = 11;
             btnGuardar.Text = "Guardar";
             btnGuardar.TextAlign = ContentAlignment.MiddleRight;
@@ -365,10 +365,10 @@ namespace InstitutoDesktop.Views
             btnModificar.IconColor = Color.Black;
             btnModificar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnModificar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnModificar.Location = new Point(597, 849);
+            btnModificar.Location = new Point(746, 971);
             btnModificar.Margin = new Padding(2);
             btnModificar.Name = "btnModificar";
-            btnModificar.Size = new Size(128, 52);
+            btnModificar.Size = new Size(160, 65);
             btnModificar.TabIndex = 5;
             btnModificar.Text = "Modificar";
             btnModificar.TextAlign = ContentAlignment.MiddleRight;
@@ -385,10 +385,10 @@ namespace InstitutoDesktop.Views
             iconButtonSalir.IconFont = FontAwesome.Sharp.IconFont.Auto;
             iconButtonSalir.IconSize = 44;
             iconButtonSalir.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButtonSalir.Location = new Point(1225, 849);
-            iconButtonSalir.Margin = new Padding(3, 4, 3, 4);
+            iconButtonSalir.Location = new Point(1531, 971);
+            iconButtonSalir.Margin = new Padding(4, 5, 4, 5);
             iconButtonSalir.Name = "iconButtonSalir";
-            iconButtonSalir.Size = new Size(123, 54);
+            iconButtonSalir.Size = new Size(154, 68);
             iconButtonSalir.TabIndex = 15;
             iconButtonSalir.Text = "&Salir";
             iconButtonSalir.TextAlign = ContentAlignment.MiddleRight;
@@ -397,9 +397,9 @@ namespace InstitutoDesktop.Views
             // 
             // InstitucionView
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1353, 912);
+            ClientSize = new Size(1691, 1050);
             Controls.Add(iconButtonSalir);
             Controls.Add(btnModificar);
             Controls.Add(tabControl);
@@ -408,7 +408,6 @@ namespace InstitutoDesktop.Views
             Name = "InstitucionView";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Datos de la institución";
-            WindowState = FormWindowState.Maximized;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             tabControl.ResumeLayout(false);

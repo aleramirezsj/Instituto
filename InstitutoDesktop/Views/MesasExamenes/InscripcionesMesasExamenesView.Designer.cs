@@ -84,7 +84,7 @@ namespace InstitutoDesktop.Views
             panel1.Location = new Point(1, 1);
             panel1.Margin = new Padding(2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1435, 60);
+            panel1.Size = new Size(1794, 75);
             panel1.TabIndex = 0;
             // 
             // chkFiltrarPorAñoCarrera
@@ -92,9 +92,10 @@ namespace InstitutoDesktop.Views
             chkFiltrarPorAñoCarrera.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             chkFiltrarPorAñoCarrera.AutoSize = true;
             chkFiltrarPorAñoCarrera.Enabled = false;
-            chkFiltrarPorAñoCarrera.Location = new Point(1201, 5);
+            chkFiltrarPorAñoCarrera.Location = new Point(1512, 6);
+            chkFiltrarPorAñoCarrera.Margin = new Padding(4, 4, 4, 4);
             chkFiltrarPorAñoCarrera.Name = "chkFiltrarPorAñoCarrera";
-            chkFiltrarPorAñoCarrera.Size = new Size(175, 24);
+            chkFiltrarPorAñoCarrera.Size = new Size(208, 29);
             chkFiltrarPorAñoCarrera.TabIndex = 9;
             chkFiltrarPorAñoCarrera.Text = "Filtrar por año carrera";
             chkFiltrarPorAñoCarrera.UseVisualStyleBackColor = true;
@@ -102,9 +103,10 @@ namespace InstitutoDesktop.Views
             // chkFiltrarPorCarrera
             // 
             chkFiltrarPorCarrera.AutoSize = true;
-            chkFiltrarPorCarrera.Location = new Point(777, 6);
+            chkFiltrarPorCarrera.Location = new Point(971, 8);
+            chkFiltrarPorCarrera.Margin = new Padding(4, 4, 4, 4);
             chkFiltrarPorCarrera.Name = "chkFiltrarPorCarrera";
-            chkFiltrarPorCarrera.Size = new Size(146, 24);
+            chkFiltrarPorCarrera.Size = new Size(173, 29);
             chkFiltrarPorCarrera.TabIndex = 8;
             chkFiltrarPorCarrera.Text = "Filtrar por carrera";
             chkFiltrarPorCarrera.UseVisualStyleBackColor = true;
@@ -114,9 +116,10 @@ namespace InstitutoDesktop.Views
             cboAniosCarreras.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             cboAniosCarreras.Enabled = false;
             cboAniosCarreras.FormattingEnabled = true;
-            cboAniosCarreras.Location = new Point(1201, 30);
+            cboAniosCarreras.Location = new Point(1501, 38);
+            cboAniosCarreras.Margin = new Padding(4, 4, 4, 4);
             cboAniosCarreras.Name = "cboAniosCarreras";
-            cboAniosCarreras.Size = new Size(195, 28);
+            cboAniosCarreras.Size = new Size(243, 33);
             cboAniosCarreras.TabIndex = 6;
             // 
             // cboCarreras
@@ -124,36 +127,39 @@ namespace InstitutoDesktop.Views
             cboCarreras.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             cboCarreras.Enabled = false;
             cboCarreras.FormattingEnabled = true;
-            cboCarreras.Location = new Point(777, 30);
+            cboCarreras.Location = new Point(971, 38);
+            cboCarreras.Margin = new Padding(4, 4, 4, 4);
             cboCarreras.Name = "cboCarreras";
-            cboCarreras.Size = new Size(418, 28);
+            cboCarreras.Size = new Size(522, 33);
             cboCarreras.TabIndex = 4;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(494, 6);
+            label4.Location = new Point(618, 8);
+            label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
-            label4.Size = new Size(124, 20);
+            label4.Size = new Size(149, 25);
             label4.TabIndex = 3;
             label4.Text = "Turno de examen";
             // 
             // cboTurnosExamenes
             // 
             cboTurnosExamenes.FormattingEnabled = true;
-            cboTurnosExamenes.Location = new Point(494, 31);
+            cboTurnosExamenes.Location = new Point(618, 39);
+            cboTurnosExamenes.Margin = new Padding(4, 4, 4, 4);
             cboTurnosExamenes.Name = "cboTurnosExamenes";
-            cboTurnosExamenes.Size = new Size(279, 28);
+            cboTurnosExamenes.Size = new Size(348, 33);
             cboTurnosExamenes.TabIndex = 2;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 16F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            label1.Location = new Point(9, 6);
+            label1.Location = new Point(11, 8);
             label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(460, 37);
+            label1.Size = new Size(547, 45);
             label1.TabIndex = 0;
             label1.Text = "Inscripciones a mesas de exámenes";
             // 
@@ -162,11 +168,11 @@ namespace InstitutoDesktop.Views
             tabControl.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             tabControl.Controls.Add(tabPageVerPorAlumnos);
             tabControl.Controls.Add(tabPageVerPorMaterias);
-            tabControl.Location = new Point(1, 65);
+            tabControl.Location = new Point(1, 81);
             tabControl.Margin = new Padding(2);
             tabControl.Name = "tabControl";
             tabControl.SelectedIndex = 0;
-            tabControl.Size = new Size(1435, 604);
+            tabControl.Size = new Size(1794, 755);
             tabControl.TabIndex = 1;
             // 
             // tabPageVerPorAlumnos
@@ -180,11 +186,11 @@ namespace InstitutoDesktop.Views
             tabPageVerPorAlumnos.Controls.Add(btnImprimirSeleccionada);
             tabPageVerPorAlumnos.Controls.Add(btnImprimirTodas);
             tabPageVerPorAlumnos.Controls.Add(dataGridInscripciones);
-            tabPageVerPorAlumnos.Location = new Point(4, 29);
+            tabPageVerPorAlumnos.Location = new Point(4, 34);
             tabPageVerPorAlumnos.Margin = new Padding(2);
             tabPageVerPorAlumnos.Name = "tabPageVerPorAlumnos";
             tabPageVerPorAlumnos.Padding = new Padding(2);
-            tabPageVerPorAlumnos.Size = new Size(1427, 571);
+            tabPageVerPorAlumnos.Size = new Size(1786, 717);
             tabPageVerPorAlumnos.TabIndex = 0;
             tabPageVerPorAlumnos.Text = "Ver por alumnos";
             tabPageVerPorAlumnos.UseVisualStyleBackColor = true;
@@ -193,15 +199,16 @@ namespace InstitutoDesktop.Views
             // 
             statusbar.ImageScalingSize = new Size(20, 20);
             statusbar.Items.AddRange(new ToolStripItem[] { statusBarMessage });
-            statusbar.Location = new Point(2, 547);
+            statusbar.Location = new Point(2, 693);
             statusbar.Name = "statusbar";
-            statusbar.Size = new Size(1423, 22);
+            statusbar.Padding = new Padding(1, 0, 18, 0);
+            statusbar.Size = new Size(1782, 22);
             statusbar.TabIndex = 16;
             // 
             // statusBarMessage
             // 
             statusBarMessage.Name = "statusBarMessage";
-            statusBarMessage.Size = new Size(0, 16);
+            statusBarMessage.Size = new Size(0, 15);
             // 
             // dataGridInscripcionSeleccioanda
             // 
@@ -220,13 +227,13 @@ namespace InstitutoDesktop.Views
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
             dataGridInscripcionSeleccioanda.DefaultCellStyle = dataGridViewCellStyle1;
-            dataGridInscripcionSeleccioanda.Location = new Point(6, 390);
+            dataGridInscripcionSeleccioanda.Location = new Point(8, 488);
             dataGridInscripcionSeleccioanda.Margin = new Padding(2);
             dataGridInscripcionSeleccioanda.Name = "dataGridInscripcionSeleccioanda";
             dataGridInscripcionSeleccioanda.ReadOnly = true;
             dataGridInscripcionSeleccioanda.RowHeadersWidth = 62;
             dataGridInscripcionSeleccioanda.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridInscripcionSeleccioanda.Size = new Size(1170, 168);
+            dataGridInscripcionSeleccioanda.Size = new Size(1590, 210);
             dataGridInscripcionSeleccioanda.TabIndex = 15;
             // 
             // btnSalir
@@ -239,10 +246,10 @@ namespace InstitutoDesktop.Views
             btnSalir.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnSalir.IconSize = 44;
             btnSalir.ImageAlign = ContentAlignment.MiddleLeft;
-            btnSalir.Location = new Point(1181, 489);
-            btnSalir.Margin = new Padding(3, 4, 3, 4);
+            btnSalir.Location = new Point(1604, 620);
+            btnSalir.Margin = new Padding(4, 5, 4, 5);
             btnSalir.Name = "btnSalir";
-            btnSalir.Size = new Size(141, 54);
+            btnSalir.Size = new Size(176, 68);
             btnSalir.TabIndex = 14;
             btnSalir.Text = "&Salir";
             btnSalir.TextAlign = ContentAlignment.MiddleRight;
@@ -258,10 +265,10 @@ namespace InstitutoDesktop.Views
             BtnBuscar.IconColor = Color.White;
             BtnBuscar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             BtnBuscar.ImageAlign = ContentAlignment.MiddleLeft;
-            BtnBuscar.Location = new Point(1197, 18);
-            BtnBuscar.Margin = new Padding(3, 4, 3, 4);
+            BtnBuscar.Location = new Point(1604, 79);
+            BtnBuscar.Margin = new Padding(4, 5, 4, 5);
             BtnBuscar.Name = "BtnBuscar";
-            BtnBuscar.Size = new Size(145, 51);
+            BtnBuscar.Size = new Size(176, 64);
             BtnBuscar.TabIndex = 13;
             BtnBuscar.Text = "&Buscar";
             BtnBuscar.TextAlign = ContentAlignment.MiddleRight;
@@ -271,17 +278,19 @@ namespace InstitutoDesktop.Views
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(27, 21);
+            label3.Location = new Point(34, 26);
+            label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
-            label3.Size = new Size(109, 20);
+            label3.Size = new Size(132, 25);
             label3.TabIndex = 12;
             label3.Text = "Buscar alumno:";
             // 
             // txtFiltro
             // 
-            txtFiltro.Location = new Point(179, 18);
+            txtFiltro.Location = new Point(224, 22);
+            txtFiltro.Margin = new Padding(4, 4, 4, 4);
             txtFiltro.Name = "txtFiltro";
-            txtFiltro.Size = new Size(483, 27);
+            txtFiltro.Size = new Size(603, 31);
             txtFiltro.TabIndex = 11;
             txtFiltro.TextChanged += txtFiltro_TextChanged;
             // 
@@ -292,10 +301,10 @@ namespace InstitutoDesktop.Views
             btnImprimirSeleccionada.IconColor = Color.Black;
             btnImprimirSeleccionada.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnImprimirSeleccionada.ImageAlign = ContentAlignment.MiddleLeft;
-            btnImprimirSeleccionada.Location = new Point(1197, 135);
+            btnImprimirSeleccionada.Location = new Point(1604, 226);
             btnImprimirSeleccionada.Margin = new Padding(2);
             btnImprimirSeleccionada.Name = "btnImprimirSeleccionada";
-            btnImprimirSeleccionada.Size = new Size(142, 63);
+            btnImprimirSeleccionada.Size = new Size(173, 79);
             btnImprimirSeleccionada.TabIndex = 4;
             btnImprimirSeleccionada.Text = "Imprimir seleccionada";
             btnImprimirSeleccionada.TextAlign = ContentAlignment.MiddleRight;
@@ -309,10 +318,10 @@ namespace InstitutoDesktop.Views
             btnImprimirTodas.IconColor = Color.Black;
             btnImprimirTodas.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnImprimirTodas.ImageAlign = ContentAlignment.MiddleLeft;
-            btnImprimirTodas.Location = new Point(1197, 75);
+            btnImprimirTodas.Location = new Point(1604, 151);
             btnImprimirTodas.Margin = new Padding(2);
             btnImprimirTodas.Name = "btnImprimirTodas";
-            btnImprimirTodas.Size = new Size(142, 56);
+            btnImprimirTodas.Size = new Size(173, 70);
             btnImprimirTodas.TabIndex = 3;
             btnImprimirTodas.Text = "Imprimir\ntodas";
             btnImprimirTodas.TextAlign = ContentAlignment.MiddleRight;
@@ -336,13 +345,13 @@ namespace InstitutoDesktop.Views
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             dataGridInscripciones.DefaultCellStyle = dataGridViewCellStyle2;
-            dataGridInscripciones.Location = new Point(6, 63);
+            dataGridInscripciones.Location = new Point(8, 79);
             dataGridInscripciones.Margin = new Padding(2);
             dataGridInscripciones.Name = "dataGridInscripciones";
             dataGridInscripciones.ReadOnly = true;
             dataGridInscripciones.RowHeadersWidth = 62;
             dataGridInscripciones.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridInscripciones.Size = new Size(1185, 312);
+            dataGridInscripciones.Size = new Size(1590, 390);
             dataGridInscripciones.TabIndex = 0;
             // 
             // tabPageVerPorMaterias
@@ -354,11 +363,11 @@ namespace InstitutoDesktop.Views
             tabPageVerPorMaterias.Controls.Add(btnImprimirMateriaSeleccionada);
             tabPageVerPorMaterias.Controls.Add(btnImprimirTodasMaterias);
             tabPageVerPorMaterias.Controls.Add(dataGridMaterias);
-            tabPageVerPorMaterias.Location = new Point(4, 29);
+            tabPageVerPorMaterias.Location = new Point(4, 34);
             tabPageVerPorMaterias.Margin = new Padding(2);
             tabPageVerPorMaterias.Name = "tabPageVerPorMaterias";
             tabPageVerPorMaterias.Padding = new Padding(2);
-            tabPageVerPorMaterias.Size = new Size(1427, 571);
+            tabPageVerPorMaterias.Size = new Size(1786, 717);
             tabPageVerPorMaterias.TabIndex = 1;
             tabPageVerPorMaterias.Text = "Ver por materias";
             tabPageVerPorMaterias.UseVisualStyleBackColor = true;
@@ -380,13 +389,13 @@ namespace InstitutoDesktop.Views
             dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
             dataGridAlumnos.DefaultCellStyle = dataGridViewCellStyle3;
-            dataGridAlumnos.Location = new Point(4, 392);
+            dataGridAlumnos.Location = new Point(5, 490);
             dataGridAlumnos.Margin = new Padding(2);
             dataGridAlumnos.Name = "dataGridAlumnos";
             dataGridAlumnos.ReadOnly = true;
             dataGridAlumnos.RowHeadersWidth = 62;
             dataGridAlumnos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridAlumnos.Size = new Size(1293, 168);
+            dataGridAlumnos.Size = new Size(1588, 210);
             dataGridAlumnos.TabIndex = 22;
             // 
             // btnBuscarMateria
@@ -398,10 +407,10 @@ namespace InstitutoDesktop.Views
             btnBuscarMateria.IconColor = Color.White;
             btnBuscarMateria.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnBuscarMateria.ImageAlign = ContentAlignment.MiddleLeft;
-            btnBuscarMateria.Location = new Point(1197, 20);
-            btnBuscarMateria.Margin = new Padding(3, 4, 3, 4);
+            btnBuscarMateria.Location = new Point(1599, 81);
+            btnBuscarMateria.Margin = new Padding(4, 5, 4, 5);
             btnBuscarMateria.Name = "btnBuscarMateria";
-            btnBuscarMateria.Size = new Size(145, 51);
+            btnBuscarMateria.Size = new Size(181, 64);
             btnBuscarMateria.TabIndex = 21;
             btnBuscarMateria.Text = "&Buscar";
             btnBuscarMateria.TextAlign = ContentAlignment.MiddleRight;
@@ -410,17 +419,19 @@ namespace InstitutoDesktop.Views
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(25, 23);
+            label2.Location = new Point(31, 29);
+            label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(110, 20);
+            label2.Size = new Size(131, 25);
             label2.TabIndex = 20;
             label2.Text = "Buscar materia:";
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(177, 20);
+            textBox1.Location = new Point(221, 25);
+            textBox1.Margin = new Padding(4, 4, 4, 4);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(483, 27);
+            textBox1.Size = new Size(603, 31);
             textBox1.TabIndex = 19;
             // 
             // btnImprimirMateriaSeleccionada
@@ -430,10 +441,10 @@ namespace InstitutoDesktop.Views
             btnImprimirMateriaSeleccionada.IconColor = Color.Black;
             btnImprimirMateriaSeleccionada.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnImprimirMateriaSeleccionada.ImageAlign = ContentAlignment.MiddleLeft;
-            btnImprimirMateriaSeleccionada.Location = new Point(1197, 137);
+            btnImprimirMateriaSeleccionada.Location = new Point(1599, 227);
             btnImprimirMateriaSeleccionada.Margin = new Padding(2);
             btnImprimirMateriaSeleccionada.Name = "btnImprimirMateriaSeleccionada";
-            btnImprimirMateriaSeleccionada.Size = new Size(142, 63);
+            btnImprimirMateriaSeleccionada.Size = new Size(178, 79);
             btnImprimirMateriaSeleccionada.TabIndex = 18;
             btnImprimirMateriaSeleccionada.Text = "Imprimir seleccionada";
             btnImprimirMateriaSeleccionada.TextAlign = ContentAlignment.MiddleRight;
@@ -447,10 +458,10 @@ namespace InstitutoDesktop.Views
             btnImprimirTodasMaterias.IconColor = Color.Black;
             btnImprimirTodasMaterias.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnImprimirTodasMaterias.ImageAlign = ContentAlignment.MiddleLeft;
-            btnImprimirTodasMaterias.Location = new Point(1197, 77);
+            btnImprimirTodasMaterias.Location = new Point(1599, 152);
             btnImprimirTodasMaterias.Margin = new Padding(2);
             btnImprimirTodasMaterias.Name = "btnImprimirTodasMaterias";
-            btnImprimirTodasMaterias.Size = new Size(142, 56);
+            btnImprimirTodasMaterias.Size = new Size(178, 70);
             btnImprimirTodasMaterias.TabIndex = 17;
             btnImprimirTodasMaterias.Text = "Imprimir\ntodas";
             btnImprimirTodasMaterias.TextAlign = ContentAlignment.MiddleRight;
@@ -474,20 +485,20 @@ namespace InstitutoDesktop.Views
             dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
             dataGridMaterias.DefaultCellStyle = dataGridViewCellStyle4;
-            dataGridMaterias.Location = new Point(4, 65);
+            dataGridMaterias.Location = new Point(5, 81);
             dataGridMaterias.Margin = new Padding(2);
             dataGridMaterias.Name = "dataGridMaterias";
             dataGridMaterias.ReadOnly = true;
             dataGridMaterias.RowHeadersWidth = 62;
             dataGridMaterias.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridMaterias.Size = new Size(1187, 312);
+            dataGridMaterias.Size = new Size(1588, 390);
             dataGridMaterias.TabIndex = 16;
             // 
             // InscripcionesExamenesView
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1447, 665);
+            ClientSize = new Size(1809, 831);
             Controls.Add(tabControl);
             Controls.Add(panel1);
             Margin = new Padding(2);

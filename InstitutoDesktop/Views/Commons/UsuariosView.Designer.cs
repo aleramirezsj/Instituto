@@ -1,4 +1,4 @@
-﻿namespace InstitutoDesktop.Views.Commons
+namespace InstitutoDesktop.Views.Commons
 {
     partial class UsuariosView
     {
@@ -70,17 +70,17 @@
             panel1.Location = new Point(1, 1);
             panel1.Margin = new Padding(2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(961, 60);
+            panel1.Size = new Size(1201, 75);
             panel1.TabIndex = 0;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 16F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            label1.Location = new Point(9, 6);
+            label1.Location = new Point(11, 8);
             label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(129, 37);
+            label1.Size = new Size(150, 45);
             label1.TabIndex = 0;
             label1.Text = "Usuarios";
             // 
@@ -89,11 +89,11 @@
             tabControl.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             tabControl.Controls.Add(tabPageLista);
             tabControl.Controls.Add(tabPageAgregarEditar);
-            tabControl.Location = new Point(1, 65);
+            tabControl.Location = new Point(1, 81);
             tabControl.Margin = new Padding(2);
             tabControl.Name = "tabControl";
             tabControl.SelectedIndex = 0;
-            tabControl.Size = new Size(961, 572);
+            tabControl.Size = new Size(1201, 715);
             tabControl.TabIndex = 1;
             // 
             // tabPageLista
@@ -106,11 +106,11 @@
             tabPageLista.Controls.Add(btnModificar);
             tabPageLista.Controls.Add(btnAgregar);
             tabPageLista.Controls.Add(Grilla);
-            tabPageLista.Location = new Point(4, 29);
+            tabPageLista.Location = new Point(4, 34);
             tabPageLista.Margin = new Padding(2);
             tabPageLista.Name = "tabPageLista";
             tabPageLista.Padding = new Padding(2);
-            tabPageLista.Size = new Size(953, 539);
+            tabPageLista.Size = new Size(1193, 677);
             tabPageLista.TabIndex = 0;
             tabPageLista.Text = "Lista";
             tabPageLista.UseVisualStyleBackColor = true;
@@ -125,10 +125,10 @@
             iconButtonSalir.IconFont = FontAwesome.Sharp.IconFont.Auto;
             iconButtonSalir.IconSize = 44;
             iconButtonSalir.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButtonSalir.Location = new Point(824, 228);
-            iconButtonSalir.Margin = new Padding(3, 4, 3, 4);
+            iconButtonSalir.Location = new Point(1030, 285);
+            iconButtonSalir.Margin = new Padding(4, 5, 4, 5);
             iconButtonSalir.Name = "iconButtonSalir";
-            iconButtonSalir.Size = new Size(123, 54);
+            iconButtonSalir.Size = new Size(154, 68);
             iconButtonSalir.TabIndex = 14;
             iconButtonSalir.Text = "&Salir";
             iconButtonSalir.TextAlign = ContentAlignment.MiddleRight;
@@ -144,10 +144,10 @@
             BtnBuscar.IconColor = Color.White;
             BtnBuscar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             BtnBuscar.ImageAlign = ContentAlignment.MiddleLeft;
-            BtnBuscar.Location = new Point(827, 18);
-            BtnBuscar.Margin = new Padding(3, 4, 3, 4);
+            BtnBuscar.Location = new Point(1034, 22);
+            BtnBuscar.Margin = new Padding(4, 5, 4, 5);
             BtnBuscar.Name = "BtnBuscar";
-            BtnBuscar.Size = new Size(123, 51);
+            BtnBuscar.Size = new Size(154, 64);
             BtnBuscar.TabIndex = 13;
             BtnBuscar.Text = "&Buscar";
             BtnBuscar.TextAlign = ContentAlignment.MiddleRight;
@@ -157,18 +157,20 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(27, 21);
+            label3.Location = new Point(34, 26);
+            label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
-            label3.Size = new Size(55, 20);
+            label3.Size = new Size(67, 25);
             label3.TabIndex = 12;
             label3.Text = "Buscar:";
             // 
             // txtFiltro
             // 
             txtFiltro.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            txtFiltro.Location = new Point(97, 16);
+            txtFiltro.Location = new Point(121, 20);
+            txtFiltro.Margin = new Padding(4, 4, 4, 4);
             txtFiltro.Name = "txtFiltro";
-            txtFiltro.Size = new Size(483, 27);
+            txtFiltro.Size = new Size(603, 31);
             txtFiltro.TabIndex = 11;
             txtFiltro.TextChanged += txtFiltro_TextChanged;
             // 
@@ -181,10 +183,10 @@
             btnEliminar.IconColor = Color.Black;
             btnEliminar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnEliminar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnEliminar.Location = new Point(827, 176);
+            btnEliminar.Location = new Point(1034, 220);
             btnEliminar.Margin = new Padding(2);
             btnEliminar.Name = "btnEliminar";
-            btnEliminar.Size = new Size(120, 46);
+            btnEliminar.Size = new Size(150, 58);
             btnEliminar.TabIndex = 5;
             btnEliminar.Text = "Eliminar";
             btnEliminar.TextAlign = ContentAlignment.MiddleRight;
@@ -200,10 +202,10 @@
             btnModificar.IconColor = Color.Black;
             btnModificar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnModificar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnModificar.Location = new Point(827, 126);
+            btnModificar.Location = new Point(1034, 158);
             btnModificar.Margin = new Padding(2);
             btnModificar.Name = "btnModificar";
-            btnModificar.Size = new Size(120, 46);
+            btnModificar.Size = new Size(150, 58);
             btnModificar.TabIndex = 4;
             btnModificar.Text = "Modificar";
             btnModificar.TextAlign = ContentAlignment.MiddleRight;
@@ -218,10 +220,10 @@
             btnAgregar.IconColor = Color.Black;
             btnAgregar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnAgregar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnAgregar.Location = new Point(827, 75);
+            btnAgregar.Location = new Point(1034, 94);
             btnAgregar.Margin = new Padding(2);
             btnAgregar.Name = "btnAgregar";
-            btnAgregar.Size = new Size(120, 46);
+            btnAgregar.Size = new Size(150, 58);
             btnAgregar.TabIndex = 3;
             btnAgregar.Text = "Agregar";
             btnAgregar.TextAlign = ContentAlignment.MiddleRight;
@@ -235,13 +237,13 @@
             Grilla.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             Grilla.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             Grilla.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            Grilla.Location = new Point(6, 63);
+            Grilla.Location = new Point(8, 79);
             Grilla.Margin = new Padding(2);
             Grilla.Name = "Grilla";
             Grilla.ReadOnly = true;
             Grilla.RowHeadersWidth = 62;
             Grilla.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            Grilla.Size = new Size(812, 468);
+            Grilla.Size = new Size(1015, 585);
             Grilla.TabIndex = 0;
             // 
             // tabPageAgregarEditar
@@ -261,11 +263,11 @@
             tabPageAgregarEditar.Controls.Add(label6);
             tabPageAgregarEditar.Controls.Add(btnCancelar);
             tabPageAgregarEditar.Controls.Add(btnGuardar);
-            tabPageAgregarEditar.Location = new Point(4, 29);
+            tabPageAgregarEditar.Location = new Point(4, 34);
             tabPageAgregarEditar.Margin = new Padding(2);
             tabPageAgregarEditar.Name = "tabPageAgregarEditar";
             tabPageAgregarEditar.Padding = new Padding(2);
-            tabPageAgregarEditar.Size = new Size(953, 539);
+            tabPageAgregarEditar.Size = new Size(1193, 677);
             tabPageAgregarEditar.TabIndex = 1;
             tabPageAgregarEditar.Text = "Agregar/Editar";
             tabPageAgregarEditar.UseVisualStyleBackColor = true;
@@ -275,10 +277,10 @@
             label8.Anchor = AnchorStyles.None;
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI", 11F);
-            label8.Location = new Point(112, 367);
+            label8.Location = new Point(140, 459);
             label8.Margin = new Padding(2, 0, 2, 0);
             label8.Name = "label8";
-            label8.Size = new Size(166, 25);
+            label8.Size = new Size(190, 30);
             label8.TabIndex = 33;
             label8.Text = "Docente asociado:";
             // 
@@ -287,9 +289,10 @@
             comboBoxAlumnos.Anchor = AnchorStyles.None;
             comboBoxAlumnos.Enabled = false;
             comboBoxAlumnos.FormattingEnabled = true;
-            comboBoxAlumnos.Location = new Point(306, 422);
+            comboBoxAlumnos.Location = new Point(382, 528);
+            comboBoxAlumnos.Margin = new Padding(4, 4, 4, 4);
             comboBoxAlumnos.Name = "comboBoxAlumnos";
-            comboBoxAlumnos.Size = new Size(437, 28);
+            comboBoxAlumnos.Size = new Size(545, 33);
             comboBoxAlumnos.TabIndex = 32;
             // 
             // label7
@@ -297,10 +300,10 @@
             label7.Anchor = AnchorStyles.None;
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 11F);
-            label7.Location = new Point(116, 421);
+            label7.Location = new Point(145, 526);
             label7.Margin = new Padding(2, 0, 2, 0);
             label7.Name = "label7";
-            label7.Size = new Size(162, 25);
+            label7.Size = new Size(184, 30);
             label7.TabIndex = 31;
             label7.Text = "Alumno asociado:";
             // 
@@ -309,9 +312,10 @@
             comboBoxDocentes.Anchor = AnchorStyles.None;
             comboBoxDocentes.Enabled = false;
             comboBoxDocentes.FormattingEnabled = true;
-            comboBoxDocentes.Location = new Point(306, 368);
+            comboBoxDocentes.Location = new Point(382, 460);
+            comboBoxDocentes.Margin = new Padding(4, 4, 4, 4);
             comboBoxDocentes.Name = "comboBoxDocentes";
-            comboBoxDocentes.Size = new Size(437, 28);
+            comboBoxDocentes.Size = new Size(545, 33);
             comboBoxDocentes.TabIndex = 30;
             // 
             // label5
@@ -319,10 +323,10 @@
             label5.Anchor = AnchorStyles.None;
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 11F);
-            label5.Location = new Point(157, 310);
+            label5.Location = new Point(196, 388);
             label5.Margin = new Padding(2, 0, 2, 0);
             label5.Name = "label5";
-            label5.Size = new Size(121, 25);
+            label5.Size = new Size(137, 30);
             label5.TabIndex = 29;
             label5.Text = "Tipo usuario:";
             // 
@@ -331,18 +335,20 @@
             comboBoxTipoUsuario.Anchor = AnchorStyles.None;
             comboBoxTipoUsuario.Enabled = false;
             comboBoxTipoUsuario.FormattingEnabled = true;
-            comboBoxTipoUsuario.Location = new Point(306, 311);
+            comboBoxTipoUsuario.Location = new Point(382, 389);
+            comboBoxTipoUsuario.Margin = new Padding(4, 4, 4, 4);
             comboBoxTipoUsuario.Name = "comboBoxTipoUsuario";
-            comboBoxTipoUsuario.Size = new Size(437, 28);
+            comboBoxTipoUsuario.Size = new Size(545, 33);
             comboBoxTipoUsuario.TabIndex = 28;
             // 
             // checkPermitirAccionesAdministrativas
             // 
             checkPermitirAccionesAdministrativas.Anchor = AnchorStyles.None;
             checkPermitirAccionesAdministrativas.AutoSize = true;
-            checkPermitirAccionesAdministrativas.Location = new Point(306, 197);
+            checkPermitirAccionesAdministrativas.Location = new Point(382, 246);
+            checkPermitirAccionesAdministrativas.Margin = new Padding(4, 4, 4, 4);
             checkPermitirAccionesAdministrativas.Name = "checkPermitirAccionesAdministrativas";
-            checkPermitirAccionesAdministrativas.Size = new Size(342, 24);
+            checkPermitirAccionesAdministrativas.Size = new Size(408, 29);
             checkPermitirAccionesAdministrativas.TabIndex = 27;
             checkPermitirAccionesAdministrativas.Text = "Permitir acciones administrativas a este usuario";
             checkPermitirAccionesAdministrativas.UseVisualStyleBackColor = true;
@@ -351,10 +357,10 @@
             // 
             txtEmail.Anchor = AnchorStyles.None;
             txtEmail.Font = new Font("Segoe UI", 11F);
-            txtEmail.Location = new Point(306, 127);
+            txtEmail.Location = new Point(382, 159);
             txtEmail.Margin = new Padding(2);
             txtEmail.Name = "txtEmail";
-            txtEmail.Size = new Size(437, 32);
+            txtEmail.Size = new Size(545, 37);
             txtEmail.TabIndex = 26;
             // 
             // label2
@@ -362,10 +368,10 @@
             label2.Anchor = AnchorStyles.None;
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 11F);
-            label2.Location = new Point(217, 130);
+            label2.Location = new Point(271, 162);
             label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
-            label2.Size = new Size(67, 25);
+            label2.Size = new Size(75, 30);
             label2.TabIndex = 25;
             label2.Text = "Email :";
             // 
@@ -373,11 +379,11 @@
             // 
             txtPassword.Anchor = AnchorStyles.None;
             txtPassword.Font = new Font("Segoe UI", 11F);
-            txtPassword.Location = new Point(306, 250);
+            txtPassword.Location = new Point(382, 312);
             txtPassword.Margin = new Padding(2);
             txtPassword.Name = "txtPassword";
             txtPassword.PasswordChar = '*';
-            txtPassword.Size = new Size(437, 32);
+            txtPassword.Size = new Size(545, 37);
             txtPassword.TabIndex = 24;
             // 
             // label4
@@ -385,10 +391,10 @@
             label4.Anchor = AnchorStyles.None;
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 11F);
-            label4.Location = new Point(183, 250);
+            label4.Location = new Point(229, 312);
             label4.Margin = new Padding(2, 0, 2, 0);
             label4.Name = "label4";
-            label4.Size = new Size(95, 25);
+            label4.Size = new Size(108, 30);
             label4.TabIndex = 23;
             label4.Text = "Password:";
             // 
@@ -396,10 +402,10 @@
             // 
             txtNombre.Anchor = AnchorStyles.None;
             txtNombre.Font = new Font("Segoe UI", 11F);
-            txtNombre.Location = new Point(306, 64);
+            txtNombre.Location = new Point(382, 80);
             txtNombre.Margin = new Padding(2);
             txtNombre.Name = "txtNombre";
-            txtNombre.Size = new Size(437, 32);
+            txtNombre.Size = new Size(545, 37);
             txtNombre.TabIndex = 20;
             // 
             // label6
@@ -407,10 +413,10 @@
             label6.Anchor = AnchorStyles.None;
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 11F);
-            label6.Location = new Point(106, 67);
+            label6.Location = new Point(132, 84);
             label6.Margin = new Padding(2, 0, 2, 0);
             label6.Name = "label6";
-            label6.Size = new Size(179, 25);
+            label6.Size = new Size(208, 30);
             label6.TabIndex = 19;
             label6.Text = "Nombre y Apellido :";
             // 
@@ -422,10 +428,10 @@
             btnCancelar.IconColor = Color.Black;
             btnCancelar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnCancelar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnCancelar.Location = new Point(812, 207);
+            btnCancelar.Location = new Point(1015, 259);
             btnCancelar.Margin = new Padding(2);
             btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(122, 57);
+            btnCancelar.Size = new Size(152, 71);
             btnCancelar.TabIndex = 3;
             btnCancelar.Text = "Cancelar";
             btnCancelar.TextAlign = ContentAlignment.MiddleRight;
@@ -440,10 +446,10 @@
             btnGuardar.IconColor = Color.Black;
             btnGuardar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnGuardar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnGuardar.Location = new Point(812, 147);
+            btnGuardar.Location = new Point(1015, 184);
             btnGuardar.Margin = new Padding(2);
             btnGuardar.Name = "btnGuardar";
-            btnGuardar.Size = new Size(122, 57);
+            btnGuardar.Size = new Size(152, 71);
             btnGuardar.TabIndex = 2;
             btnGuardar.Text = "Guardar";
             btnGuardar.TextAlign = ContentAlignment.MiddleRight;
@@ -452,16 +458,15 @@
             // 
             // UsuariosView
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(963, 634);
+            ClientSize = new Size(1204, 792);
             Controls.Add(tabControl);
             Controls.Add(panel1);
             Margin = new Padding(2);
             Name = "UsuariosView";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Usuarios";
-            WindowState = FormWindowState.Maximized;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             tabControl.ResumeLayout(false);

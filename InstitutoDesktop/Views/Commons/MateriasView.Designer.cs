@@ -70,7 +70,7 @@ namespace InstitutoDesktop.Views.Commons
             panel1.Location = new Point(1, 1);
             panel1.Margin = new Padding(2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(961, 110);
+            panel1.Size = new Size(1201, 138);
             panel1.TabIndex = 0;
             // 
             // comboBoxAñosCarreras
@@ -78,9 +78,10 @@ namespace InstitutoDesktop.Views.Commons
             comboBoxAñosCarreras.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             comboBoxAñosCarreras.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             comboBoxAñosCarreras.FormattingEnabled = true;
-            comboBoxAñosCarreras.Location = new Point(121, 55);
+            comboBoxAñosCarreras.Location = new Point(151, 69);
+            comboBoxAñosCarreras.Margin = new Padding(4, 4, 4, 4);
             comboBoxAñosCarreras.Name = "comboBoxAñosCarreras";
-            comboBoxAñosCarreras.Size = new Size(830, 45);
+            comboBoxAñosCarreras.Size = new Size(1036, 53);
             comboBoxAñosCarreras.TabIndex = 3;
             comboBoxAñosCarreras.SelectedIndexChanged += comboBoxAñosCarreras_SelectedIndexChanged;
             // 
@@ -88,10 +89,10 @@ namespace InstitutoDesktop.Views.Commons
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 16F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            label4.Location = new Point(45, 58);
+            label4.Location = new Point(56, 72);
             label4.Margin = new Padding(2, 0, 2, 0);
             label4.Name = "label4";
-            label4.Size = new Size(75, 37);
+            label4.Size = new Size(89, 45);
             label4.TabIndex = 2;
             label4.Text = "Año:";
             // 
@@ -100,9 +101,10 @@ namespace InstitutoDesktop.Views.Commons
             comboBoxCarreras.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             comboBoxCarreras.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             comboBoxCarreras.FormattingEnabled = true;
-            comboBoxCarreras.Location = new Point(121, 6);
+            comboBoxCarreras.Location = new Point(151, 8);
+            comboBoxCarreras.Margin = new Padding(4, 4, 4, 4);
             comboBoxCarreras.Name = "comboBoxCarreras";
-            comboBoxCarreras.Size = new Size(830, 45);
+            comboBoxCarreras.Size = new Size(1036, 53);
             comboBoxCarreras.TabIndex = 1;
             comboBoxCarreras.SelectedIndexChanged += comboBoxCarreras_SelectedIndexChanged;
             // 
@@ -110,10 +112,10 @@ namespace InstitutoDesktop.Views.Commons
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 16F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            label1.Location = new Point(9, 6);
+            label1.Location = new Point(11, 8);
             label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(113, 37);
+            label1.Size = new Size(134, 45);
             label1.TabIndex = 0;
             label1.Text = "Carrera";
             // 
@@ -122,11 +124,11 @@ namespace InstitutoDesktop.Views.Commons
             tabControl.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             tabControl.Controls.Add(tabPageLista);
             tabControl.Controls.Add(tabPageAgregarEditar);
-            tabControl.Location = new Point(1, 114);
+            tabControl.Location = new Point(1, 142);
             tabControl.Margin = new Padding(2);
             tabControl.Name = "tabControl";
             tabControl.SelectedIndex = 0;
-            tabControl.Size = new Size(961, 574);
+            tabControl.Size = new Size(1201, 718);
             tabControl.TabIndex = 1;
             // 
             // tabPageLista
@@ -139,11 +141,11 @@ namespace InstitutoDesktop.Views.Commons
             tabPageLista.Controls.Add(btnModificar);
             tabPageLista.Controls.Add(btnAgregar);
             tabPageLista.Controls.Add(Grilla);
-            tabPageLista.Location = new Point(4, 29);
+            tabPageLista.Location = new Point(4, 34);
             tabPageLista.Margin = new Padding(2);
             tabPageLista.Name = "tabPageLista";
             tabPageLista.Padding = new Padding(2);
-            tabPageLista.Size = new Size(953, 541);
+            tabPageLista.Size = new Size(1193, 680);
             tabPageLista.TabIndex = 0;
             tabPageLista.Text = "Lista";
             tabPageLista.UseVisualStyleBackColor = true;
@@ -158,10 +160,10 @@ namespace InstitutoDesktop.Views.Commons
             iconButtonSalir.IconFont = FontAwesome.Sharp.IconFont.Auto;
             iconButtonSalir.IconSize = 44;
             iconButtonSalir.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButtonSalir.Location = new Point(824, 228);
-            iconButtonSalir.Margin = new Padding(3, 4, 3, 4);
+            iconButtonSalir.Location = new Point(1030, 285);
+            iconButtonSalir.Margin = new Padding(4, 5, 4, 5);
             iconButtonSalir.Name = "iconButtonSalir";
-            iconButtonSalir.Size = new Size(123, 54);
+            iconButtonSalir.Size = new Size(154, 68);
             iconButtonSalir.TabIndex = 14;
             iconButtonSalir.Text = "&Salir";
             iconButtonSalir.TextAlign = ContentAlignment.MiddleRight;
@@ -177,10 +179,10 @@ namespace InstitutoDesktop.Views.Commons
             BtnBuscar.IconColor = Color.White;
             BtnBuscar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             BtnBuscar.ImageAlign = ContentAlignment.MiddleLeft;
-            BtnBuscar.Location = new Point(827, 18);
-            BtnBuscar.Margin = new Padding(3, 4, 3, 4);
+            BtnBuscar.Location = new Point(1034, 22);
+            BtnBuscar.Margin = new Padding(4, 5, 4, 5);
             BtnBuscar.Name = "BtnBuscar";
-            BtnBuscar.Size = new Size(123, 51);
+            BtnBuscar.Size = new Size(154, 64);
             BtnBuscar.TabIndex = 13;
             BtnBuscar.Text = "&Buscar";
             BtnBuscar.TextAlign = ContentAlignment.MiddleRight;
@@ -190,18 +192,20 @@ namespace InstitutoDesktop.Views.Commons
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(27, 21);
+            label3.Location = new Point(34, 26);
+            label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
-            label3.Size = new Size(55, 20);
+            label3.Size = new Size(67, 25);
             label3.TabIndex = 12;
             label3.Text = "Buscar:";
             // 
             // txtFiltro
             // 
             txtFiltro.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            txtFiltro.Location = new Point(97, 16);
+            txtFiltro.Location = new Point(121, 20);
+            txtFiltro.Margin = new Padding(4, 4, 4, 4);
             txtFiltro.Name = "txtFiltro";
-            txtFiltro.Size = new Size(483, 27);
+            txtFiltro.Size = new Size(603, 31);
             txtFiltro.TabIndex = 11;
             txtFiltro.TextChanged += txtFiltro_TextChanged;
             // 
@@ -214,10 +218,10 @@ namespace InstitutoDesktop.Views.Commons
             btnEliminar.IconColor = Color.Black;
             btnEliminar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnEliminar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnEliminar.Location = new Point(827, 176);
+            btnEliminar.Location = new Point(1034, 220);
             btnEliminar.Margin = new Padding(2);
             btnEliminar.Name = "btnEliminar";
-            btnEliminar.Size = new Size(120, 46);
+            btnEliminar.Size = new Size(150, 58);
             btnEliminar.TabIndex = 5;
             btnEliminar.Text = "Eliminar";
             btnEliminar.TextAlign = ContentAlignment.MiddleRight;
@@ -233,10 +237,10 @@ namespace InstitutoDesktop.Views.Commons
             btnModificar.IconColor = Color.Black;
             btnModificar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnModificar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnModificar.Location = new Point(827, 126);
+            btnModificar.Location = new Point(1034, 158);
             btnModificar.Margin = new Padding(2);
             btnModificar.Name = "btnModificar";
-            btnModificar.Size = new Size(120, 46);
+            btnModificar.Size = new Size(150, 58);
             btnModificar.TabIndex = 4;
             btnModificar.Text = "Modificar";
             btnModificar.TextAlign = ContentAlignment.MiddleRight;
@@ -251,10 +255,10 @@ namespace InstitutoDesktop.Views.Commons
             btnAgregar.IconColor = Color.Black;
             btnAgregar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnAgregar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnAgregar.Location = new Point(827, 75);
+            btnAgregar.Location = new Point(1034, 94);
             btnAgregar.Margin = new Padding(2);
             btnAgregar.Name = "btnAgregar";
-            btnAgregar.Size = new Size(120, 46);
+            btnAgregar.Size = new Size(150, 58);
             btnAgregar.TabIndex = 3;
             btnAgregar.Text = "Agregar";
             btnAgregar.TextAlign = ContentAlignment.MiddleRight;
@@ -268,13 +272,13 @@ namespace InstitutoDesktop.Views.Commons
             Grilla.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             Grilla.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             Grilla.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            Grilla.Location = new Point(6, 63);
+            Grilla.Location = new Point(8, 79);
             Grilla.Margin = new Padding(2);
             Grilla.Name = "Grilla";
             Grilla.ReadOnly = true;
             Grilla.RowHeadersWidth = 62;
             Grilla.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            Grilla.Size = new Size(812, 470);
+            Grilla.Size = new Size(1015, 588);
             Grilla.TabIndex = 0;
             Grilla.DataBindingComplete += Grilla_DataBindingComplete;
             // 
@@ -289,11 +293,11 @@ namespace InstitutoDesktop.Views.Commons
             tabPageAgregarEditar.Controls.Add(label2);
             tabPageAgregarEditar.Controls.Add(btnCancelar);
             tabPageAgregarEditar.Controls.Add(btnGuardar);
-            tabPageAgregarEditar.Location = new Point(4, 29);
+            tabPageAgregarEditar.Location = new Point(4, 34);
             tabPageAgregarEditar.Margin = new Padding(2);
             tabPageAgregarEditar.Name = "tabPageAgregarEditar";
             tabPageAgregarEditar.Padding = new Padding(2);
-            tabPageAgregarEditar.Size = new Size(953, 541);
+            tabPageAgregarEditar.Size = new Size(1193, 680);
             tabPageAgregarEditar.TabIndex = 1;
             tabPageAgregarEditar.Text = "Agregar/Editar";
             tabPageAgregarEditar.UseVisualStyleBackColor = true;
@@ -302,10 +306,10 @@ namespace InstitutoDesktop.Views.Commons
             // 
             label6.Anchor = AnchorStyles.None;
             label6.AutoSize = true;
-            label6.Location = new Point(258, 280);
+            label6.Location = new Point(322, 350);
             label6.Margin = new Padding(2, 0, 2, 0);
             label6.Name = "label6";
-            label6.Size = new Size(97, 20);
+            label6.Size = new Size(115, 25);
             label6.TabIndex = 10;
             label6.Text = "Tipo materia:";
             // 
@@ -313,18 +317,20 @@ namespace InstitutoDesktop.Views.Commons
             // 
             comboBoxTipoMateria.Anchor = AnchorStyles.None;
             comboBoxTipoMateria.FormattingEnabled = true;
-            comboBoxTipoMateria.Location = new Point(371, 272);
+            comboBoxTipoMateria.Location = new Point(464, 340);
+            comboBoxTipoMateria.Margin = new Padding(4, 4, 4, 4);
             comboBoxTipoMateria.Name = "comboBoxTipoMateria";
-            comboBoxTipoMateria.Size = new Size(284, 28);
+            comboBoxTipoMateria.Size = new Size(354, 33);
             comboBoxTipoMateria.TabIndex = 9;
             // 
             // chkEsRecreo
             // 
             chkEsRecreo.Anchor = AnchorStyles.None;
             chkEsRecreo.AutoSize = true;
-            chkEsRecreo.Location = new Point(371, 338);
+            chkEsRecreo.Location = new Point(464, 422);
+            chkEsRecreo.Margin = new Padding(4, 4, 4, 4);
             chkEsRecreo.Name = "chkEsRecreo";
-            chkEsRecreo.Size = new Size(91, 24);
+            chkEsRecreo.Size = new Size(109, 29);
             chkEsRecreo.TabIndex = 8;
             chkEsRecreo.Text = "Es recreo";
             chkEsRecreo.UseVisualStyleBackColor = true;
@@ -333,10 +339,10 @@ namespace InstitutoDesktop.Views.Commons
             // 
             label5.Anchor = AnchorStyles.None;
             label5.AutoSize = true;
-            label5.Location = new Point(237, 215);
+            label5.Location = new Point(296, 269);
             label5.Margin = new Padding(2, 0, 2, 0);
             label5.Name = "label5";
-            label5.Size = new Size(119, 20);
+            label5.Size = new Size(145, 25);
             label5.TabIndex = 7;
             label5.Text = "Periodo cursado:";
             // 
@@ -344,28 +350,29 @@ namespace InstitutoDesktop.Views.Commons
             // 
             comboBoxTipoPeriodo.Anchor = AnchorStyles.None;
             comboBoxTipoPeriodo.FormattingEnabled = true;
-            comboBoxTipoPeriodo.Location = new Point(371, 207);
+            comboBoxTipoPeriodo.Location = new Point(464, 259);
+            comboBoxTipoPeriodo.Margin = new Padding(4, 4, 4, 4);
             comboBoxTipoPeriodo.Name = "comboBoxTipoPeriodo";
-            comboBoxTipoPeriodo.Size = new Size(284, 28);
+            comboBoxTipoPeriodo.Size = new Size(354, 33);
             comboBoxTipoPeriodo.TabIndex = 6;
             // 
             // txtNombre
             // 
             txtNombre.Anchor = AnchorStyles.None;
-            txtNombre.Location = new Point(371, 147);
+            txtNombre.Location = new Point(464, 184);
             txtNombre.Margin = new Padding(2);
             txtNombre.Name = "txtNombre";
-            txtNombre.Size = new Size(284, 27);
+            txtNombre.Size = new Size(354, 31);
             txtNombre.TabIndex = 5;
             // 
             // label2
             // 
             label2.Anchor = AnchorStyles.None;
             label2.AutoSize = true;
-            label2.Location = new Point(288, 152);
+            label2.Location = new Point(360, 190);
             label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
-            label2.Size = new Size(67, 20);
+            label2.Size = new Size(82, 25);
             label2.TabIndex = 4;
             label2.Text = "Nombre:";
             // 
@@ -377,10 +384,10 @@ namespace InstitutoDesktop.Views.Commons
             btnCancelar.IconColor = Color.Black;
             btnCancelar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnCancelar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnCancelar.Location = new Point(812, 207);
+            btnCancelar.Location = new Point(1015, 259);
             btnCancelar.Margin = new Padding(2);
             btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(122, 57);
+            btnCancelar.Size = new Size(152, 71);
             btnCancelar.TabIndex = 3;
             btnCancelar.Text = "Cancelar";
             btnCancelar.TextAlign = ContentAlignment.MiddleRight;
@@ -395,10 +402,10 @@ namespace InstitutoDesktop.Views.Commons
             btnGuardar.IconColor = Color.Black;
             btnGuardar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnGuardar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnGuardar.Location = new Point(812, 147);
+            btnGuardar.Location = new Point(1015, 184);
             btnGuardar.Margin = new Padding(2);
             btnGuardar.Name = "btnGuardar";
-            btnGuardar.Size = new Size(122, 57);
+            btnGuardar.Size = new Size(152, 71);
             btnGuardar.TabIndex = 2;
             btnGuardar.Text = "Guardar";
             btnGuardar.TextAlign = ContentAlignment.MiddleRight;
@@ -407,9 +414,9 @@ namespace InstitutoDesktop.Views.Commons
             // 
             // MateriasView
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(963, 685);
+            ClientSize = new Size(1204, 856);
             Controls.Add(tabControl);
             Controls.Add(panel1);
             Margin = new Padding(2);
@@ -417,7 +424,6 @@ namespace InstitutoDesktop.Views.Commons
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Materias";
             TopMost = true;
-            WindowState = FormWindowState.Maximized;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             tabControl.ResumeLayout(false);

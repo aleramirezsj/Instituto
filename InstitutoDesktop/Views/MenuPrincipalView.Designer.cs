@@ -42,6 +42,7 @@ namespace InstitutoDesktop
             subMenuMaterias = new FontAwesome.Sharp.IconMenuItem();
             toolStripSeparator4 = new ToolStripSeparator();
             subMenuUsuarios = new FontAwesome.Sharp.IconMenuItem();
+            iconMenuDatosInstitucion = new FontAwesome.Sharp.IconMenuItem();
             menuHorarios = new FontAwesome.Sharp.IconMenuItem();
             subMenuHoras = new FontAwesome.Sharp.IconMenuItem();
             subMenuPeriodosHorarios = new FontAwesome.Sharp.IconMenuItem();
@@ -63,7 +64,6 @@ namespace InstitutoDesktop
             toolStrip1 = new ToolStrip();
             ToolButtonHorarios = new FontAwesome.Sharp.IconToolStripButton();
             ToolButtonMesasExamenes = new FontAwesome.Sharp.IconToolStripButton();
-            iconMenuDatosInstitucion = new FontAwesome.Sharp.IconMenuItem();
             menuStrip1.SuspendLayout();
             toolStrip1.SuspendLayout();
             SuspendLayout();
@@ -74,8 +74,8 @@ namespace InstitutoDesktop
             menuStrip1.Items.AddRange(new ToolStripItem[] { menuPrincipal, menuHorarios, iconMenuItem2, menuMesasExamenes, menuInformes, menuSalir });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Padding = new Padding(7, 2, 0, 2);
-            menuStrip1.Size = new Size(1091, 32);
+            menuStrip1.Padding = new Padding(9, 2, 0, 2);
+            menuStrip1.Size = new Size(1364, 40);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             menuStrip1.Visible = false;
@@ -88,7 +88,7 @@ namespace InstitutoDesktop
             menuPrincipal.IconFont = FontAwesome.Sharp.IconFont.Auto;
             menuPrincipal.IconSize = 40;
             menuPrincipal.Name = "menuPrincipal";
-            menuPrincipal.Size = new Size(104, 28);
+            menuPrincipal.Size = new Size(118, 36);
             menuPrincipal.Text = "Principal";
             // 
             // subMenuCiclosLectivos
@@ -97,7 +97,7 @@ namespace InstitutoDesktop
             subMenuCiclosLectivos.IconColor = Color.Black;
             subMenuCiclosLectivos.IconFont = FontAwesome.Sharp.IconFont.Auto;
             subMenuCiclosLectivos.Name = "subMenuCiclosLectivos";
-            subMenuCiclosLectivos.Size = new Size(244, 30);
+            subMenuCiclosLectivos.Size = new Size(291, 34);
             subMenuCiclosLectivos.Text = "Ciclos Lectivos";
             subMenuCiclosLectivos.Click += subMenuCiclosLectivos_Click;
             // 
@@ -107,14 +107,14 @@ namespace InstitutoDesktop
             subMenuAulas.IconColor = Color.Black;
             subMenuAulas.IconFont = FontAwesome.Sharp.IconFont.Auto;
             subMenuAulas.Name = "subMenuAulas";
-            subMenuAulas.Size = new Size(244, 30);
+            subMenuAulas.Size = new Size(291, 34);
             subMenuAulas.Text = "Aulas";
             subMenuAulas.Click += subMenuAulas_Click;
             // 
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new Size(241, 6);
+            toolStripSeparator1.Size = new Size(288, 6);
             // 
             // subMenuAlumnos
             // 
@@ -122,7 +122,7 @@ namespace InstitutoDesktop
             subMenuAlumnos.IconColor = Color.Black;
             subMenuAlumnos.IconFont = FontAwesome.Sharp.IconFont.Auto;
             subMenuAlumnos.Name = "subMenuAlumnos";
-            subMenuAlumnos.Size = new Size(244, 30);
+            subMenuAlumnos.Size = new Size(291, 34);
             subMenuAlumnos.Text = "Alumnos";
             subMenuAlumnos.Click += subMenuAlumnos_Click;
             // 
@@ -132,14 +132,14 @@ namespace InstitutoDesktop
             subMenuDocentes.IconColor = Color.Pink;
             subMenuDocentes.IconFont = FontAwesome.Sharp.IconFont.Solid;
             subMenuDocentes.Name = "subMenuDocentes";
-            subMenuDocentes.Size = new Size(244, 30);
+            subMenuDocentes.Size = new Size(291, 34);
             subMenuDocentes.Text = "Docentes";
             subMenuDocentes.Click += subMenuDocentes_Click;
             // 
             // toolStripSeparator2
             // 
             toolStripSeparator2.Name = "toolStripSeparator2";
-            toolStripSeparator2.Size = new Size(241, 6);
+            toolStripSeparator2.Size = new Size(288, 6);
             // 
             // subMenuCarreras
             // 
@@ -147,7 +147,7 @@ namespace InstitutoDesktop
             subMenuCarreras.IconColor = Color.Black;
             subMenuCarreras.IconFont = FontAwesome.Sharp.IconFont.Auto;
             subMenuCarreras.Name = "subMenuCarreras";
-            subMenuCarreras.Size = new Size(244, 30);
+            subMenuCarreras.Size = new Size(291, 34);
             subMenuCarreras.Text = "Carreras";
             subMenuCarreras.Click += subMenuCarreras_Click;
             // 
@@ -157,7 +157,7 @@ namespace InstitutoDesktop
             subMenuAñosCarreras.IconColor = Color.Black;
             subMenuAñosCarreras.IconFont = FontAwesome.Sharp.IconFont.Auto;
             subMenuAñosCarreras.Name = "subMenuAñosCarreras";
-            subMenuAñosCarreras.Size = new Size(244, 30);
+            subMenuAñosCarreras.Size = new Size(291, 34);
             subMenuAñosCarreras.Text = "Años de las carreras";
             subMenuAñosCarreras.Click += subMenuAñosCarreras_Click;
             // 
@@ -167,14 +167,14 @@ namespace InstitutoDesktop
             subMenuMaterias.IconColor = Color.Black;
             subMenuMaterias.IconFont = FontAwesome.Sharp.IconFont.Auto;
             subMenuMaterias.Name = "subMenuMaterias";
-            subMenuMaterias.Size = new Size(244, 30);
+            subMenuMaterias.Size = new Size(291, 34);
             subMenuMaterias.Text = "Materias";
             subMenuMaterias.Click += subMenuMaterias_Click;
             // 
             // toolStripSeparator4
             // 
             toolStripSeparator4.Name = "toolStripSeparator4";
-            toolStripSeparator4.Size = new Size(241, 6);
+            toolStripSeparator4.Size = new Size(288, 6);
             // 
             // subMenuUsuarios
             // 
@@ -182,9 +182,19 @@ namespace InstitutoDesktop
             subMenuUsuarios.IconColor = Color.Black;
             subMenuUsuarios.IconFont = FontAwesome.Sharp.IconFont.Auto;
             subMenuUsuarios.Name = "subMenuUsuarios";
-            subMenuUsuarios.Size = new Size(244, 30);
+            subMenuUsuarios.Size = new Size(291, 34);
             subMenuUsuarios.Text = "Usuarios";
             subMenuUsuarios.Click += subMenuUsuarios_Click;
+            // 
+            // iconMenuDatosInstitucion
+            // 
+            iconMenuDatosInstitucion.IconChar = FontAwesome.Sharp.IconChar.House;
+            iconMenuDatosInstitucion.IconColor = Color.Black;
+            iconMenuDatosInstitucion.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            iconMenuDatosInstitucion.Name = "iconMenuDatosInstitucion";
+            iconMenuDatosInstitucion.Size = new Size(291, 34);
+            iconMenuDatosInstitucion.Text = "Datos de la Institución";
+            iconMenuDatosInstitucion.Click += iconMenuDatosInstitucion_Click;
             // 
             // menuHorarios
             // 
@@ -193,7 +203,7 @@ namespace InstitutoDesktop
             menuHorarios.IconColor = Color.Black;
             menuHorarios.IconFont = FontAwesome.Sharp.IconFont.Auto;
             menuHorarios.Name = "menuHorarios";
-            menuHorarios.Size = new Size(104, 28);
+            menuHorarios.Size = new Size(120, 36);
             menuHorarios.Text = "Horarios";
             // 
             // subMenuHoras
@@ -202,7 +212,7 @@ namespace InstitutoDesktop
             subMenuHoras.IconColor = Color.Black;
             subMenuHoras.IconFont = FontAwesome.Sharp.IconFont.Auto;
             subMenuHoras.Name = "subMenuHoras";
-            subMenuHoras.Size = new Size(228, 26);
+            subMenuHoras.Size = new Size(278, 34);
             subMenuHoras.Text = "Horas";
             subMenuHoras.Click += subMenuHoras_Click;
             // 
@@ -212,7 +222,7 @@ namespace InstitutoDesktop
             subMenuPeriodosHorarios.IconColor = Color.Black;
             subMenuPeriodosHorarios.IconFont = FontAwesome.Sharp.IconFont.Auto;
             subMenuPeriodosHorarios.Name = "subMenuPeriodosHorarios";
-            subMenuPeriodosHorarios.Size = new Size(228, 26);
+            subMenuPeriodosHorarios.Size = new Size(278, 34);
             subMenuPeriodosHorarios.Text = "Periodos de horarios";
             subMenuPeriodosHorarios.Click += subMenuPeriodosHorarios_Click;
             // 
@@ -222,7 +232,7 @@ namespace InstitutoDesktop
             subMenuHorarios.IconColor = Color.Black;
             subMenuHorarios.IconFont = FontAwesome.Sharp.IconFont.Auto;
             subMenuHorarios.Name = "subMenuHorarios";
-            subMenuHorarios.Size = new Size(228, 26);
+            subMenuHorarios.Size = new Size(278, 34);
             subMenuHorarios.Text = "Horarios";
             subMenuHorarios.Click += subMenuHorarios_Click;
             // 
@@ -233,7 +243,7 @@ namespace InstitutoDesktop
             iconMenuItem2.IconColor = Color.Black;
             iconMenuItem2.IconFont = FontAwesome.Sharp.IconFont.Auto;
             iconMenuItem2.Name = "iconMenuItem2";
-            iconMenuItem2.Size = new Size(205, 28);
+            iconMenuItem2.Size = new Size(240, 36);
             iconMenuItem2.Text = "Inscripciones a materias";
             // 
             // subMenuPeriodosInscripciones
@@ -242,14 +252,14 @@ namespace InstitutoDesktop
             subMenuPeriodosInscripciones.IconColor = Color.Black;
             subMenuPeriodosInscripciones.IconFont = FontAwesome.Sharp.IconFont.Auto;
             subMenuPeriodosInscripciones.Name = "subMenuPeriodosInscripciones";
-            subMenuPeriodosInscripciones.Size = new Size(354, 26);
+            subMenuPeriodosInscripciones.Size = new Size(428, 34);
             subMenuPeriodosInscripciones.Text = "Períodos de inscripciones a materias";
             subMenuPeriodosInscripciones.Click += subMenuPeriodosInscripciones_Click_1;
             // 
             // toolStripSeparator6
             // 
             toolStripSeparator6.Name = "toolStripSeparator6";
-            toolStripSeparator6.Size = new Size(351, 6);
+            toolStripSeparator6.Size = new Size(425, 6);
             // 
             // iconMenuItem1
             // 
@@ -257,7 +267,7 @@ namespace InstitutoDesktop
             iconMenuItem1.IconColor = Color.Black;
             iconMenuItem1.IconFont = FontAwesome.Sharp.IconFont.Auto;
             iconMenuItem1.Name = "iconMenuItem1";
-            iconMenuItem1.Size = new Size(354, 26);
+            iconMenuItem1.Size = new Size(428, 34);
             iconMenuItem1.Text = "Inscripciones a materias de los alumnos";
             iconMenuItem1.Click += subMenuInscripcionesMaterias_Click;
             // 
@@ -268,7 +278,7 @@ namespace InstitutoDesktop
             menuMesasExamenes.IconColor = Color.Black;
             menuMesasExamenes.IconFont = FontAwesome.Sharp.IconFont.Auto;
             menuMesasExamenes.Name = "menuMesasExamenes";
-            menuMesasExamenes.Size = new Size(179, 28);
+            menuMesasExamenes.Size = new Size(210, 36);
             menuMesasExamenes.Text = "Mesas de exámenes";
             // 
             // subMenuTurnosExámenes
@@ -277,7 +287,7 @@ namespace InstitutoDesktop
             subMenuTurnosExámenes.IconColor = Color.Black;
             subMenuTurnosExámenes.IconFont = FontAwesome.Sharp.IconFont.Auto;
             subMenuTurnosExámenes.Name = "subMenuTurnosExámenes";
-            subMenuTurnosExámenes.Size = new Size(406, 26);
+            subMenuTurnosExámenes.Size = new Size(491, 34);
             subMenuTurnosExámenes.Text = "Turnos de exámenes";
             subMenuTurnosExámenes.Click += subMenuTurnosExámenes_Click;
             // 
@@ -287,14 +297,14 @@ namespace InstitutoDesktop
             subMenuConformacionMesasExamenes.IconColor = Color.Black;
             subMenuConformacionMesasExamenes.IconFont = FontAwesome.Sharp.IconFont.Auto;
             subMenuConformacionMesasExamenes.Name = "subMenuConformacionMesasExamenes";
-            subMenuConformacionMesasExamenes.Size = new Size(406, 26);
+            subMenuConformacionMesasExamenes.Size = new Size(491, 34);
             subMenuConformacionMesasExamenes.Text = "Conformación de Mesas de exámenes";
             subMenuConformacionMesasExamenes.Click += subMenuConformacionMesasExamenes_Click;
             // 
             // toolStripSeparator3
             // 
             toolStripSeparator3.Name = "toolStripSeparator3";
-            toolStripSeparator3.Size = new Size(403, 6);
+            toolStripSeparator3.Size = new Size(488, 6);
             // 
             // subMenuInscripciones
             // 
@@ -302,14 +312,14 @@ namespace InstitutoDesktop
             subMenuInscripciones.IconColor = Color.Black;
             subMenuInscripciones.IconFont = FontAwesome.Sharp.IconFont.Auto;
             subMenuInscripciones.Name = "subMenuInscripciones";
-            subMenuInscripciones.Size = new Size(406, 26);
+            subMenuInscripciones.Size = new Size(491, 34);
             subMenuInscripciones.Text = "Inscripciones a mesas de exámenes de alumnos";
             subMenuInscripciones.Click += subMenuInscripciones_Click;
             // 
             // toolStripSeparator5
             // 
             toolStripSeparator5.Name = "toolStripSeparator5";
-            toolStripSeparator5.Size = new Size(403, 6);
+            toolStripSeparator5.Size = new Size(488, 6);
             // 
             // menuInformes
             // 
@@ -318,7 +328,7 @@ namespace InstitutoDesktop
             menuInformes.IconColor = Color.Black;
             menuInformes.IconFont = FontAwesome.Sharp.IconFont.Auto;
             menuInformes.Name = "menuInformes";
-            menuInformes.Size = new Size(105, 28);
+            menuInformes.Size = new Size(123, 36);
             menuInformes.Text = "Informes";
             // 
             // subMenuInformeDocentes
@@ -327,7 +337,7 @@ namespace InstitutoDesktop
             subMenuInformeDocentes.IconColor = Color.Pink;
             subMenuInformeDocentes.IconFont = FontAwesome.Sharp.IconFont.Solid;
             subMenuInformeDocentes.Name = "subMenuInformeDocentes";
-            subMenuInformeDocentes.Size = new Size(154, 26);
+            subMenuInformeDocentes.Size = new Size(188, 34);
             subMenuInformeDocentes.Text = "Docentes";
             subMenuInformeDocentes.Click += mnuDocentes_Click;
             // 
@@ -338,7 +348,7 @@ namespace InstitutoDesktop
             menuSalir.IconColor = Color.Black;
             menuSalir.IconFont = FontAwesome.Sharp.IconFont.Auto;
             menuSalir.Name = "menuSalir";
-            menuSalir.Size = new Size(76, 28);
+            menuSalir.Size = new Size(85, 36);
             menuSalir.Text = "Salir";
             // 
             // subMenuSalirDelSistema
@@ -347,7 +357,7 @@ namespace InstitutoDesktop
             subMenuSalirDelSistema.IconColor = Color.Black;
             subMenuSalirDelSistema.IconFont = FontAwesome.Sharp.IconFont.Auto;
             subMenuSalirDelSistema.Name = "subMenuSalirDelSistema";
-            subMenuSalirDelSistema.Size = new Size(200, 26);
+            subMenuSalirDelSistema.Size = new Size(241, 34);
             subMenuSalirDelSistema.Text = "Salir del sistema";
             subMenuSalirDelSistema.Click += iconMenuItem4_Click;
             // 
@@ -357,7 +367,7 @@ namespace InstitutoDesktop
             toolStrip1.Items.AddRange(new ToolStripItem[] { ToolButtonHorarios, ToolButtonMesasExamenes });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(1091, 67);
+            toolStrip1.Size = new Size(1364, 84);
             toolStrip1.TabIndex = 2;
             toolStrip1.Text = "toolStrip1";
             toolStrip1.Visible = false;
@@ -371,7 +381,7 @@ namespace InstitutoDesktop
             ToolButtonHorarios.ImageScaling = ToolStripItemImageScaling.None;
             ToolButtonHorarios.ImageTransparentColor = Color.Magenta;
             ToolButtonHorarios.Name = "ToolButtonHorarios";
-            ToolButtonHorarios.Size = new Size(70, 64);
+            ToolButtonHorarios.Size = new Size(84, 79);
             ToolButtonHorarios.Text = "Horarios";
             ToolButtonHorarios.TextImageRelation = TextImageRelation.ImageAboveText;
             // 
@@ -384,37 +394,26 @@ namespace InstitutoDesktop
             ToolButtonMesasExamenes.ImageScaling = ToolStripItemImageScaling.None;
             ToolButtonMesasExamenes.ImageTransparentColor = Color.Magenta;
             ToolButtonMesasExamenes.Name = "ToolButtonMesasExamenes";
-            ToolButtonMesasExamenes.Size = new Size(124, 64);
+            ToolButtonMesasExamenes.Size = new Size(149, 79);
             ToolButtonMesasExamenes.Text = "Mesas Exámenes";
             ToolButtonMesasExamenes.TextImageRelation = TextImageRelation.ImageAboveText;
             // 
-            // iconMenuDatosInstitucion
-            // 
-            iconMenuDatosInstitucion.IconChar = FontAwesome.Sharp.IconChar.House;
-            iconMenuDatosInstitucion.IconColor = Color.Black;
-            iconMenuDatosInstitucion.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            iconMenuDatosInstitucion.Name = "iconMenuDatosInstitucion";
-            iconMenuDatosInstitucion.Size = new Size(244, 30);
-            iconMenuDatosInstitucion.Text = "Datos de la Institución";
-            iconMenuDatosInstitucion.Click += iconMenuDatosInstitucion_Click;
-            // 
             // MenuPrincipalView
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Center;
-            ClientSize = new Size(1091, 662);
+            ClientSize = new Size(1364, 828);
             Controls.Add(menuStrip1);
             Controls.Add(toolStrip1);
             DoubleBuffered = true;
             IsMdiContainer = true;
             MainMenuStrip = menuStrip1;
-            Margin = new Padding(3, 4, 3, 4);
+            Margin = new Padding(4, 5, 4, 5);
             Name = "MenuPrincipalView";
             Text = "Instituto Superior de Profesorado Nº20";
-            WindowState = FormWindowState.Maximized;
             Activated += MenuPrincipalView_Activated;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();

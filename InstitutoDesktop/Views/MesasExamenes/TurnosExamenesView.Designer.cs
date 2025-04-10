@@ -1,4 +1,4 @@
-﻿namespace InstitutoDesktop.Views.MesasExamenes
+namespace InstitutoDesktop.Views.MesasExamenes
 {
     partial class TurnosExamenesView
     {
@@ -41,6 +41,7 @@
             btnAgregar = new FontAwesome.Sharp.IconButton();
             Grilla = new DataGridView();
             tabPageAgregarEditar = new TabPage();
+            checkTurnoActual = new CheckBox();
             checkTiene2doLLamado = new CheckBox();
             checkInscripcionHabilitada = new CheckBox();
             lblCicloLectivoHorarioView = new Label();
@@ -49,7 +50,6 @@
             label2 = new Label();
             btnCancelar = new FontAwesome.Sharp.IconButton();
             btnGuardar = new FontAwesome.Sharp.IconButton();
-            checkTurnoActual = new CheckBox();
             panel1.SuspendLayout();
             tabControl.SuspendLayout();
             tabPageLista.SuspendLayout();
@@ -64,17 +64,17 @@
             panel1.Location = new Point(1, 1);
             panel1.Margin = new Padding(2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(961, 60);
+            panel1.Size = new Size(1201, 75);
             panel1.TabIndex = 0;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 16F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            label1.Location = new Point(9, 6);
+            label1.Location = new Point(11, 8);
             label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(274, 37);
+            label1.Size = new Size(326, 45);
             label1.TabIndex = 0;
             label1.Text = "Turnos de exámenes";
             // 
@@ -83,11 +83,11 @@
             tabControl.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             tabControl.Controls.Add(tabPageLista);
             tabControl.Controls.Add(tabPageAgregarEditar);
-            tabControl.Location = new Point(1, 65);
+            tabControl.Location = new Point(1, 81);
             tabControl.Margin = new Padding(2);
             tabControl.Name = "tabControl";
             tabControl.SelectedIndex = 0;
-            tabControl.Size = new Size(961, 572);
+            tabControl.Size = new Size(1201, 715);
             tabControl.TabIndex = 1;
             // 
             // tabPageLista
@@ -100,11 +100,11 @@
             tabPageLista.Controls.Add(btnModificar);
             tabPageLista.Controls.Add(btnAgregar);
             tabPageLista.Controls.Add(Grilla);
-            tabPageLista.Location = new Point(4, 29);
+            tabPageLista.Location = new Point(4, 34);
             tabPageLista.Margin = new Padding(2);
             tabPageLista.Name = "tabPageLista";
             tabPageLista.Padding = new Padding(2);
-            tabPageLista.Size = new Size(953, 539);
+            tabPageLista.Size = new Size(1193, 677);
             tabPageLista.TabIndex = 0;
             tabPageLista.Text = "Lista";
             tabPageLista.UseVisualStyleBackColor = true;
@@ -119,10 +119,10 @@
             iconButtonSalir.IconFont = FontAwesome.Sharp.IconFont.Auto;
             iconButtonSalir.IconSize = 44;
             iconButtonSalir.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButtonSalir.Location = new Point(824, 228);
-            iconButtonSalir.Margin = new Padding(3, 4, 3, 4);
+            iconButtonSalir.Location = new Point(1030, 285);
+            iconButtonSalir.Margin = new Padding(4, 5, 4, 5);
             iconButtonSalir.Name = "iconButtonSalir";
-            iconButtonSalir.Size = new Size(123, 54);
+            iconButtonSalir.Size = new Size(154, 68);
             iconButtonSalir.TabIndex = 14;
             iconButtonSalir.Text = "&Salir";
             iconButtonSalir.TextAlign = ContentAlignment.MiddleRight;
@@ -138,10 +138,10 @@
             BtnBuscar.IconColor = Color.White;
             BtnBuscar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             BtnBuscar.ImageAlign = ContentAlignment.MiddleLeft;
-            BtnBuscar.Location = new Point(827, 18);
-            BtnBuscar.Margin = new Padding(3, 4, 3, 4);
+            BtnBuscar.Location = new Point(1034, 22);
+            BtnBuscar.Margin = new Padding(4, 5, 4, 5);
             BtnBuscar.Name = "BtnBuscar";
-            BtnBuscar.Size = new Size(123, 51);
+            BtnBuscar.Size = new Size(154, 64);
             BtnBuscar.TabIndex = 13;
             BtnBuscar.Text = "&Buscar";
             BtnBuscar.TextAlign = ContentAlignment.MiddleRight;
@@ -151,18 +151,20 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(27, 21);
+            label3.Location = new Point(34, 26);
+            label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
-            label3.Size = new Size(55, 20);
+            label3.Size = new Size(67, 25);
             label3.TabIndex = 12;
             label3.Text = "Buscar:";
             // 
             // txtFiltro
             // 
             txtFiltro.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            txtFiltro.Location = new Point(97, 16);
+            txtFiltro.Location = new Point(121, 20);
+            txtFiltro.Margin = new Padding(4, 4, 4, 4);
             txtFiltro.Name = "txtFiltro";
-            txtFiltro.Size = new Size(483, 27);
+            txtFiltro.Size = new Size(603, 31);
             txtFiltro.TabIndex = 11;
             txtFiltro.TextChanged += txtFiltro_TextChanged;
             // 
@@ -175,10 +177,10 @@
             btnEliminar.IconColor = Color.Black;
             btnEliminar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnEliminar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnEliminar.Location = new Point(827, 176);
+            btnEliminar.Location = new Point(1034, 220);
             btnEliminar.Margin = new Padding(2);
             btnEliminar.Name = "btnEliminar";
-            btnEliminar.Size = new Size(120, 46);
+            btnEliminar.Size = new Size(150, 58);
             btnEliminar.TabIndex = 5;
             btnEliminar.Text = "Eliminar";
             btnEliminar.TextAlign = ContentAlignment.MiddleRight;
@@ -194,10 +196,10 @@
             btnModificar.IconColor = Color.Black;
             btnModificar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnModificar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnModificar.Location = new Point(827, 126);
+            btnModificar.Location = new Point(1034, 158);
             btnModificar.Margin = new Padding(2);
             btnModificar.Name = "btnModificar";
-            btnModificar.Size = new Size(120, 46);
+            btnModificar.Size = new Size(150, 58);
             btnModificar.TabIndex = 4;
             btnModificar.Text = "Modificar";
             btnModificar.TextAlign = ContentAlignment.MiddleRight;
@@ -212,10 +214,10 @@
             btnAgregar.IconColor = Color.Black;
             btnAgregar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnAgregar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnAgregar.Location = new Point(827, 75);
+            btnAgregar.Location = new Point(1034, 94);
             btnAgregar.Margin = new Padding(2);
             btnAgregar.Name = "btnAgregar";
-            btnAgregar.Size = new Size(120, 46);
+            btnAgregar.Size = new Size(150, 58);
             btnAgregar.TabIndex = 3;
             btnAgregar.Text = "Agregar";
             btnAgregar.TextAlign = ContentAlignment.MiddleRight;
@@ -229,13 +231,13 @@
             Grilla.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             Grilla.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             Grilla.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            Grilla.Location = new Point(6, 63);
+            Grilla.Location = new Point(8, 79);
             Grilla.Margin = new Padding(2);
             Grilla.Name = "Grilla";
             Grilla.ReadOnly = true;
             Grilla.RowHeadersWidth = 62;
             Grilla.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            Grilla.Size = new Size(812, 468);
+            Grilla.Size = new Size(1015, 585);
             Grilla.TabIndex = 0;
             // 
             // tabPageAgregarEditar
@@ -249,22 +251,35 @@
             tabPageAgregarEditar.Controls.Add(label2);
             tabPageAgregarEditar.Controls.Add(btnCancelar);
             tabPageAgregarEditar.Controls.Add(btnGuardar);
-            tabPageAgregarEditar.Location = new Point(4, 29);
+            tabPageAgregarEditar.Location = new Point(4, 34);
             tabPageAgregarEditar.Margin = new Padding(2);
             tabPageAgregarEditar.Name = "tabPageAgregarEditar";
             tabPageAgregarEditar.Padding = new Padding(2);
-            tabPageAgregarEditar.Size = new Size(953, 539);
+            tabPageAgregarEditar.Size = new Size(1193, 677);
             tabPageAgregarEditar.TabIndex = 1;
             tabPageAgregarEditar.Text = "Agregar/Editar";
             tabPageAgregarEditar.UseVisualStyleBackColor = true;
+            // 
+            // checkTurnoActual
+            // 
+            checkTurnoActual.Anchor = AnchorStyles.None;
+            checkTurnoActual.AutoSize = true;
+            checkTurnoActual.Location = new Point(751, 359);
+            checkTurnoActual.Margin = new Padding(4, 4, 4, 4);
+            checkTurnoActual.Name = "checkTurnoActual";
+            checkTurnoActual.Size = new Size(135, 29);
+            checkTurnoActual.TabIndex = 33;
+            checkTurnoActual.Text = "Turno actual";
+            checkTurnoActual.UseVisualStyleBackColor = true;
             // 
             // checkTiene2doLLamado
             // 
             checkTiene2doLLamado.Anchor = AnchorStyles.None;
             checkTiene2doLLamado.AutoSize = true;
-            checkTiene2doLLamado.Location = new Point(412, 287);
+            checkTiene2doLLamado.Location = new Point(515, 359);
+            checkTiene2doLLamado.Margin = new Padding(4, 4, 4, 4);
             checkTiene2doLLamado.Name = "checkTiene2doLLamado";
-            checkTiene2doLLamado.Size = new Size(156, 24);
+            checkTiene2doLLamado.Size = new Size(185, 29);
             checkTiene2doLLamado.TabIndex = 32;
             checkTiene2doLLamado.Text = "Tiene 2do llamado";
             checkTiene2doLLamado.UseVisualStyleBackColor = true;
@@ -273,9 +288,10 @@
             // 
             checkInscripcionHabilitada.Anchor = AnchorStyles.None;
             checkInscripcionHabilitada.AutoSize = true;
-            checkInscripcionHabilitada.Location = new Point(202, 287);
+            checkInscripcionHabilitada.Location = new Point(252, 359);
+            checkInscripcionHabilitada.Margin = new Padding(4, 4, 4, 4);
             checkInscripcionHabilitada.Name = "checkInscripcionHabilitada";
-            checkInscripcionHabilitada.Size = new Size(173, 24);
+            checkInscripcionHabilitada.Size = new Size(205, 29);
             checkInscripcionHabilitada.TabIndex = 31;
             checkInscripcionHabilitada.Text = "Inscripción habilitada";
             checkInscripcionHabilitada.UseVisualStyleBackColor = true;
@@ -284,9 +300,10 @@
             // 
             lblCicloLectivoHorarioView.Anchor = AnchorStyles.None;
             lblCicloLectivoHorarioView.AutoSize = true;
-            lblCicloLectivoHorarioView.Location = new Point(182, 150);
+            lblCicloLectivoHorarioView.Location = new Point(228, 188);
+            lblCicloLectivoHorarioView.Margin = new Padding(4, 0, 4, 0);
             lblCicloLectivoHorarioView.Name = "lblCicloLectivoHorarioView";
-            lblCicloLectivoHorarioView.Size = new Size(96, 20);
+            lblCicloLectivoHorarioView.Size = new Size(114, 25);
             lblCicloLectivoHorarioView.TabIndex = 30;
             lblCicloLectivoHorarioView.Text = "Ciclo Lectivo:";
             // 
@@ -294,28 +311,29 @@
             // 
             comboBoxCiclosLectivos.Anchor = AnchorStyles.None;
             comboBoxCiclosLectivos.FormattingEnabled = true;
-            comboBoxCiclosLectivos.Location = new Point(303, 147);
+            comboBoxCiclosLectivos.Location = new Point(379, 184);
+            comboBoxCiclosLectivos.Margin = new Padding(4, 4, 4, 4);
             comboBoxCiclosLectivos.Name = "comboBoxCiclosLectivos";
-            comboBoxCiclosLectivos.Size = new Size(455, 28);
+            comboBoxCiclosLectivos.Size = new Size(568, 33);
             comboBoxCiclosLectivos.TabIndex = 29;
             // 
             // txtNombre
             // 
             txtNombre.Anchor = AnchorStyles.None;
-            txtNombre.Location = new Point(303, 222);
+            txtNombre.Location = new Point(379, 278);
             txtNombre.Margin = new Padding(2);
             txtNombre.Name = "txtNombre";
-            txtNombre.Size = new Size(455, 27);
+            txtNombre.Size = new Size(568, 31);
             txtNombre.TabIndex = 5;
             // 
             // label2
             // 
             label2.Anchor = AnchorStyles.None;
             label2.AutoSize = true;
-            label2.Location = new Point(208, 225);
+            label2.Location = new Point(260, 281);
             label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
-            label2.Size = new Size(67, 20);
+            label2.Size = new Size(82, 25);
             label2.TabIndex = 4;
             label2.Text = "Nombre:";
             // 
@@ -327,10 +345,10 @@
             btnCancelar.IconColor = Color.Black;
             btnCancelar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnCancelar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnCancelar.Location = new Point(812, 207);
+            btnCancelar.Location = new Point(1015, 259);
             btnCancelar.Margin = new Padding(2);
             btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(122, 57);
+            btnCancelar.Size = new Size(152, 71);
             btnCancelar.TabIndex = 3;
             btnCancelar.Text = "Cancelar";
             btnCancelar.TextAlign = ContentAlignment.MiddleRight;
@@ -345,39 +363,27 @@
             btnGuardar.IconColor = Color.Black;
             btnGuardar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnGuardar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnGuardar.Location = new Point(812, 147);
+            btnGuardar.Location = new Point(1015, 184);
             btnGuardar.Margin = new Padding(2);
             btnGuardar.Name = "btnGuardar";
-            btnGuardar.Size = new Size(122, 57);
+            btnGuardar.Size = new Size(152, 71);
             btnGuardar.TabIndex = 2;
             btnGuardar.Text = "Guardar";
             btnGuardar.TextAlign = ContentAlignment.MiddleRight;
             btnGuardar.UseVisualStyleBackColor = false;
             btnGuardar.Click += btnGuardar_Click;
             // 
-            // checkTurnoActual
-            // 
-            checkTurnoActual.Anchor = AnchorStyles.None;
-            checkTurnoActual.AutoSize = true;
-            checkTurnoActual.Location = new Point(601, 287);
-            checkTurnoActual.Name = "checkTurnoActual";
-            checkTurnoActual.Size = new Size(113, 24);
-            checkTurnoActual.TabIndex = 33;
-            checkTurnoActual.Text = "Turno actual";
-            checkTurnoActual.UseVisualStyleBackColor = true;
-            // 
             // TurnosExamenesView
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(963, 634);
+            ClientSize = new Size(1204, 792);
             Controls.Add(tabControl);
             Controls.Add(panel1);
             Margin = new Padding(2);
             Name = "TurnosExamenesView";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Turnos de exámenes";
-            WindowState = FormWindowState.Maximized;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             tabControl.ResumeLayout(false);

@@ -72,12 +72,12 @@ namespace InstitutoDesktop.States.MesasExamenes.MesasExamenes
             //cuando terminan todas las tareas, cierro el showInActivity y cargo los combos
             await Task.WhenAll(tareas);
             ShowInActivity.Hide();
-            LoadComboboxTurnosExamenes();
             LoadComboboxCarreras();
             LoadComboboxAniosCarreras();
             LoadComboboxMaterias();
             LoadComboboxDocentes();
             LoadComboboxTipoIntegrante();
+            LoadComboboxTurnosExamenes();
             LoadGrid(_form.txtFiltro.Text);
         }
 
@@ -85,14 +85,16 @@ namespace InstitutoDesktop.States.MesasExamenes.MesasExamenes
         {
             _form.dataGridMesasExamenes.DataSource = null;
             if (_form.listaMesasExamenes != null && _form.listaMesasExamenes.Count > 0)
+            {
                 _form.dataGridMesasExamenes.DataSource = _form.listaMesasExamenes.
                     Where(h => h.TurnoExamenId.Equals((int)_form.cboTurnosExamenes.SelectedValue) &&
                           h.Materia.AnioCarrera.CarreraId.Equals((int)_form.cboCarreras.SelectedValue) &&
                           h.Materia.AnioCarreraId.Equals((int)_form.cboAniosCarreras.SelectedValue) &&
                           h.Materia.Nombre.Contains(filterText)).ToList();
-            var columnaOcultar = (_form.cboTurnosExamenes.SelectedItem as TurnoExamen).TieneLLamado2 ? "" : "Llamado2";
+                var columnaOcultar = (_form.cboTurnosExamenes.SelectedItem as TurnoExamen).TieneLLamado2 ? "" : "Llamado2";
 
-            _form.dataGridMesasExamenes.OcultarColumnas(new string[] { "Id", "MateriaId", "TurnoExamen", "DetallesMesaExamen", "TurnoExamenId", "Eliminado", columnaOcultar });
+                _form.dataGridMesasExamenes.OcultarColumnas(new string[] { "Id", "MateriaId", "TurnoExamen", "DetallesMesaExamen", "TurnoExamenId", "Eliminado", columnaOcultar });
+            }
         }
 
 
