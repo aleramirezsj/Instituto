@@ -33,7 +33,7 @@ namespace InstitutoDesktop.States.Horarios.Horarios
 
             var horario = (await _form._memoryCache.GetAllCacheAsync<Horario>())
                 .FirstOrDefault(h => h.MateriaId.Equals((int)_form.cboMaterias.SelectedValue));
-            if (horario != null)
+            if (horario != null && !horario.Materia.EsRecreo)
                 _form.cboDocentes.SelectedValue = horario.IntegrantesHorario.FirstOrDefault().DocenteId;
 
         }
@@ -73,7 +73,8 @@ namespace InstitutoDesktop.States.Horarios.Horarios
                 MessageBox.Show("Debe seleccionar una materia", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            if (_form.horarioCurrent?.IntegrantesHorario?.Count == 0 && !_form.horarioCurrent.Materia.EsRecreo)
+            var materia = (Materia)_form.cboMaterias.SelectedItem;
+            if (_form.horarioCurrent?.IntegrantesHorario?.Count == 0 && !materia.EsRecreo)
             {
                 MessageBox.Show("Debe definirse al menos un docente para el horario", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
