@@ -27,7 +27,7 @@ builder.Logging.SetMinimumLevel(LogLevel.Debug);
 string branch = builder.Configuration.GetValue<string>("branch");
 //string urlApi;
 //if (branch == "dev")
-    string urlApi = "https://api2.isp20.edu.ar/api/";
+    string urlApi = "https://api.isp20.edu.ar/api/";
 //else
     //string urlApi = "https://api.isp20.edu.ar/api/";
 //string urlApi = builder.Configuration.GetValue<string>("UrlApiLocal");
