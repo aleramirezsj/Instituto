@@ -59,14 +59,5 @@ namespace InstitutoBack.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a 0ht55b84.
-        /// </summary>
-        public static string pass {
-            get {
-                return ResourceManager.GetString("pass", resourceCulture);
-            }
-        }
     }
 }
