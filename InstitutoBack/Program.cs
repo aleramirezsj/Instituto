@@ -7,12 +7,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 //// Detectar en que rama estamos para determinar con que backend trabaja
-string branch = Environment.GetEnvironmentVariable("BRANCH")??"master";
+string branch = Environment.GetEnvironmentVariable("BRANCH")??"dev";
 string mysql_setting;
-if(branch == "master")
-    mysql_setting = "mysqlremoto";
-else
+if(branch == "dev")
     mysql_setting = "mysqlremotodev";
+else
+    mysql_setting = "mysqlremoto";
 //bool isContainer = Environment.GetEnvironmentVariable("IS_CONTAINER") == "true"; /*||
 //                   File.Exists("/.dockerenv") || // Algunos contenedores crean este archivo
 //                   File.ReadAllText("/proc/1/cgroup").Contains("docker");*/
