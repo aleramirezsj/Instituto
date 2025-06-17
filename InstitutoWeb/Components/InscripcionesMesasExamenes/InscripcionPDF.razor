@@ -1,4 +1,23 @@
-﻿@if(inscripcion!=null)
+<style>
+    .firma-footer {
+        margin-top: 48px;
+        width: 200px;
+        text-align: right;
+        margin-left: auto;
+    }
+
+        .firma-footer h3 {
+            display: inline-block;
+            border-top: 2px dashed #333;
+            padding-top: 10px;
+            margin: 0;
+            width: 100%;
+            font-size: 1.1rem;
+            font-weight: normal;
+            background: white;
+        }
+</style>
+@if(inscripcion!=null)
 {
     var materiasAgrupadasPorAnio = inscripcion.detallesInscripcionesExamenes.OrderBy(m => m?.Materia?.AnioCarreraId).ThenBy(m => m?.Materia?.Nombre).GroupBy(m => m?.Materia?.AnioCarreraId);
 
@@ -25,9 +44,12 @@
                         <td >@inscripcion.Materia.Nombre</td>
                 </tr>
             }
-        </tbody>
-    </table>
+            </tbody>
+        </table>
     }
+    <div class="firma-footer">
+        <h3>Firma del estudiante</h3>
+    </div>
 }
 
 @code {

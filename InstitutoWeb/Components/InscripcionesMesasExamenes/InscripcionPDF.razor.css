@@ -1,0 +1,17 @@
+﻿.firma-footer {
+    margin-top: 48px; /* 2-3 líneas de separación, ajusta según necesidad */
+    width: 200px;
+    text-align: right;
+    margin-left: auto; /* Alinea el bloque a la derecha */
+}
+
+    .firma-footer h3 {
+        display: inline-block;
+        border-top: 2px dashed #333;
+        padding-top: 10px;
+        margin: 0;
+        width: 100%;
+        font-size: 1.1rem;
+        font-weight: normal;
+        background: white;
+    }
