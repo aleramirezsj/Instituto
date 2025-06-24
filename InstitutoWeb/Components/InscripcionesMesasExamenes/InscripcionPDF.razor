@@ -22,8 +22,9 @@
     var materiasAgrupadasPorAnio = inscripcion.detallesInscripcionesExamenes.OrderBy(m => m?.Materia?.AnioCarreraId).ThenBy(m => m?.Materia?.Nombre).GroupBy(m => m?.Materia?.AnioCarreraId);
 
     <h2>Inscripción de: @inscripcion?.Alumno?.ApellidoNombre</h2>
+    <p>DNI: @inscripcion?.Alumno?.Dni</p>
     <h3>Carrera: @inscripcion?.Carrera?.Nombre</h3>
-    <p>Fecha de inscripción: @inscripcion?.Fecha.ToShortDateString()</p>
+    <p>Fecha de inscripción: @inscripcion?.Fecha.Date.ToShortDateString()</p>
     <p>Turno de examen: @inscripcion?.TurnoExamen?.Nombre</p>
     <hr />
     <h3>Materias inscriptas</h3>
